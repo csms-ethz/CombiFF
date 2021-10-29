@@ -1,0 +1,10 @@
+<!ELEMENT pseudoatoms (pseudoatom+)>
+<!ATTLIST pseudoatoms version CDATA #REQUIRED>
+
+<!ELEMENT pseudoatom (atoms, adjacency_stack)>
+<!ATTLIST pseudoatom code CDATA #REQUIRED>
+
+
+<!ELEMENT atoms (atom+)>
+<!ELEMENT atom (#PCDATA)>
+<!ELEMENT adjacency_stack (#PCDATA)>

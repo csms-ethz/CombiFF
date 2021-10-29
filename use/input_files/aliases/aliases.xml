@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE aliases SYSTEM "aliases.dtd">
+<aliases version="1.0">
+  <alias name="Hal">
+    <member>F</member>
+    <member>Cl</member>
+    <member>Br</member>
+    <member>I</member>
+  </alias>
+  <alias name="SB">
+    <member>CH3</member>
+    <member>H</member>
+    <aliasmember>Hal</aliasmember>
+  </alias>
+  <alias name="CorH">
+    <member>H</member>
+    <member>C</member>
+  </alias>
+  <alias name="NoP">
+    <member>N</member>
+    <member>P</member>
+  </alias>
+  <!--<alias name="Sadraa">
+    <member>H</member>
+    <member>CH3</member>
+    <member>OMX</member>
+    <member>KOX</member>
+    <member>OH</member>
+  </alias>-->
+  <alias name="Sadrab">
+    <member>H</member>
+    <member>Me</member>
+    <member>KdO</member>
+    <member>OMX</member>
+    <member>KOX</member>
+    <member>OH</member>
+  </alias>
+</aliases>

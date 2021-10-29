@@ -1,0 +1,20 @@
+Alias Set
+*********
+
+contains aliases.xml, which contains the element mappings for the family definition.
+
+
+Format
+******
+
+format defined in aliases.dtd. Basic structure:
+
+<aliases version="[version number]">
+  <alias name="[name of alias]">
+    <member>[element symbol of member, e.g. H, F. Also united hydrogens such as CH3]</member>
+    ...
+    <aliasmember>[name of other alias (listed **before the current one** whose members should be included]</aliasmember>
+    ...
+  </alias>
+  ...
+</aliases>

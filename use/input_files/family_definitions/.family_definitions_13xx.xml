@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE family_definitions SYSTEM "family_definitions.dtd">
+<family_definitions version="1.0">
+  <!-- 
+    saturated C1-C10 with one sulfur group
+  -->
+  <family_definition code="1300">
+    <formula>C[0-10] H[1-22] S2</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="NBUTYL" amount="1">
+        <atoms>
+          <atom type="CorH"/>
+          <atom type="S"/>
+          <atom type="S"/>
+          <atom type="CorH"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with one S(=O)(R)(R) group
+  -->
+  <family_definition code="1311">
+    <formula>C[0-10] H[1-22] O1 Sf1</formula>
+    <unsaturations>1</unsaturations>
+    <substructures>
+      <substructure substructure_code="KETONE" amount="1">
+        <atoms>
+          <atom type="O"/>
+          <atom type="Sf"/>
+          <atom type="CorH"/>
+          <atom type="CorH"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with one S(=O)(OR)(R) group
+  -->
+  <family_definition code="1312">
+    <formula>C[0-10] H[1-22] O2 Sf1</formula>
+    <unsaturations>1</unsaturations>
+    <substructures>
+      <substructure substructure_code="KETONE" amount="1">
+        <atoms>
+          <atom type="O"/>
+          <atom type="Sf"/>
+          <atom type="O"/>
+          <atom type="CorH"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with S(=O)(=O)(R)R group
+  -->
+  <family_definition code="1314">
+    <formula>C[0-10] H[1-22] 'Ss(=O)=O'1</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="SULFONYL" amount="1">
+        <atoms>
+          <atom type="Ss"/>
+          <atom type="O"/>
+          <atom type="O"/>
+          <atom type="CorH"/>
+          <atom type="CorH"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with S(=O)(=O)(OR)R group
+  -->
+  <family_definition code="1315">
+    <formula>C[0-10] H[1-22] O1 'Ss(=O)=O'1</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="SULFONYL" amount="1">
+        <atoms>
+          <atom type="Ss"/>
+          <atom type="O"/>
+          <atom type="O"/>
+          <atom type="O"/>
+          <atom type="CorH"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with S(=O)(=O)(OR)R group
+  -->
+  <family_definition code="1326">
+    <formula>C[0-10] H[1-22] O2 'Ss(=O)=O'1</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="SULFONYL" amount="1">
+        <atoms>
+          <atom type="Ss"/>
+          <atom type="O"/>
+          <atom type="O"/>
+          <atom type="O"/>
+          <atom type="O"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with two sulfer groups
+  -->
+  <family_definition code="1323">
+    <formula>C[0-10] H[1-22] S1</formula>
+    <unsaturations>0</unsaturations>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with one S(=O)(OR)(OR) group
+  -->
+  <family_definition code="1324">
+    <formula>C[0-10] H[1-22] O3 Sf1</formula>
+    <unsaturations>1</unsaturations>
+    <substructures>
+      <substructure substructure_code="KETONE" amount="1">
+        <atoms>
+          <atom type="O"/>
+          <atom type="Sf"/>
+          <atom type="O"/>
+          <atom type="O"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+</family_definitions>

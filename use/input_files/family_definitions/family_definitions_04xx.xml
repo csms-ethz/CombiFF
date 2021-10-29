@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE family_definitions SYSTEM "family_definitions.dtd">
+<family_definitions version="1.0">
+  <!-- 
+    saturated C1-C10 with one alcohol group
+  -->
+  <family_definition code="0400">
+    <formula>C[1-10] {OH}1 H[1-22]</formula>
+    <unsaturations>0</unsaturations>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with two alcohol groups
+  -->
+  <family_definition code="0401">
+    <formula>C[1-10] {OH}2 H[1-22]</formula>
+    <unsaturations>0</unsaturations>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with three alcohol groups 
+  -->
+  <family_definition code="0402">
+    <formula>C[1-10] {OH}3 H[1-22]</formula>
+    <unsaturations>0</unsaturations>
+  </family_definition>
+</family_definitions>

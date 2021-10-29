@@ -1,0 +1,15 @@
+CombiFF/input_files contains all 1st level input file for the CombiFF scheme. These files are the only ones that a potential user should change, ideally by adding new files to the different subdirectories.
+
+****replaces CombiFF/cff****
+
+Directory Contents:
+
+- aliases   :          alias files for enu
+- atomtypes :          atom type files for tbl
+- family_definitions : family definition files for enu
+- fragments :          fragment files for tbl
+- pseudoatoms :        pseudo atom files for enu
+- substructures :      substructure files for enu
+
+
+Each subdirectory contains a README file illustrating the directory content and file format.

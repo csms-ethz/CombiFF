@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE family_definitions SYSTEM "family_definitions.dtd">
+<family_definitions version="1.0">
+  <!--
+    benzenes with 6 subsitutents from {H, Halo, {CH3}}
+  -->
+  <family_definition code="0300">
+    <formula>C6 {CH3}[0-6] H[0-6] Cl[0-6] Br[0-6] F[0-6] I[0-6]</formula>
+    <unsaturations>4</unsaturations>
+    <cycles>1</cycles>
+    <double_bonds>3</double_bonds>
+    <max_bond_degree>2</max_bond_degree>
+    <substructures>
+      <substructure substructure_code="BENZENE" amount="1">
+        <atoms>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="C"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+</family_definitions>

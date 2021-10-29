@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE family_definitions SYSTEM "family_definitions.dtd">
+<family_definitions version="1.0">
+  <!-- 
+    saturated C1-C10 with one P(R)(R)R group
+  -->
+  <family_definition code="1400">
+    <formula>C[0-10] H[1-23] P1</formula>
+    <unsaturations>0</unsaturations>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with one P(OR)(R)R group
+  -->
+  <family_definition code="1401">
+    <formula>C[0-10] H[1-23] O1 P1</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="TERNARY" amount="1">
+        <atoms>
+          <atom type="P"/>
+          <atom type="CorH"/>
+          <atom type="CorH"/>
+          <atom type="O"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with P(=O)(R)(R)R group
+  -->
+  <family_definition code="1404">
+    <formula>C[0-10] H[1-23] 'Pf=O'1</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="TERNARY" amount="1">
+        <atoms>
+          <atom type="Pf"/>
+          <atom type="CorH"/>
+          <atom type="CorH"/>
+          <atom type="CorH"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with P(=O)(OR)(R)R group
+  -->
+  <family_definition code="1405">
+    <formula>C[0-10] H[1-23] O1 'Pf=O'1</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="TERNARY" amount="1">
+        <atoms>
+          <atom type="Pf"/>
+          <atom type="CorH"/>
+          <atom type="CorH"/>
+          <atom type="O"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with one P(OR)(OR)R group
+  -->
+  <family_definition code="1416">
+    <formula>C[0-10] H[1-23] O2 P1</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="TERNARY" amount="1">
+        <atoms>
+          <atom type="P"/>
+          <atom type="CorH"/>
+          <atom type="O"/>
+          <atom type="O"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with one P(OR)(OR)OR group
+  -->
+  <family_definition code="1417">
+    <formula>C[0-10] H[1-23] O3 P1</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="TERNARY" amount="1">
+        <atoms>
+          <atom type="P"/>
+          <atom type="O"/>
+          <atom type="O"/>
+          <atom type="O"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with P(=O)(OR)(OR)R group
+  -->
+  <family_definition code="1422">
+    <formula>C[0-10] H[1-23] O2 'Pf=O'1</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="TERNARY" amount="1">
+        <atoms>
+          <atom type="Pf"/>
+          <atom type="CorH"/>
+          <atom type="O"/>
+          <atom type="O"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with P(=O)(OR)(OR)OR group
+  -->
+  <family_definition code="1423">
+    <formula>C[0-10] H[1-23] O3 'Pf=O'1</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="TERNARY" amount="1">
+        <atoms>
+          <atom type="Pf"/>
+          <atom type="O"/>
+          <atom type="O"/>
+          <atom type="O"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+</family_definitions>

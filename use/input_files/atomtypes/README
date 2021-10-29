@@ -1,0 +1,22 @@
+Topology Builder Atomtypes
+**************************
+
+Format
+******
+
+format defined in atomtypes.dtd. Basic structure:
+
+<atomtypes version="[version number]">
+  <simpleatomtypes>
+    <atomtype id="[uppercase id of atom type]">
+      <element_type>[element type, e.g. C, H, Br, ...]</element_type>
+    </atomtype>
+    ...
+  <atomtypesets>
+    <atomtypeset name="[uppercase name of atom type set]">
+      <member id="[upercase id of atom type or atom type set in this set]"/>
+      ...
+    </atomtypeset>
+    ...
+  </atomtypesets>
+</atomtypes>

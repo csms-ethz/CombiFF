@@ -1,0 +1,8 @@
+<!ELEMENT aliases (alias+)>
+<!ATTLIST aliases version CDATA #REQUIRED>
+
+<!ELEMENT alias (member*,aliasmember*)>
+<!ATTLIST alias name ID #REQUIRED>
+
+<!ELEMENT member (#PCDATA)>
+<!ELEMENT aliasmember (#PCDATA)>

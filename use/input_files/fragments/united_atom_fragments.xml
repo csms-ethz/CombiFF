@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE fragments SYSTEM "fragments.dtd">
+<fragments version="1.0">
+  <!--
+    UNITED ATOM FRAGMENTS
+  -->
+  <!-- fragment C_ali: C(H)(*)(*)(*) -->
+  <fragment code="~CH1">
+    <atoms>
+      <atom id="c">
+        <atomtype>CH1_ali</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="h">
+        <atomtype>H_ali_united</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l1">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l2">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l3">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>h</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l3</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <improper_dihedrals>
+      <improper_dihedral>
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l1</involved_atom>
+          <involved_atom>l2</involved_atom>
+          <involved_atom>l3</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+    </improper_dihedrals>
+  </fragment>
+  <fragment code="~CH2">
+    <atoms>
+      <atom id="c">
+        <atomtype>CH2_ali</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="h1">
+        <atomtype>H_ali_united</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="h2">
+        <atomtype>H_ali_united</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l1">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l2">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>h1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>h2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l2</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <fragment code="~CH3">
+    <atoms>
+      <atom id="c">
+        <atomtype>CH3_ali</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="h1">
+        <atomtype>H_ali_united</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="h2">
+        <atomtype>H_ali_united</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="h3">
+        <atomtype>H_ali_united</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>h1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>h2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>h3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <fragment code="~CH4">
+    <atoms>
+      <atom id="c">
+        <atomtype>CH4_ali</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="h1">
+        <atomtype>H_ali_united</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="h2">
+        <atomtype>H_ali_united</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="h3">
+        <atomtype>H_ali_united</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="h4">
+        <atomtype>H_ali_united</atomtype>
+        <linktype type="core"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>h1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>h2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>h3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>h4</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+</fragments>

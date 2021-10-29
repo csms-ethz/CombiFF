@@ -1,0 +1,21 @@
+Pseudoatom Set
+**************
+
+contains pseudoatoms.dtd which lists pseudoatoms
+
+
+Format
+******
+
+structure defined in pseudoatoms.dtd. Basic structure:
+
+<pseudoatoms version="[version number]">
+  <pseudoatom code="[pseudoatom code]">
+    <atoms>
+      <atom>[atom type of 1st atom]</atom>
+      ...
+    </atoms>
+    <adjacency_stack>[stack of adjacency matrix, which defines the connections of the above atoms]</adjacency_stack>
+  </pseudoatom>
+  ...
+</pseudoatoms>

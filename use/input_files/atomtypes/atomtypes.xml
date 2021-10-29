@@ -1,0 +1,259 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE atomtypes SYSTEM "atomtypes.dtd">
+<atomtypes version="1.0">
+  <simpleatomtypes>
+    <!-- 
+      aliphatic types 
+    -->
+    <atomtype id="C_ali">
+      <element_type>C</element_type>
+    </atomtype>
+    <atomtype id="CH1_ali">
+      <element_type>C</element_type>
+    </atomtype>
+    <atomtype id="CH2_ali">
+      <element_type>C</element_type>
+    </atomtype>
+    <atomtype id="CH3_ali">
+      <element_type>C</element_type>
+    </atomtype>
+    <atomtype id="CH4_ali">
+      <element_type>C</element_type>
+    </atomtype>
+    <atomtype id="C_on_cyc">
+      <element_type>C</element_type>
+    </atomtype>
+    <atomtype id="C_cyc_3">
+      <element_type>C</element_type>
+    </atomtype>
+    <atomtype id="C_cyc_4">
+      <element_type>C</element_type>
+    </atomtype>
+    <atomtype id="C_cyc_5">
+      <element_type>C</element_type>
+    </atomtype>
+    <atomtype id="C_cyc_6">
+      <element_type>C</element_type>
+    </atomtype>
+    <atomtype id="Br_ali">
+      <element_type>Br</element_type>
+    </atomtype>
+    <atomtype id="Cl_ali">
+      <element_type>Cl</element_type>
+    </atomtype>
+    <atomtype id="F_ali">
+      <element_type>F</element_type>
+    </atomtype>
+    <atomtype id="I_ali">
+      <element_type>I</element_type>
+    </atomtype>
+    <atomtype id="H_ali">
+      <element_type>H</element_type>
+    </atomtype>
+    <atomtype id="Br_on_cyc">
+      <element_type>Br</element_type>
+    </atomtype>
+    <atomtype id="Cl_on_cyc">
+      <element_type>Cl</element_type>
+    </atomtype>
+    <atomtype id="F_on_cyc">
+      <element_type>F</element_type>
+    </atomtype>
+    <atomtype id="I_on_cyc">
+      <element_type>I</element_type>
+    </atomtype>
+    <atomtype id="H_on_cyc">
+      <element_type>H</element_type>
+    </atomtype>
+    <atomtype id="O_ali">
+      <element_type>O</element_type>
+    </atomtype>
+    <atomtype id="N_ali">
+      <element_type>N</element_type>
+    </atomtype>
+    <atomtype id="S_2">
+      <element_type>S</element_type>
+    </atomtype>
+    <atomtype id="S_4">
+      <element_type>S</element_type>
+    </atomtype>
+    <atomtype id="S_6">
+      <element_type>S</element_type>
+    </atomtype>
+    <atomtype id="P_3">
+      <element_type>P</element_type>
+    </atomtype>
+    <atomtype id="P_5">
+      <element_type>P</element_type>
+    </atomtype>
+    <!--
+      double bond types
+    -->
+    <atomtype id="C_db">
+      <element_type>C</element_type>
+    </atomtype>
+    <atomtype id="O_db">
+      <element_type>O</element_type>
+    </atomtype>
+     <atomtype id="C_on_db">
+      <element_type>C</element_type>
+    </atomtype>
+    <atomtype id="O_on_db">
+      <element_type>O</element_type>
+    </atomtype>
+    <atomtype id="H_on_db">
+      <element_type>H</element_type>
+    </atomtype>
+    <atomtype id="Cl_on_db">
+      <element_type>Cl</element_type>
+    </atomtype>
+    <atomtype id="F_on_db">
+      <element_type>F</element_type>
+    </atomtype>
+    <atomtype id="I_on_db">
+      <element_type>I</element_type>
+    </atomtype>
+    <atomtype id="Br_on_db">
+      <element_type>Br</element_type>
+    </atomtype>
+    <atomtype id="S2_db">
+      <element_type>S</element_type>
+    </atomtype>
+    <atomtype id="S4_db">
+      <element_type>S</element_type>
+    </atomtype>
+    <atomtype id="S6_db">
+      <element_type>S</element_type>
+    </atomtype>
+    <!-- 
+      aromatic types 
+    -->
+    <atomtype id="C_aro">
+      <element_type>C</element_type>
+    </atomtype>
+    <atomtype id="CH3_aro">
+      <element_type>C</element_type>
+    </atomtype>
+    <atomtype id="Br_aro">
+      <element_type>Br</element_type>
+    </atomtype>
+    <atomtype id="Cl_aro">
+      <element_type>Cl</element_type>
+    </atomtype>
+    <atomtype id="F_aro">
+      <element_type>F</element_type>
+    </atomtype>
+    <atomtype id="I_aro">
+      <element_type>I</element_type>
+    </atomtype>
+    <atomtype id="H_aro">
+      <element_type>H</element_type>
+    </atomtype>
+    <!-- 
+      S types 
+    -->
+    <!-- H_ali_united: hydrogen for united atoms -> should be the last entry of simpleatomtypes! -->
+    <atomtype id="H_ali_united">
+      <element_type>H</element_type>
+    </atomtype>
+  </simpleatomtypes>
+  <atomtypesets>
+    <atomtypeset name="C_cyc">
+      <member id="C_cyc_3"/>
+      <member id="C_cyc_4"/>
+      <member id="C_cyc_5"/>
+      <member id="C_cyc_6"/>
+    </atomtypeset>
+    <atomtypeset name="Halo_ali">
+      <member id="Br_ali"/>
+      <member id="Cl_ali"/>
+      <member id="F_ali"/>
+      <member id="I_ali"/>
+    </atomtypeset>
+    <atomtypeset name="Halo_aro">
+      <member id="Br_aro"/>
+      <member id="Cl_aro"/>
+      <member id="F_aro"/>
+      <member id="I_aro"/>
+    </atomtypeset>
+    <atomtypeset name="Halo_all">
+      <member id="Halo_ali"/>
+      <member id="Halo_aro"/>
+    </atomtypeset>
+    <atomtypeset name="Deg1_ali">
+      <member id="Halo_ali"/>
+      <member id="H_ali"/>
+    </atomtypeset>
+    <atomtypeset name="Deg1_aro">
+      <member id="Halo_aro"/>
+      <member id="H_aro"/>
+      <member id="CH3_aro"/>
+    </atomtypeset>
+    <atomtypeset name="Deg1_all">
+      <member id="Deg1_ali"/>
+      <member id="Deg1_aro"/>
+    </atomtypeset>
+    <atomtypeset name="C_all">
+      <member id="C_ali"/>
+      <member id="C_aro"/>
+      <member id="C_db"/>
+      <member id="CH1_ali"/>
+      <member id="CH2_ali"/>
+      <member id="CH3_ali"/>
+      <member id="CH4_ali"/>
+    </atomtypeset>
+    <atomtypeset name="H_all">
+      <member id="H_ali"/>
+      <member id="H_aro"/>
+      <member id="H_ali_united"/>
+    </atomtypeset>
+    <atomtypeset name="Any_ali">
+      <member id="C_ali"/>
+      <member id="Halo_ali"/>
+      <member id="H_ali"/>
+      <member id="O_ali"/>
+      <member id="C_on_cyc"/>
+      <member id="S_2"/>
+      <member id="C_on_db"/>
+      <member id="H_ali_united"/>
+      <member id="CH1_ali"/>
+      <member id="CH2_ali"/>
+      <member id="CH3_ali"/>
+      <member id="CH4_ali"/>
+      <member id="N_ali"/>
+    </atomtypeset>
+    <atomtypeset name="Any_aro">
+      <member id="C_aro"/>
+      <member id="Halo_aro"/>
+      <member id="H_aro"/>
+    </atomtypeset>
+    <atomtypeset name="Any_on_cyc">
+      <member id="C_on_cyc"/>
+      <member id="F_on_cyc"/>
+      <member id="I_on_cyc"/>
+      <member id="Br_on_cyc"/>
+      <member id="Cl_on_cyc"/>
+      <member id="H_on_cyc"/>
+    </atomtypeset>
+    <atomtypeset name="Any_db">
+      <member id="C_db"/>
+      <member id="O_db"/>
+      <member id="S2_db"/>
+      <member id="S4_db"/>
+      <member id="S6_db"/>
+    </atomtypeset>
+    <atomtypeset name="Any_on_db">
+      <member id="C_on_db"/>
+      <member id="H_on_db"/>
+      <member id="Br_on_db"/>
+      <member id="Cl_on_db"/>
+      <member id="F_on_db"/>
+      <member id="I_on_db"/>
+      <member id="O_on_db"/>
+      <member id="CH1_ali"/>
+      <member id="CH2_ali"/>
+      <member id="CH3_ali"/>
+      <member id="CH4_ali"/>
+    </atomtypeset>
+  </atomtypesets>
+</atomtypes>

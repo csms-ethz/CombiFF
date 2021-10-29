@@ -1,0 +1,45 @@
+Topology Builder Fragments
+**************************
+
+fragments for the TBL molecule decompositions
+
+Topology Builder Fragment Format
+********************************
+
+structure is defined in fragments.dtd
+
+basic structure is:
+
+<fragments>
+  <fragment code="[fragment code]">
+    <atoms>
+      <atom id="[lowercase atom id (unique within fragment)]">
+        <atomtype>[atomtype from atomtypes.xml]</atomtype>
+        <linktype type="["core" or "link"]"/>
+      </atom>
+      ...
+    </atoms>
+    <bonds>
+      <bond degree="[single, double, triple, quadruple or aromatic]">
+        <involved_atoms>
+          <involved_atom>[lowercase atom id for first atom in bond</involved_atom>
+          <involved_atom>[lowercase atom id for second atom in bond</involved_atom>
+        </involved_atoms>
+      </bond>
+      ...
+    </bonds>
+    [optional: angles
+      -> only specify the properties that should have a special parameter that cannot be deduced]
+    <angles>
+      <angle parameter="[special parameter]">
+        <involved_atoms>
+          <involved_atom>[lowercase atom id for first atom in property]</involved_atom>
+          ...
+        </involved_atoms>
+      </angle>
+      ...
+    </angles>
+    [optional: improper_dihedrals and torsional_dihedrals, analogous to angles]
+  </fragment>
+  ...
+</fragments>

@@ -1,0 +1,100 @@
+Family Definition Files
+***********************
+
+- 01xx: linear and branched alkanes
+- 02xx: linear and branched haloalkanes
+- 03xx: benzenes
+- 04xx: alcohol groups
+- 05xx: ether groups
+- 06xx: ketone groups
+- 07xx: ketone groups
+- 08xx: ester groups
+- 09xx: ester groups
+- 10xx: amine groups
+- 11xx: haloalkanes with alcohol groups
+- 12xx: alkanes with amide groups
+- tests: families for testing
+
+
+Format
+******
+
+format defined in family_definitions.dtd. Basic structure:
+
+  <family_definitions version="[version number]">
+    <family_definition code="[family code]">
+      <formula>[formula, e.g. C10H22]</formula>
+    </family_definition>
+    ...
+  </family_definitions>
+
+-the minimal requirement for a family definition is the following structure:
+
+  <family_definition code="[family code]">
+    <formula>[formula, e.g. C10H22]</formula>
+  </family_definition>
+
+-a proper family definition, has the following structure:
+
+  <!--
+    [comment describing the family]
+  -->
+  <family_definition code="[family code]">
+    <formula>[formula, e.g. C10H22]</formula>
+  </family_definition>
+
+- the FORMULA entry consists of sequence of alternating atom type definitions and quantitiy specifications.
+  -> an atom type can be given as:
+     - directly, e.g. C or H or Fl
+     - a united atom in curly braces, e.g. {CH} or {CH3} or {OH}. Note that the second atom *has* to be a hydrogen
+     - an element alias, as defined in CombiFF/cff/fea/README, e.g. SB or Hal
+     - a pseudoatom in single quotes, e.g. 'C=O' or 'C-O-OH'
+  -> an atom type quantity for an atom type X, as specified above, can be given as:
+     - directly, e.g. X1 or X10
+     - a range in square brackets, e.g. X[1-20] or X[5-8]
+     - a list of numbers in square brackets, e.g. X[0, 3, 5, 20]
+     - a mix of lists and ranges in square brackets, e.g. X[0-3, 4, 6, 8-10] or X[1,3,6-9] or X[0,3-5,6,8,1,10-12,14]
+     - a range specified by <, <=, >, >=, e.g. X<4 or X<=4 or X>0 or X>=0
+     - a wildcard: X* (in practice equivalent to X[0-100])
+  -> if a ^ is put in front of two element aliases this is considered an XOR
+     - this guarantees that the two chosen atom types within the element mappings will be different. 
+     - this can also be done for more than one type by adding a number after the ^. , e.g. ^1Hal1 ^1Hal2 ^2Hal1 ^2Hal3 would mean that there's one Hal atom that's distinct from the next two Hal atoms and then one Hal atom that's distinct from the next 3 Hal atoms.
+     - note that there is also an option for an AND: by using MAPn, n of the same atom type from MAP are chosen
+     - note that there is also an option for an OR: by using MAPn MAPm, any combination of the same n and the same m atom type is chosen, including the case of n+m of the same atom type
+
+
+Restrictions
+************
+
+after the formula entry any of the following restrictions *can* (but don't have to) be used:
+  -> max_bond_degree : maximum bond degree between two atoms
+  -> unsaturations   : number of unsaturations                       
+  -> total_bonds     : number of bonds
+  -> single_bonds    : number of single bonds
+  -> double_bonds    : number of double bonds
+  -> triple_bonds    : number of triple bonds
+  -> quadruple_bonds : number of quadruple bonds
+  -> cycles          : number of rings/cycles
+
+The above properties are specified by either a number, a range in rectangular brackets [n-m], or a star for unrestricted
+  -> e.g. <unsaturations>[1-2]</unsaturations> or <cycles>0</cycles>
+
+
+Furthermore, subsctuctures that should (or shouldn't) occur in the molecule can be specified using the following basic format
+
+<substructures>
+  <substructure substructure_code="[substructure code]" amount="[amount, given as number or range in rectangular brackets]">
+    <atoms>
+      <atom type="[atom type]"/>
+      ...
+    </atoms>
+  </substructure>
+  ...
+</substructures>
+
+  -> substructures that can be used are defined in the files in CombiFF/input_files/substructures/*.xml. In a substructure, only the connectivity is defined, but not the atom types.
+  -> in order to specify a substructure, an entry uses the substructure's substructure_code
+  -> after the code, the list of the desired atoms needs to be given
+     -> an atom type can either be an element name, a united atom in curly braces, an element alias, or a * for any atom type
+     -> if an atom type is given by an element alias, it can be preceded by an & or an ^. If two or more element aliases are preceded by an & (and optionally the same number), this means that they have to be identical. If two or more element aliases are preceded by a ^ (and optionallly the same number), this means that they have to be different. E.g. [^1Hal, ^1Hal, &2^1Hal, &2Hal] indicates that the first 3 atom types need to be different and the last two need to be identical. If neither an & nor a ^ is used, any combination of atom types within the alias can be used
+  -> optionally, a repetition attribute repetition="[xor|and|or]" can be added to the substructure tag. If the substructure contains element aliases, a xor indicates that all the atom combinations in the occuring substructures need to be different, i.e. the substructures need to be different. A and indicates that all the atom combinations in the occuring substructures need to be the same, i.e. the substructures need to be the same. The default is an or, which allows any combinations

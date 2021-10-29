@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE substructures SYSTEM "substructures.dtd">
+
+<substructures version="1.0">
+  <!-- substructure for a tetrahedral molecular substructure. the fist atom is the central one. -->
+  <substructure code="TET">
+    <num_atoms>5</num_atoms>
+    <adjacency_stack>1 1 1 1 0 0 0 0 0 0</adjacency_stack>
+  </substructure>
+  <!-- substructure for benzene ring -->
+  <substructure code="BENZENE">
+    <num_atoms>6</num_atoms>
+    <adjacency_stack>2 0 0 0 1 1 0 0 0 2 0 0 1 0 2</adjacency_stack>
+  </substructure>
+  <!-- substructure for ketone. The first atom is the oxygen. -->
+  <substructure code="KETONE">
+    <num_atoms>4</num_atoms>
+    <adjacency_stack>2 0 0 1 1 0</adjacency_stack>
+  </substructure>
+  <!-- substructure for ether. the second atom is the oxygen. -->
+  <substructure code="ETHER">
+    <num_atoms>3</num_atoms>
+    <adjacency_stack>1 0 1</adjacency_stack>
+  </substructure>
+  <!-- substructure for ester. The first atom is the oxygen (O=C). -->
+  <substructure code="ESTER">
+    <num_atoms>5</num_atoms>
+    <adjacency_stack>2 0 0 0 1 0 1 1 0 0</adjacency_stack>
+  </substructure>
+  <!-- substructure for amine. The first atom is the nitrogen. -->
+  <substructure code="TERNARY">
+    <num_atoms>4</num_atoms>
+    <adjacency_stack> 1 1 1 0 0 0</adjacency_stack>
+  </substructure>
+  <!-- substructure for amide. O=CCN[CorH][CorH] -->
+  <substructure code="AMIDE">
+    <num_atoms>6</num_atoms>
+    <adjacency_stack>2 0 0 0 0 1 1 0 0 0 0 0 1 1 0</adjacency_stack>
+  </substructure>
+  <!-- substructure for nbutyl: CCCC -->
+  <substructure code="NBUTYL">
+    <num_atoms>4</num_atoms>
+    <adjacency_stack>1 0 0 1 0 1</adjacency_stack>
+  </substructure>
+  <!-- substructure for S(=O)(=O)(R)-R -->
+  <substructure code="SULFONYL">
+    <num_atoms>5</num_atoms>
+    <adjacency_stack>2 2 1 1 0 0 0 0 0 0</adjacency_stack>
+  </substructure>
+</substructures>

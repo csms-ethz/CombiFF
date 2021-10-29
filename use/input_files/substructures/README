@@ -1,0 +1,38 @@
+Substructure Set
+****************
+
+
+Substructure Format
+*******************
+A substructure is defined with the format specified in substructures.dtd
+
+basic structure is:
+
+<substructures version="[version number]">
+  <substructure code="[unique substructure identifier code]">
+    <num_atoms>[# atoms in substructure]</num_atoms>
+    <adjacency_stack>[adjacency stack as numbers separated by spaces, e.g. 1 1 0 0 1 1]</adjacency_stack>
+  </substructure>
+  ...
+</substructures>
+
+
+Note: the adjacency stack lists the upper triangular elements in one row
+
+- Example: the adjacency stack a b c d e f g h i j corresponds to the symmetric adjacency matrix
+  
+   0 a b c d
+   a 0 e f g
+   b e 0 h i
+   c f h 0 j
+   d g i j 0
+                  
+
+- Example: the adjacency stack 2 0 0 0 1 1 0 0 0 2 0 0 1 0 2 corresponds to the symmetric adjacency matrix
+
+   0 2 0 0 0 1
+   2 0 1 0 0 0
+   0 1 0 2 0 0
+   0 0 2 0 1 0
+   0 0 0 1 0 2
+   1 0 0 0 2 0

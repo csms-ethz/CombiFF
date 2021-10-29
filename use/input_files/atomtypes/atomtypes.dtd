@@ -1,0 +1,13 @@
+<!ELEMENT atomtypes (simpleatomtypes,atomtypesets)>
+<!ATTLIST atomtypes version CDATA #REQUIRED>
+
+<!ELEMENT simpleatomtypes (atomtype+)>
+<!ELEMENT atomtype (element_type)>
+<!ATTLIST atomtype id ID #REQUIRED>
+<!ELEMENT element_type (#PCDATA)>
+
+<!ELEMENT atomtypesets (atomtypeset+)>
+<!ELEMENT atomtypeset (member+)>
+<!ATTLIST atomtypeset name ID #REQUIRED>
+<!ELEMENT member EMPTY>
+<!ATTLIST member id IDREF #REQUIRED>

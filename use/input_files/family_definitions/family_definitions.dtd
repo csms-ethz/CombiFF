@@ -1,0 +1,25 @@
+<!ELEMENT family_definitions (family_definition+)>
+<!ATTLIST family_definitions version CDATA #REQUIRED>
+
+<!ELEMENT family_definition (formula, (unsaturations|substructures|maximum_bond_degree|double_bonds|single_bonds|total_bonds|aromatic_bonds|triple_bonds|cycles)*)>
+<!ATTLIST family_definition code CDATA #REQUIRED>
+
+<!ELEMENT formula (#PCDATA)>
+<!ELEMENT unsaturations (#PCDATA)>
+<!ELEMENT substructures (substructure+)>
+<!ELEMENT double_bonds (#PCDATA)>
+<!ELEMENT single_bonds (#PCDATA)>
+<!ELEMENT total_bonds (#PCDATA)>
+<!ELEMENT aromatic_bonds (#PCDATA)>
+<!ELEMENT triple_bonds (#PCDATA)>
+<!ELEMENT cycles (#PCDATA)>
+
+<!ELEMENT substructure (atoms)>
+<!ATTLIST substructure substructure_code CDATA #REQUIRED amount CDATA #REQUIRED repetition (xor|and|or) #IMPLIED>
+
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT atoms (atom+)>
+<!ELEMENT amount (#PCDATA)>
+
+<!ELEMENT atom EMPTY>
+<!ATTLIST atom type CDATA #REQUIRED>

@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE family_definitions SYSTEM "family_definitions.dtd">
+<family_definitions version="1.0">
+  <!--
+    linear and branched haloalkanes with C1 with up to 4 of the same Halos
+  -->
+  <family_definition code="0200">
+    <formula>C1 H* Hal[1-4]</formula>
+    <unsaturations>0</unsaturations>
+  </family_definition>
+  <!--
+    linear and branched haloalkanes with C1 with up to 4 Halos
+  -->
+  <family_definition code="0201">
+    <formula>C1 H* Hal1 Hal[0-1] Hal[0-1] Hal[0-1]</formula>
+    <unsaturations>0</unsaturations>
+  </family_definition>
+  <!--
+    linear and branched haloalkanes from C2 to C4 with up to 3 of the same Halos
+  -->
+  <family_definition code="0202">
+    <formula>C[2-4] H* Hal[1-3]</formula>
+    <unsaturations>0</unsaturations>
+  </family_definition>
+  <!--
+    linear and branched haloalkanes from C2 to C4 with 1-2 halos of one type and 1-2 halos of another type
+  -->
+  <family_definition code="0203">
+    <formula>C[2-4] ^Hal[1-2] ^Hal[1-2] H*</formula>
+    <unsaturations>0</unsaturations>
+  </family_definition>
+  <!--
+    linear and branched haloalkanes from C2 to C4 with up to 1 halo of one type and 3 halos of another type
+  -->
+  <family_definition code="0204">
+    <formula>C[2-4] H* ^Hal1 ^Hal3</formula>
+    <unsaturations>0</unsaturations>
+  </family_definition>
+  <!--
+    secondary monohaloalkanes with 5 C
+  -->
+  <family_definition code="0205">
+    <formula>C5 H* Hal1</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="TET" amount="1">
+        <atoms>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="H"/>
+          <atom type="Hal"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!--
+    tertiary monohaloalkanes with 5 to 6 C
+  -->
+  <family_definition code="0206">
+    <formula>C[5-6] H* Hal1</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="TET" amount="1">
+        <atoms>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="Hal"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!--
+    tertiary homohaloalkanes with 5 C with 1 to 3 halos
+  -->
+  <family_definition code="0207">
+    <formula>C5 H* Hal[1-3]</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="TET" amount="1">
+        <atoms>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="CH3"/>
+          <atom type="CH3"/>
+          <atom type="CH3"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!--
+    tertiary monohaloalkanes with 6 C with 1 to 2 halos
+  -->
+  <family_definition code="0208">
+    <formula>C6 H* Hal1</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="TET" amount="1">
+        <atoms>
+          <atom type="C"/>
+          <atom type="CH3"/>
+          <atom type="CH3"/>
+          <atom type="CH3"/>
+          <atom type="CH1"/>
+        </atoms>
+      </substructure>
+      <substructure substructure_code="TERNARY" amount="1">
+        <atoms>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="Hal"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!--
+    linear and branched haloalkanes from C5 to C10 with up to 3 Halos
+  -->
+  <family_definition code="0209">
+    <formula>C[5-10] H* Hal[1-3]</formula>
+    <unsaturations>0</unsaturations>
+  </family_definition>
+  <!--
+    linear and branched haloalkanes from C5 to C9 with 1-2 halos of one type and 1-2 halos of another type
+  -->
+  <family_definition code="0210">
+    <formula>C[5-9] H* ^Hal[1-2] ^Hal[1-2]</formula>
+    <unsaturations>0</unsaturations>
+  </family_definition>
+  <!--
+    linear and branched haloalkanes from C5 to C9 with 1 halo of one type and 3 halo of another type
+  -->
+  <family_definition code="0211">
+    <formula>C[5-9] H* ^Hal1 ^Hal3</formula>
+    <unsaturations>0</unsaturations>
+  </family_definition>  
+  <!--
+    linear and branched haloalkanes with C10 with 2 different Halos
+  -->
+  <family_definition code="0212">
+    <formula>C10 H* ^Hal1 ^Hal1</formula>
+    <unsaturations>0</unsaturations>
+  </family_definition>  
+</family_definitions>

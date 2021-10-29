@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE pseudoatoms SYSTEM "pseudoatoms.dtd">
+<pseudoatoms version="1.0">
+  <pseudoatom code="C=O">
+    <atoms>
+      <atom>C</atom>
+      <atom>O</atom>
+    </atoms>
+    <adjacency_stack>2</adjacency_stack>
+  </pseudoatom>
+  <pseudoatom code="C(H)=O">
+    <atoms>
+      <atom>CH1</atom>
+      <atom>O</atom>
+    </atoms>
+    <adjacency_stack>2</adjacency_stack>
+  </pseudoatom>
+  <pseudoatom code="C(=O)OH">
+    <atoms>
+      <atom>C</atom>
+      <atom>O</atom>
+      <atom>OH1</atom>
+    </atoms>
+    <adjacency_stack>2 1 0</adjacency_stack>
+  </pseudoatom>
+  <pseudoatom code="OC(=O)H">
+    <atoms>
+      <atom>O</atom>
+      <atom>CH1</atom>
+      <atom>O</atom>
+    </atoms>
+    <adjacency_stack>1 0 2</adjacency_stack>
+  </pseudoatom>
+  <pseudoatom code="CH0=O">
+    <atoms>
+      <atom>CH0</atom>
+      <atom>O</atom>
+    </atoms>
+    <adjacency_stack>2</adjacency_stack>
+  </pseudoatom>
+  <pseudoatom code="CC(=O)H">
+    <atoms>
+      <atom>C</atom>
+      <atom>CH1</atom>
+      <atom>O</atom>
+    </atoms>
+    <adjacency_stack>1 0 2</adjacency_stack>
+  </pseudoatom>
+  <pseudoatom code="C-OH">
+    <atoms>
+      <atom>C</atom>
+      <atom>OH1</atom>
+    </atoms>
+    <adjacency_stack>1</adjacency_stack>
+  </pseudoatom>
+  <pseudoatom code="C-O-OH">
+    <atoms>
+      <atom>C</atom>
+      <atom>O</atom>
+      <atom>OH1</atom>
+    </atoms>
+    <adjacency_stack>1 0 1</adjacency_stack>
+  </pseudoatom>
+  <pseudoatom code="C(Br)H">
+    <atoms>
+      <atom>CH1</atom>
+      <atom>Br</atom>
+    </atoms>
+    <adjacency_stack>1</adjacency_stack>
+  </pseudoatom>
+  <pseudoatom code="O(CH3)">
+    <atoms>
+      <atom>O</atom>
+      <atom>CH3</atom>
+    </atoms>
+    <adjacency_stack>1</adjacency_stack>
+  </pseudoatom>
+  <pseudoatom code="C(H2)OH">
+    <atoms>
+      <atom>CH2</atom>
+      <atom>OH1</atom>
+    </atoms>
+    <adjacency_stack>1</adjacency_stack>
+  </pseudoatom>
+  <pseudoatom code="KOX">
+    <atoms>
+      <atom>CH2</atom>
+      <atom>OH1</atom>
+    </atoms>
+    <adjacency_stack>1</adjacency_stack>
+  </pseudoatom>
+  <pseudoatom code="KdO">
+    <atoms>
+      <atom>CH1</atom>
+      <atom>O</atom>
+    </atoms>
+    <adjacency_stack>2</adjacency_stack>
+  </pseudoatom>
+  <pseudoatom code="OMX">
+    <atoms>
+      <atom>O</atom>
+      <atom>CH3</atom>
+    </atoms>
+    <adjacency_stack>1</adjacency_stack>
+  </pseudoatom>
+  <pseudoatom code="OH">
+    <atoms>
+      <atom>OH1</atom>
+    </atoms>
+    <adjacency_stack/>
+  </pseudoatom>
+  <pseudoatom code="Me">
+    <atoms>
+      <atom>CH3</atom>
+    </atoms>
+    <adjacency_stack/>
+  </pseudoatom>
+  <pseudoatom code="Ss(=O)=O">
+    <atoms>
+      <atom>Ss</atom>
+      <atom>O</atom>
+      <atom>O</atom>
+    </atoms>
+    <adjacency_stack>2 2 0</adjacency_stack>
+  </pseudoatom>
+  <pseudoatom code="Pf=O">
+    <atoms>
+      <atom>Pf</atom>
+      <atom>O</atom>
+    </atoms>
+    <adjacency_stack>2</adjacency_stack>
+  </pseudoatom>
+</pseudoatoms>

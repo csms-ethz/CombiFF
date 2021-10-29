@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE family_definitions SYSTEM "family_definitions.dtd">
+<family_definitions version="1.0">
+  <!-- 
+    saturated C1-C10 with one primary amide group
+  -->
+  <family_definition code="1200">
+    <formula>'C=O'1 C[0-9] N1 H*</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="AMIDE" amount="1">
+        <atoms>
+          <atom type="O"/>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="N"/>
+          <atom type="H"/>
+          <atom type="H"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with one secondary amide group
+  -->
+  <family_definition code="1201">
+    <formula>'C=O'1 C[0-9] N1 H*</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="AMIDE" amount="1">
+        <atoms>
+          <atom type="O"/>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="N"/>
+          <atom type="H"/>
+          <atom type="C"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with one tertiary amide group
+  -->
+  <family_definition code="1202">
+    <formula>'C=O'1 C[0-9] N1 H*</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="AMIDE" amount="1">
+        <atoms>
+          <atom type="O"/>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="N"/>
+          <atom type="C"/>
+          <atom type="C"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with two amide groups
+  -->
+  <family_definition code="1203">
+    <formula>'C=O'2 C[0-8] N2 H*</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="AMIDE" amount="2">
+        <atoms>
+          <atom type="O"/>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="N"/>
+          <atom type="CorH"/>
+          <atom type="CorH"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+</family_definitions>
+

@@ -1,0 +1,8 @@
+<!ELEMENT substructures (substructure+)>
+<!ATTLIST substructures version CDATA #REQUIRED>
+
+<!ELEMENT substructure (num_atoms, adjacency_stack)>
+<!ATTLIST substructure code CDATA #REQUIRED>
+
+<!ELEMENT num_atoms (#PCDATA)>
+<!ELEMENT adjacency_stack (#PCDATA)>

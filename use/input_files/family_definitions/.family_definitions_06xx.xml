@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE family_definitions SYSTEM "family_definitions.dtd">
+<family_definitions version="1.0">
+  <!-- 
+    saturated C1-C10 with one ketone group
+  -->
+  <family_definition code="0600">
+    <formula>C[0-9] 'C=O'1 H[1-22]</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="KETONE" amount="1">
+        <atoms>
+          <atom type="O"/>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="C"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with two ketone groups
+  -->
+  <family_definition code="0601">
+    <formula>C[0-8] 'C=O'2 H[1-22]</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="KETONE" amount="2">
+        <atoms>
+          <atom type="O"/>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="C"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with three ketone groups
+  -->
+  <family_definition code="0602">
+    <formula>C[0-7] 'C=O'3 H[0-22]</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="KETONE" amount="3">
+        <atoms>
+          <atom type="O"/>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="C"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+  <!-- 
+    saturated C1-C10 with four ketone groups
+  -->
+  <family_definition code="0603">
+    <formula>C[0-6] 'C=O'4 H[1-22]</formula>
+    <unsaturations>0</unsaturations>
+    <substructures>
+      <substructure substructure_code="KETONE" amount="4">
+        <atoms>
+          <atom type="O"/>
+          <atom type="C"/>
+          <atom type="C"/>
+          <atom type="C"/>
+        </atoms>
+      </substructure>
+    </substructures>
+  </family_definition>
+</family_definitions>

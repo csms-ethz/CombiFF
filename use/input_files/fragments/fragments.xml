@@ -1,0 +1,1728 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE fragments SYSTEM "fragments.dtd">
+<fragments version="1.0">
+  <!--
+    ALIPHATIC FRAGMENTS
+  -->
+  <!-- fragment H: H-* -->
+  <fragment code="~H_ali">
+    <atoms>
+      <atom id="h">
+        <atomtype>H_ali</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>h</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment C_ali: C(C*)(C*)(C*)(C*) -->
+  <fragment code="~C_ali">
+    <atoms>
+      <atom id="c">
+        <atomtype>C_ali</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l1">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l2">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l3">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l4">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l4</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+<!--    <angles>
+      <angle>
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle>
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle>
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle>
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle>
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle>
+        <involved_atoms>
+          <involved_atom>c4</involved_atom>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c5</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <improper_dihedrals>
+      <improper_dihedral>
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>c3</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+    </improper_dihedrals>
+-->
+  </fragment>
+  <!--
+    ALIPHATIC HALOGEN FRAGMENTS
+  -->
+  <!-- fragment *-Br -->
+  <fragment code="~Br_ali">
+    <atoms>
+      <atom id="br">
+        <atomtype>Br_ali</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>br</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment *-Cl -->
+  <fragment code="~Cl_ali">
+    <atoms>
+      <atom id="cl">
+        <atomtype>Cl_ali</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>cl</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment *-F -->
+  <fragment code="~F_ali">
+    <atoms>
+      <atom id="f">
+        <atomtype>F_ali</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>f</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment *-I -->
+  <fragment code="~I_ali">
+    <atoms>
+      <atom id="i">
+        <atomtype>I_ali</atomtype>
+        <linktype type="core"/>
+      </atom>
+     <atom id="l">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>i</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!--
+    ALIPHATIC OXYGEN FRAGMENTS
+  -->
+  <!-- fragment OH_ali: O(*)(*) -->
+  <fragment code="~O_ali">
+    <atoms>
+      <atom id="o">
+        <atomtype>O_ali</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l1">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l2">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>o</involved_atom>
+          <involved_atom>l1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>o</involved_atom>
+          <involved_atom>l2</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- 
+    AROMATIC FRAGMENTS 
+  -->
+  <!-- fragment benz: c1(*)c(*)c(*)c(*)c(*)c1(*) -->
+  <fragment code="~benz">
+    <atoms>
+      <atom id="c1">
+        <atomtype>C_aro</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c2">
+        <atomtype>C_aro</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c3">
+        <atomtype>C_aro</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c4">
+        <atomtype>C_aro</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c5">
+        <atomtype>C_aro</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c6">
+        <atomtype>C_aro</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l1">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l2">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l3">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l4">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l5">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l6">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="aromatic">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="aromatic">
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>c3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="aromatic">
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>c4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="aromatic">
+        <involved_atoms>
+          <involved_atom>c4</involved_atom>
+          <involved_atom>c5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="aromatic">
+        <involved_atoms>
+          <involved_atom>c5</involved_atom>
+          <involved_atom>c6</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="aromatic">
+        <involved_atoms>
+          <involved_atom>c6</involved_atom>
+          <involved_atom>c1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>l2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>l3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c4</involved_atom>
+          <involved_atom>l4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c5</involved_atom>
+          <involved_atom>l5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c6</involved_atom>
+          <involved_atom>l6</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <improper_dihedrals>
+      <improper_dihedral>
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l1</involved_atom>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>c6</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+      <improper_dihedral>
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>c4</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+      <improper_dihedral>
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l2</involved_atom>
+          <involved_atom>c3</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+      <improper_dihedral>
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c6</involved_atom>
+          <involved_atom>c5</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+      <improper_dihedral>
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>c4</involved_atom>
+          <involved_atom>c5</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+      <improper_dihedral>
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>l3</involved_atom>
+          <involved_atom>c4</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+      <improper_dihedral>
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>c4</involved_atom>
+          <involved_atom>c5</involved_atom>
+          <involved_atom>c6</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+      <improper_dihedral>
+        <involved_atoms>
+          <involved_atom>c4</involved_atom>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>l4</involved_atom>
+          <involved_atom>c5</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+      <improper_dihedral>
+        <involved_atoms>
+          <involved_atom>c4</involved_atom>
+          <involved_atom>c5</involved_atom>
+          <involved_atom>c6</involved_atom>
+          <involved_atom>c1</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+      <improper_dihedral>
+        <involved_atoms>
+          <involved_atom>c5</involved_atom>
+          <involved_atom>c4</involved_atom>
+          <involved_atom>l5</involved_atom>
+          <involved_atom>c6</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+      <improper_dihedral>
+        <involved_atoms>
+          <involved_atom>c6</involved_atom>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>c3</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+      <improper_dihedral>
+        <involved_atoms>
+          <involved_atom>c6</involved_atom>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c5</involved_atom>
+          <involved_atom>l6</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+    </improper_dihedrals>
+  </fragment>
+  <!-- fragment ar*-H -->
+  <fragment code="~H_aro">
+    <atoms>
+      <atom id="h">
+        <atomtype>H_aro</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>Any_aro</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>h</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment ar*-C(ali)(ali)ali -->
+  <fragment code="~C_ali_on_aro">
+    <atoms>
+      <atom id ="c">
+        <atomtype>C_ali</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id ="l1">
+        <atomtype>Any_aro</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id ="l2">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id ="l3">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id ="l4">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l4</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>     
+  <!--
+    AROMATIC HALOGEN FRAGMENTS
+  -->
+  <!-- fragment ar*-Br -->
+  <fragment code="~Br_aro">
+    <atoms>
+      <atom id="br">
+        <atomtype>Br_aro</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>Any_aro</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>br</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment ar*-Cl -->
+  <fragment code="~Cl_aro">
+    <atoms>
+      <atom id="cl">
+        <atomtype>Cl_aro</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>Any_aro</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>cl</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment C_aro*-F -->
+  <fragment code="~F_aro">
+    <atoms>
+      <atom id="f">
+        <atomtype>F_aro</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>Any_aro</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>f</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment C_aro*-I -->
+  <fragment code="~I_aro">
+    <atoms>
+      <atom id="i">
+        <atomtype>I_aro</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>Any_aro</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>i</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!--
+    DOUBLE BOND FRAGMENT
+  -->
+  <!-- fragment C=C -->
+  <fragment code="~CdC">
+    <atoms>
+      <atom id="c1">
+        <atomtype>C_db</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c2">
+        <atomtype>C_db</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l1">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l2">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l3">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l4">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="double">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>l3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>l4</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment C(*)(*)=* -->
+  <fragment code="~C_db_ss">
+    <atoms>
+      <atom id="c1">
+        <atomtype>C_db</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l1">
+        <atomtype>Any_db</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l2">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l3">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="double">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l3</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment O=* -->
+  <fragment code="~O_db">
+    <atoms>
+      <atom id="o">
+        <atomtype>O_db</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>Any_db</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="double">
+        <involved_atoms>
+          <involved_atom>o</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <fragment code="~C_ali_on_db">
+    <atoms>
+      <atom id="c1">
+        <atomtype>C_on_db</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l1">
+        <atomtype>Any_db</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l2">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l3">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l4">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l4</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <fragment code="~O_on_db">
+    <atoms>
+      <atom id="h">
+        <atomtype>H_ali</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="o">
+        <atomtype>O_on_db</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>Any_db</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>h</involved_atom>
+          <involved_atom>o</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>o</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <fragment code="~H_on_db">
+    <atoms>
+      <atom id="h">
+        <atomtype>H_on_db</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>Any_db</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>h</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <fragment code="~F_on_db">
+    <atoms>
+      <atom id="f">
+        <atomtype>F_on_db</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>Any_db</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>f</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <fragment code="~Br_on_db">
+    <atoms>
+      <atom id="br">
+        <atomtype>Br_on_db</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>Any_db</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>br</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <fragment code="~S4_db_ss">
+    <atoms>
+      <atom id="s">
+        <atomtype>S4_db</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l1">
+        <atomtype>Any_db</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l2">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l3">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="double">
+        <involved_atoms>
+          <involved_atom>s</involved_atom>
+          <involved_atom>l1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>s</involved_atom>
+          <involved_atom>l2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>s</involved_atom>
+          <involved_atom>l3</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <fragment code="~S2_db">
+    <atoms>
+      <atom id="s">
+        <atomtype>S2_db</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>Any_db</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="double">
+        <involved_atoms>
+          <involved_atom>s</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!--
+    CYCLE FRAGMENTS
+  -->
+  <!-- fragment C_on_cyc: C_on_cyc(C_cyc*)(C*)(C*)(C*) -->
+  <!--
+  <fragment code="~C_on_cyc">
+    <atoms>
+      <atom id="c">
+        <atomtype>C_on_cyc</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l1">
+        <atomtype>C_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l2">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l3">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l4">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c</involved_atom>
+          <involved_atom>l4</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  -->
+  <!-- fragment *_cyc-H -->
+  <fragment code="~H_on_cyc">
+    <atoms>
+      <atom id="h">
+        <atomtype>H_on_cyc</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>C_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>h</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment *_cyc-Br -->
+  <fragment code="~Br_on_cyc">
+    <atoms>
+      <atom id="br">
+        <atomtype>Br_on_cyc</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>C_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>br</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment *cyc-Cl -->
+  <fragment code="~Cl_on_cyc">
+    <atoms>
+      <atom id="cl">
+        <atomtype>Cl_on_cyc</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>C_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>cl</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment *_cyc-F -->
+  <fragment code="~F_on_cyc">
+    <atoms>
+      <atom id="f">
+        <atomtype>F_on_cyc</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l">
+        <atomtype>C_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>f</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment *_cyc-I -->
+  <fragment code="~I_on_cyc">
+    <atoms>
+      <atom id="i">
+        <atomtype>I_on_cyc</atomtype>
+        <linktype type="core"/>
+      </atom>
+     <atom id="l">
+        <atomtype>C_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>i</involved_atom>
+          <involved_atom>l</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment C1CC1 -->
+  <fragment code="~C_cyc_3">
+    <atoms>
+      <atom id="c1">
+        <atomtype>C_cyc_3</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c2">
+        <atomtype>C_cyc_3</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c3">
+        <atomtype>C_cyc_3</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l1">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l2">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l3">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l4">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l5">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l6">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>c3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>l3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>l4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>l5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>l6</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment C1CCC1 -->
+  <fragment code="~C_cyc_4">
+    <atoms>
+      <atom id="c1">
+        <atomtype>C_cyc_4</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c2">
+        <atomtype>C_cyc_4</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c3">
+        <atomtype>C_cyc_4</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c4">
+        <atomtype>C_cyc_4</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l1">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l2">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l3">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l4">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l5">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l6">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l7">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l8">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>c3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>c4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>l3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>l4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>l5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>l6</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c4</involved_atom>
+          <involved_atom>l7</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c4</involved_atom>
+          <involved_atom>l8</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment C1CCCC1 -->
+  <fragment code="~C_cyc_5">
+    <atoms>
+      <atom id="c1">
+        <atomtype>C_cyc_5</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c2">
+        <atomtype>C_cyc_5</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c3">
+        <atomtype>C_cyc_5</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c4">
+        <atomtype>C_cyc_5</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c5">
+        <atomtype>C_cyc_5</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l1">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l2">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l3">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l4">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l5">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l6">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l7">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l8">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l9">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l10">
+        <atomtype>any</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>c3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>c4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c4</involved_atom>
+          <involved_atom>c5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>l3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>l4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>l5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>l6</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c4</involved_atom>
+          <involved_atom>l7</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c4</involved_atom>
+          <involved_atom>l8</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c5</involved_atom>
+          <involved_atom>l9</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c5</involved_atom>
+          <involved_atom>l10</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- fragment C1CCCCC1 -->
+  <fragment code="~C_cyc_6">
+    <atoms>
+      <atom id="c1">
+        <atomtype>C_cyc_6</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c2">
+        <atomtype>C_cyc_6</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c3">
+        <atomtype>C_cyc_6</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c4">
+        <atomtype>C_cyc_6</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c5">
+        <atomtype>C_cyc_6</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="c6">
+        <atomtype>C_cyc_6</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l1">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l2">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l3">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l4">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l5">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l6">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l7">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l8">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l9">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l10">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l11">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l12">
+        <atomtype>Any_on_cyc</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>c6</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>c3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>c4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c4</involved_atom>
+          <involved_atom>c5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c5</involved_atom>
+          <involved_atom>c6</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c1</involved_atom>
+          <involved_atom>l2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>l3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c2</involved_atom>
+          <involved_atom>l4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>l5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c3</involved_atom>
+          <involved_atom>l6</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c4</involved_atom>
+          <involved_atom>l7</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c4</involved_atom>
+          <involved_atom>l8</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c5</involved_atom>
+          <involved_atom>l9</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c5</involved_atom>
+          <involved_atom>l10</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c6</involved_atom>
+          <involved_atom>l11</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree = "single">
+        <involved_atoms>
+          <involved_atom>c6</involved_atom>
+          <involved_atom>l12</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+  <!-- Sulfur fragments -->
+  <fragment code="~S_2">
+    <atoms>
+      <atom id="s">
+        <atomtype>S_2</atomtype>
+        <linktype type="core"/>
+      </atom>
+      <atom id="l1">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+      <atom id="l2">
+        <atomtype>Any_ali</atomtype>
+        <linktype type="link"/>
+      </atom>
+    </atoms>
+    <bonds>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>s</involved_atom>
+          <involved_atom>l1</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond degree="single">
+        <involved_atoms>
+          <involved_atom>s</involved_atom>
+          <involved_atom>l2</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </fragment>
+</fragments>

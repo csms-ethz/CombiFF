@@ -1,0 +1,36 @@
+<!ELEMENT fragments (fragment+)>
+<!ATTLIST fragments version CDATA #REQUIRED>
+
+<!ELEMENT fragment (atoms+,bonds*,angles?,improper_dihedrals?,torsional_dihedrals?)>
+<!ATTLIST fragment code ID #REQUIRED>
+
+<!ELEMENT atoms (atom+)>
+<!ELEMENT atom (atomtype,linktype)>
+<!ATTLIST atom id CDATA #REQUIRED>
+
+<!ELEMENT atomtype (#PCDATA)>
+<!ELEMENT linktype (linksite?,deletable?)>
+<!ATTLIST linktype type (core|link) #REQUIRED>
+<!-- <!ELEMENT linksite (#PCDATA)> -->
+<!-- <!ELEMENT deletable (#PCDATA)> -->
+
+<!ELEMENT bonds (bond+)>
+<!ELEMENT bond (involved_atoms)>
+<!ATTLIST bond 
+  degree (single|double|triple|quadruple|aromatic) #REQUIRED
+  parameter CDATA #IMPLIED>
+
+<!ELEMENT angles (angle+)>
+<!ELEMENT angle (involved_atoms)>
+<!ATTLIST angle parameter CDATA #IMPLIED>
+
+<!ELEMENT improper_dihedrals (improper_dihedral+)>
+<!ELEMENT improper_dihedral (involved_atoms)>
+<!ATTLIST improper_dihedral parameter CDATA #IMPLIED>
+
+<!ELEMENT torsional_dihedrals (torsional_dihedral+)>
+<!ELEMENT torsional_dihedral (involved_atoms)>
+<!ATTLIST torsional_dihedral parameter CDATA #IMPLIED>
+
+<!ELEMENT involved_atoms (involved_atom+)> 
+<!ELEMENT involved_atom (#PCDATA)>
