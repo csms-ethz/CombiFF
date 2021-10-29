@@ -1,6 +1,8 @@
 bin/*
 build/
 __pycache__/
+*.pyc
+
 
 ## hidden xml files
 .*.xml

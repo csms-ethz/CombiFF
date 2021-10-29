@@ -28,3 +28,7 @@ if(args.executable is not None):
   subprocess.call(['make','-j4',args.executable])
 else:
   subprocess.call(['make','-j4'])
+  #copy script files
+  for file in glob.glob(script_dir + "/*.py"):
+    shutil.copy(file, bin_dir)
+  
