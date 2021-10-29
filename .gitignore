@@ -1,5 +1,9 @@
 bin/*
-build
+build/
+__pycache__/
+
+## hidden xml files
+.*.xml
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
