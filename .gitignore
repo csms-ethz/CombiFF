@@ -3,6 +3,7 @@ build/
 __pycache__/
 *.pyc
 output_files/*
+output_files/**
 
 
 ## hidden xml files
