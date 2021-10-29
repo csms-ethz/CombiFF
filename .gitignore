@@ -6,8 +6,9 @@ use/output_files/*
 use/output_files/**
 
 
-## hidden xml files
+## hidden xml + tex files
 .*.xml
+.*.tex
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
