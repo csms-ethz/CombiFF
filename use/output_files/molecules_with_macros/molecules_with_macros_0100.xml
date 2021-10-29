@@ -1,0 +1,3070 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE molecules_with_macros SYSTEM "molecules_with_macros.dtd">
+<molecules_with_macros enu_version="1.0" family_code="0100" family_version="1.0" tbl_version="1.0">
+  <molecule_with_macros isomer_id="0100_000000001" smiles="C">
+    <atoms amount="1">
+      <atom atom_id="C1" atom_type="CH4_ali"></atom>
+    </atoms>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000002" smiles="CC">
+    <atoms amount="2">
+      <atom atom_id="C1" atom_type="CH3_ali/~CH3.l">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH3_ali/~CH3.l">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="1">
+      <bond parameter="bnd_CH3_ali-CH3_ali/~CH3.l%~CH3.l">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000003" smiles="CCC">
+    <atoms amount="3">
+      <atom atom_id="C1" atom_type="CH2_ali/~CH3.l,~CH3.l">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH3_ali/~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH3_ali/~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="2">
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH3.l%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH3.l%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="1">
+      <angle parameter="ang_CH3_ali-CH2_ali-CH3_ali/~CH2.l1%~CH3.l,~CH3.l%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000004" smiles="CC(C)C">
+    <atoms amount="4">
+      <atom atom_id="C1" atom_type="CH1_ali/~CH3.l,~CH3.l,~CH3.l">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH3_ali/~CH1.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH3_ali/~CH1.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH3_ali/~CH1.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="3">
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH3.l%~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH3.l%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH3.l%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="3">
+      <angle parameter="ang_CH3_ali-CH1_ali-CH3_ali/~CH1.l1%~CH3.l,~CH3.l,~CH3.l%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-CH1_ali-CH3_ali/~CH1.l1%~CH3.l,~CH3.l,~CH3.l%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-CH1_ali-CH3_ali/~CH1.l2%~CH3.l,~CH3.l,~CH3.l%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <improper_dihedrals amount="1">
+      <improper_dihedral parameter="imp_CH1_ali,-CH3_ali,-CH3_ali,-CH3_ali/~CH3.l,~CH3.l,~CH3.l%~CH1.l1%~CH1.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+    </improper_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000005" smiles="CCCC">
+    <atoms amount="4">
+      <atom atom_id="C1" atom_type="CH2_ali/~CH3.l,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH2_ali/~CH3.l,~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH3_ali/~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH3_ali/~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="3">
+      <bond parameter="bnd_CH2_ali-CH2_ali/~CH3.l,~CH2.l1%~CH3.l,~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH2.l2%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="2">
+      <angle parameter="ang_CH2_ali-CH2_ali-CH3_ali/~CH3.l,~CH2.l1%~CH3.l,~CH2.l2%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH2_ali-CH3_ali/~CH3.l,~CH2.l2%~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <torsional_dihedrals amount="1">
+      <torsional_dihedral parameter="dih_CH3_ali-CH2_ali-CH2_ali-CH3_ali/~CH2.l1%~CH3.l,~CH2.l1%~CH3.l,~CH2.l2%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000006" smiles="CC(C)(C)C">
+    <atoms amount="5">
+      <atom atom_id="C1" atom_type="C_ali/~CH3.l,~CH3.l,~CH3.l,~CH3.l">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH3_ali/~C_ali.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH3_ali/~C_ali.l4">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH3_ali/~C_ali.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH3_ali/~C_ali.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="4">
+      <bond parameter="bnd_CH3_ali-C_ali/~CH3.l,~CH3.l,~CH3.l,~CH3.l%~C_ali.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-C_ali/~CH3.l,~CH3.l,~CH3.l,~CH3.l%~C_ali.l4">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-C_ali/~CH3.l,~CH3.l,~CH3.l,~CH3.l%~C_ali.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-C_ali/~CH3.l,~CH3.l,~CH3.l,~CH3.l%~C_ali.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="6">
+      <angle parameter="ang_CH3_ali-C_ali-CH3_ali/~C_ali.l3%~CH3.l,~CH3.l,~CH3.l,~CH3.l%~C_ali.l4">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-C_ali-CH3_ali/~C_ali.l3%~CH3.l,~CH3.l,~CH3.l,~CH3.l%~C_ali.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-C_ali-CH3_ali/~C_ali.l3%~CH3.l,~CH3.l,~CH3.l,~CH3.l%~C_ali.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-C_ali-CH3_ali/~C_ali.l4%~CH3.l,~CH3.l,~CH3.l,~CH3.l%~C_ali.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-C_ali-CH3_ali/~C_ali.l4%~CH3.l,~CH3.l,~CH3.l,~CH3.l%~C_ali.l2">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-C_ali-CH3_ali/~C_ali.l1%~CH3.l,~CH3.l,~CH3.l,~CH3.l%~C_ali.l2">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000007" smiles="CCC(C)C">
+    <atoms amount="5">
+      <atom atom_id="C1" atom_type="CH1_ali/~CH3.l,~CH3.l,~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH2_ali/~CH3.l,~CH1.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH3_ali/~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH3_ali/~CH1.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH3_ali/~CH1.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="4">
+      <bond parameter="bnd_CH2_ali-CH1_ali/~CH3.l,~CH3.l,~CH2.l2%~CH3.l,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH2.l2%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH2.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH1.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="4">
+      <angle parameter="ang_CH1_ali-CH2_ali-CH3_ali/~CH3.l,~CH3.l,~CH2.l2%~CH3.l,~CH1.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH3_ali/~CH3.l,~CH1.l1%~CH3.l,~CH3.l,~CH2.l2%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH3_ali/~CH3.l,~CH1.l1%~CH3.l,~CH3.l,~CH2.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-CH1_ali-CH3_ali/~CH1.l2%~CH3.l,~CH3.l,~CH2.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <improper_dihedrals amount="1">
+      <improper_dihedral parameter="imp_CH1_ali,-CH2_ali,-CH3_ali,-CH3_ali/~CH3.l,~CH3.l,~CH2.l2%~CH3.l,~CH1.l1%~CH1.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+    </improper_dihedrals>
+    <torsional_dihedrals amount="1">
+      <torsional_dihedral parameter="dih_CH3_ali-CH1_ali-CH2_ali-CH3_ali/~CH1.l2%~CH3.l,~CH3.l,~CH2.l2%~CH3.l,~CH1.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000008" smiles="CCCCC">
+    <atoms amount="5">
+      <atom atom_id="C1" atom_type="CH2_ali/~CH3.l,~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH2_ali/~CH2.l2,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH2_ali/~CH3.l,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH3_ali/~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH3_ali/~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="4">
+      <bond parameter="bnd_CH2_ali-CH2_ali/~CH3.l,~CH2.l2%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH2.l2%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH2_ali/~CH2.l2,~CH2.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="3">
+      <angle parameter="ang_CH2_ali-CH2_ali-CH2_ali/~CH3.l,~CH2.l2%~CH2.l2,~CH2.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH2_ali-CH3_ali/~CH2.l2,~CH2.l1%~CH3.l,~CH2.l2%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH2_ali-CH3_ali/~CH2.l2,~CH2.l1%~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <torsional_dihedrals amount="2">
+      <torsional_dihedral parameter="dih_CH2_ali-CH2_ali-CH2_ali-CH3_ali/~CH3.l,~CH2.l2%~CH2.l2,~CH2.l1%~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH3_ali-CH2_ali-CH2_ali-CH2_ali/~CH2.l2%~CH3.l,~CH2.l2%~CH2.l2,~CH2.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C5</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000009" smiles="CCC(C)(C)C">
+    <atoms amount="6">
+      <atom atom_id="C1" atom_type="C_ali/~CH3.l,~CH3.l,~CH3.l,~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH2_ali/~CH3.l,~C_ali.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH3_ali/~C_ali.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH3_ali/~C_ali.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH3_ali/~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C6" atom_type="CH3_ali/~C_ali.l4">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="5">
+      <bond parameter="bnd_CH2_ali-C_ali/~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~CH3.l,~C_ali.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-C_ali/~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-C_ali/~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-C_ali/~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l4">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~C_ali.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="7">
+      <angle parameter="ang_C_ali-CH2_ali-CH3_ali/~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~CH3.l,~C_ali.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-C_ali-CH3_ali/~CH3.l,~C_ali.l1%~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-C_ali-CH3_ali/~CH3.l,~C_ali.l1%~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l3">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-C_ali-CH3_ali/~CH3.l,~C_ali.l1%~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l4">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-C_ali-CH3_ali/~C_ali.l2%~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l3">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-C_ali-CH3_ali/~C_ali.l2%~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l4">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-C_ali-CH3_ali/~C_ali.l3%~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l4">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <torsional_dihedrals amount="1">
+      <torsional_dihedral parameter="dih_CH3_ali-C_ali-CH2_ali-CH3_ali/~C_ali.l2%~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~CH3.l,~C_ali.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000010" smiles="CC(C)C(C)C">
+    <atoms amount="6">
+      <atom atom_id="C1" atom_type="CH1_ali/~CH3.l,~CH3.l,~CH1.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH1_ali/~CH3.l,~CH3.l,~CH1.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH3_ali/~CH1.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH3_ali/~CH1.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH3_ali/~CH1.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C6" atom_type="CH3_ali/~CH1.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="5">
+      <bond parameter="bnd_CH1_ali-CH1_ali/~CH3.l,~CH3.l,~CH1.l3%~CH3.l,~CH3.l,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH1.l3%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH1.l3%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH1.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH1.l1%~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="6">
+      <angle parameter="ang_CH1_ali-CH1_ali-CH3_ali/~CH3.l,~CH3.l,~CH1.l3%~CH3.l,~CH3.l,~CH1.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH1_ali-CH1_ali-CH3_ali/~CH3.l,~CH3.l,~CH1.l3%~CH3.l,~CH3.l,~CH1.l1%~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH1_ali-CH1_ali-CH3_ali/~CH3.l,~CH3.l,~CH1.l1%~CH3.l,~CH3.l,~CH1.l3%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH1_ali-CH1_ali-CH3_ali/~CH3.l,~CH3.l,~CH1.l1%~CH3.l,~CH3.l,~CH1.l3%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-CH1_ali-CH3_ali/~CH1.l2%~CH3.l,~CH3.l,~CH1.l1%~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-CH1_ali-CH3_ali/~CH1.l2%~CH3.l,~CH3.l,~CH1.l3%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <improper_dihedrals amount="2">
+      <improper_dihedral parameter="imp_CH1_ali,-CH1_ali,-CH3_ali,-CH3_ali/~CH3.l,~CH3.l,~CH1.l3%~CH3.l,~CH3.l,~CH1.l1%~CH1.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+      <improper_dihedral parameter="imp_CH1_ali,-CH3_ali,-CH3_ali,-CH1_ali/~CH3.l,~CH3.l,~CH1.l1%~CH3.l,~CH3.l,~CH1.l3%~CH1.l2%~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+    </improper_dihedrals>
+    <torsional_dihedrals amount="1">
+      <torsional_dihedral parameter="dih_CH3_ali-CH1_ali-CH1_ali-CH3_ali/~CH1.l2%~CH3.l,~CH3.l,~CH1.l3%~CH3.l,~CH3.l,~CH1.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000011" smiles="CCC(C)CC">
+    <atoms amount="6">
+      <atom atom_id="C1" atom_type="CH1_ali/~CH3.l,~CH2.l2,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH2_ali/~CH3.l,~CH1.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH2_ali/~CH3.l,~CH1.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH3_ali/~CH1.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH3_ali/~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C6" atom_type="CH3_ali/~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="5">
+      <bond parameter="bnd_CH2_ali-CH1_ali/~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH1_ali/~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH2.l2,~CH2.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH1.l3%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH1.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="5">
+      <angle parameter="ang_CH1_ali-CH2_ali-CH3_ali/~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~CH1.l3%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH1_ali-CH2_ali-CH3_ali/~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~CH1.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH2_ali/~CH3.l,~CH1.l3%~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH3_ali/~CH3.l,~CH1.l3%~CH3.l,~CH2.l2,~CH2.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH3_ali/~CH3.l,~CH1.l1%~CH3.l,~CH2.l2,~CH2.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <improper_dihedrals amount="1">
+      <improper_dihedral parameter="imp_CH1_ali,-CH2_ali,-CH3_ali,-CH2_ali/~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~CH1.l3%~CH3.l,~CH1.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+    </improper_dihedrals>
+    <torsional_dihedrals amount="2">
+      <torsional_dihedral parameter="dih_CH2_ali-CH1_ali-CH2_ali-CH3_ali/~CH3.l,~CH1.l3%~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~CH1.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH2_ali-CH1_ali-CH2_ali-CH3_ali/~CH3.l,~CH1.l1%~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~CH1.l3%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000012" smiles="CCCC(C)C">
+    <atoms amount="6">
+      <atom atom_id="C1" atom_type="CH1_ali/~CH3.l,~CH3.l,~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH2_ali/~CH2.l2,~CH1.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH2_ali/~CH3.l,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH3_ali/~CH1.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH3_ali/~CH1.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C6" atom_type="CH3_ali/~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="5">
+      <bond parameter="bnd_CH2_ali-CH1_ali/~CH3.l,~CH3.l,~CH2.l2%~CH2.l2,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH2.l2%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH2.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH2_ali/~CH2.l2,~CH1.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="5">
+      <angle parameter="ang_CH1_ali-CH2_ali-CH2_ali/~CH3.l,~CH3.l,~CH2.l2%~CH2.l2,~CH1.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH3_ali/~CH2.l2,~CH1.l1%~CH3.l,~CH3.l,~CH2.l2%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH3_ali/~CH2.l2,~CH1.l1%~CH3.l,~CH3.l,~CH2.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH2_ali-CH3_ali/~CH2.l2,~CH1.l1%~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-CH1_ali-CH3_ali/~CH1.l2%~CH3.l,~CH3.l,~CH2.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <improper_dihedrals amount="1">
+      <improper_dihedral parameter="imp_CH1_ali,-CH2_ali,-CH3_ali,-CH3_ali/~CH3.l,~CH3.l,~CH2.l2%~CH2.l2,~CH1.l1%~CH1.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+    </improper_dihedrals>
+    <torsional_dihedrals amount="2">
+      <torsional_dihedral parameter="dih_CH1_ali-CH2_ali-CH2_ali-CH3_ali/~CH3.l,~CH3.l,~CH2.l2%~CH2.l2,~CH1.l1%~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH3_ali-CH1_ali-CH2_ali-CH2_ali/~CH1.l2%~CH3.l,~CH3.l,~CH2.l2%~CH2.l2,~CH1.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000013" smiles="CCCCCC">
+    <atoms amount="6">
+      <atom atom_id="C1" atom_type="CH2_ali/~CH3.l,~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH2_ali/~CH2.l2,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH2_ali/~CH3.l,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH2_ali/~CH2.l2,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH3_ali/~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C6" atom_type="CH3_ali/~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="5">
+      <bond parameter="bnd_CH2_ali-CH2_ali/~CH3.l,~CH2.l2%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH2.l2%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH2_ali/~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH2_ali/~CH3.l,~CH2.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="4">
+      <angle parameter="ang_CH2_ali-CH2_ali-CH2_ali/~CH3.l,~CH2.l2%~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH2_ali-CH3_ali/~CH2.l2,~CH2.l1%~CH3.l,~CH2.l2%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH2_ali-CH2_ali/~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH2_ali-CH3_ali/~CH2.l2,~CH2.l1%~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <torsional_dihedrals amount="3">
+      <torsional_dihedral parameter="dih_CH2_ali-CH2_ali-CH2_ali-CH2_ali/~CH3.l,~CH2.l2%~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH3_ali-CH2_ali-CH2_ali-CH2_ali/~CH2.l2%~CH3.l,~CH2.l2%~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C5</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH3_ali-CH2_ali-CH2_ali-CH2_ali/~CH2.l1%~CH3.l,~CH2.l1%~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C6</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000014" smiles="CC(C)C(C)(C)C">
+    <atoms amount="7">
+      <atom atom_id="C1" atom_type="C_ali/~CH3.l,~CH3.l,~CH3.l,~CH1.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH1_ali/~CH3.l,~CH3.l,~C_ali.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH3_ali/~CH1.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH3_ali/~C_ali.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH3_ali/~C_ali.l4">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C6" atom_type="CH3_ali/~CH1.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C7" atom_type="CH3_ali/~C_ali.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="6">
+      <bond parameter="bnd_CH1_ali-C_ali/~CH3.l,~CH3.l,~CH3.l,~CH1.l3%~CH3.l,~CH3.l,~C_ali.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-C_ali/~CH3.l,~CH3.l,~CH3.l,~CH1.l3%~C_ali.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-C_ali/~CH3.l,~CH3.l,~CH3.l,~CH1.l3%~C_ali.l4">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-C_ali/~CH3.l,~CH3.l,~CH3.l,~CH1.l3%~C_ali.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~C_ali.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~C_ali.l1%~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="9">
+      <angle parameter="ang_C_ali-CH1_ali-CH3_ali/~CH3.l,~CH3.l,~CH3.l,~CH1.l3%~CH3.l,~CH3.l,~C_ali.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_C_ali-CH1_ali-CH3_ali/~CH3.l,~CH3.l,~CH3.l,~CH1.l3%~CH3.l,~CH3.l,~C_ali.l1%~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH1_ali-C_ali-CH3_ali/~CH3.l,~CH3.l,~C_ali.l1%~CH3.l,~CH3.l,~CH3.l,~CH1.l3%~C_ali.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH1_ali-C_ali-CH3_ali/~CH3.l,~CH3.l,~C_ali.l1%~CH3.l,~CH3.l,~CH3.l,~CH1.l3%~C_ali.l4">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH1_ali-C_ali-CH3_ali/~CH3.l,~CH3.l,~C_ali.l1%~CH3.l,~CH3.l,~CH3.l,~CH1.l3%~C_ali.l3">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-CH1_ali-CH3_ali/~CH1.l2%~CH3.l,~CH3.l,~C_ali.l1%~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-C_ali-CH3_ali/~C_ali.l2%~CH3.l,~CH3.l,~CH3.l,~CH1.l3%~C_ali.l4">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-C_ali-CH3_ali/~C_ali.l2%~CH3.l,~CH3.l,~CH3.l,~CH1.l3%~C_ali.l3">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-C_ali-CH3_ali/~C_ali.l4%~CH3.l,~CH3.l,~CH3.l,~CH1.l3%~C_ali.l3">
+        <involved_atoms>
+          <involved_atom>C5</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <improper_dihedrals amount="1">
+      <improper_dihedral parameter="imp_CH1_ali,-CH3_ali,-CH3_ali,-C_ali/~CH3.l,~CH3.l,~C_ali.l1%~CH3.l,~CH3.l,~CH3.l,~CH1.l3%~CH1.l2%~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+    </improper_dihedrals>
+    <torsional_dihedrals amount="1">
+      <torsional_dihedral parameter="dih_CH3_ali-C_ali-CH1_ali-CH3_ali/~C_ali.l2%~CH3.l,~CH3.l,~CH3.l,~CH1.l3%~CH3.l,~CH3.l,~C_ali.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000015" smiles="CCC(C)(C)CC">
+    <atoms amount="7">
+      <atom atom_id="C1" atom_type="C_ali/~CH3.l,~CH3.l,~CH2.l2,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH2_ali/~CH3.l,~C_ali.l4">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH2_ali/~CH3.l,~C_ali.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH3_ali/~C_ali.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH3_ali/~C_ali.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C6" atom_type="CH3_ali/~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C7" atom_type="CH3_ali/~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="6">
+      <bond parameter="bnd_CH2_ali-C_ali/~CH3.l,~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~C_ali.l4">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-C_ali/~CH3.l,~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~C_ali.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-C_ali/~CH3.l,~CH3.l,~CH2.l2,~CH2.l1%~C_ali.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-C_ali/~CH3.l,~CH3.l,~CH2.l2,~CH2.l1%~C_ali.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~C_ali.l4%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~C_ali.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="8">
+      <angle parameter="ang_C_ali-CH2_ali-CH3_ali/~CH3.l,~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~C_ali.l4%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_C_ali-CH2_ali-CH3_ali/~CH3.l,~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~C_ali.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-C_ali-CH2_ali/~CH3.l,~C_ali.l4%~CH3.l,~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~C_ali.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-C_ali-CH3_ali/~CH3.l,~C_ali.l4%~CH3.l,~CH3.l,~CH2.l2,~CH2.l1%~C_ali.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-C_ali-CH3_ali/~CH3.l,~C_ali.l4%~CH3.l,~CH3.l,~CH2.l2,~CH2.l1%~C_ali.l3">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-C_ali-CH3_ali/~CH3.l,~C_ali.l1%~CH3.l,~CH3.l,~CH2.l2,~CH2.l1%~C_ali.l2">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-C_ali-CH3_ali/~CH3.l,~C_ali.l1%~CH3.l,~CH3.l,~CH2.l2,~CH2.l1%~C_ali.l3">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-C_ali-CH3_ali/~C_ali.l2%~CH3.l,~CH3.l,~CH2.l2,~CH2.l1%~C_ali.l3">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <torsional_dihedrals amount="2">
+      <torsional_dihedral parameter="dih_CH2_ali-C_ali-CH2_ali-CH3_ali/~CH3.l,~C_ali.l4%~CH3.l,~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~C_ali.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH2_ali-C_ali-CH2_ali-CH3_ali/~CH3.l,~C_ali.l1%~CH3.l,~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~C_ali.l4%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000016" smiles="CCCC(C)(C)C">
+    <atoms amount="7">
+      <atom atom_id="C1" atom_type="C_ali/~CH3.l,~CH3.l,~CH3.l,~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH2_ali/~CH2.l2,~C_ali.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH2_ali/~CH3.l,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH3_ali/~C_ali.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH3_ali/~C_ali.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C6" atom_type="CH3_ali/~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C7" atom_type="CH3_ali/~C_ali.l4">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="6">
+      <bond parameter="bnd_CH2_ali-C_ali/~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~CH2.l2,~C_ali.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-C_ali/~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-C_ali/~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-C_ali/~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l4">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH2_ali/~CH2.l2,~C_ali.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="8">
+      <angle parameter="ang_C_ali-CH2_ali-CH2_ali/~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~CH2.l2,~C_ali.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-C_ali-CH3_ali/~CH2.l2,~C_ali.l1%~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-C_ali-CH3_ali/~CH2.l2,~C_ali.l1%~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l3">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-C_ali-CH3_ali/~CH2.l2,~C_ali.l1%~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l4">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH2_ali-CH3_ali/~CH2.l2,~C_ali.l1%~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-C_ali-CH3_ali/~C_ali.l2%~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l3">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-C_ali-CH3_ali/~C_ali.l2%~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l4">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-C_ali-CH3_ali/~C_ali.l3%~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~C_ali.l4">
+        <involved_atoms>
+          <involved_atom>C5</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <torsional_dihedrals amount="2">
+      <torsional_dihedral parameter="dih_C_ali-CH2_ali-CH2_ali-CH3_ali/~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~CH2.l2,~C_ali.l1%~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH3_ali-C_ali-CH2_ali-CH2_ali/~C_ali.l2%~CH3.l,~CH3.l,~CH3.l,~CH2.l2%~CH2.l2,~C_ali.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000017" smiles="CCC(C)C(C)C">
+    <atoms amount="7">
+      <atom atom_id="C1" atom_type="CH1_ali/~CH3.l,~CH3.l,~CH1.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH1_ali/~CH3.l,~CH2.l2,~CH1.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH2_ali/~CH3.l,~CH1.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH3_ali/~CH1.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH3_ali/~CH1.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C6" atom_type="CH3_ali/~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C7" atom_type="CH3_ali/~CH1.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="6">
+      <bond parameter="bnd_CH1_ali-CH1_ali/~CH3.l,~CH3.l,~CH1.l3%~CH3.l,~CH2.l2,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH1.l3%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH1.l3%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH1_ali/~CH3.l,~CH2.l2,~CH1.l1%~CH3.l,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH2.l2,~CH1.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH1.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="7">
+      <angle parameter="ang_CH1_ali-CH1_ali-CH2_ali/~CH3.l,~CH3.l,~CH1.l3%~CH3.l,~CH2.l2,~CH1.l1%~CH3.l,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH1_ali-CH1_ali-CH3_ali/~CH3.l,~CH3.l,~CH1.l3%~CH3.l,~CH2.l2,~CH1.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH1_ali-CH1_ali-CH3_ali/~CH3.l,~CH2.l2,~CH1.l1%~CH3.l,~CH3.l,~CH1.l3%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH1_ali-CH1_ali-CH3_ali/~CH3.l,~CH2.l2,~CH1.l1%~CH3.l,~CH3.l,~CH1.l3%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH1_ali-CH2_ali-CH3_ali/~CH3.l,~CH2.l2,~CH1.l1%~CH3.l,~CH1.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH3_ali/~CH3.l,~CH1.l1%~CH3.l,~CH2.l2,~CH1.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-CH1_ali-CH3_ali/~CH1.l2%~CH3.l,~CH3.l,~CH1.l3%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C5</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <improper_dihedrals amount="2">
+      <improper_dihedral parameter="imp_CH1_ali,-CH1_ali,-CH3_ali,-CH3_ali/~CH3.l,~CH3.l,~CH1.l3%~CH3.l,~CH2.l2,~CH1.l1%~CH1.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C5</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+      <improper_dihedral parameter="imp_CH1_ali,-CH2_ali,-CH3_ali,-CH1_ali/~CH3.l,~CH2.l2,~CH1.l1%~CH3.l,~CH3.l,~CH1.l3%~CH3.l,~CH1.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+    </improper_dihedrals>
+    <torsional_dihedrals amount="2">
+      <torsional_dihedral parameter="dih_CH1_ali-CH1_ali-CH2_ali-CH3_ali/~CH3.l,~CH3.l,~CH1.l3%~CH3.l,~CH2.l2,~CH1.l1%~CH3.l,~CH1.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH3_ali-CH1_ali-CH1_ali-CH2_ali/~CH1.l2%~CH3.l,~CH3.l,~CH1.l3%~CH3.l,~CH2.l2,~CH1.l1%~CH3.l,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C5</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000018" smiles="CC(C)CC(C)C">
+    <atoms amount="7">
+      <atom atom_id="C1" atom_type="CH1_ali/~CH3.l,~CH3.l,~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH1_ali/~CH3.l,~CH3.l,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH2_ali/~CH1.l3,~CH1.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH3_ali/~CH1.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH3_ali/~CH1.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C6" atom_type="CH3_ali/~CH1.l1">
+        <excluded_atoms>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C7" atom_type="CH3_ali/~CH1.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="6">
+      <bond parameter="bnd_CH2_ali-CH1_ali/~CH3.l,~CH3.l,~CH2.l2%~CH1.l3,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH2.l2%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH2.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH1_ali/~CH3.l,~CH3.l,~CH2.l1%~CH1.l3,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH2.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH2.l1%~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="7">
+      <angle parameter="ang_CH1_ali-CH2_ali-CH1_ali/~CH3.l,~CH3.l,~CH2.l2%~CH1.l3,~CH1.l1%~CH3.l,~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH3_ali/~CH1.l3,~CH1.l1%~CH3.l,~CH3.l,~CH2.l2%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH3_ali/~CH1.l3,~CH1.l1%~CH3.l,~CH3.l,~CH2.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH3_ali/~CH1.l3,~CH1.l1%~CH3.l,~CH3.l,~CH2.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH3_ali/~CH1.l3,~CH1.l1%~CH3.l,~CH3.l,~CH2.l1%~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-CH1_ali-CH3_ali/~CH1.l2%~CH3.l,~CH3.l,~CH2.l1%~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-CH1_ali-CH3_ali/~CH1.l2%~CH3.l,~CH3.l,~CH2.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C5</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <improper_dihedrals amount="2">
+      <improper_dihedral parameter="imp_CH1_ali,-CH2_ali,-CH3_ali,-CH3_ali/~CH3.l,~CH3.l,~CH2.l2%~CH1.l3,~CH1.l1%~CH1.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C5</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+      <improper_dihedral parameter="imp_CH1_ali,-CH3_ali,-CH3_ali,-CH2_ali/~CH3.l,~CH3.l,~CH2.l1%~CH1.l3,~CH1.l1%~CH1.l2%~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+    </improper_dihedrals>
+    <torsional_dihedrals amount="2">
+      <torsional_dihedral parameter="dih_CH3_ali-CH1_ali-CH2_ali-CH1_ali/~CH1.l2%~CH3.l,~CH3.l,~CH2.l1%~CH1.l3,~CH1.l1%~CH3.l,~CH3.l,~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH3_ali-CH1_ali-CH2_ali-CH1_ali/~CH1.l2%~CH3.l,~CH3.l,~CH2.l2%~CH1.l3,~CH1.l1%~CH3.l,~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C5</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000019" smiles="CCC(CC)CC">
+    <atoms amount="7">
+      <atom atom_id="C1" atom_type="CH1_ali/~CH2.l2,~CH2.l1,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH2_ali/~CH3.l,~CH1.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH2_ali/~CH3.l,~CH1.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH2_ali/~CH3.l,~CH1.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH3_ali/~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C6" atom_type="CH3_ali/~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C7" atom_type="CH3_ali/~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="6">
+      <bond parameter="bnd_CH2_ali-CH1_ali/~CH2.l2,~CH2.l1,~CH2.l1%~CH3.l,~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH1_ali/~CH2.l2,~CH2.l1,~CH2.l1%~CH3.l,~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH1_ali/~CH2.l2,~CH2.l1,~CH2.l1%~CH3.l,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH1.l3%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH1.l2%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH1.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="6">
+      <angle parameter="ang_CH1_ali-CH2_ali-CH3_ali/~CH2.l2,~CH2.l1,~CH2.l1%~CH3.l,~CH1.l3%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH1_ali-CH2_ali-CH3_ali/~CH2.l2,~CH2.l1,~CH2.l1%~CH3.l,~CH1.l2%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH1_ali-CH2_ali-CH3_ali/~CH2.l2,~CH2.l1,~CH2.l1%~CH3.l,~CH1.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH2_ali/~CH3.l,~CH1.l3%~CH2.l2,~CH2.l1,~CH2.l1%~CH3.l,~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH2_ali/~CH3.l,~CH1.l3%~CH2.l2,~CH2.l1,~CH2.l1%~CH3.l,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH2_ali/~CH3.l,~CH1.l2%~CH2.l2,~CH2.l1,~CH2.l1%~CH3.l,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <improper_dihedrals amount="1">
+      <improper_dihedral parameter="imp_CH1_ali,-CH2_ali,-CH2_ali,-CH2_ali/~CH2.l2,~CH2.l1,~CH2.l1%~CH3.l,~CH1.l3%~CH3.l,~CH1.l2%~CH3.l,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+    </improper_dihedrals>
+    <torsional_dihedrals amount="3">
+      <torsional_dihedral parameter="dih_CH2_ali-CH1_ali-CH2_ali-CH3_ali/~CH3.l,~CH1.l3%~CH2.l2,~CH2.l1,~CH2.l1%~CH3.l,~CH1.l2%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH2_ali-CH1_ali-CH2_ali-CH3_ali/~CH3.l,~CH1.l3%~CH2.l2,~CH2.l1,~CH2.l1%~CH3.l,~CH1.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH2_ali-CH1_ali-CH2_ali-CH3_ali/~CH3.l,~CH1.l2%~CH2.l2,~CH2.l1,~CH2.l1%~CH3.l,~CH1.l3%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000020" smiles="CCCC(C)CC">
+    <atoms amount="7">
+      <atom atom_id="C1" atom_type="CH1_ali/~CH3.l,~CH2.l2,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH2_ali/~CH3.l,~CH1.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH2_ali/~CH2.l2,~CH1.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH2_ali/~CH3.l,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH3_ali/~CH1.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C6" atom_type="CH3_ali/~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C7" atom_type="CH3_ali/~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="6">
+      <bond parameter="bnd_CH2_ali-CH1_ali/~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH1_ali/~CH3.l,~CH2.l2,~CH2.l1%~CH2.l2,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH2.l2,~CH2.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH1.l3%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH2_ali/~CH2.l2,~CH1.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="6">
+      <angle parameter="ang_CH1_ali-CH2_ali-CH3_ali/~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~CH1.l3%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH1_ali-CH2_ali-CH2_ali/~CH3.l,~CH2.l2,~CH2.l1%~CH2.l2,~CH1.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH2_ali/~CH3.l,~CH1.l3%~CH3.l,~CH2.l2,~CH2.l1%~CH2.l2,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH3_ali/~CH3.l,~CH1.l3%~CH3.l,~CH2.l2,~CH2.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH3_ali/~CH2.l2,~CH1.l1%~CH3.l,~CH2.l2,~CH2.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH2_ali-CH3_ali/~CH2.l2,~CH1.l1%~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <improper_dihedrals amount="1">
+      <improper_dihedral parameter="imp_CH1_ali,-CH2_ali,-CH3_ali,-CH2_ali/~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~CH1.l3%~CH2.l2,~CH1.l1%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+    </improper_dihedrals>
+    <torsional_dihedrals amount="3">
+      <torsional_dihedral parameter="dih_CH1_ali-CH2_ali-CH2_ali-CH3_ali/~CH3.l,~CH2.l2,~CH2.l1%~CH2.l2,~CH1.l1%~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH2_ali-CH1_ali-CH2_ali-CH2_ali/~CH3.l,~CH1.l3%~CH3.l,~CH2.l2,~CH2.l1%~CH2.l2,~CH1.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH2_ali-CH1_ali-CH2_ali-CH3_ali/~CH2.l2,~CH1.l1%~CH3.l,~CH2.l2,~CH2.l1%~CH3.l,~CH1.l3%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000021" smiles="CCCCC(C)C">
+    <atoms amount="7">
+      <atom atom_id="C1" atom_type="CH1_ali/~CH3.l,~CH3.l,~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH2_ali/~CH2.l2,~CH1.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH2_ali/~CH2.l2,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH2_ali/~CH3.l,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH3_ali/~CH1.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C6" atom_type="CH3_ali/~CH1.l3">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C7" atom_type="CH3_ali/~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="6">
+      <bond parameter="bnd_CH2_ali-CH1_ali/~CH3.l,~CH3.l,~CH2.l2%~CH2.l2,~CH1.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH2.l2%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH1_ali/~CH3.l,~CH3.l,~CH2.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH2_ali/~CH2.l2,~CH1.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH2_ali/~CH2.l2,~CH2.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="6">
+      <angle parameter="ang_CH1_ali-CH2_ali-CH2_ali/~CH3.l,~CH3.l,~CH2.l2%~CH2.l2,~CH1.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH3_ali/~CH2.l2,~CH1.l1%~CH3.l,~CH3.l,~CH2.l2%~CH1.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH1_ali-CH3_ali/~CH2.l2,~CH1.l1%~CH3.l,~CH3.l,~CH2.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH2_ali-CH2_ali/~CH2.l2,~CH1.l1%~CH2.l2,~CH2.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH2_ali-CH3_ali/~CH2.l2,~CH2.l1%~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH3_ali-CH1_ali-CH3_ali/~CH1.l2%~CH3.l,~CH3.l,~CH2.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C5</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <improper_dihedrals amount="1">
+      <improper_dihedral parameter="imp_CH1_ali,-CH2_ali,-CH3_ali,-CH3_ali/~CH3.l,~CH3.l,~CH2.l2%~CH2.l2,~CH1.l1%~CH1.l2%~CH1.l3">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C5</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </improper_dihedral>
+    </improper_dihedrals>
+    <torsional_dihedrals amount="3">
+      <torsional_dihedral parameter="dih_CH1_ali-CH2_ali-CH2_ali-CH2_ali/~CH3.l,~CH3.l,~CH2.l2%~CH2.l2,~CH1.l1%~CH2.l2,~CH2.l1%~CH3.l,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH2_ali-CH2_ali-CH2_ali-CH3_ali/~CH2.l2,~CH1.l1%~CH2.l2,~CH2.l1%~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH3_ali-CH1_ali-CH2_ali-CH2_ali/~CH1.l2%~CH3.l,~CH3.l,~CH2.l2%~CH2.l2,~CH1.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C5</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C3</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+  <molecule_with_macros isomer_id="0100_000000022" smiles="CCCCCCC">
+    <atoms amount="7">
+      <atom atom_id="C1" atom_type="CH2_ali/~CH3.l,~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C2" atom_type="CH2_ali/~CH2.l2,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C3" atom_type="CH2_ali/~CH3.l,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C4" atom_type="CH2_ali/~CH2.l2,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C5" atom_type="CH2_ali/~CH2.l2,~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C6" atom_type="CH3_ali/~CH2.l1">
+        <excluded_atoms>
+          <excluded_atom>C3</excluded_atom>
+          <excluded_atom>C4</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C6</excluded_atom>
+        </excluded_atoms>
+      </atom>
+      <atom atom_id="C7" atom_type="CH3_ali/~CH2.l2">
+        <excluded_atoms>
+          <excluded_atom>C1</excluded_atom>
+          <excluded_atom>C2</excluded_atom>
+          <excluded_atom>C5</excluded_atom>
+          <excluded_atom>C7</excluded_atom>
+        </excluded_atoms>
+      </atom>
+    </atoms>
+    <bonds amount="6">
+      <bond parameter="bnd_CH2_ali-CH2_ali/~CH3.l,~CH2.l2%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH2.l2%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH2_ali/~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH2_ali/~CH3.l,~CH2.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH3_ali-CH2_ali/~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </bond>
+      <bond parameter="bnd_CH2_ali-CH2_ali/~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </bond>
+    </bonds>
+    <angles amount="5">
+      <angle parameter="ang_CH2_ali-CH2_ali-CH2_ali/~CH3.l,~CH2.l2%~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH2_ali-CH3_ali/~CH2.l2,~CH2.l1%~CH3.l,~CH2.l2%~CH2.l2">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C7</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH2_ali-CH2_ali/~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C5</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH2_ali-CH2_ali/~CH3.l,~CH2.l1%~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </angle>
+      <angle parameter="ang_CH2_ali-CH2_ali-CH3_ali/~CH2.l2,~CH2.l1%~CH3.l,~CH2.l1%~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C6</involved_atom>
+        </involved_atoms>
+      </angle>
+    </angles>
+    <torsional_dihedrals amount="4">
+      <torsional_dihedral parameter="dih_CH2_ali-CH2_ali-CH2_ali-CH2_ali/~CH3.l,~CH2.l2%~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C5</involved_atom>
+          <involved_atom>C4</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH2_ali-CH2_ali-CH2_ali-CH2_ali/~CH3.l,~CH2.l1%~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C5</involved_atom>
+          <involved_atom>C2</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH3_ali-CH2_ali-CH2_ali-CH2_ali/~CH2.l1%~CH3.l,~CH2.l1%~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C6</involved_atom>
+          <involved_atom>C3</involved_atom>
+          <involved_atom>C4</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+      <torsional_dihedral parameter="dih_CH3_ali-CH2_ali-CH2_ali-CH2_ali/~CH2.l2%~CH3.l,~CH2.l2%~CH2.l2,~CH2.l1%~CH2.l2,~CH2.l1">
+        <involved_atoms>
+          <involved_atom>C7</involved_atom>
+          <involved_atom>C1</involved_atom>
+          <involved_atom>C2</involved_atom>
+          <involved_atom>C5</involved_atom>
+        </involved_atoms>
+      </torsional_dihedral>
+    </torsional_dihedrals>
+  </molecule_with_macros>
+</molecules_with_macros>

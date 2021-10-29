@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE family_isomer_enumeration SYSTEM "family_isomer_enumeration.dtd">
+<family_isomer_enumeration enu_version="1.0" family_code="0100" family_version="1.0">
+  <enumeration_type type="constitutional"/>
+  <number_of_isomers>22</number_of_isomers>
+  <enumeration_time>0 h 0 min 0 s 0 ms</enumeration_time>
+  <isomer_lists>
+    <isomer_list formula="C1H4">
+      <isomer isomer_id="0100_000000001">
+        <constitutional_SMILES>C</constitutional_SMILES>
+      </isomer>
+    </isomer_list>
+    <isomer_list formula="C2H6">
+      <isomer isomer_id="0100_000000002">
+        <constitutional_SMILES>CC</constitutional_SMILES>
+      </isomer>
+    </isomer_list>
+    <isomer_list formula="C3H8">
+      <isomer isomer_id="0100_000000003">
+        <constitutional_SMILES>CCC</constitutional_SMILES>
+      </isomer>
+    </isomer_list>
+    <isomer_list formula="C4H10">
+      <isomer isomer_id="0100_000000004">
+        <constitutional_SMILES>CC(C)C</constitutional_SMILES>
+      </isomer>
+      <isomer isomer_id="0100_000000005">
+        <constitutional_SMILES>CCCC</constitutional_SMILES>
+      </isomer>
+    </isomer_list>
+    <isomer_list formula="C5H12">
+      <isomer isomer_id="0100_000000006">
+        <constitutional_SMILES>CC(C)(C)C</constitutional_SMILES>
+      </isomer>
+      <isomer isomer_id="0100_000000007">
+        <constitutional_SMILES>CCC(C)C</constitutional_SMILES>
+      </isomer>
+      <isomer isomer_id="0100_000000008">
+        <constitutional_SMILES>CCCCC</constitutional_SMILES>
+      </isomer>
+    </isomer_list>
+    <isomer_list formula="C6H14">
+      <isomer isomer_id="0100_000000009">
+        <constitutional_SMILES>CCC(C)(C)C</constitutional_SMILES>
+      </isomer>
+      <isomer isomer_id="0100_000000010">
+        <constitutional_SMILES>CC(C)C(C)C</constitutional_SMILES>
+      </isomer>
+      <isomer isomer_id="0100_000000011">
+        <constitutional_SMILES>CCC(C)CC</constitutional_SMILES>
+      </isomer>
+      <isomer isomer_id="0100_000000012">
+        <constitutional_SMILES>CCCC(C)C</constitutional_SMILES>
+      </isomer>
+      <isomer isomer_id="0100_000000013">
+        <constitutional_SMILES>CCCCCC</constitutional_SMILES>
+      </isomer>
+    </isomer_list>
+    <isomer_list formula="C7H16">
+      <isomer isomer_id="0100_000000014">
+        <constitutional_SMILES>CC(C)C(C)(C)C</constitutional_SMILES>
+      </isomer>
+      <isomer isomer_id="0100_000000015">
+        <constitutional_SMILES>CCC(C)(C)CC</constitutional_SMILES>
+      </isomer>
+      <isomer isomer_id="0100_000000016">
+        <constitutional_SMILES>CCCC(C)(C)C</constitutional_SMILES>
+      </isomer>
+      <isomer isomer_id="0100_000000017">
+        <constitutional_SMILES>CCC(C)C(C)C</constitutional_SMILES>
+      </isomer>
+      <isomer isomer_id="0100_000000018">
+        <constitutional_SMILES>CC(C)CC(C)C</constitutional_SMILES>
+      </isomer>
+      <isomer isomer_id="0100_000000019">
+        <constitutional_SMILES>CCC(CC)CC</constitutional_SMILES>
+      </isomer>
+      <isomer isomer_id="0100_000000020">
+        <constitutional_SMILES>CCCC(C)CC</constitutional_SMILES>
+      </isomer>
+      <isomer isomer_id="0100_000000021">
+        <constitutional_SMILES>CCCCC(C)C</constitutional_SMILES>
+      </isomer>
+      <isomer isomer_id="0100_000000022">
+        <constitutional_SMILES>CCCCCCC</constitutional_SMILES>
+      </isomer>
+    </isomer_list>
+  </isomer_lists>
+</family_isomer_enumeration>
