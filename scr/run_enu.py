@@ -61,6 +61,10 @@ families_to_update = dict(families_to_update)
 print("\nchecking for explicit family list: ", families_to_enumerate)
 print("families to update: ", families_to_update.keys())
 
+if(not os.path.exists(enu_executable)):
+  print("Warning: enu executable not found -> compiling")
+  exec(open(script_dir + '/compile.py').read())
+
 if len(sys.argv) > 1:
   command = sys.argv[1:len(sys.argv)]
   command.insert(0, enu_executable)

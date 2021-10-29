@@ -64,6 +64,10 @@ fragment_files = glob.glob(fragments_dir + "/*.xml")
 if (not united_atoms):
     fragment_files = [ff for ff in fragment_files if "united" not in ff]
 
+if(not os.path.exists(tbl_executable)):
+  print("Warning: tbl executable not found -> compiling")
+  exec(open(script_dir + '/compile.py').read())
+
 if len(enumerations_to_update):
   for family, file in enumerations_to_update.items():
     print(family)
