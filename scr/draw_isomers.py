@@ -6,6 +6,12 @@ import xml.etree.ElementTree as ET
 from pdfrw import PdfReader, PdfWriter
 import os
 import sys
+import glob
+
+script_dir = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(script_dir + "/../use")
+
+from global_settings import *
 
 DrawingOptions.atomLabelFontSize = 50
 DrawingOptions.dotsPerAngstrom = 100
@@ -15,7 +21,8 @@ if(len(sys.argv) < 1):
   print("please provide family isomer enumeration file")
   exit()
 
-tree = ET.parse(sys.argv[1])
+input_file = sys.argv[1]
+tree = ET.parse(input_file)
 root = tree.getroot()
 
 mol_list = []
@@ -26,7 +33,9 @@ num_printed = 0
 
 molsPerRow = 10
 molsPerPage = int(molsPerRow*(molsPerRow)*2)
-writer = PdfWriter("isomerlist.pdf")
+
+os.makedirs(img_dir, exist_ok=True)
+writer = PdfWriter(img_dir + '/' + os.path.basename(input_file).replace(".xml", ".pdf"))
 
 for isomer_lists in root.findall('isomer_lists'):
   for isomer_list in isomer_lists.findall('isomer_list'):
@@ -46,7 +55,7 @@ for isomer_lists in root.findall('isomer_lists'):
                 #id_list.append(stereo_isomer.get('stereo_id'))
                 id_list.append(stereo_isomer.find('stereo_SMILES').text)
               else:
-                 img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (200,200), maxMols = molsPerPage, legends=id_list).convert('RGB')
+                 img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (200,200), maxMols = molsPerPage, legends=id_list, returnPNG=False)
                  img.save("tmp.pdf")
                  writer.addpages(PdfReader("tmp.pdf").pages)
                  mol_list.clear()
@@ -55,7 +64,7 @@ for isomer_lists in root.findall('isomer_lists'):
                  print(str(num_printed) + "/" + str(num_iso))
                 
       else:
-        img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (200,200), maxMols = molsPerPage, legends=id_list).convert('RGB')
+        img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (200,200), maxMols = molsPerPage, legends=id_list, returnPNG=False)
         img.save("tmp.pdf")
         writer.addpages(PdfReader("tmp.pdf").pages)
         writer.write()
@@ -64,7 +73,7 @@ for isomer_lists in root.findall('isomer_lists'):
         num_printed += molsPerPage
         print(str(num_printed) + "/" + str(num_iso))
 
-
+"""
 for i in range(len(mol_list)):
   for j in range(i+1, len(mol_list)):
     m1 = mol_list[i]
@@ -72,8 +81,9 @@ for i in range(len(mol_list)):
     s1 = Chem.CanonSmiles(Chem.rdmolfiles.MolToSmiles(m1))
     s2 = Chem.CanonSmiles(Chem.rdmolfiles.MolToSmiles(m2))
     print(str(i) + " " + str(j) + " " + str(s1 == s2))
+"""
 
-img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (200,200), maxMols = molsPerPage, legends=id_list).convert('RGB')
+img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (200,200), maxMols = molsPerPage, legends=id_list, returnPNG=False)
 img.save("tmp.pdf")
 writer.addpages(PdfReader("tmp.pdf").pages)
 

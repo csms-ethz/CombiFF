@@ -4,6 +4,7 @@ __pycache__/
 *.pyc
 use/output_files/*
 use/output_files/**
+use/user_settings.py
 
 
 ## hidden xml + tex files

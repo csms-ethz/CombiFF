@@ -3,7 +3,7 @@ import re
 
 #
 # Important:
-# you should not change the deafault choices in this file to avoid conflicts with different versions of other users on git
+# you should not change the default choices in this file to avoid conflicts with different versions of other users on git
 # if you'd like to make a different choice, please create a file 'user_settings.py' and modify your parameters in there
 #
 
@@ -39,12 +39,13 @@ family_isomer_enumerations_stereo_dir = build_path(output_dir, 'family_isomer_en
 molecule_decompositions_dir = build_path(output_dir, 'molecule_decompositions')
 molecules_with_macros_dir = build_path(output_dir, 'molecules_with_macros')
 mtb_dir = build_path(output_dir, 'mtb')
+img_dir = build_path(output_dir, 'img')
 
 #
 # default choices
 #
 
-family_exceptions=['90..', 'test*']
+family_exceptions=['test*']
 families_to_enumerate = ['0100']
 families_to_build_topologies = ['0100']
 
