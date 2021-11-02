@@ -8,7 +8,7 @@ To compile the C++ programs of CombiFF, you'll need CMake (https://cmake.org/). 
 
 ```
 # clone the repository
-git clone https://github.com/csms-ethz/CombiFF.git
+git clone git@github.com:csms-ethz/CombiFF.git
 cd CombiFF
 
 # create and activate the conda environment
