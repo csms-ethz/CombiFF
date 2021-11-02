@@ -25,4 +25,4 @@ cmake ..
 make
 ```
 
-After installation, the executables are generated in the `bin` directory
+After installation, the executables for the different programs are located in the `bin` directory
