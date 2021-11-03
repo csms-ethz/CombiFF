@@ -24,3 +24,8 @@ use/user_settings.py
 *.cb
 *.cb2
 .*.lb
+
+
+#IDE:
+.idea
+cmake-build-debug
