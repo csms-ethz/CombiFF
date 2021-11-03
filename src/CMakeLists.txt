@@ -17,3 +17,30 @@ add_subdirectory(shared)
 add_subdirectory(enu)
 add_subdirectory(cnv)
 add_subdirectory(tbl)
+
+
+### PYTHON LIBRARY ###
+project(pyCombiFF)
+set(PYBIND11_USE_CMAKE True)
+include_directories(lib ${shared_path}
+        cnv
+        cnv/lib)
+
+
+set(headers
+        pybinds/pycnv.h)
+set(sources
+        pybinds/pyCombiFF.cpp
+        pybinds/pycnv.cpp)
+
+##get pybind project
+add_subdirectory(pybinds/lib/pybind11)
+
+##add pybind module
+pybind11_add_module(pyCombiFF ${sources} ${headers})
+
+##link_libs
+target_link_libraries(pyCombiFF PRIVATE )# sharedLib cnvLib)
+
+##install
+install(TARGETS pyCombiFF LIBRARY DESTINATION lib)
