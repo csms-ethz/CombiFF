@@ -160,15 +160,16 @@ void Atom::AddNeighbour(size_t i) {
 
   if(range.first == range.second)
     neighbors.insert(range.first, i);*/
-  if (!std::binary_search(neighbors.begin(), neighbors.end(), i))
-    neighbors.insert(std::upper_bound(neighbors.begin(), neighbors.end(), i), i);
+
+  auto el = std::upper_bound(neighbors.begin(), neighbors.end(), i);
+  if (el == neighbors.begin() || *(el-1) != i)
+    neighbors.insert(el, i);
 }
 
 void Atom::RemoveNeighbour(size_t i) {
-  auto&& range = std::equal_range(neighbors.begin(), neighbors.end(), i);
-
-  if (*(range.first) == i)
-    neighbors.erase(range.first);
+  auto el = std::find(neighbors.begin(), neighbors.end(), i);
+  if(el != neighbors.end())
+    neighbors.erase(el);
 }
 
 void Atom::SetNeighbours(NeighborVector n) {
@@ -176,7 +177,7 @@ void Atom::SetNeighbours(NeighborVector n) {
 }
 
 void Atom::EraseNeighbours() {
-  neighbors.resize(0);
+  neighbors.clear();
 }
 
 double Atom::GetMass() const {

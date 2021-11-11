@@ -599,7 +599,8 @@ void AdjacencyMatrix<T, AtomClass>::Print() const {
 }
 
 template<typename T, typename AtomClass>
-void AdjacencyMatrix<T, AtomClass>::SetElement(const size_t i, const size_t j,
+void AdjacencyMatrix<T, AtomClass>::SetElement(const size_t i,
+                                               const size_t j,
                                                const T v) {
   if (v != 0) {
     atoms[i].AddNeighbour(j);
@@ -614,9 +615,9 @@ void AdjacencyMatrix<T, AtomClass>::SetElement(const size_t i, const size_t j,
 
   SymmetricalMatrix<T>::SetElement(i, j, v);
 }
+
 template<typename T, typename AtomClass>
-void AdjacencyMatrix<T, AtomClass>::SetAtomVector(const
-                                                  combi_ff::AtomVector<AtomClass>& a) {
+void AdjacencyMatrix<T, AtomClass>::SetAtomVector(const combi_ff::AtomVector<AtomClass>& a) {
   atoms.assign(a.begin(), a.end());
 
   for (size_t i = 0; i < this->N_minus_one; i++) {
@@ -722,13 +723,13 @@ bool AdjacencyMatrix<T, AtomClass>::hasCycle() const {
   for (size_t i = 0; i < this->N; i++) {
     const combi_ff::NeighborVector& neighbors = atoms[i].GetNeighbours();
 
-    for (size_t j = 0; j < neighbors.size(); j++) {
+    for (auto neighbor : neighbors) {
       std::vector<bool> visited_(this->N, false);
       SymmetricalMatrix<bool> visited(this->N);
-      visited_[neighbors[j]] = true;
-      visited.SetElement(i, neighbors[j], true);
+      visited_[neighbor] = true;
+      visited.SetElement(i, neighbor, true);
       std::stack<size_t> stack;
-      stack.push(neighbors[j]);
+      stack.push(neighbor);
 
       while (!stack.empty()) {
         size_t curr_element = stack.top();
@@ -930,16 +931,16 @@ std::vector<bool> AdjacencyMatrix<T, AtomClass>::IsInCycle() const {
     bool cyc = false;
     const combi_ff::NeighborVector& neighbors = atoms[j].GetNeighbours();
 
-    for (size_t jj = 0; jj < neighbors.size(); jj++) {
+    for (auto neighbor: neighbors) {
       if (cyc)
         break;
 
       std::vector<bool> visited_(this->N, false);
       SymmetricalMatrix<bool> visited(this->N);
-      visited_[neighbors[jj]] = true;
-      visited.SetElement(j, neighbors[jj], true);
+      visited_[neighbor] = true;
+      visited.SetElement(j, neighbor, true);
       std::stack<size_t> stack;
-      stack.push(neighbors[jj]);
+      stack.push(neighbor);
 
       while (!cyc && !stack.empty()) {
         size_t curr_element = stack.top();
@@ -974,10 +975,10 @@ bool AdjacencyMatrix<T, AtomClass>::AreInSameCycle(size_t atom1,
   bool visit1 = false;
   bool visit2 = false;
 
-  for (size_t jj = 0; jj < neighbors.size(); jj++) {
-    if (neighbors[jj] != atom2) {
-      visited.SetElement(atom1, neighbors[jj], true);
-      stack.push(neighbors[jj]);
+  for (auto neighbor : neighbors) {
+    if (neighbor != atom2) {
+      visited.SetElement(atom1, neighbor, true);
+      stack.push(neighbor);
 
       while (!stack.empty()) {
         size_t currEl = stack.top();
@@ -1013,22 +1014,22 @@ size_t AdjacencyMatrix<T, AtomClass>::GetNumPiAtoms() const {
       const combi_ff::NeighborVector& neighbors = atoms[i].GetNeighbours();
       int n_double(0);
 
-      for (size_t j = 0; j < neighbors.size(); j++) {
-        if (inCycle[neighbors[j]]) {
-          if (this->GetElement(i, neighbors[j]) == 2) {
+      for (auto neighbor : neighbors) {
+        if (inCycle[neighbor]) {
+          if (this->GetElement(i, neighbor) == 2) {
             //nPi++;
             n_double++;
           }
 
           //!!! For now, assume that a molecule that has a triple bond in *any* cycle
           //is not aromatic, but this is not actually true !!!
-          else if (this->GetElement(i, neighbors[j]) == 3)
+          else if (this->GetElement(i, neighbor) == 3)
             return 0;
         }
 
         // !!! For now, assume that a molecucle that has an atom that's connected with a double bond to
         // an atom outside the ring is not aromatic, but this is not actually true !!!
-        else if (this->GetElement(i, neighbors[j]) > 1)
+        else if (this->GetElement(i, neighbor) > 1)
           return 0;
       }
 

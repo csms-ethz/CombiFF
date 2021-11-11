@@ -215,13 +215,13 @@ bool FragmentMatrix::HasCycle() const {
   for (size_t i = 0; i < N; i++) {
     const combi_ff::NeighborVector& neighbors = atoms[i].GetNeighbours();
 
-    for (size_t j = 0; j < neighbors.size(); j++) {
+    for (auto neighbor : neighbors) {
       std::vector<bool> visited_(N, false);
       SymmetricalMatrix<bool> visited(N);
-      visited_[neighbors[j]] = true;
-      visited.SetElement(i, neighbors[j], true);
+      visited_[neighbor] = true;
+      visited.SetElement(i, neighbor, true);
       std::stack<size_t> stack;
-      stack.push(neighbors[j]);
+      stack.push(neighbor);
 
       while (!stack.empty()) {
         size_t curr_element = stack.top();

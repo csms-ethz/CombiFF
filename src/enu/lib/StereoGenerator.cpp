@@ -1520,8 +1520,8 @@ Config operator++(Config& b)  {
 
 bool StereoGenerator::NeighborsArePermuted(const Atom& a,
                                            const std::vector<size_t>& permuted_indices) {
-  for (size_t j = 0; j < a.GetNeighbours().size(); j++) {
-    if (a.GetNeighbours()[j] != permuted_indices[a.GetNeighbours()[j]])
+  for (auto neighbor : a.GetNeighbours()) {
+    if (neighbor != permuted_indices[neighbor])
       return true;
   }
 

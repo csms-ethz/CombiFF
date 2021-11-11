@@ -418,11 +418,13 @@ std::vector<size_t> SmilesGenerator<T, AtomClass>::Sort(
   for (size_t i = 0; i < curr_partition.size(); i++) {
     idx = curr_partition[i];
     sorted_neighbors[i].resize(atoms[idx].GetNeighbours().size());
-    const std::vector<size_t>& curr_neighbor_vector = atoms[idx].GetNeighbours();
+    const auto& curr_neighbor_vector = atoms[idx].GetNeighbours();
 
     //for(auto && j : atoms[idx].GetNeighbours())
-    for (size_t j = 0; j < curr_neighbor_vector.size(); j++)
-      sorted_neighbors[i][j] = (indices[curr_neighbor_vector[j]]);
+    auto neighbor_it = curr_neighbor_vector.begin();
+    for (size_t j = 0; j < sorted_neighbors[i].size(); j++){
+      sorted_neighbors[i][j] = (indices[*neighbor_it++]);
+    }
 
     std::sort(sorted_neighbors[i].begin(), sorted_neighbors[i].end(), IsLarger);
   }
