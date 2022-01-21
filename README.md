@@ -6,9 +6,20 @@
 
 ## Usage
 
-For installation instructions please refer to README.md
+For installation instructions please refer to INSTALL.md
 
 ### Scripts
+
+Default settings are defined in use/global_settings.py. This file should *not* be modified to avoid merge conflicts. Instead, you can define your own local settings in use/user_settings.py which is ignored by git.
+
+There are several scripts that can help you with the use of CombiFF:
+
+ * scr/clean.py: clean up of temporary files
+ * scr/compile.py: compile enu, tbl, and cnv
+ * scr/compile_documentation.py: generate PDFs of the documentation from the tex files in doc
+ * draw_isomers.py: draw enumerated isomers with RDKit
+ * run_enu.py: run enu with the specifications of use/global_settings.py and/or use/user_settings.py
+ * run_tbl.py: run tbl with the specifications of use/global_settings.py and/or use/user_settings.py
 
 ### Enu
 
