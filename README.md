@@ -6,6 +6,8 @@
 
 ## Usage
 
+### Installation
+
 For installation instructions please refer to INSTALL.md
 
 ### Scripts
