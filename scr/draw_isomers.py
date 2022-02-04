@@ -88,4 +88,11 @@ img.save("tmp.pdf")
 writer.addpages(PdfReader("tmp.pdf").pages)
 
 writer.write()
-os.remove("tmp.pdf")
+
+if len(sys.argv) > 2:
+  output_file_name = sys.argv[2]
+else:
+  output_file_name = "isomers.pdf"
+  print("Warning: no output file name given, using default \"isomers.pdf\"")
+
+os.rename("tmp.pdf", output_file_name)
