@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE family_definitions SYSTEM "family_definitions.dtd">
+<family_definitions version="1.0">
+  <!--
+    A simple family definition to get you started
+  -->
+  <family_definition code="intro">
+    <formula>C[1-10] H*</formula>
+    <unsaturations>0</unsaturations>
+  </family_definition>
+</family_definitions>

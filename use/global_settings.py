@@ -46,8 +46,8 @@ img_dir = build_path(output_dir, 'img')
 #
 
 family_exceptions=['test*']
-families_to_enumerate = ['0100']
-families_to_build_topologies = ['0100']
+families_to_enumerate = ['intro']
+families_to_build_topologies = ['intro']
 
 force_update = True
 united_atoms = True
