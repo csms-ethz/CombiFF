@@ -1,7 +1,7 @@
 from rdkit import Chem
 from rdkit.Chem import AllChem
 from rdkit.Chem.Draw import IPythonConsole
-from rdkit.Chem.Draw.MolDrawing import MolDrawing, DrawingOptions
+from rdkit.Chem.Draw.MolDrawing import MolDrawing
 import xml.etree.ElementTree as ET
 from pdfrw import PdfReader, PdfWriter
 import os
@@ -13,9 +13,6 @@ sys.path.append(script_dir + "/../use")
 
 from global_settings import *
 
-DrawingOptions.atomLabelFontSize = 50
-DrawingOptions.dotsPerAngstrom = 100
-DrawingOptions.bondLineWidth = 2.0
 
 if(len(sys.argv) < 1):
   print("please provide family isomer enumeration file")
@@ -55,7 +52,7 @@ for isomer_lists in root.findall('isomer_lists'):
                 #id_list.append(stereo_isomer.get('stereo_id'))
                 id_list.append(stereo_isomer.find('stereo_SMILES').text)
               else:
-                 img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (200,200), maxMols = molsPerPage, legends=id_list, returnPNG=False)
+                 img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (300,300) , maxMols = molsPerPage, legends=id_list, returnPNG=False)
                  img.save("tmp.pdf")
                  writer.addpages(PdfReader("tmp.pdf").pages)
                  mol_list.clear()
@@ -64,7 +61,7 @@ for isomer_lists in root.findall('isomer_lists'):
                  print(str(num_printed) + "/" + str(num_iso))
                 
       else:
-        img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (200,200), maxMols = molsPerPage, legends=id_list, returnPNG=False)
+        img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (300,300), maxMols = molsPerPage, legends=id_list, returnPNG=False)
         img.save("tmp.pdf")
         writer.addpages(PdfReader("tmp.pdf").pages)
         writer.write()
@@ -83,7 +80,7 @@ for i in range(len(mol_list)):
     print(str(i) + " " + str(j) + " " + str(s1 == s2))
 """
 
-img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (200,200), maxMols = molsPerPage, legends=id_list, returnPNG=False)
+img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (300,300), maxMols = molsPerPage, legends=id_list, returnPNG=False)
 img.save("tmp.pdf")
 writer.addpages(PdfReader("tmp.pdf").pages)
 
