@@ -52,7 +52,7 @@ for isomer_lists in root.findall('isomer_lists'):
                 #id_list.append(stereo_isomer.get('stereo_id'))
                 id_list.append(stereo_isomer.find('stereo_SMILES').text)
               else:
-                 img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (300,300) , maxMols = molsPerPage, legends=id_list, returnPNG=False)
+                 img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (400,400) , maxMols = molsPerPage, legends=id_list, returnPNG=False)
                  img.save("tmp.pdf")
                  writer.addpages(PdfReader("tmp.pdf").pages)
                  mol_list.clear()
@@ -61,7 +61,7 @@ for isomer_lists in root.findall('isomer_lists'):
                  print(str(num_printed) + "/" + str(num_iso))
                 
       else:
-        img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (300,300), maxMols = molsPerPage, legends=id_list, returnPNG=False)
+        img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (400,400), maxMols = molsPerPage, legends=id_list, returnPNG=False)
         img.save("tmp.pdf")
         writer.addpages(PdfReader("tmp.pdf").pages)
         writer.write()
@@ -80,7 +80,7 @@ for i in range(len(mol_list)):
     print(str(i) + " " + str(j) + " " + str(s1 == s2))
 """
 
-img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (300,300), maxMols = molsPerPage, legends=id_list, returnPNG=False)
+img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (400,400), maxMols = molsPerPage, legends=id_list, returnPNG=False)
 img.save("tmp.pdf")
 writer.addpages(PdfReader("tmp.pdf").pages)
 
@@ -92,4 +92,4 @@ else:
   output_file_name = "isomers.pdf"
   print("Warning: no output file name given, using default \"isomers.pdf\"")
 
-os.rename("tmp.pdf", output_file_name)
+os.remove("tmp.pdf")
