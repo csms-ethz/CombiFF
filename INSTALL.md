@@ -12,7 +12,7 @@ git clone git@github.com:csms-ethz/CombiFF.git
 cd CombiFF
 
 # create and activate the conda environment
-conda env create -f dev/conda_envs/combiff.yml 
+conda env create -f dev/conda_envs/combiff.yml -n combiff
 conda activate combiff
 
 # compile
