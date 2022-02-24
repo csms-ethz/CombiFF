@@ -23,11 +23,7 @@ for tex_file in glob.glob(doc_dir + "/tex/*.tex"):
   
   pdf_file = glob.glob(doc_dir + "/" + "".join(doc_file.split('.')[:-1]) + ".pdf")
   print(pdf_file)
-  print(doc_file)
-  print(doc_file_compiled)
-  print(doc_dir + "/" + "".join(doc_file.split('.')[:-1]) + ".pdf")
-  
-  
+  print(doc_file)  
 
   if not len(pdf_file) or not os.path.isfile(doc_file_compiled) or not filecmp.cmp(doc_file, doc_file_compiled):
     if(len(pdf_file) == 1):
@@ -36,7 +32,6 @@ for tex_file in glob.glob(doc_dir + "/tex/*.tex"):
       print("ERROR: too many files found: ", pdf_file)
     subprocess.run(["pdflatex", doc_file])
     pdf_file = glob.glob("".join(doc_file.split('.')[:-1]) + ".pdf")[0]
-    print(pdf_file)
     shutil.copyfile(doc_file, doc_file_compiled)
     shutil.move(pdf_file, doc_dir)
 
