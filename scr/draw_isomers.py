@@ -13,7 +13,6 @@ sys.path.append(script_dir + "/../use")
 
 from global_settings import *
 
-
 if(len(sys.argv) < 1):
   print("please provide family isomer enumeration file")
   exit()
@@ -32,7 +31,15 @@ molsPerRow = 10
 molsPerPage = int(molsPerRow*(molsPerRow)*2)
 
 os.makedirs(img_dir, exist_ok=True)
-writer = PdfWriter(img_dir + '/' + os.path.basename(input_file).replace(".xml", ".pdf"))
+
+if len(sys.argv) > 2:
+  output_file_name = sys.argv[2]
+else:
+  output_file_name = os.path.basename(input_file).replace(".xml", ".pdf")
+  print("Warning: no output file name given, using default " + output_file_name)
+
+output_path = img_dir + '/' + output_file_name
+writer = PdfWriter(output_path)
 
 for isomer_lists in root.findall('isomer_lists'):
   for isomer_list in isomer_lists.findall('isomer_list'):
@@ -70,26 +77,21 @@ for isomer_lists in root.findall('isomer_lists'):
         num_printed += molsPerPage
         print(str(num_printed) + "/" + str(num_iso))
 
-"""
 for i in range(len(mol_list)):
   for j in range(i+1, len(mol_list)):
     m1 = mol_list[i]
     m2 = mol_list[j]
     s1 = Chem.CanonSmiles(Chem.rdmolfiles.MolToSmiles(m1))
     s2 = Chem.CanonSmiles(Chem.rdmolfiles.MolToSmiles(m2))
-    print(str(i) + " " + str(j) + " " + str(s1 == s2))
-"""
+    if(s1 == s2):
+      print(str(i) + " " + str(j) + " " + str(s1 == s2))
+      print(s1,s2)
 
 img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (400,400), maxMols = molsPerPage, legends=id_list, returnPNG=False)
 img.save("tmp.pdf")
 writer.addpages(PdfReader("tmp.pdf").pages)
 
 writer.write()
-
-if len(sys.argv) > 2:
-  output_file_name = sys.argv[2]
-else:
-  output_file_name = "isomers.pdf"
-  print("Warning: no output file name given, using default \"isomers.pdf\"")
-
+  
+print("image saved to " + output_path)
 os.remove("tmp.pdf")
