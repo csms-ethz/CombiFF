@@ -1,37 +1,42 @@
+// Copyright 2022 Salomé Rieder, CSMS ETH Zürich
+
 #include "readLambdas.h"
+
+#include <sstream>
+
 #include "Matrix.h"
 #include "exceptions.h"
-#include <sstream>
 
 namespace combi_ff {
 
 namespace enu {
 
-
 /********************************************************************************************
-READ A SEQUENCE/RANGE OF LAMBDA VALUES FOR THE CURRENT ATOM TYPE AND ADD THEM TO lambda_ranges
+READ A SEQUENCE/RANGE OF LAMBDA VALUES FOR THE CURRENT ATOM TYPE AND ADD THEM TO
+lambda_ranges
 ********************************************************************************************/
-void ReadLambdas(std::list<LambdaVector>& lambda_ranges, size_t& j, const std::string& formula) {
-  //if we're at the end of the formula, or the next element is a letter or a '{', assume lambda = 1
-  //e.g. C{CH3} -> C1{CH3}1 and C1H3Cl -> C1H3Cl1
-  if (j >= formula.size()  || formula[j] == '{') {
-    //the new lambda has to be added to all the LambdaVectors in lambda_ranges
-    for (auto && l : lambda_ranges)
-      l.push_back(1);
+void ReadLambdas(std::list<LambdaVector>& lambda_ranges, size_t& j,
+                 const std::string& formula) {
+  // if we're at the end of the formula, or the next element is a letter or a
+  // '{', assume lambda = 1 e.g. C{CH3} -> C1{CH3}1 and C1H3Cl -> C1H3Cl1
+  if (j >= formula.size() || formula[j] == '{') {
+    // the new lambda has to be added to all the LambdaVectors in lambda_ranges
+    for (auto&& l : lambda_ranges) l.push_back(1);
 
     j++;
   }
 
-  //if the atom type is followed by a number, use this number as lambda value
+  // if the atom type is followed by a number, use this number as lambda value
   else if (isdigit(formula[j])) {
     size_t n = GetNumber(j, formula);
 
-    //the new lambda has to be added to all the LambdaVectors in lambda_ranges
-    for (auto && lr = lambda_ranges.begin(); lr != lambda_ranges.end(); ++lr)
+    // the new lambda has to be added to all the LambdaVectors in lambda_ranges
+    for (auto&& lr = lambda_ranges.begin(); lr != lambda_ranges.end(); ++lr)
       lr->push_back(n);
   }
 
-  //if the atom type is followed by a '[', this means that a range or sequence of lambdas is given
+  // if the atom type is followed by a '[', this means that a range or sequence
+  // of lambdas is given
   else if (formula[j] == '[') {
     std::vector<size_t> nums;
 
@@ -41,8 +46,9 @@ void ReadLambdas(std::list<LambdaVector>& lambda_ranges, size_t& j, const std::s
     if (!ReadLess(++j, formula, nums)) {
       if (!ReadGreater(j, formula, nums)) {
         if (!ReadNumber(j, formula, nums))
-          throw combi_ff::input_error("couldn't read lambda, unexpected character " + std::string(1,
-                                                                                                  formula[j]) + " in " + formula);
+          throw combi_ff::input_error(
+              "couldn't read lambda, unexpected character " +
+              std::string(1, formula[j]) + " in " + formula);
       }
     }
 
@@ -50,36 +56,37 @@ void ReadLambdas(std::list<LambdaVector>& lambda_ranges, size_t& j, const std::s
     CONTINUE ADDING NUMBERS AND RANGES UNTIL ENCOUNTERING THE CLOSING ']'
     ********************************************************************/
     while (j < formula.size() && formula[j] != ']') {
-      //if current character is a comma, either a >, < or a digit has to follow
+      // if current character is a comma, either a >, < or a digit has to follow
       if (formula[j] == ',') {
         if (!ReadLess(++j, formula, nums)) {
           if (!ReadGreater(j, formula, nums)) {
             if (!ReadNumber(j, formula, nums))
-              throw combi_ff::input_error("couldn't read lambda, unexpected character " + std::string(1,
-                                                                                                      formula[j]) + " in " + formula);
+              throw combi_ff::input_error(
+                  "couldn't read lambda, unexpected character " +
+                  std::string(1, formula[j]) + " in " + formula);
           }
         }
       }
 
-      //if current character is a -, a digit has to follow, and the range goes from num.back() up to newly read number
+      // if current character is a -, a digit has to follow, and the range goes
+      // from num.back() up to newly read number
       else if (formula[j] == '-') {
         size_t n = GetNumber(++j, formula);
         size_t numPrev = nums.back();
 
-        if (n < numPrev)
-          std::swap(n, numPrev);
+        if (n < numPrev) std::swap(n, numPrev);
 
-        for (size_t i = numPrev; i <= n; i++)
-          nums.push_back(i);
+        for (size_t i = numPrev; i <= n; i++) nums.push_back(i);
       }
 
-      //unexpected character
+      // unexpected character
       else
-        throw combi_ff::input_error("expected a '-' or ',' in the formula " + formula + ", but encountered "
-                                    + formula[j]);
+        throw combi_ff::input_error("expected a '-' or ',' in the formula " +
+                                    formula + ", but encountered " +
+                                    formula[j]);
     }
 
-    //add all the unique numbers in num to the lambda_ranges
+    // add all the unique numbers in num to the lambda_ranges
     AddNumsToLambdaRanges(nums, lambda_ranges, false);
     j++;
 
@@ -87,21 +94,20 @@ void ReadLambdas(std::list<LambdaVector>& lambda_ranges, size_t& j, const std::s
     std::vector<size_t> nums;
     nums.reserve(100);
 
-    for (size_t i = 0; i < 100; i++)
-      nums.push_back(i);
+    for (size_t i = 0; i < 100; i++) nums.push_back(i);
 
     AddNumsToLambdaRanges(nums, lambda_ranges, true);
     j++;
 
   } else
-    throw combi_ff::input_error("unexpected character " + std::string(1,
-                                                                      formula[j]) + " in " + formula);
+    throw combi_ff::input_error("unexpected character " +
+                                std::string(1, formula[j]) + " in " + formula);
 }
 
-
-bool ReadLess(size_t& j, const std::string& formula, std::vector<size_t>& nums) {
+bool ReadLess(size_t& j, const std::string& formula,
+              std::vector<size_t>& nums) {
   if (formula[j] == '<') {
-    //check if <=
+    // check if <=
     bool leq(false);
 
     if (formula[++j] == '=') {
@@ -111,13 +117,11 @@ bool ReadLess(size_t& j, const std::string& formula, std::vector<size_t>& nums) 
 
     size_t n = GetNumber(j, formula);
 
-    //add all numbers < n to nums
-    for (size_t i = 0; i < n; i++)
-      nums.push_back(i);
+    // add all numbers < n to nums
+    for (size_t i = 0; i < n; i++) nums.push_back(i);
 
-    //if <= add n to nums as well
-    if (leq)
-      nums.push_back(n);
+    // if <= add n to nums as well
+    if (leq) nums.push_back(n);
 
     return true;
 
@@ -125,10 +129,10 @@ bool ReadLess(size_t& j, const std::string& formula, std::vector<size_t>& nums) 
     return false;
 }
 
-
-bool ReadGreater(size_t& j, const std::string& formula, std::vector<size_t>& nums) {
+bool ReadGreater(size_t& j, const std::string& formula,
+                 std::vector<size_t>& nums) {
   if (formula[j] == '>') {
-    //check if >=
+    // check if >=
     bool geq(false);
 
     if (formula[++j] == '=') {
@@ -138,13 +142,11 @@ bool ReadGreater(size_t& j, const std::string& formula, std::vector<size_t>& num
 
     size_t n = GetNumber(j, formula);
 
-    //if >= add n to nums
-    if (geq)
-      nums.push_back(n);
+    // if >= add n to nums
+    if (geq) nums.push_back(n);
 
-    //add all numbers greater than n+1 to nums (and smaller than 100)
-    for (size_t i = n + 1; i < 100; i++)
-      nums.push_back(i);
+    // add all numbers greater than n+1 to nums (and smaller than 100)
+    for (size_t i = n + 1; i < 100; i++) nums.push_back(i);
 
     return true;
 
@@ -152,8 +154,8 @@ bool ReadGreater(size_t& j, const std::string& formula, std::vector<size_t>& num
     return false;
 }
 
-
-bool ReadNumber(size_t& j, const std::string& formula, std::vector<size_t>& nums) {
+bool ReadNumber(size_t& j, const std::string& formula,
+                std::vector<size_t>& nums) {
   if (isdigit(formula[j])) {
     nums.push_back(GetNumber(j, formula));
     return true;
@@ -161,7 +163,6 @@ bool ReadNumber(size_t& j, const std::string& formula, std::vector<size_t>& nums
   } else
     return false;
 }
-
 
 void AddNumsToLambdaRanges(std::vector<size_t>& nums,
                            std::vector<LambdaVector>& lambda_ranges,
@@ -185,7 +186,8 @@ void AddNumsToLambdaRanges(std::vector<size_t>& nums,
   lambda_ranges = lambda_ranges_tmp;
 }
 
-void AddNumsToLambdaRanges(std::vector<size_t>& nums, std::list<LambdaVector>& lambda_ranges,
+void AddNumsToLambdaRanges(std::vector<size_t>& nums,
+                           std::list<LambdaVector>& lambda_ranges,
                            bool already_sorted) {
   if (!already_sorted) {
     std::sort(nums.begin(), nums.end());
@@ -195,7 +197,7 @@ void AddNumsToLambdaRanges(std::vector<size_t>& nums, std::list<LambdaVector>& l
 
   std::list<LambdaVector> lambda_ranges_tmp(0);
 
-  for (auto && lr =  lambda_ranges.begin(); lr != lambda_ranges.end(); ++lr) {
+  for (auto&& lr = lambda_ranges.begin(); lr != lambda_ranges.end(); ++lr) {
     for (size_t n : nums) {
       lambda_ranges_tmp.push_back(*lr);
       lambda_ranges_tmp.back().push_back(n);
@@ -205,8 +207,6 @@ void AddNumsToLambdaRanges(std::vector<size_t>& nums, std::list<LambdaVector>& l
   lambda_ranges = lambda_ranges_tmp;
 }
 
-
-
 /***********
 READ A RANGE
 ***********/
@@ -214,8 +214,7 @@ void ReadRange(const std::string& prop_, Range& r) {
   std::istringstream s(prop_);
   std::string prop(""), tmp;
 
-  while (s >> tmp)
-    prop += tmp;
+  while (s >> tmp) prop += tmp;
 
   size_t j = 0;
 
@@ -238,20 +237,18 @@ void ReadRange(const std::string& prop_, Range& r) {
     r = Range({0, -1});
 
   } else
-    throw combi_ff::input_error("unexpected character " + std::string(1,
-                                                                      prop[j]) + " in range " + prop);
+    throw combi_ff::input_error("unexpected character " +
+                                std::string(1, prop[j]) + " in range " + prop);
 }
 
-
-size_t GetNumber(size_t& j, const std::string formula) {
+size_t GetNumber(size_t& j, const std::string& formula) {
   std::string n = "";
 
-  while (j < formula.size() && isdigit(formula[j]))
-    n += formula[j++];
+  while (j < formula.size() && isdigit(formula[j])) n += formula[j++];
 
   return std::stoul(n);
 }
 
-} //namespace enu
+}  // namespace enu
 
-} //namespace combi_ff
+}  // namespace combi_ff

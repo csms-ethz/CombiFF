@@ -1,6 +1,10 @@
+// Copyright 2022 Salomé Rieder, CSMS ETH Zürich
+
 #include "InputOutput.h"
-#include "exceptions.h"
+
 #include <iostream>
+
+#include "exceptions.h"
 
 namespace combi_ff {
 
@@ -9,26 +13,23 @@ namespace cnv {
 /**********
 CONSTRUCTOR
 **********/
-InputOutput::InputOutput(std::list<std::pair<std::string, std::string>>& input_list,
-                         std::vector<bool>& print_options,
-                         InputOption& input,
-                         std::string& output_file_name,
-                         combi_ff::StringVector& family_enumeration_file_names,
-                         int& argc,
-                         char* argv[])
-  : input_list(input_list),
-    print_options(print_options),
-    input(input),
-    output_file_name(output_file_name),
-    family_enumeration_file_names(family_enumeration_file_names),
-    input_file_names(combi_ff::StringVector(0)) {
-  //add command line arguments to arguments vector
-  arguments  = (combi_ff::StringVector(0));
+InputOutput::InputOutput(
+    std::list<std::pair<std::string, std::string>>& input_list,
+    std::vector<bool>& print_options, InputOption& input,
+    std::string& output_file_name,
+    combi_ff::StringVector& family_enumeration_file_names, int& argc,
+    char* argv[])
+    : input_list(input_list),
+      print_options(print_options),
+      input(input),
+      output_file_name(output_file_name),
+      family_enumeration_file_names(family_enumeration_file_names),
+      input_file_names(combi_ff::StringVector(0)) {
+  // add command line arguments to arguments vector
+  arguments = (combi_ff::StringVector(0));
 
-  for (int ii = 1; ii < argc; ii++)
-    arguments.push_back(std::string(argv[ii]));
+  for (int ii = 1; ii < argc; ii++) arguments.push_back(std::string(argv[ii]));
 }
-
 
 /*******************************************************************************
 READ THE GIVEN OR DEFAULT TBFragmentFiles, familyLibraryFiles, and moleculeFiles
@@ -46,10 +47,10 @@ void InputOutput::ReadArguments() {
 
   std::string arg;
 
-  //go through the arguments vector
-  //for(size_t i = 0; i < arguments.size(); i++) {
-  for (size_t i = 0; i  < arguments.size(); i++) {
-    //arg is the current argument
+  // go through the arguments vector
+  // for(size_t i = 0; i < arguments.size(); i++) {
+  for (size_t i = 0; i < arguments.size(); i++) {
+    // arg is the current argument
     arg = arguments[i];
 
     if (arg == "-fie") {
@@ -121,37 +122,37 @@ void InputOutput::ReadArguments() {
       i += found_option;
 
       if (arg != "-")
-        throw combi_ff::input_error("uncrecognized option " + arg.substr(1, arg.size() - 1));
+        throw combi_ff::input_error("uncrecognized option " +
+                                    arg.substr(1, arg.size() - 1));
 
       else if (!found_option)
         throw combi_ff::input_error("uncrecognized option " + arg);
 
     } else {
       while (i < arguments.size() && arguments[i].front() != '-')
-        input_list.push_back(std::pair<std::string, std::string>("command_line", arguments[i++]));
+        input_list.push_back(std::pair<std::string, std::string>(
+            "command_line", arguments[i++]));
 
-      if (i < arguments.size() && arguments[i].front() == '-')
-        i--;
+      if (i < arguments.size() && arguments[i].front() == '-') i--;
     }
   }
 }
-
-
 
 /*************************************************************
 READ THE CONTENT OF A GIVEN INPUT FILE AND ADD IT TO arguments
 *************************************************************/
 void InputOutput::GetInputFromFile(const size_t pos) {
   std::ifstream arguments_file;
-  //the next argument in arguments corresponds to the filename after @input
-  //std::string arg = arguments[++i];
+  // the next argument in arguments corresponds to the filename after @input
+  // std::string arg = arguments[++i];
   input_file_names = combi_ff::StringVector(1, arguments[pos]);
 
   for (int i = 0; i < (int)input_file_names.size(); i++) {
     for (int j = 0; j < (int)input_file_names[i].size(); j++) {
       if ((input_file_names[i][j] == ' ' || input_file_names[i][j] == ',') &&
           input_file_names[i].size() > 1) {
-        input_file_names.push_back(input_file_names[i].substr(j + 1, input_file_names[i].size() - (j + 1)));
+        input_file_names.push_back(input_file_names[i].substr(
+            j + 1, input_file_names[i].size() - (j + 1)));
         input_file_names[i] = input_file_names[i].substr(0, j);
         j--;
       }
@@ -163,22 +164,23 @@ void InputOutput::GetInputFromFile(const size_t pos) {
     }
   }
 
-  for (auto && fileName : input_file_names) {
+  for (auto&& fileName : input_file_names) {
     arguments_file.open(fileName.c_str());
-    //read the input file, and add all the arguments to the arguments vector
+    // read the input file, and add all the arguments to the arguments vector
     std::string next;
 
     while (getline(arguments_file, next)) {
-      //don't continue reading after a comment
+      // don't continue reading after a comment
       if (next.front() == '#' || next.front() == '%')
         getline(arguments_file, next);
 
-      //otherwise, add the current string to arguments vector
+      // otherwise, add the current string to arguments vector
       else {
-        if (next.back() == 13) // catch carriage return
+        if (next.back() == 13)  // catch carriage return
           next.pop_back();
 
-        input_list.push_back(std::pair<std::string, std::string>(fileName, next));
+        input_list.push_back(
+            std::pair<std::string, std::string>(fileName, next));
       }
     }
 
@@ -186,8 +188,8 @@ void InputOutput::GetInputFromFile(const size_t pos) {
   }
 }
 
-
-void InputOutput::ReadInputOption(const size_t pos, const combi_ff::StringVector& arguments) {
+void InputOutput::ReadInputOption(const size_t pos,
+                                  const combi_ff::StringVector& arguments) {
   if (pos >= arguments.size())
     throw combi_ff::input_error("expected argument after -I");
 
@@ -212,12 +214,14 @@ void InputOutput::ReadInputOption(const size_t pos, const combi_ff::StringVector
     throw combi_ff::input_error("unrecognized option for -I");
 }
 
-const std::string InputOutput::IncompatibilityMessage(const std::string& input,
-                                                      const std::string& output) const {
-  return "input option \'" + input + "\' not compatible with output option \'" + output;
+const std::string InputOutput::IncompatibilityMessage(
+    const std::string& input, const std::string& output) const {
+  return "input option \'" + input + "\' not compatible with output option \'" +
+         output;
 }
 
-void InputOutput::ReadOutputOption(const size_t pos, const combi_ff::StringVector& arguments) {
+void InputOutput::ReadOutputOption(const size_t pos,
+                                   const combi_ff::StringVector& arguments) {
   if (pos >= arguments.size())
     throw combi_ff::input_error("expected argument after -I");
 
@@ -227,10 +231,12 @@ void InputOutput::ReadOutputOption(const size_t pos, const combi_ff::StringVecto
 
   if (find != (size_t)std::string::npos) {
     if (input == formula)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("frm", "smi"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("frm", "smi"));
 
     else if (input == name)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("nam", "smi"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("nam", "smi"));
 
     found_option = true;
     print_options[cnv::print_canon_smiles] = true;
@@ -241,7 +247,8 @@ void InputOutput::ReadOutputOption(const size_t pos, const combi_ff::StringVecto
 
   if (find != (size_t)std::string::npos) {
     if (input == name)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("nam", "frm"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("nam", "frm"));
 
     found_option = true;
     print_options[cnv::print_canon_formula] = true;
@@ -252,16 +259,20 @@ void InputOutput::ReadOutputOption(const size_t pos, const combi_ff::StringVecto
 
   if (find != (size_t)std::string::npos) {
     if (input == formula)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("frm", "nam"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("frm", "nam"));
 
     else if (input == smiles)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("smi", "nam"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("smi", "nam"));
 
     else if (input == family_enumeration)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("fmi", "nam"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("fmi", "nam"));
 
     else if (input == matrix)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("mat", "nam"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("mat", "nam"));
 
     found_option = true;
     print_options[cnv::print_canon_name] = true;
@@ -272,7 +283,8 @@ void InputOutput::ReadOutputOption(const size_t pos, const combi_ff::StringVecto
 
   if (find != (size_t)std::string::npos) {
     if (input == name)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("nam", "mass"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("nam", "mass"));
 
     found_option = true;
     print_options[cnv::print_mass] = true;
@@ -283,13 +295,16 @@ void InputOutput::ReadOutputOption(const size_t pos, const combi_ff::StringVecto
 
   if (find != (size_t)std::string::npos) {
     if (input == name)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("nam", "fmi"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("nam", "fmi"));
 
     else if (input == formula)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("frm", "fmi"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("frm", "fmi"));
 
     else if (input == family_enumeration)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("fmi", "fmi"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("fmi", "fmi"));
 
     found_option = true;
     print_options[cnv::print_family_enumeration] = true;
@@ -300,7 +315,8 @@ void InputOutput::ReadOutputOption(const size_t pos, const combi_ff::StringVecto
 
   if (find != (size_t)std::string::npos) {
     if (input == name)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("nam", "num_sat"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("nam", "num_sat"));
 
     found_option = true;
     print_options[cnv::print_n_unsaturations] = true;
@@ -311,10 +327,12 @@ void InputOutput::ReadOutputOption(const size_t pos, const combi_ff::StringVecto
 
   if (find != (size_t)std::string::npos) {
     if (input == name)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("nam", "num_mul"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("nam", "num_mul"));
 
     else if (input == formula)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("frm", "num_mul"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("frm", "num_mul"));
 
     found_option = true;
     print_options[cnv::print_n_multiple_bonds] = true;
@@ -325,10 +343,12 @@ void InputOutput::ReadOutputOption(const size_t pos, const combi_ff::StringVecto
 
   if (find != (size_t)std::string::npos) {
     if (input == name)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("nam", "num_dbl"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("nam", "num_dbl"));
 
     else if (input == formula)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("frm", "num_dbl"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("frm", "num_dbl"));
 
     found_option = true;
     print_options[cnv::print_n_double_bonds] = true;
@@ -339,10 +359,12 @@ void InputOutput::ReadOutputOption(const size_t pos, const combi_ff::StringVecto
 
   if (find != (size_t)std::string::npos) {
     if (input == name)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("nam", "num_arm"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("nam", "num_arm"));
 
     else if (input == formula)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("frm", "num_arm"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("frm", "num_arm"));
 
     found_option = true;
     print_options[cnv::print_n_aromatic_bonds] = true;
@@ -353,10 +375,12 @@ void InputOutput::ReadOutputOption(const size_t pos, const combi_ff::StringVecto
 
   if (find != (size_t)std::string::npos) {
     if (input == name)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("nam", "num_tri"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("nam", "num_tri"));
 
     else if (input == formula)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("frm", "num_tri"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("frm", "num_tri"));
 
     found_option = true;
     print_options[cnv::print_n_triple_bonds] = true;
@@ -367,10 +391,12 @@ void InputOutput::ReadOutputOption(const size_t pos, const combi_ff::StringVecto
 
   if (find != (size_t)std::string::npos) {
     if (input == name)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("nam", "num_cyc"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("nam", "num_cyc"));
 
     else if (input == formula)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("frm", "num_cyc"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("frm", "num_cyc"));
 
     found_option = true;
     print_options[cnv::print_n_cycles] = true;
@@ -381,10 +407,12 @@ void InputOutput::ReadOutputOption(const size_t pos, const combi_ff::StringVecto
 
   if (find != (size_t)std::string::npos) {
     if (input == name)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("nam", "atmV"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("nam", "atmV"));
 
     else if (input == formula)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("frm", "atmV"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("frm", "atmV"));
 
     found_option = true;
     print_options[cnv::print_canon_atom_vector] = true;
@@ -395,10 +423,12 @@ void InputOutput::ReadOutputOption(const size_t pos, const combi_ff::StringVecto
 
   if (find != (size_t)std::string::npos) {
     if (input == name)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("nam", "stack"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("nam", "stack"));
 
     else if (input == formula)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("frm", "stack"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("frm", "stack"));
 
     found_option = true;
     print_options[cnv::print_stack] = true;
@@ -409,10 +439,12 @@ void InputOutput::ReadOutputOption(const size_t pos, const combi_ff::StringVecto
 
   if (find != (size_t)std::string::npos) {
     if (input == name)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("nam", "mat"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("nam", "mat"));
 
     else if (input == formula)
-      throw combi_ff::input_error(InputOutput::IncompatibilityMessage("frm", "mat"));
+      throw combi_ff::input_error(
+          InputOutput::IncompatibilityMessage("frm", "mat"));
 
     found_option = true;
     print_options[cnv::print_matrix] = true;
@@ -432,11 +464,13 @@ void InputOutput::ReadOutputOption(const size_t pos, const combi_ff::StringVecto
     throw combi_ff::input_error("expected an argument for -O");
 }
 
-void InputOutput::ReadFieFileNamesFromSetupFile(const std::string& setup_file_name) {
+void InputOutput::ReadFieFileNamesFromSetupFile(
+    const std::string& setup_file_name) {
   std::ifstream setup_file(setup_file_name);
 
   if (!setup_file.is_open())
-    throw combi_ff::input_error("manual setup file " + setup_file_name + " not open");
+    throw combi_ff::input_error("manual setup file " + setup_file_name +
+                                " not open");
 
   std::string next("");
 
@@ -453,44 +487,55 @@ const combi_ff::StringVector& InputOutput::GetInputFileNames() const {
   return input_file_names;
 }
 
-
 /**********************************************
 PRINT THE INPUT OUTPUT OPTIONS THAT CAN BE USED
 **********************************************/
 void InputOutput::PrintInputOptions() {
-  std::cout << "input options are:\n\n"
-            << " -I : used to define the format of the input. takes only one argument. possible arguments are:\n"
-            << "      - smi:   smiles strings\n"
-            << "      - frm:   molecular formulas\n"
-            << "      - nam:   molecule names\n"
-            << "      - fmi:   family molecular identifiers (i.e. codes from the fie files)\n"
-            << "      - mat:   adjacency matrix\n\n"
-            << " -O : used to define the desired output. takes at least one argument.\n"
-            << "      arguments can be written all toGether without any whitespaces, or spearated by commas, or within single quotes and separated by commas and/or whitespaces\n"
-            << "      possible arguments are:\n"
-            << "      - smi:     print the canonical smiles string\n"
-            << "      - frm:     print the canonical formula\n"
-            << "      - mass:    print the molecular mass\n"
-            << "      - fmi:     print the code of the corresponding canonical smiles string from the fie files\n"
-            << "      - num_sat: print number of unsaturations\n"
-            << "      - num_mul: print number of multiple bonds\n"
-            << "      - num_dbl: print number of double bonds\n"
-            << "      - num_arm: print number of aromatic bonds\n"
-            << "      - num_tri: print number of triple bonds\n"
-            << "      - num_cyc: print number of cycles\n"
-            << "      - stack:   print the stack of the canonical adjacency matrix\n"
-            << "      - atmV:    print the atom vector of the canonical matrix\n"
-            << "      - mat:     print the canonical adjacency matrix\n\n"
-            << " -i : used to define an input file. several files can be given separated by commas, or within single quotes separated by commas and/or whitespaces\n"
-            << "      lists of smiles strings can be separated by commas, periods, and/or whitespaces.\n"
-            << "      lists of formulas, names, or family identifiers can be separated by commas and/or whitespaces\n"
-            << "      Note: if no input file is given, the list of arguments (or a single argument) can be given directly on the command line.\n"
-            <<
-            " -o : used to define an output file\n\n"
-            << " -s : used to overwrite the default option usr/default.cnv for the Setup file\n\n"
-            << " -h : display help message\n\n";
+  std::cout
+      << "input options are:\n\n"
+      << " -I : used to define the format of the input. takes only one "
+         "argument. possible arguments are:\n"
+      << "      - smi:   smiles strings\n"
+      << "      - frm:   molecular formulas\n"
+      << "      - nam:   molecule names\n"
+      << "      - fmi:   family molecular identifiers (i.e. codes from the fie "
+         "files)\n"
+      << "      - mat:   adjacency matrix\n\n"
+      << " -O : used to define the desired output. takes at least one "
+         "argument.\n"
+      << "      arguments can be written all toGether without any whitespaces, "
+         "or spearated by commas, or within single quotes and separated by "
+         "commas and/or whitespaces\n"
+      << "      possible arguments are:\n"
+      << "      - smi:     print the canonical smiles string\n"
+      << "      - frm:     print the canonical formula\n"
+      << "      - mass:    print the molecular mass\n"
+      << "      - fmi:     print the code of the corresponding canonical "
+         "smiles string from the fie files\n"
+      << "      - num_sat: print number of unsaturations\n"
+      << "      - num_mul: print number of multiple bonds\n"
+      << "      - num_dbl: print number of double bonds\n"
+      << "      - num_arm: print number of aromatic bonds\n"
+      << "      - num_tri: print number of triple bonds\n"
+      << "      - num_cyc: print number of cycles\n"
+      << "      - stack:   print the stack of the canonical adjacency matrix\n"
+      << "      - atmV:    print the atom vector of the canonical matrix\n"
+      << "      - mat:     print the canonical adjacency matrix\n\n"
+      << " -i : used to define an input file. several files can be given "
+         "separated by commas, or within single quotes separated by commas "
+         "and/or whitespaces\n"
+      << "      lists of smiles strings can be separated by commas, periods, "
+         "and/or whitespaces.\n"
+      << "      lists of formulas, names, or family identifiers can be "
+         "separated by commas and/or whitespaces\n"
+      << "      Note: if no input file is given, the list of arguments (or a "
+         "single argument) can be given directly on the command line.\n"
+      << " -o : used to define an output file\n\n"
+      << " -s : used to overwrite the default option usr/default.cnv for the "
+         "Setup file\n\n"
+      << " -h : display help message\n\n";
 }
 
-} //namespace cnv
+}  // namespace cnv
 
-} //namespace combi_ff
+}  // namespace combi_ff

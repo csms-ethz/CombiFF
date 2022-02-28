@@ -1,6 +1,9 @@
+// Copyright 2022 Salomé Rieder, CSMS ETH Zürich
+
 #include "FormulaHandler.h"
-#include <iomanip>
+
 #include <cmath>
+#include <iomanip>
 
 namespace combi_ff {
 
@@ -9,21 +12,21 @@ namespace cnv {
 void FormulaHandler::Run() {
   cnv::Handler::Run(print_canon_formula);
 
-  //determine the different formulas from the input_list
+  // determine the different formulas from the input_list
   for (auto it = input_list.begin(); it != input_list.end(); ++it) {
     for (size_t i = 0; i < it->second.size(); i++) {
       if ((it->second)[i] == ' ' || (it->second)[i] == ',') {
         auto next = ++it;
         it--;
-        input_list.insert(next, {it->first, it->second.substr(i + 1, it->second.size() - i)});
+        input_list.insert(
+            next, {it->first, it->second.substr(i + 1, it->second.size() - i)});
         it->second = it->second.substr(0, i);
       }
     }
   }
 
-  for (auto && formula : input_list) {
-    if (formula.second.size())
-      FormulaHandler::ConvertFormula(formula.second);
+  for (auto&& formula : input_list) {
+    if (formula.second.size()) FormulaHandler::ConvertFormula(formula.second);
   }
 }
 
@@ -34,13 +37,14 @@ void FormulaHandler::ConvertFormula(const std::string& formula) {
   while (i < formula.size()) {
     std::string atom_name("");
     std::string num("");
-    //assert(std::isalpha(formula[i]));
+    // assert(std::isalpha(formula[i]));
 
-    //while(i < formula.size() && std::isalpha(formula[i]))
+    // while(i < formula.size() && std::isalpha(formula[i]))
     //	atom_name += formula[i++];
 
     if (formula[i] == 'C' || formula[i] == 'c') {
-      if (i + 1 < formula.size() && (formula[i + 1] == 'l' || formula[i + 1] == 'L')) {
+      if (i + 1 < formula.size() &&
+          (formula[i + 1] == 'l' || formula[i + 1] == 'L')) {
         i++;
         atom_name = "Cl";
 
@@ -62,7 +66,7 @@ void FormulaHandler::ConvertFormula(const std::string& formula) {
     else if (formula[i] == 'P' || formula[i] == 'p')
       atom_name = "P";
 
-    else if (formula[i] == 'B'  || formula[i] == 'r') {
+    else if (formula[i] == 'B' || formula[i] == 'r') {
       if (formula[++i] != 'r' && formula[i] != 'R')
         throw combi_ff::input_error("unrecognized atom type in " + formula);
 
@@ -101,8 +105,7 @@ void FormulaHandler::PrintOutput(const std::string& formula_orig,
   if (print_options[cnv::print_n_unsaturations]) {
     double unsat(0);
 
-    for (auto && atom : atoms)
-      unsat += (double)atom.GetDegree() - 2.;
+    for (auto&& atom : atoms) unsat += (double)atom.GetDegree() - 2.;
 
     n_unsaturations = (size_t)floor((unsat / 2.) + 1);
   }
@@ -118,14 +121,14 @@ void FormulaHandler::PrintOutput(const std::string& formula_orig,
   *out << std::setw(column_width) << std::left << formula_orig << " ";
 
   if (print_options[cnv::print_canon_formula])
-    *out << std::setw(column_width) << std::left <<
-         CreateCanonicalFormulaFromAtomVector<combi_ff::CnvAtom>(atoms) << " ";
+    *out << std::setw(column_width) << std::left
+         << CreateCanonicalFormulaFromAtomVector<combi_ff::CnvAtom>(atoms)
+         << " ";
 
   if (print_options[cnv::print_mass]) {
     double mass = 0;
 
-    for (auto && a : atoms)
-      mass += a.GetMass();
+    for (auto&& a : atoms) mass += a.GetMass();
 
     *out << std::setw(column_width) << std::left << mass << " ";
   }
@@ -136,11 +139,10 @@ void FormulaHandler::PrintOutput(const std::string& formula_orig,
   *out << '\n';
 }
 
-
 void FormulaHandler::PrintFirstLine() {
   cnv::Handler::PrintFirstLine("# originalFormula");
 }
 
-} //namespace Cnv
+}  // namespace cnv
 
-} //namespace combi_ff
+}  // namespace combi_ff

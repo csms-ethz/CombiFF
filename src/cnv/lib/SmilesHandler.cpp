@@ -1,7 +1,11 @@
+// Copyright 2022 Salomé Rieder, CSMS ETH Zürich
+
 #include "SmilesHandler.h"
-#include "smilesToMatrix.h"
+
 #include <cmath>
 #include <sstream>
+
+#include "smilesToMatrix.h"
 
 namespace combi_ff {
 
@@ -11,19 +15,22 @@ void SmilesHandler::Run() {
   cnv::Handler::Run();
   SmilesHandler::PrintFirstLine();
 
-  //determine the different smiles strings from the input_list
-  for (auto smiles_it = input_list.begin(); smiles_it != input_list.end(); ++smiles_it) {
+  // determine the different smiles strings from the input_list
+  for (auto smiles_it = input_list.begin(); smiles_it != input_list.end();
+       ++smiles_it) {
     for (size_t i = 0; i < smiles_it->second.size(); i++) {
       if ((smiles_it->second)[i] == ' ' || (smiles_it->second)[i] == ',') {
         auto next = ++smiles_it;
         smiles_it--;
-        input_list.insert(next, {smiles_it->first, smiles_it->second.substr(i + 1, smiles_it->second.size() - i)});
+        input_list.insert(
+            next, {smiles_it->first, smiles_it->second.substr(
+                                         i + 1, smiles_it->second.size() - i)});
         smiles_it->second = smiles_it->second.substr(0, i);
       }
     }
   }
 
-  for (auto && smiles_orig : input_list) {
+  for (auto&& smiles_orig : input_list) {
     if (smiles_orig.second.size()) {
       std::cerr << smiles_orig.second << std::endl;
 
@@ -45,7 +52,8 @@ void SmilesHandler::Run() {
             smiles += smiles_orig.second[i];
           }
 
-          max_size = std::min((unsigned long)column_width * 3, std::max(max_size, smiles_orig.second.size()));
+          max_size = std::min((unsigned long)column_width * 3,
+                              std::max(max_size, smiles_orig.second.size()));
           std::string fmi_tmp("");
           std::string smiles_canon_tmp("");
           ConvertSmiles(smiles, smiles_canon_tmp, A);
@@ -55,8 +63,7 @@ void SmilesHandler::Run() {
 
           smiles_canon += smiles_canon_tmp;
 
-          if (i != smiles_orig.second.size())
-            smiles_canon += '.';
+          if (i != smiles_orig.second.size()) smiles_canon += '.';
 
           fmi += fmi_tmp;
         }
@@ -66,8 +73,8 @@ void SmilesHandler::Run() {
       } else {
         cnv::AdjacencyMatrix A;
         std::string smiles_canon("");
-        max_size = std::min((unsigned long)column_width * 3, std::max(max_size,
-                                                                      smiles_orig.second.size()));
+        max_size = std::min((unsigned long)column_width * 3,
+                            std::max(max_size, smiles_orig.second.size()));
         ConvertSmiles(smiles_orig.second, smiles_canon, A);
         std::string fmi("");
 
@@ -85,12 +92,12 @@ void SmilesHandler::FindFamilyIdentifier(const std::string& smiles_canon,
   bool found(false);
   std::string line, code, formula, smiles_cur;
 
-  for (auto && family_file_name : fie_file_names) {
+  for (auto&& family_file_name : fie_file_names) {
     std::ifstream familyFile(family_file_name);
 
     if (!familyFile.is_open()) {
-      throw combi_ff::input_error("family isomer enumeration file " +  family_file_name
-                                  + " could not be opened");
+      throw combi_ff::input_error("family isomer enumeration file " +
+                                  family_file_name + " could not be opened");
     }
 
     while (std::getline(familyFile, line)) {
@@ -107,17 +114,16 @@ void SmilesHandler::FindFamilyIdentifier(const std::string& smiles_canon,
 
     familyFile.close();
 
-    if (found)
-      break;
+    if (found) break;
   }
 
   if (!found) {
-    for (auto && ffn : fie_file_names)
-      std::cerr << ffn << " ";
+    for (auto&& ffn : fie_file_names) std::cerr << ffn << " ";
 
     std::cerr << '\n';
-    throw combi_ff::input_error("smiles " + smiles_canon +
-                                " not found in any of the above family isomer enumeration files ");
+    throw combi_ff::input_error(
+        "smiles " + smiles_canon +
+        " not found in any of the above family isomer enumeration files ");
 
   } else
     fmi = code;
@@ -128,22 +134,22 @@ void SmilesHandler::PrintFirstLine() {
 }
 
 void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
-                                  std::string& smiles_canon, cnv::AdjacencyMatrix& A) {
+                                  std::string& smiles_canon,
+                                  cnv::AdjacencyMatrix& A) {
   if (smiles_orig.size() && smiles_orig != "%") {
     try {
       A = (combi_ff::ConvertToMatrix(smiles_orig));
     }
 
-    //catch unhandled user input
+    // catch unhandled user input
     catch (combi_ff::input_warning& e) {
       std::cerr << "?Warning: " << e.what() << std::endl;
       return;
     }
 
-    if (!A.GetN())
-      return;
+    if (!A.GetN()) return;
 
-    //convert aromatic bonds 1.5 to alternating double and single bonds
+    // convert aromatic bonds 1.5 to alternating double and single bonds
     bool set_last_arom_to_2(false);
 
     for (int i = 0; i < (int)A.GetN(); i++) {
@@ -156,7 +162,8 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
           } else {
             if (std::find(A.GetElements().begin() + i * A.GetN(),
                           A.GetElements().begin() + i * A.GetN() + A.GetN(),
-                          2) != A.GetElements().begin() + i * A.GetN() + A.GetN())
+                          2) !=
+                A.GetElements().begin() + i * A.GetN() + A.GetN())
               A.SetElement(i, j, 1);
 
             else
@@ -168,32 +175,38 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
 
     smiles_canon = "";
 
-    if (print_options[cnv::print_canon_smiles] || print_options[cnv::print_stack] ||
-        print_options[cnv::print_matrix] || print_options[cnv::print_family_enumeration] ||
+    if (print_options[cnv::print_canon_smiles] ||
+        print_options[cnv::print_stack] || print_options[cnv::print_matrix] ||
+        print_options[cnv::print_family_enumeration] ||
         print_options[cnv::print_canon_atom_vector]) {
       A.SortAtomVector(A.GetIsAromaticCarbon());
       combi_ff::LambdaVector lambda = A.GetLambda();
       size_t N = A.GetN();
-      //num_perms[i] indicates, with how many other atom indices the index of atom i can be permuted
-      //note: index permutations are only allowed within the same lambda partition, and with higher indices
-      //e.g. for lambda = [1, 3, 1, 4, 6], we have num_perms = [1, 3, 2, 1, 1, 4, 3, 2, 1, 6, 5, 4, 3, 2, 1]
+      // num_perms[i] indicates, with how many other atom indices the index of
+      // atom i can be permuted note: index permutations are only allowed within
+      // the same lambda partition, and with higher indices e.g. for lambda =
+      // [1, 3, 1, 4, 6], we have num_perms = [1, 3, 2, 1, 1, 4, 3, 2, 1, 6, 5,
+      // 4, 3, 2, 1]
       std::vector<size_t> num_perms;
       int ind(0);
 
       for (size_t i = 0; i < lambda.size(); i++) {
         for (size_t j = 0; j < lambda[i]; j++)
-          num_perms.push_back(std::accumulate(lambda.begin(), lambda.begin() + i + 1, 0) - ind++);
+          num_perms.push_back(
+              std::accumulate(lambda.begin(), lambda.begin() + i + 1, 0) -
+              ind++);
       }
 
-      //a RepresentationSystem contains all the possible index permutations for the different atom indices
-      // e.g. for lambda = [2, 1, 4], the RepresentationSystem is
-      // (0,0), (0,1)         (for idx 0)
-      // (1,1)            (for idx 1)
-      // (2,2)            (for idx 2)
-      // (3,3), (3,4), (3,5), (3,6) (for idx 3)
-      // (4,4), (4,5), (4,6)      (for idx 4)
-      // (5,5), (5,6)         (for idx 5)
-      // (6,6)            (for idx 6)
+      // a RepresentationSystem contains all the possible index permutations for
+      // the different atom indices
+      //  e.g. for lambda = [2, 1, 4], the RepresentationSystem is
+      //  (0,0), (0,1)         (for idx 0)
+      //  (1,1)            (for idx 1)
+      //  (2,2)            (for idx 2)
+      //  (3,3), (3,4), (3,5), (3,6) (for idx 3)
+      //  (4,4), (4,5), (4,6)      (for idx 4)
+      //  (5,5), (5,6)         (for idx 5)
+      //  (6,6)            (for idx 6)
       combi_ff::RepresentationSystem u(N);
 
       for (size_t i = 0; i < N; i++) {
@@ -217,26 +230,25 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
   }
 }
 
-
-
-
-
 void SmilesHandler::PrintOutput(const std::string& smiles_orig,
-                                const std::string& smiles_canon, const std::string& fmi,
+                                const std::string& smiles_canon,
+                                const std::string& fmi,
                                 const cnv::AdjacencyMatrix& A) {
   size_t nUnsat(0), nMB(0), nDB(0), nAB(0), nTB(0), nSB(0), nQB(0), nCyc(0);
 
-  if (print_options[cnv::print_n_double_bonds] || print_options[cnv::print_n_aromatic_bonds] ||
-      print_options[cnv::print_n_triple_bonds] || print_options[cnv::print_n_unsaturations] ||
+  if (print_options[cnv::print_n_double_bonds] ||
+      print_options[cnv::print_n_aromatic_bonds] ||
+      print_options[cnv::print_n_triple_bonds] ||
+      print_options[cnv::print_n_unsaturations] ||
       print_options[cnv::print_n_cycles] ||
-      print_options[cnv::print_n_multiple_bonds] || print_options[cnv::print_n_quadruple_bonds]) {
+      print_options[cnv::print_n_multiple_bonds] ||
+      print_options[cnv::print_n_quadruple_bonds]) {
     A.GetNumMultipleBonds(nSB, nDB, nTB, nQB, nAB);
     double DoU_(0);
     assert(!(nAB % 2));
     nMB = nDB + nTB + nAB / 2;
 
-    for (auto && atom : A.GetAtomVector())
-      DoU_ += (double)atom.GetDegree() - 2.;
+    for (auto&& atom : A.GetAtomVector()) DoU_ += (double)atom.GetDegree() - 2.;
 
     nUnsat = (size_t)floor((DoU_ / 2.) + 1);
     nCyc = nUnsat - nMB;
@@ -250,14 +262,15 @@ void SmilesHandler::PrintOutput(const std::string& smiles_orig,
   else
     out = &std::cout;
 
-  *out << /*"#" <<*/ std::setw((int)max_size) << std::left << smiles_orig << " ";
+  *out << /*"#" <<*/ std::setw((int)max_size) << std::left << smiles_orig
+       << " ";
 
   if (print_options[cnv::print_canon_smiles])
     *out << std::setw(column_width) << std::left << smiles_canon << " ";
 
   if (print_options[cnv::print_canon_formula])
-    *out << std::setw(column_width) << std::left <<
-         CreateCanonicalFormulaFromAtomVector(A.GetAtomVector()) << " ";
+    *out << std::setw(column_width) << std::left
+         << CreateCanonicalFormulaFromAtomVector(A.GetAtomVector()) << " ";
 
   if (print_options[cnv::print_mass])
     *out << std::setw(column_width) << std::left << A.GetMass() << " ";
@@ -289,8 +302,7 @@ void SmilesHandler::PrintOutput(const std::string& smiles_orig,
   if (print_options[cnv::print_canon_atom_vector])
     *out << A.GetAtomVector() << " ";
 
-  if (print_options[cnv::print_stack])
-    *out << A.GetStack();
+  if (print_options[cnv::print_stack]) *out << A.GetStack();
 
   if (print_options[cnv::print_matrix]) {
     *out << '\n';
@@ -300,6 +312,6 @@ void SmilesHandler::PrintOutput(const std::string& smiles_orig,
   *out << '\n';
 }
 
-} //namespace cnv
+}  // namespace cnv
 
-} //namespace combi_ff
+}  // namespace combi_ff

@@ -1,3 +1,5 @@
+// Copyright 2022 Salomé Rieder, CSMS ETH Zürich
+
 #ifndef MAXFILLALG_H
 #define MAXFILLALG_H
 
@@ -9,7 +11,8 @@ namespace enu {
 
 class MaxFillAlg {
  public:
-  MaxFillAlg(enu::AdjacencyMatrix& A, const bool stereo, const size_t max_degree);
+  MaxFillAlg(enu::AdjacencyMatrix& A, const bool stereo,
+             const size_t max_degree);
 
   bool GetNextCanonicalMatrix();
   std::pair<int, int> GetHat();
@@ -19,12 +22,11 @@ class MaxFillAlg {
   void BackwardStep();
   void CanonicityTest();
 
-
   bool IsCanonical();
   bool IsCanonical(size_t row);
-  void DetermineNewIJ(const size_t i0, const size_t j0,
-                      const size_t i_pos, const size_t j_pos,
-                      const size_t i_pos_perm, const size_t j_pos_perm);
+  void DetermineNewIJ(const size_t i0, const size_t j0, const size_t i_pos,
+                      const size_t j_pos, const size_t i_pos_perm,
+                      const size_t j_pos_perm);
   bool FindStabilizer(const std::vector<size_t>& permuted_indices,
                       RepresentationSystem& u_next,
                       const size_t highest_permuted_idx);
@@ -59,12 +61,10 @@ class MaxFillAlg {
   TriangularMatrix<size_t> accumulated_column_matrix;
   PermutationIterator perm_it;
   void (combi_ff::enu::MaxFillAlg::*next_step_ptr)();
-
 };
 
-} //namespace enu
+}  // namespace enu
 
-} //namespace combi_ff
-
+}  // namespace combi_ff
 
 #endif

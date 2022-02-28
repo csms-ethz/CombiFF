@@ -1,27 +1,27 @@
+// Copyright 2022 Salomé Rieder, CSMS ETH Zürich
+
 #ifndef HYDROGENDISTRIBUTION_H
 #define HYDROGENDISTRIBUTION_H
 
-#include "LambdaVector.h"
 #include "Atom.h"
+#include "LambdaVector.h"
 
 namespace combi_ff {
 
 namespace enu {
 
 class HydrogenDistribution {
-
  public:
-
   HydrogenDistribution(const LambdaVector& lambda,
                        const AtomVector<combi_ff::Atom>& non_H_atoms,
                        const int NH);
 
   bool GetNextDistribution();
-  void CanonicityTest() ;
-  void BackwardStep() ;
+  void CanonicityTest();
+  void BackwardStep();
   void ForwardStep();
 
-  bool LexOrder() ;
+  bool LexOrder();
   bool LexOrderUpTo(const size_t max);
   const ConnectivityVector& GetHcon();
 
@@ -35,12 +35,10 @@ class HydrogenDistribution {
   const int N_hyd;
   const size_t N_hat;
   bool canonical;
-
 };
 
+}  // namespace enu
 
-} //namespace enu
-
-} //namespace combi_ff
+}  // namespace combi_ff
 
 #endif

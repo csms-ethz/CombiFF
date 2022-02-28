@@ -1,10 +1,12 @@
+// Copyright 2022 Salomé Rieder, CSMS ETH Zürich
+
 #include "TopologicalProperty.h"
+
 #include "ContainerOperators.h"
 
 namespace combi_ff {
 
 namespace topology_builder {
-
 
 /*************************************
 TopologicalPropertyBase implementation
@@ -13,21 +15,20 @@ TopologicalPropertyBase implementation
 /*
 Constructors
 */
-TopologicalPropertyBase::TopologicalPropertyBase(const std::string& property_name,
-                                                 const size_t num_involved_atoms)
-  : property_name(property_name),
-    num_involved_atoms(num_involved_atoms) {
+TopologicalPropertyBase::TopologicalPropertyBase(
+    const std::string& property_name, const size_t num_involved_atoms)
+    : property_name(property_name), num_involved_atoms(num_involved_atoms) {
   involved_atoms.reserve(num_involved_atoms);
 }
 
-TopologicalPropertyBase::TopologicalPropertyBase(const std::string& property_name,
-                                                 const size_t num_involved_atoms,
-                                                 const std::vector<size_t>& involved_atoms,
-                                                 const std::unordered_map<std::string, std::string>& attributes)
-  : property_name(property_name),
-    num_involved_atoms(num_involved_atoms),
-    involved_atoms(involved_atoms),
-    attributes(attributes) {}
+TopologicalPropertyBase::TopologicalPropertyBase(
+    const std::string& property_name, const size_t num_involved_atoms,
+    const std::vector<size_t>& involved_atoms,
+    const std::unordered_map<std::string, std::string>& attributes)
+    : property_name(property_name),
+      num_involved_atoms(num_involved_atoms),
+      involved_atoms(involved_atoms),
+      attributes(attributes) {}
 
 /*
 Getter functions
@@ -45,13 +46,17 @@ size_t TopologicalPropertyBase::GetNumInvolvedAtoms() const {
   return num_involved_atoms;
 }
 
-const std::string TopologicalPropertyBase::GetAttribute(const std::string& name)const {
-  if (attributes.find(name) != attributes.end())return attributes.find(name)->second;
+const std::string TopologicalPropertyBase::GetAttribute(
+    const std::string& name) const {
+  if (attributes.find(name) != attributes.end())
+    return attributes.find(name)->second;
 
-  else return "";
+  else
+    return "";
 }
 
-const std::unordered_map<std::string, std::string>& TopologicalPropertyBase::GetAttributes() const {
+const std::unordered_map<std::string, std::string>&
+TopologicalPropertyBase::GetAttributes() const {
   return attributes;
 }
 
@@ -59,9 +64,7 @@ const std::vector<size_t>& TopologicalPropertyBase::GetInvolvedAtoms() const {
   return involved_atoms;
 }
 
-PropertyType TopologicalPropertyBase::GetType() const {
-  return type;
-}
+PropertyType TopologicalPropertyBase::GetType() const { return type; }
 
 /*
 Setter functions
@@ -71,8 +74,8 @@ void TopologicalPropertyBase::SetPropertyName(const std::string& s) {
   property_name = s;
 }
 
-void TopologicalPropertyBase::SetAttributes(const std::unordered_map<std::string, std::string>&
-                                            attrib) {
+void TopologicalPropertyBase::SetAttributes(
+    const std::unordered_map<std::string, std::string>& attrib) {
   attributes = attrib;
 }
 
@@ -84,7 +87,8 @@ void TopologicalPropertyBase::SetNumInvolvedAtoms(const size_t i) {
   num_involved_atoms = i;
 }
 
-void TopologicalPropertyBase::AddAttribute(const std::string& name, const std::string& value) {
+void TopologicalPropertyBase::AddAttribute(const std::string& name,
+                                           const std::string& value) {
   attributes[name] = value;
 }
 
@@ -96,9 +100,11 @@ void TopologicalPropertyBase::AddInvolvedAtom(const size_t idx) {
 operator<<
 */
 
-std::ostream& operator<<(std::ostream& stream, const TopologicalPropertyBase& prop) {
-  stream << prop.GetPropertyName() << " " <<
-         prop.GetNumInvolvedAtoms();// << " " //<< prop.GetAttributes() << " ";
+std::ostream& operator<<(std::ostream& stream,
+                         const TopologicalPropertyBase& prop) {
+  stream << prop.GetPropertyName() << " "
+         << prop.GetNumInvolvedAtoms();  // << " " //<< prop.GetAttributes() <<
+                                         // " ";
   combi_ff::operator<<(stream, prop.GetInvolvedAtoms());
   return stream;
 }
@@ -111,7 +117,7 @@ TopologicalProperty implementation
 template constructors
 */
 
-template<>
+template <>
 TopologicalProperty<bond>::TopologicalProperty() {
   type = bond;
   property_name = "bond";
@@ -119,7 +125,7 @@ TopologicalProperty<bond>::TopologicalProperty() {
   num_involved_atoms = 2;
 }
 
-template<>
+template <>
 TopologicalProperty<angle>::TopologicalProperty() {
   type = angle;
   property_name = "angle";
@@ -127,7 +133,7 @@ TopologicalProperty<angle>::TopologicalProperty() {
   num_involved_atoms = 3;
 }
 
-template<>
+template <>
 TopologicalProperty<improper_dihedral>::TopologicalProperty() {
   type = improper_dihedral;
   property_name = "improper_dihedral";
@@ -135,7 +141,7 @@ TopologicalProperty<improper_dihedral>::TopologicalProperty() {
   num_involved_atoms = 4;
 }
 
-template<>
+template <>
 TopologicalProperty<torsional_dihedral>::TopologicalProperty() {
   type = torsional_dihedral;
   property_name = "torsional_dihedral";
@@ -172,12 +178,12 @@ TopologicalProperty<third_neighbor>::TopologicalProperty() {
 sortInvolvedAtoms implementation
 */
 
-template<>
+template <>
 void TopologicalProperty<improper_dihedral>::SortInvolvedAtoms() {
   std::sort(involved_atoms.begin() + 1, involved_atoms.end());
 }
 
-template<>
+template <>
 void TopologicalProperty<angle>::SortInvolvedAtoms() {
   if (involved_atoms.front() > involved_atoms.back())
     std::swap(involved_atoms.front(), involved_atoms.back());
@@ -189,7 +195,7 @@ void TopologicalProperty<second_neighbor>::sortInvolvedAtoms() {
     std::swap(involved_atoms.front(), involved_atoms.back());
 }*/
 
-template<>
+template <>
 void TopologicalProperty<torsional_dihedral>::SortInvolvedAtoms() {
   if (involved_atoms[1] > involved_atoms[2]) {
     std::swap(involved_atoms.front(), involved_atoms.back());
@@ -205,7 +211,7 @@ void TopologicalProperty<third_neighbor>::sortInvolvedAtoms() {
   }
 }*/
 
-template<PropertyType t>
+template <PropertyType t>
 void TopologicalProperty<t>::SortInvolvedAtoms() {
   std::sort(involved_atoms.begin(), involved_atoms.end());
 }
@@ -213,43 +219,48 @@ void TopologicalProperty<t>::SortInvolvedAtoms() {
 /*
 creates a new TopologicalPropertyBase pointer for the property_name type
 */
-std::shared_ptr<TopologicalPropertyBase> CreateNewTopologicalProperty(const PropertyType type) {
+std::shared_ptr<TopologicalPropertyBase> CreateNewTopologicalProperty(
+    const PropertyType type) {
   switch (type) {
-  case (bond) :
-    return std::shared_ptr<TopologicalPropertyBase>(new TopologicalProperty<bond>());
-    break;
+    case (bond):
+      return std::shared_ptr<TopologicalPropertyBase>(
+          new TopologicalProperty<bond>());
+      break;
 
-  case (angle) :
-    return std::shared_ptr<TopologicalPropertyBase>(new TopologicalProperty<angle>());
-    break;
+    case (angle):
+      return std::shared_ptr<TopologicalPropertyBase>(
+          new TopologicalProperty<angle>());
+      break;
 
-  case (improper_dihedral) :
-    return std::shared_ptr<TopologicalPropertyBase>(new TopologicalProperty<improper_dihedral>());
-    break;
+    case (improper_dihedral):
+      return std::shared_ptr<TopologicalPropertyBase>(
+          new TopologicalProperty<improper_dihedral>());
+      break;
 
-  case (torsional_dihedral) :
-    return std::shared_ptr<TopologicalPropertyBase>(new TopologicalProperty<torsional_dihedral>());
-    break;
+    case (torsional_dihedral):
+      return std::shared_ptr<TopologicalPropertyBase>(
+          new TopologicalProperty<torsional_dihedral>());
+      break;
 
-  /*
-  case(first_neighbor) :
-    return std::shared_ptr<TopologicalPropertyBase>(new TopologicalProperty<first_neighbor>());
-    break;
+    /*
+    case(first_neighbor) :
+      return std::shared_ptr<TopologicalPropertyBase>(new
+    TopologicalProperty<first_neighbor>()); break;
 
-  case(second_neighbor) :
-    return std::shared_ptr<TopologicalPropertyBase>(new TopologicalProperty<second_neighbor>());
-    break;
+    case(second_neighbor) :
+      return std::shared_ptr<TopologicalPropertyBase>(new
+    TopologicalProperty<second_neighbor>()); break;
 
-  case(third_neighbor) :
-    return std::shared_ptr<TopologicalPropertyBase>(new TopologicalProperty<third_neighbor>());
-    break;
-  */
-  default :
-    throw std::runtime_error("unknown case " + std::to_string(type) +
-                             " for creating new TopologicalProperty\n");
+    case(third_neighbor) :
+      return std::shared_ptr<TopologicalPropertyBase>(new
+    TopologicalProperty<third_neighbor>()); break;
+    */
+    default:
+      throw std::runtime_error("unknown case " + std::to_string(type) +
+                               " for creating new TopologicalProperty\n");
   }
 }
 
-} //namespace topology_builder
+}  // namespace topology_builder
 
-} //namespace Com
+}  // namespace combi_ff

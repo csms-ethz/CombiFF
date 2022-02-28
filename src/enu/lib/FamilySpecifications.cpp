@@ -1,4 +1,7 @@
+// Copyright 2022 Salomé Rieder, CSMS ETH Zürich
+
 #include "FamilySpecifications.h"
+
 #include "InputOutput.h"
 
 namespace combi_ff {
@@ -6,12 +9,13 @@ namespace combi_ff {
 namespace enu {
 
 FamilySpecifications::FamilySpecifications(InputOutput& IO)
-  : abstr_substructures(AbstractSubstructureMap(0)),
-    pseudoatoms(PseudoatomMap(0)),
-    alias_map(AliasMap(0)),
-    families(FamilyVector(0)) {
+    : abstr_substructures(AbstractSubstructureMap(0)),
+      pseudoatoms(PseudoatomMap(0)),
+      alias_map(AliasMap(0)),
+      families(FamilyVector(0)) {
   try {
-    CreateSubstructures(abstr_substructures, IO.GetInputFileNamesAt(substructure_file));
+    CreateSubstructures(abstr_substructures,
+                        IO.GetInputFileNamesAt(substructure_file));
 
   } catch (combi_ff::input_warning& w) {
     std::cout << "?Warning: " << w.what() << std::endl;
@@ -32,8 +36,9 @@ FamilySpecifications::FamilySpecifications(InputOutput& IO)
   }
 
   try {
-    CreateFamilies(families, IO.GetInputFileNamesAt(family_file), IO.GetEnumSpec().used_families,
-                   abstr_substructures, alias_map, pseudoatoms);
+    CreateFamilies(families, IO.GetInputFileNamesAt(family_file),
+                   IO.GetEnumSpec().used_families, abstr_substructures,
+                   alias_map, pseudoatoms);
 
   } catch (combi_ff::input_warning& w) {
     std::cout << "?Warning: " << w.what() << std::endl;
@@ -48,7 +53,6 @@ const PseudoatomMap& FamilySpecifications::GetPseudoatoms() const {
   return pseudoatoms;
 }
 
+}  // namespace enu
 
-} //namespace enu
-
-} //namespace combi_ff
+}  // namespace combi_ff

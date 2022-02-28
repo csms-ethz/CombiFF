@@ -1,3 +1,5 @@
+// Copyright 2022 Salomé Rieder, CSMS ETH Zürich
+
 #ifndef FAMILYSPECIFICATIONS_H_
 #define FAMILYSPECIFICATIONS_H_
 
@@ -10,24 +12,20 @@ namespace enu {
 class InputOutput;
 
 class FamilySpecifications {
-
  public:
-
-  FamilySpecifications(InputOutput& IO);
+  explicit FamilySpecifications(InputOutput& IO);
   const FamilyVector& GetFamilies() const;
-  const PseudoatomMap& GetPseudoatoms() const ;
+  const PseudoatomMap& GetPseudoatoms() const;
 
  private:
-
   AbstractSubstructureMap abstr_substructures;
   PseudoatomMap pseudoatoms;
   AliasMap alias_map;
   FamilyVector families;
-
 };
 
-} //namespace enu
+}  // namespace enu
 
-} //namespace combi_ff
+}  // namespace combi_ff
 
 #endif

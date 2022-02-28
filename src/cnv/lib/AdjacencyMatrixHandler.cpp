@@ -1,4 +1,7 @@
+// Copyright 2022 Salomé Rieder, CSMS ETH Zürich
+
 #include "AdjacencyMatrixHandler.h"
+
 #include <cmath>
 #include <sstream>
 
@@ -9,9 +12,9 @@ namespace cnv {
 void AdjacencyMatrixHandler::Run() {
   cnv::Handler::Run();
   std::string line;
-  std::vector <cnv::AdjacencyMatrix> matrices(0);
+  std::vector<cnv::AdjacencyMatrix> matrices(0);
   cnv::AdjacencyMatrix A;
-  std::vector <std::string> input_file_names(0);
+  std::vector<std::string> input_file_names(0);
 
   for (auto it = input_list.begin(); it != input_list.end(); ++it) {
     std::istringstream s(it->second);
@@ -39,8 +42,7 @@ void AdjacencyMatrixHandler::Run() {
         std::istringstream ss((++it)->second);
         int degree;
 
-        while (ss >> degree)
-          v.push_back(degree);
+        while (ss >> degree) v.push_back(degree);
       }
 
       input_file_names.push_back(it->first);
@@ -54,10 +56,11 @@ void AdjacencyMatrixHandler::Run() {
     const std::string& fileName = input_file_names[i];
     cnv::AdjacencyMatrix& AdjacencyMatrixOrig = matrices[i];
     std::string canon_smiles("");
-    //std::cout << "\n\n";
-    //std::cout << "original matrix:\n";
-    //AdjacencyMatrixOrig.print();
-    cnv::AdjacencyMatrix A = AdjacencyMatrixHandler::ConvertMatrix(AdjacencyMatrixOrig, canon_smiles);
+    // std::cout << "\n\n";
+    // std::cout << "original matrix:\n";
+    // AdjacencyMatrixOrig.print();
+    cnv::AdjacencyMatrix A = AdjacencyMatrixHandler::ConvertMatrix(
+        AdjacencyMatrixOrig, canon_smiles);
     std::string fmi("");
 
     if (print_options[print_family_enumeration])
@@ -69,21 +72,22 @@ void AdjacencyMatrixHandler::Run() {
     std::cout << "canonical matrix:\n";
     A.Print();
     std::cout << "input_file:            " << fileName << '\n';
-    AdjacencyMatrixHandler::PrintOutput(AdjacencyMatrixOrig, canon_smiles, fmi, A);
+    AdjacencyMatrixHandler::PrintOutput(AdjacencyMatrixOrig, canon_smiles, fmi,
+                                        A);
   }
 }
 
-void AdjacencyMatrixHandler::findFamilyIdentifier(const std::string& canon_smiles,
-                                                  std::string& fmi) {
+void AdjacencyMatrixHandler::findFamilyIdentifier(
+    const std::string& canon_smiles, std::string& fmi) {
   bool found(false);
   std::string line, code, formula, smiles_cur;
 
-  for (auto && familyFileName : fie_file_names) {
+  for (auto&& familyFileName : fie_file_names) {
     std::ifstream familyFile(familyFileName);
 
     if (!familyFile.is_open()) {
-      std::cout << "!Error: family isomer enumeration file " << familyFileName <<
-                " could not be opened\n";
+      std::cout << "!Error: family isomer enumeration file " << familyFileName
+                << " could not be opened\n";
       exit(-1);
     }
 
@@ -101,16 +105,15 @@ void AdjacencyMatrixHandler::findFamilyIdentifier(const std::string& canon_smile
 
     familyFile.close();
 
-    if (found)
-      break;
+    if (found) break;
   }
 
   if (!found) {
-    std::cout << "!Error: smiles " << canon_smiles <<
-              " not found in any of the following family isomer enumeration files ";
+    std::cout << "!Error: smiles " << canon_smiles
+              << " not found in any of the following family isomer enumeration "
+                 "files ";
 
-    for (auto && ffn : fie_file_names)
-      std::cout << ffn << " ";
+    for (auto&& ffn : fie_file_names) std::cout << ffn << " ";
 
     std::cout << '\n';
     exit(-1);
@@ -123,8 +126,8 @@ void AdjacencyMatrixHandler::PrintFirstLine() {
   cnv::Handler::PrintFirstLine("# originalMatrix");
 }
 
-AdjacencyMatrix AdjacencyMatrixHandler::ConvertMatrix(const AdjacencyMatrix& AdjacencyMatrixOrig,
-                                                      std::string& canon_smiles) {
+AdjacencyMatrix AdjacencyMatrixHandler::ConvertMatrix(
+    const AdjacencyMatrix& AdjacencyMatrixOrig, std::string& canon_smiles) {
   cnv::AdjacencyMatrix A(AdjacencyMatrixOrig);
   canon_smiles = "";
 
@@ -134,26 +137,30 @@ AdjacencyMatrix AdjacencyMatrixHandler::ConvertMatrix(const AdjacencyMatrix& Adj
     std::vector<size_t> idx = A.SortAtomVector(A.GetIsAromaticCarbon());
     combi_ff::LambdaVector lambda = A.GetLambda();
     size_t N = A.GetN();
-    //num_perms[i] indicates, with how many other atom indices the index of atom i can be permuted
-    //note: index permutations are only allowed within the same lambda partition, and with higher indices
-    //e.g. for lambda = [1, 3, 1, 4, 6], we have num_perms = [1, 3, 2, 1, 1, 4, 3, 2, 1, 6, 5, 4, 3, 2, 1]
+    // num_perms[i] indicates, with how many other atom indices the index of
+    // atom i can be permuted note: index permutations are only allowed within
+    // the same lambda partition, and with higher indices e.g. for lambda = [1,
+    // 3, 1, 4, 6], we have num_perms = [1, 3, 2, 1, 1, 4, 3, 2, 1, 6, 5, 4, 3,
+    // 2, 1]
     std::vector<size_t> num_perms;
     int ind(0);
 
     for (size_t i = 0; i < lambda.size(); i++) {
       for (size_t j = 0; j < lambda[i]; j++)
-        num_perms.push_back(std::accumulate(lambda.begin(), lambda.begin() + i + 1, 0) - ind++);
+        num_perms.push_back(
+            std::accumulate(lambda.begin(), lambda.begin() + i + 1, 0) - ind++);
     }
 
-    //a RepresentationSystem contains all the possible index permutations for the different atom indices
-    // e.g. for lambda = [2, 1, 4], the RepresentationSystem is
-    // (0,0), (0,1) 				(for idx 0)
-    // (1,1)						(for idx 1)
-    // (2,2)						(for idx 2)
-    // (3,3), (3,4), (3,5), (3,6)	(for idx 3)
-    // (4,4), (4,5), (4,6)			(for idx 4)
-    // (5,5), (5,6)					(for idx 5)
-    // (6,6) 						(for idx 6)
+    // a RepresentationSystem contains all the possible index permutations for
+    // the different atom indices
+    //  e.g. for lambda = [2, 1, 4], the RepresentationSystem is
+    //  (0,0), (0,1) 				(for idx 0)
+    //  (1,1)						(for idx 1)
+    //  (2,2)						(for idx 2)
+    //  (3,3), (3,4), (3,5), (3,6)	(for idx 3)
+    //  (4,4), (4,5), (4,6)			(for idx 4)
+    //  (5,5), (5,6)					(for idx 5)
+    //  (6,6) 						(for idx 6)
     combi_ff::RepresentationSystem u(N);
 
     for (size_t i = 0; i < N; i++) {
@@ -173,24 +180,26 @@ AdjacencyMatrix AdjacencyMatrixHandler::ConvertMatrix(const AdjacencyMatrix& Adj
   return A;
 }
 
-
-void AdjacencyMatrixHandler::PrintOutput(const cnv::AdjacencyMatrix& AdjacencyMatrixOrig,
-                                         const std::string& canon_smiles, const std::string& fmi,
-                                         const cnv::AdjacencyMatrix& A) {
+void AdjacencyMatrixHandler::PrintOutput(
+    const cnv::AdjacencyMatrix& AdjacencyMatrixOrig,
+    const std::string& canon_smiles, const std::string& fmi,
+    const cnv::AdjacencyMatrix& A) {
   int nUnsat(0);
   size_t nMB(0), nDB(0), nAB(0), nTB(0), nSB(0), nQB(0), nCyc(0);
 
-  if (print_options[cnv::print_n_double_bonds] || print_options[cnv::print_n_aromatic_bonds] ||
-      print_options[cnv::print_n_triple_bonds] || print_options[cnv::print_n_unsaturations] ||
+  if (print_options[cnv::print_n_double_bonds] ||
+      print_options[cnv::print_n_aromatic_bonds] ||
+      print_options[cnv::print_n_triple_bonds] ||
+      print_options[cnv::print_n_unsaturations] ||
       print_options[cnv::print_n_cycles] ||
-      print_options[cnv::print_n_multiple_bonds] || print_options[cnv::print_n_quadruple_bonds]) {
+      print_options[cnv::print_n_multiple_bonds] ||
+      print_options[cnv::print_n_quadruple_bonds]) {
     A.GetNumMultipleBonds(nSB, nDB, nTB, nQB, nAB);
     double DoU_(0);
-    //assert(!(nAB % 2));
+    // assert(!(nAB % 2));
     nMB = nDB + nTB + nAB / 2 + nQB;
 
-    for (auto && atom : A.GetAtomVector())
-      DoU_ += (double)atom.GetDegree() - 2.;
+    for (auto&& atom : A.GetAtomVector()) DoU_ += (double)atom.GetDegree() - 2.;
 
     nUnsat = (int)floor((DoU_ / 2.) + 1);
     nCyc = nUnsat - nMB;
@@ -204,20 +213,21 @@ void AdjacencyMatrixHandler::PrintOutput(const cnv::AdjacencyMatrix& AdjacencyMa
   else
     out = &std::cout;
 
-  //AdjacencyMatrixOrig.printToFile(*out);
+  // AdjacencyMatrixOrig.printToFile(*out);
 
   if (print_options[cnv::print_canon_smiles])
     *out << std::setw(column_width) << std::left << canon_smiles << " ";
 
   if (print_options[cnv::print_canon_formula])
-    *out << std::setw(column_width) << std::left <<
-         CreateCanonicalFormulaFromAtomVector<combi_ff::CnvAtom>(A.GetAtomVector()) << " ";
+    *out << std::setw(column_width) << std::left
+         << CreateCanonicalFormulaFromAtomVector<combi_ff::CnvAtom>(
+                A.GetAtomVector())
+         << " ";
 
   if (print_options[cnv::print_mass]) {
     double mass = 0;
 
-    for (auto && a : A.GetAtomVector())
-      mass += a.GetMass();
+    for (auto&& a : A.GetAtomVector()) mass += a.GetMass();
 
     *out << std::setw(column_width) << std::left << mass << " ";
   }
@@ -249,8 +259,7 @@ void AdjacencyMatrixHandler::PrintOutput(const cnv::AdjacencyMatrix& AdjacencyMa
   if (print_options[cnv::print_canon_atom_vector])
     *out << "canonical_atom_vector: " << A.GetAtomVector() << " ";
 
-  if (print_options[cnv::print_stack])
-    *out << A.GetStack();
+  if (print_options[cnv::print_stack]) *out << A.GetStack();
 
   if (print_options[cnv::print_matrix]) {
     *out << '\n';
@@ -260,6 +269,6 @@ void AdjacencyMatrixHandler::PrintOutput(const cnv::AdjacencyMatrix& AdjacencyMa
   *out << '\n';
 }
 
-} //namespace cnv
+}  // namespace cnv
 
-} //namespace combi_ff
+}  // namespace combi_ff

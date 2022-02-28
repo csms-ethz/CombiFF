@@ -1,3 +1,5 @@
+// Copyright 2022 Salomé Rieder, CSMS ETH Zürich
+
 #include "Matrix.h"
 
 namespace combi_ff {
@@ -6,13 +8,12 @@ namespace combi_ff {
  ComparisonMatrix class members
 */
 
-ComparisonMatrix::ComparisonMatrix(size_t N, size_t M) 
-: Matrix<bool>(N, M, false) {}
+ComparisonMatrix::ComparisonMatrix(size_t N, size_t M)
+    : Matrix<bool>(N, M, false) {}
 
 void ComparisonMatrix::Print() const {
   for (size_t i = 0; i < N; i++) {
-    for (size_t j = 0; j < M; j++)
-      std::cout << GetElement(i, j) << " ";
+    for (size_t j = 0; j < M; j++) std::cout << GetElement(i, j) << " ";
 
     std::cout << std::endl;
   }
@@ -22,8 +23,7 @@ size_t ComparisonMatrix::AccumulateColumn(const size_t col) const {
   size_t sum(0);
   size_t lim = N * M;
 
-  for (size_t i = col; i < lim; i += M)
-    sum += elements[i];
+  for (size_t i = col; i < lim; i += M) sum += elements[i];
 
   return sum;
 }
@@ -32,8 +32,7 @@ size_t ComparisonMatrix::AccumulateRow(const size_t row) const {
   size_t sum(0);
   size_t lim = row * M + M;
 
-  for (size_t j = row * M; j < lim; j++)
-    sum += elements[j];
+  for (size_t j = row * M; j < lim; j++) sum += elements[j];
 
   return sum;
 }
@@ -44,41 +43,42 @@ size_t ComparisonMatrix::AccumulateRow(const size_t row) const {
 FragmentMatrix::FragmentMatrix() : SymmetricalMatrix(0), atoms(0) {}
 
 FragmentMatrix::FragmentMatrix(size_t N)
-  : SymmetricalMatrix(N), atoms(combi_ff::AtomVector<combi_ff::Atom>(N)) {}
+    : SymmetricalMatrix(N), atoms(combi_ff::AtomVector<combi_ff::Atom>(N)) {}
 
 FragmentMatrix::FragmentMatrix(size_t N,
                                combi_ff::AtomVector<combi_ff::Atom> atoms)
-  : SymmetricalMatrix(N), atoms(atoms) {}
+    : SymmetricalMatrix(N), atoms(atoms) {}
 
 FragmentMatrix::FragmentMatrix(size_t N, AdjacencyVector v)
-  : SymmetricalMatrix<size_t>(N), atoms(N, combi_ff::Atom("*")) {
+    : SymmetricalMatrix<size_t>(N), atoms(N, combi_ff::Atom("*")) {
   for (size_t i = 0; i < N_minus_one; i++) {
     for (size_t j = i + 1; j < N; j++) {
       if (v[i * N + j])
-        SetElement(i, j, v[i * N + j]); //to Set neighbours correctly
+        SetElement(i, j, v[i * N + j]);  // to Set neighbours correctly
     }
   }
 }
 
 FragmentMatrix::FragmentMatrix(size_t N,
                                combi_ff::AtomVector<combi_ff::Atom> atoms,
-                               AdjacencyVector v) : SymmetricalMatrix<size_t>(N), atoms(atoms) {
+                               AdjacencyVector v)
+    : SymmetricalMatrix<size_t>(N), atoms(atoms) {
   for (size_t i = 0; i < N_minus_one; i++) {
     for (size_t j = i + 1; j < N; j++) {
       if (v[i * N + j])
-        SetElement(i, j, v[i * N + j]); //to Set neighbours correctly
+        SetElement(i, j, v[i * N + j]);  // to Set neighbours correctly
     }
   }
 }
 
 FragmentMatrix::FragmentMatrix(SymmetricalMatrix<size_t>& M,
-                               combi_ff::AtomVector<combi_ff::Atom>& atoms) : SymmetricalMatrix<size_t>
-  (M.GetN()),
-  atoms(atoms) {
+                               combi_ff::AtomVector<combi_ff::Atom>& atoms)
+    : SymmetricalMatrix<size_t>(M.GetN()), atoms(atoms) {
   for (size_t i = 0; i < N_minus_one; i++) {
     for (size_t j = i + 1; j < N; j++) {
-      if (M.GetElements()[i * N + j ])
-        SetElement(i, j, M.GetElements()[i * N + j]); //to Set neighbours correctly
+      if (M.GetElements()[i * N + j])
+        SetElement(i, j,
+                   M.GetElements()[i * N + j]);  // to Set neighbours correctly
     }
   }
 }
@@ -112,7 +112,7 @@ void FragmentMatrix::SetAtomVector(const combi_ff::AtomVector<Atom>& a) {
 }
 
 const combi_ff::AtomVector<combi_ff::Atom>& FragmentMatrix::GetAtomVector()
-const {
+    const {
   return atoms;
 }
 
@@ -128,8 +128,8 @@ void FragmentMatrix::print() const {
     std::cout << std::setw(3) << atoms[i].GetUnitedAtomSymbol() << " ";
 
     for (size_t j = 0; j < N; j++)
-      std::cout << std::setw((int)atoms[j].GetUnitedAtomSymbol().size()) <<
-                GetElement(i, j) << " ";
+      std::cout << std::setw((int)atoms[j].GetUnitedAtomSymbol().size())
+                << GetElement(i, j) << " ";
 
     std::cout << std::endl;
   }
@@ -154,8 +154,7 @@ void FragmentMatrix::PrintIndented() const {
 }
 
 void FragmentMatrix::ResetAtomNeighbours() {
-  for (auto && a : atoms)
-    a.EraseNeighbours();
+  for (auto&& a : atoms) a.EraseNeighbours();
 
   for (size_t i = 0; i < N_minus_one; i++) {
     for (size_t j = i + 1; j < N; j++) {
@@ -170,10 +169,9 @@ void FragmentMatrix::ResetAtomNeighbours() {
 std::string FragmentMatrix::GetPrintIndented() const {
   std::string s("\t\t\t");
 
-  for (size_t i = 0; i < N; i++)
-    s += atoms[i].GetUnitedAtomSymbol() + " ";
+  for (size_t i = 0; i < N; i++) s += atoms[i].GetUnitedAtomSymbol() + " ";
 
-  s +=  '\n';
+  s += '\n';
 
   for (size_t i = 0; i < N; i++) {
     s += "\t\t\t";
@@ -230,8 +228,7 @@ bool FragmentMatrix::HasCycle() const {
         for (size_t ii = 0; ii < N; ii++) {
           if (!visited.GetElement(curr_element, ii) &&
               GetElement(curr_element, ii) != 0) {
-            if (ii == i)
-              return true;
+            if (ii == i) return true;
 
             visited.SetElement(curr_element, ii, true);
             visited_[ii] = true;
@@ -245,4 +242,4 @@ bool FragmentMatrix::HasCycle() const {
   return false;
 }
 
-} // namespace combi_ff
+}  // namespace combi_ff

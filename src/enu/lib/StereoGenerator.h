@@ -1,8 +1,10 @@
+// Copyright 2022 Salomé Rieder, CSMS ETH Zürich
+
 #ifndef STEREOGENERATOR_H_
 #define STEREOGENERATOR_H_
 
-#include "SmilesGenerator.h"
 #include "AdjacencyMatrixEnu.h"
+#include "SmilesGenerator.h"
 
 namespace combi_ff {
 
@@ -10,8 +12,8 @@ namespace enu {
 
 typedef std::vector<int> Config;
 
-//enum {clockwise, counterclockwise, notTetStereo = -1} tetrahedralOrientation;
-//enum {trans, cis, notETStereo = -1} CTdirection;
+// enum {clockwise, counterclockwise, notTetStereo = -1} tetrahedralOrientation;
+// enum {trans, cis, notETStereo = -1} CTdirection;
 
 struct CisTransPair {
   size_t idx1;
@@ -19,8 +21,8 @@ struct CisTransPair {
   size_t nbr1;
   size_t nbr2;
 
-  CisTransPair(size_t idx1, size_t idx2, size_t nbr1, size_t nbr2) :
-    idx1(idx1), idx2(idx2), nbr1(nbr1), nbr2(nbr2) {}
+  CisTransPair(size_t idx1, size_t idx2, size_t nbr1, size_t nbr2)
+      : idx1(idx1), idx2(idx2), nbr1(nbr1), nbr2(nbr2) {}
 
   CisTransPair() : idx1(0), idx2(0), nbr1(0), nbr2(0) {}
 };
@@ -31,14 +33,13 @@ struct Configuration {
 
   Configuration() : valid_config_tetra(Config(0)), valid_config_ct(Config(0)) {}
   Configuration(const Config& valid_config_tetra, const Config& valid_config_ct)
-    : valid_config_tetra(valid_config_tetra), valid_config_ct(valid_config_ct) {}
+      : valid_config_tetra(valid_config_tetra),
+        valid_config_ct(valid_config_ct) {}
 };
-
 
 class StereoGenerator {
  public:
-  StereoGenerator(const enu::AdjacencyMatrix& A,
-                  const size_t nRings,
+  StereoGenerator(const enu::AdjacencyMatrix& A, const size_t n_rings,
                   const RepresentationSystem& u_automorph,
                   const RepresentationSystem& u_id,
                   const SmilesGeneratorEnu& smiles_gen);
@@ -54,29 +55,36 @@ class StereoGenerator {
   size_t GetNumStereoCenters() const;
   size_t GetNumCTBonds() const;
 
-  void FindShortestPath(std::vector<size_t>& minimalPath, size_t i, size_t j) const ;
-  size_t NumDiff(const std::vector<size_t>& original, const std::vector<size_t>& permutated) const;
-  size_t NumPerm(const std::vector<size_t>& original, const std::vector<size_t>& permutated) const;
+  void FindShortestPath(std::vector<size_t>& minimalPath, size_t i,
+                        size_t j) const;
+  size_t NumDiff(const std::vector<size_t>& original,
+                 const std::vector<size_t>& permutated) const;
+  size_t NumPerm(const std::vector<size_t>& original,
+                 const std::vector<size_t>& permutated) const;
   bool IsSmaller(Config& perm, Config& orig) const;
 
-  void FindValidConfigurations(std::vector<Configuration>& validConfigurations) ;
-  void FindValidTrueCTConfigurations(std::vector<Config>& validConfigurationsCT);
-  void FindValidTrueTetrahedralConfigurations(std::vector<Config>& validConfigurationsTetra);
-  void AddValidTrueConfigurations(std::vector<Configuration>& validConfigurations,
-                                  std::vector<Config>& validConfigurationsTetra,
-                                  std::vector<Config>& validConfigurationsCT);
-  void FindValidParaConfigurations(std::vector<Configuration>& validConfigurations) ;
+  void FindValidConfigurations(std::vector<Configuration>& validConfigurations);
+  void FindValidTrueCTConfigurations(
+      std::vector<Config>& validConfigurationsCT);
+  void FindValidTrueTetrahedralConfigurations(
+      std::vector<Config>& validConfigurationsTetra);
+  void AddValidTrueConfigurations(
+      std::vector<Configuration>& validConfigurations,
+      std::vector<Config>& validConfigurationsTetra,
+      std::vector<Config>& validConfigurationsCT);
+  void FindValidParaConfigurations(
+      std::vector<Configuration>& validConfigurations);
 
+  bool NeighborsArePermuted(const Atom& a,
+                            const std::vector<size_t>& permutedIndices);
 
-  bool NeighborsArePermuted(const Atom& a, const std::vector<size_t>& permutedIndices) ;
+  std::vector<std::tuple<std::string, int, std::pair<int, int>>>&
+  GetStereoSmiles();
 
-  std::vector<std::tuple<std::string, int, std::pair<int, int>>>& GetStereoSmiles();
-
-  void NeighborOrder(const size_t idx,
-                         const size_t idxPerm,
-                         const std::vector<size_t>& permutedIndices,
-                         std::vector<size_t>& neighborsOrigOrder,
-                         std::vector<size_t>& neighborsPermOrder) const;
+  void NeighborOrder(const size_t idx, const size_t idxPerm,
+                     const std::vector<size_t>& permutedIndices,
+                     std::vector<size_t>& neighborsOrigOrder,
+                     std::vector<size_t>& neighborsPermOrder) const;
 
  private:
   const enu::AdjacencyMatrix& A;
@@ -109,14 +117,15 @@ class StereoGenerator {
   std::vector<bool> true_cis_trans_stereo;
   std::vector<size_t> visited_idx;
 
-  //store stereo smiles, whether the stereoisomer is an enantiomer, and the number of stereocenters and stereo CT bonds
+  // store stereo smiles, whether the stereoisomer is an enantiomer, and the
+  // number of stereocenters and stereo CT bonds
   std::vector<std::tuple<std::string, int, std::pair<int, int>>> stereo_smiles;
 };
 
 Config operator++(Config& b);
 
-} //namespace enu
+}  // namespace enu
 
-} //namespace combi_ff
+}  // namespace combi_ff
 
 #endif

@@ -1,7 +1,11 @@
+// Copyright 2022 Salomé Rieder, CSMS ETH Zürich
+
 #include "Substructure.h"
+
+#include <sstream>
+
 #include "exceptions.h"
 #include "version.h"
-#include <sstream>
 
 namespace combi_ff {
 
@@ -10,24 +14,23 @@ namespace enu {
 /***********
 CONSTRUCTORS
 ***********/
-AbstractSubstructure::AbstractSubstructure(const size_t N, const AdjacencyVector& v,
+AbstractSubstructure::AbstractSubstructure(const size_t N,
+                                           const AdjacencyVector& v,
                                            const std::string& code,
                                            const std::string& version)
-  : M(FragmentMatrix(N, AtomVector<combi_ff::Atom>(N, Atom("*")), v)),
-    code(code),
-    version(version) {}
+    : M(FragmentMatrix(N, AtomVector<combi_ff::Atom>(N, Atom("*")), v)),
+      code(code),
+      version(version) {}
 
 AbstractSubstructure::AbstractSubstructure(const SymmetricalMatrix<size_t>& M,
                                            const std::string& code,
                                            const std::string& version)
-  : M(M),
-    code(code),
-    version(version) {}
+    : M(M), code(code), version(version) {}
 
 AbstractSubstructure::AbstractSubstructure(const AbstractSubstructure& FF)
-  : M(FF.GetMatrix().GetN(), (FF.GetMatrix().GetElements())),
-    code(FF.GetCode()),
-    version(FF.GetVersion()) {}
+    : M(FF.GetMatrix().GetN(), (FF.GetMatrix().GetElements())),
+      code(FF.GetCode()),
+      version(FF.GetVersion()) {}
 
 /***************
 GetTER FUNCTIONS
@@ -36,62 +39,44 @@ const SymmetricalMatrix<size_t>& AbstractSubstructure::GetMatrix() const {
   return M;
 }
 
-const std::string& AbstractSubstructure::GetCode() const {
-  return code;
-}
+const std::string& AbstractSubstructure::GetCode() const { return code; }
 
-const std::string& AbstractSubstructure::GetVersion() const {
-  return version;
-}
+const std::string& AbstractSubstructure::GetVersion() const { return version; }
 
 /***********
 CONSTRUCTORS
 ***********/
-SubstructureCollection::SubstructureCollection(const AbstractSubstructure& F,
-                                               const Range& r,
-                                               const AtomVector<combi_ff::Atom>& atoms,
-                                               const bool AND,
-                                               const  bool XOR)
-  : AND(bool(AND)),
-    XOR(bool(XOR)),
-    code(F.GetCode()),
-    r(r) {
+SubstructureCollection::SubstructureCollection(
+    const AbstractSubstructure& F, const Range& r,
+    const AtomVector<combi_ff::Atom>& atoms, const bool AND, const bool XOR)
+    : AND(bool(AND)), XOR(bool(XOR)), code(F.GetCode()), r(r) {
   FragmentMatrix M(F.GetMatrix().GetN(), atoms, (F.GetMatrix().GetElements()));
   substructure_matrices = (std::vector<FragmentMatrix>(1, M));
 }
 
 SubstructureCollection::SubstructureCollection(const AbstractSubstructure& F,
                                                const Range& r,
-                                               const  FragmentMatrix& M,
-                                               const bool AND,
-                                               const  bool XOR)
-  : AND(AND),
-    XOR(XOR),
-    code(F.GetCode()),
-    r(r) {
+                                               const FragmentMatrix& M,
+                                               const bool AND, const bool XOR)
+    : AND(AND), XOR(XOR), code(F.GetCode()), r(r) {
   substructure_matrices = std::vector<FragmentMatrix>(1, M);
 }
 
-SubstructureCollection::SubstructureCollection(const AbstractSubstructure& F,
-                                               const Range& r,
-                                               std::vector<AtomVector<combi_ff::Atom>>& AtomVectors,
-                                               const  bool AND,
-                                               const  bool XOR)
-  : substructure_matrices(0),
-    AND(AND),
-    XOR(XOR),
-    code(F.GetCode()),
-    r(r) {
+SubstructureCollection::SubstructureCollection(
+    const AbstractSubstructure& F, const Range& r,
+    std::vector<AtomVector<combi_ff::Atom>>& AtomVectors, const bool AND,
+    const bool XOR)
+    : substructure_matrices(0), AND(AND), XOR(XOR), code(F.GetCode()), r(r) {
   substructure_matrices.reserve(AtomVectors.size());
 
-  for (auto && av : AtomVectors) {
+  for (auto&& av : AtomVectors) {
     size_t n = av.size();
     size_t num_hyd(n);
 
-    for (auto && a : av)
-      num_hyd += a.GetNumFixedHydrogens();
+    for (auto&& a : av) num_hyd += a.GetNumFixedHydrogens();
 
-    //if there are united atoms in the current atom vector, fully exend the matrix to explicitly include them
+    // if there are united atoms in the current atom vector, fully exend the
+    // matrix to explicitly include them
     if (num_hyd > n) {
       const SymmetricalMatrix<size_t> matrix_ = F.GetMatrix();
       FragmentMatrix substructure_matrix(num_hyd);
@@ -107,7 +92,7 @@ SubstructureCollection::SubstructureCollection(const AbstractSubstructure& F,
           atoms_tmp.push_back(Atom("H"));
         }
 
-        //atoms_tmp[i].SetNH(0);
+        // atoms_tmp[i].SetNH(0);
         atoms_tmp[i].SetNumFixedHydrogens(0);
       }
 
@@ -117,9 +102,8 @@ SubstructureCollection::SubstructureCollection(const AbstractSubstructure& F,
       substructure_matrices.push_back(substructure_matrix);
 
     } else
-      substructure_matrices.push_back(FragmentMatrix(F.GetMatrix().GetN(),
-                                                     av,
-                                                     F.GetMatrix().GetElements()));
+      substructure_matrices.push_back(FragmentMatrix(
+          F.GetMatrix().GetN(), av, F.GetMatrix().GetElements()));
 
     substructure_matrices.back().ResetAtomNeighbours();
   }
@@ -128,32 +112,25 @@ SubstructureCollection::SubstructureCollection(const AbstractSubstructure& F,
 /*************
 GetTER METHODS
 *************/
-const std::string& SubstructureCollection::GetCode() const {
-  return code;
-}
+const std::string& SubstructureCollection::GetCode() const { return code; }
 
-const Range& SubstructureCollection::GetRange() const {
-  return r;
-}
+const Range& SubstructureCollection::GetRange() const { return r; }
 
-const std::vector<FragmentMatrix>& SubstructureCollection::GetSubstructureMatrices() const {
+const std::vector<FragmentMatrix>&
+SubstructureCollection::GetSubstructureMatrices() const {
   return substructure_matrices;
 }
 
-bool SubstructureCollection::GetXOR() const {
-  return XOR;
-}
+bool SubstructureCollection::GetXOR() const { return XOR; }
 
-bool SubstructureCollection::GetAND() const {
-  return AND;
-}
-
+bool SubstructureCollection::GetAND() const { return AND; }
 
 /**********************
 CREATE FAMILY FRAGMENTS
 **********************/
-void CreateSubstructures(AbstractSubstructureMap& abstract_substructures,
-                         const std::list<std::string>& substructure_file_names) {
+void CreateSubstructures(
+    AbstractSubstructureMap& abstract_substructures,
+    const std::list<std::string>& substructure_file_names) {
   if (!substructure_file_names.size()) {
     throw combi_ff::input_warning("no substructure input file");
     return;
@@ -161,25 +138,27 @@ void CreateSubstructures(AbstractSubstructureMap& abstract_substructures,
 
   std::cout << "creating prototype Substructures\n";
 
-  for (auto && substructure_file_name : substructure_file_names) {
+  for (auto&& substructure_file_name : substructure_file_names) {
     XmlParserIn parser(substructure_file_name, XmlParserIn::read_all);
     const XmlElement& substructures_root = parser.GetTree().GetRoot();
     substructures_root.CheckTagName("substructures");
     substructures_root.CheckNumberOfChildren_atLeast(1);
     substructures_root.CheckAttribute("version");
-    const std::string version = substructures_root.attributes.find("version")->second;
+    const std::string version =
+        substructures_root.attributes.find("version")->second;
 
     if (version != combi_ff::current_version)
-      std::cout << "?Warning: currently running combi_ff version " << combi_ff::current_version
-                << " but substructure file " << substructure_file_name
-                << " is version " << version << "\n";
+      std::cout << "?Warning: currently running combi_ff version "
+                << combi_ff::current_version << " but substructure file "
+                << substructure_file_name << " is version " << version << "\n";
 
-    //read substrFile and add all the abstract fragments
-    for (auto && substructure : substructures_root.children)
-      GetNextAbstractSubstructure(abstract_substructures, substructure, version);
+    // read substrFile and add all the abstract fragments
+    for (auto&& substructure : substructures_root.children)
+      GetNextAbstractSubstructure(abstract_substructures, substructure,
+                                  version);
   }
 
-  for (auto && s : abstract_substructures) {
+  for (auto&& s : abstract_substructures) {
     std::cout << s.second.GetCode() << std::endl;
     std::cout << s.second.GetMatrix() << std::endl;
   }
@@ -190,9 +169,9 @@ void CreateSubstructures(AbstractSubstructureMap& abstract_substructures,
 /***************************************
 CREATE AND ADD AN AbstractSubstructure
 ***************************************/
-void GetNextAbstractSubstructure(AbstractSubstructureMap& abstract_substructures,
-                                 const XmlElement_ptr substructure,
-                                 const std::string& version) {
+void GetNextAbstractSubstructure(
+    AbstractSubstructureMap& abstract_substructures,
+    const XmlElement_ptr substructure, const std::string& version) {
   substructure->CheckTagName("substructure");
   substructure->CheckNumberOfChildren_equal(2);
   substructure->CheckAttributeSize(1);
@@ -201,7 +180,8 @@ void GetNextAbstractSubstructure(AbstractSubstructureMap& abstract_substructures
   std::string code = substructure->attributes.find("code")->second;
 
   if (abstract_substructures.find(code) != abstract_substructures.end())
-    throw combi_ff::input_error("Substructure code " + code + " occurs more than once\n");
+    throw combi_ff::input_error("Substructure code " + code +
+                                " occurs more than once\n");
 
   auto&& substructurePropertyIt = substructure->children.begin();
   const XmlElement_ptr num_atoms = *substructurePropertyIt;
@@ -212,8 +192,9 @@ void GetNextAbstractSubstructure(AbstractSubstructureMap& abstract_substructures
   size_t n_atoms = std::stoi(num_atoms->value);
 
   if (!n_atoms)
-    throw input_error("substructure must consist of at least one atom. Not the case for " + code +
-                      "\n");
+    throw input_error(
+        "substructure must consist of at least one atom. Not the case for " +
+        code + "\n");
 
   FragmentMatrix M(n_atoms, std::vector<Atom>(n_atoms, Atom("*")));
   const XmlElement_ptr adjacency_stack = *(++substructurePropertyIt);
@@ -225,15 +206,15 @@ void GetNextAbstractSubstructure(AbstractSubstructureMap& abstract_substructures
   std::istringstream adjacency_stackStream(adjacency_stack->value);
   int value;
 
-  while (adjacency_stackStream >> value)
-    values.push_back(value);
+  while (adjacency_stackStream >> value) values.push_back(value);
 
   size_t idx = 0;
 
   for (size_t i = 0; i < n_atoms - 1; i++) {
     for (size_t j = i + 1; j < n_atoms; j++) {
       if (idx >= values.size())
-        throw combi_ff::input_error("stack too small for the given number of atoms");
+        throw combi_ff::input_error(
+            "stack too small for the given number of atoms");
 
       M.SetElement(i, j, values[idx++]);
     }
@@ -246,6 +227,6 @@ void GetNextAbstractSubstructure(AbstractSubstructureMap& abstract_substructures
   return;
 }
 
-} //namespace enu
+}  // namespace enu
 
-} //namespace combi_ff
+}  // namespace combi_ff
