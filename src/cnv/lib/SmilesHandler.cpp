@@ -179,7 +179,16 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
         print_options[cnv::print_stack] || print_options[cnv::print_matrix] ||
         print_options[cnv::print_family_enumeration] ||
         print_options[cnv::print_canon_atom_vector]) {
-      A.SortAtomVector(A.GetIsAromaticCarbon());
+      cnv::SmilesGeneratorCnv smiles_gen_orig(A);
+      smiles_gen_orig.GenerateSmilesNonCanon();
+      std::string smiles_orig_ = smiles_gen_orig.GetSmiles();
+      const auto& visited_indices(smiles_gen_orig.GetVisitedIndices());
+      std::cout << smiles_orig_ << std::endl;
+      std::cout << visited_indices << std::endl;
+
+      Permutations matrix_permutations =
+          A.SortAtomVector_(A.GetIsAromaticCarbon());
+      std::cout << "permutations " << matrix_permutations << std::endl;
       combi_ff::LambdaVector lambda = A.GetLambda();
       size_t N = A.GetN();
       // num_perms[i] indicates, with how many other atom indices the index of
@@ -217,8 +226,13 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
         }
       }
 
-      std::vector<size_t> idx = A.GetIndices();
-      A.MakeCanonical(u, idx, canon_iteration_limit);
+      std::vector<size_t> idx = std::vector<size_t>(A.GetN());
+      std::iota(idx.begin(), idx.end(), 0);
+      A.MakeCanonical(u, idx, canon_iteration_limit, matrix_permutations);
+      std::cout << matrix_permutations << std::endl;
+      idx = A.GetIndices();
+      for (auto p : matrix_permutations) std::swap(idx[p.first], idx[p.second]);
+      std::cout << idx << std::endl;
       /*if(output_file.is_open())
         output_file << "canonicalizing permutation is " << idx << '\n';
       else
@@ -226,6 +240,11 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
       cnv::SmilesGeneratorCnv smiles_gen(A);
       smiles_gen.GenerateSmiles();
       smiles_canon = smiles_gen.GetSmiles();
+      const auto& visited_indices_(smiles_gen.GetVisitedIndices());
+      std::cout << visited_indices_ << std::endl;
+      std::cout << "new order of smiles: ";
+      for (auto ii : visited_indices_) std::cout << idx[ii] << " ";
+      std::cout << std::endl;
     }
   }
 }

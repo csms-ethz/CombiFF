@@ -38,6 +38,7 @@ class SmilesGenerator {
  public:
   SmilesGenerator(const combi_ff::AdjacencyMatrix<T, AtomClass>& A);
   void GenerateSmiles();
+  void GenerateSmilesNonCanon();
   std::vector<size_t> Partition();
   size_t GetInv(const size_t idx);
   std::string CreateSmiles();
@@ -110,6 +111,7 @@ SmilesGenerator<T, AtomClass>::SmilesGenerator(
   changed_indices.reserve(N);
   changed = std::vector<bool>(N);
 }
+
 template <typename T, typename AtomClass>
 void SmilesGenerator<T, AtomClass>::GenerateSmiles() {
   indices = Partition();
@@ -133,6 +135,15 @@ void SmilesGenerator<T, AtomClass>::GenerateSmiles() {
 
   smiles = CreateSmiles();
 }
+
+template <typename T, typename AtomClass>
+void SmilesGenerator<T, AtomClass>::GenerateSmilesNonCanon() {
+  indices = std::vector<size_t>(N);
+  std::iota(indices.begin(), indices.end(), 0);
+
+  smiles = CreateSmiles();
+}
+
 template <typename T, typename AtomClass>
 std::vector<size_t> SmilesGenerator<T, AtomClass>::Partition() {
   std::vector<size_t> invariants(N);

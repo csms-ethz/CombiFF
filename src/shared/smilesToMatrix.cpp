@@ -424,7 +424,10 @@ void CreateMatrixFromSmilesBlocks(
   }
 
   for (size_t i = 1; i < names.size(); i++) {
+    std::cout << i << " ";
     auto&& name = names[i];
+    name.Print();
+    std::cout << std::endl;
 
     if (name.opening_braces == "" && names[i - 1].closing_braces == "") {
       if (A.GetElement(i - 1, i))
@@ -615,6 +618,8 @@ void CreateMatrixFromSmilesBlocks(
           .SetNumHydrogens(
               size_t((double)A.GetAtomVector()[i].GetDegree() - rowSum));
   }
+
+  A.Print();
 }
 
 }  // namespace combi_ff
