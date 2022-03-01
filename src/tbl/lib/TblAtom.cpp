@@ -30,7 +30,7 @@ void TblAtom::SetLinkageType(const LinkageType link_type_) {
   link_type = link_type_;
 }
 
-void TblAtom::AddNeighbour(const size_t nbr_idx) {
+void TblAtom::AddNeighbor(const size_t nbr_idx) {
   neighbors.push_back(nbr_idx);
 }
 
@@ -43,7 +43,7 @@ const LinkageType TblAtom::GetLinkageType() const { return link_type; }
 
 const std::string& TblAtom::GetAtomID() const { return atom_id; }
 
-const NeighborVector& TblAtom::GetNeighbours() const { return neighbors; }
+const NeighborVector& TblAtom::GetNeighbors() const { return neighbors; }
 
 bool TblAtom::IsCoreAtom() const { return link_type == core; }
 

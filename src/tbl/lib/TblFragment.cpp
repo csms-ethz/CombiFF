@@ -150,7 +150,7 @@ void TblFragment::DetermineCoreAtoms() {
     else {
       bool found(false);
 
-      for (auto&& nbr : atom.GetNeighbours()) {
+      for (auto&& nbr : atom.GetNeighbors()) {
         if (atom_types[nbr].GetLinkageType() == core) {
           core_atoms.push_back(&atom_types[nbr]);
           found = true;
@@ -472,8 +472,8 @@ void AddBonds(const XmlElement_ptr bonds, std::vector<TblAtom>& atom_types,
     auto&& atom1 = atom_types[involved_atomsIdx[0]];
     auto&& atom2 = atom_types[involved_atomsIdx[1]];
     CheckBondValidity(atom1, atom2, degree);
-    atom1.AddNeighbour(involved_atomsIdx[1]);
-    atom2.AddNeighbour(involved_atomsIdx[0]);
+    atom1.AddNeighbor(involved_atomsIdx[1]);
+    atom2.AddNeighbor(involved_atomsIdx[0]);
     M.SetElement(involved_atomsIdx[0], involved_atomsIdx[1], degree);
   }
 }

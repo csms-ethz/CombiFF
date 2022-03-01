@@ -19,11 +19,11 @@ class TblAtom {
 
   void SetAtomID(const std::string& id);
   void SetAtomTypeSet(const AtomTypeSet& atomTypeSet);
-  void AddNeighbour(const size_t nbrIdx);
+  void AddNeighbor(const size_t nbrIdx);
   const AtomTypeSet& GetAtomTypes() const;
   const LinkageType GetLinkageType() const;
   const std::string& GetAtomID() const;
-  const NeighborVector& GetNeighbours() const;
+  const NeighborVector& GetNeighbors() const;
   void SetLinkageType(const LinkageType linktype_);
   bool IsCoreAtom() const;
   bool IsLinkAtom() const;

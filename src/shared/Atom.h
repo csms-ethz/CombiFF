@@ -37,7 +37,7 @@ class Atom {
   const combi_ff::ElementSymbol& GetElementSymbol() const;
   combi_ff::Connectivity GetDegree() const;
   combi_ff::ElementNumber GetElementNumber() const;
-  const combi_ff::NeighborVector& GetNeighbours() const;
+  const combi_ff::NeighborVector& GetNeighbors() const;
   size_t GetNumNeighbors() const;
   combi_ff::ElementPriority GetElementPriority() const;
   combi_ff::Connectivity GetNumConnections() const;
@@ -60,10 +60,10 @@ class Atom {
   void SetHydrogensInSmiles(bool b);
 
   /* other member functions */
-  void AddNeighbour(size_t i);
-  void RemoveNeighbour(size_t i);
-  void SetNeighbours(combi_ff::NeighborVector n);
-  void EraseNeighbours();
+  void AddNeighbor(size_t i);
+  void RemoveNeighbor(size_t i);
+  void SetNeighbors(combi_ff::NeighborVector n);
+  void EraseNeighbors();
   void RemoveHydrogens();
 
  private:
@@ -84,9 +84,23 @@ class CnvAtom final : public Atom {
   CnvAtom(const CnvAtom& a);
   void SetFormalCharge(const std::string& f);
   const std::string& GetFormalCharge() const;
+  const bool GetStereo() const;
+  const std::vector<size_t>& GetStereoNeighborOrder() const;
+  const std::string& GetTetraStereo() const;
+  const std::string& GetCTStereo() const;
+  void SetStereo(const bool);
+  void SetStereoNeighborOrder(const std::vector<size_t>&);
+  void SetTetraStereo(const std::string&);
+  void SetCTStereo(const std::string&);
+  void SwapTetrahedralStereo();
+  void SwapCTStereo();
 
  private:
   std::string formal_charge{""};
+  bool stereo{false};
+  std::vector<size_t> stereo_neighbor_order{0};
+  std::string tetra_stereo{""};
+  std::string ct_stereo{""};
 };
 
 std::ostream& operator<<(std::ostream& stream, const Atom& a);

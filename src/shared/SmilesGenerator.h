@@ -50,6 +50,7 @@ class SmilesGenerator {
       std::vector<size_t>& node_visited_at_position);
   void TestValidity(const std::string& smiles, const size_t& nArom,
                     const size_t& ring);
+  std::string UpdateStereo();
   const std::string GetSmiles() const;
   const std::vector<size_t>& GetVisitedIndices() const;
   const std::vector<size_t>& GetComingFrom() const;
@@ -185,7 +186,7 @@ size_t SmilesGenerator<T, AtomClass>::GetInv(const size_t idx) {
   const combi_ff::Atom& atom = A.GetAtomVector()[idx];
   inv += 10000000 * atom.GetNumConnections();
 
-  for (auto&& i : atom.GetNeighbours()) {
+  for (auto&& i : atom.GetNeighbors()) {
     if (A.GetElement(idx, i)) inv += 100000;
   }
 
@@ -264,7 +265,7 @@ std::string SmilesGenerator<T, AtomClass>::CreateSmiles() {
 
       for (int j = (int)indices.size() - 1; j >= 0; j--) {
         if (A.GetElement(i, indices[j])) {
-          // std::cout << "  neighbour " << indices.at(j) << std::endl;
+          // std::cout << "  neighbor " << indices.at(j) << std::endl;
           // openIdx[i].insert(openIdx[i].begin(), j);
           if (!written[indices[j]]) {
             if (found) {
@@ -441,10 +442,10 @@ std::vector<size_t> SmilesGenerator<T, AtomClass>::Sort(
 
   for (size_t i = 0; i < curr_partition.size(); i++) {
     idx = curr_partition[i];
-    sorted_neighbors[i].resize(atoms[idx].GetNeighbours().size());
-    const auto& curr_neighbor_vector = atoms[idx].GetNeighbours();
+    sorted_neighbors[i].resize(atoms[idx].GetNeighbors().size());
+    const auto& curr_neighbor_vector = atoms[idx].GetNeighbors();
 
-    // for(auto && j : atoms[idx].GetNeighbours())
+    // for(auto && j : atoms[idx].GetNeighbors())
     auto neighbor_it = curr_neighbor_vector.begin();
     for (size_t j = 0; j < sorted_neighbors[i].size(); j++) {
       sorted_neighbors[i][j] = (indices[*neighbor_it++]);
@@ -514,7 +515,7 @@ void SmilesGenerator<T, AtomClass>::Refine() {
     affected_partition_classes.resize(0);
 
     for (auto&& idx : changed_indices) {
-      for (auto&& j : atoms[idx].GetNeighbours())
+      for (auto&& j : atoms[idx].GetNeighbors())
         affected_partition_classes.push_back(indices[j]);
     }
 
@@ -644,6 +645,46 @@ void SmilesGenerator<T, AtomClass>::TestValidity(const std::string& smiles,
         throw std::runtime_error("\nbrace mismatch in SMILES: " + smiles);*/
   }
 }
+
+template <typename T, typename AtomClass>
+std::string SmilesGenerator<T, AtomClass>::UpdateStereo() {
+  std::string smiles = "";
+  for (auto&& v : visited_indices) {
+    auto&& n = smiles_blocks[v];
+    smiles += n.opening_braces + n.bond_type;
+
+    if (A.GetAtomVector()[v].GetTetraStereo().size())
+      smiles +=
+          "[" + n.element_name + A.GetAtomVector()[v].GetTetraStereo() + "]";
+
+    else if (n.formal_charge.size())
+      smiles += "[" + n.element_name + n.formal_charge + "]";
+
+    else
+      smiles += n.element_name;
+
+    // Hack for explicit hydrogen
+    //      for(size_t ii = 0; ii < A.GetAtomVector()[v].GetNumTotalHydrogens();
+    //      ii++){
+    //        smiles += "(H)";
+    //      }
+    // end hack
+
+    for (auto&& ri : n.ring_indices) {
+      smiles += ri.first;
+
+      if (ri.second <= 9)
+        smiles += std::to_string(ri.second);
+
+      else
+        smiles += "%" + std::to_string(ri.second);
+    }
+
+    smiles += n.closing_braces;
+  }
+  return smiles;
+}
+
 template <typename T, typename AtomClass>
 const std::string SmilesGenerator<T, AtomClass>::GetSmiles() const {
   return smiles;

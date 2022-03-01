@@ -57,10 +57,6 @@ class StereoGenerator {
 
   void FindShortestPath(std::vector<size_t>& minimalPath, size_t i,
                         size_t j) const;
-  size_t NumDiff(const std::vector<size_t>& original,
-                 const std::vector<size_t>& permutated) const;
-  size_t NumPerm(const std::vector<size_t>& original,
-                 const std::vector<size_t>& permutated) const;
   bool IsSmaller(Config& perm, Config& orig) const;
 
   void FindValidConfigurations(std::vector<Configuration>& validConfigurations);

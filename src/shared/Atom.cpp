@@ -77,7 +77,13 @@ Atom::Atom(const Atom& a)
       is_pseudoatom(a.is_pseudoatom),
       neighbors(a.neighbors) {}
 
-CnvAtom::CnvAtom(const CnvAtom& a) : Atom(a), formal_charge(a.formal_charge) {}
+CnvAtom::CnvAtom(const CnvAtom& a)
+    : Atom(a),
+      formal_charge(a.formal_charge),
+      stereo(a.stereo),
+      stereo_neighbor_order(a.stereo_neighbor_order),
+      tetra_stereo(a.tetra_stereo),
+      ct_stereo(a.ct_stereo) {}
 
 bool Atom::operator==(const Atom& b) const {
   if (GetUnitedAtomSymbol() == b.GetUnitedAtomSymbol() &&
@@ -155,7 +161,34 @@ combi_ff::ElementNumber Atom::GetElementNumber() const {
   return properties.element_nr;
 }
 
-void Atom::AddNeighbour(size_t i) {
+const bool CnvAtom::GetStereo() const { return stereo; }
+const std::vector<size_t>& CnvAtom::GetStereoNeighborOrder() const {
+  return stereo_neighbor_order;
+}
+const std::string& CnvAtom::GetTetraStereo() const { return tetra_stereo; }
+const std::string& CnvAtom::GetCTStereo() const { return ct_stereo; }
+
+void CnvAtom::SetStereo(const bool b) { stereo = b; }
+void CnvAtom::SetStereoNeighborOrder(const std::vector<size_t>& order) {
+  stereo_neighbor_order = order;
+}
+void CnvAtom::SetTetraStereo(const std::string& s) { tetra_stereo = s; }
+void CnvAtom::SetCTStereo(const std::string& s) { ct_stereo = s; }
+void CnvAtom::SwapTetrahedralStereo() {
+  if (tetra_stereo.size() == 1) {
+    tetra_stereo = "@@";
+  } else if (tetra_stereo.size() == 2) {
+    tetra_stereo = "@";
+  }
+}
+void CnvAtom::SwapCTStereo() {
+  if (tetra_stereo == "/") {
+    tetra_stereo = "\\";
+  } else if (tetra_stereo == "\\")
+    tetra_stereo = "/";
+}
+
+void Atom::AddNeighbor(size_t i) {
   /*auto&& range = std::equal_range(neighbors.begin(), neighbors.end(), i);
 
   if(range.first == range.second)
@@ -165,14 +198,14 @@ void Atom::AddNeighbour(size_t i) {
   if (el == neighbors.begin() || *(el - 1) != i) neighbors.insert(el, i);
 }
 
-void Atom::RemoveNeighbour(size_t i) {
+void Atom::RemoveNeighbor(size_t i) {
   auto el = std::find(neighbors.begin(), neighbors.end(), i);
   if (el != neighbors.end()) neighbors.erase(el);
 }
 
-void Atom::SetNeighbours(NeighborVector n) { neighbors = n; }
+void Atom::SetNeighbors(NeighborVector n) { neighbors = n; }
 
-void Atom::EraseNeighbours() { neighbors.clear(); }
+void Atom::EraseNeighbors() { neighbors.clear(); }
 
 double Atom::GetMass() const {
   return properties.mass + (double)GetNumTotalHydrogens() *
@@ -204,9 +237,7 @@ const std::string Atom::GetFormalCharge() const { return ""; }
 
 const std::string& CnvAtom::GetFormalCharge() const { return formal_charge; }
 
-const combi_ff::NeighborVector& Atom::GetNeighbours() const {
-  return neighbors;
-}
+const combi_ff::NeighborVector& Atom::GetNeighbors() const { return neighbors; }
 
 size_t Atom::GetNumNeighbors() const {
   return neighbors.size() + GetNumTotalHydrogens();

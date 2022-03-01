@@ -68,6 +68,11 @@ void PermuteVector(std::vector<T>& index, const Permutations& permutations) {
   }
 }
 
+size_t NumDiff(const std::vector<size_t>& original,
+               const std::vector<size_t>& permutated);
+size_t NumPerm(const std::vector<size_t>& original,
+               const std::vector<size_t>& permutated);
+
 }  // namespace combi_ff
 
 #endif

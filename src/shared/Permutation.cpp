@@ -186,4 +186,70 @@ Permutation& Max(Permutation& a, Permutation& b, Permutation& c) {
   return Max(a, Max(b, c));
 }
 
+size_t NumDiff(const std::vector<size_t>& original,
+               const std::vector<size_t>& permutated) {
+  size_t diff(0);
+
+  for (size_t i = 0; i < original.size(); i++) {
+    if (original[i] != permutated[i]) diff++;
+  }
+
+  return diff;
+}
+
+size_t NumPerm(const std::vector<size_t>& original,
+               const std::vector<size_t>& permutated) {
+  const size_t diff = NumDiff(original, permutated);
+
+  switch (diff) {
+    // e.g. 1,0,2,3 and 1,0,2,3
+    case (0):
+      // std::cout << 0 << std::endl;
+      return 0;
+
+    // e.g. 1,0,2,3 and 0,1,2,3
+    case (2):
+      // std::cout << 1 << std::endl;
+      return 1;
+
+    // e.g. 1,0,2,3 and 0,2,1,3
+    case (3):
+      // std::cout << 2 << std::endl;
+      return 2;
+
+    // not clear yet how many swaps -> e.g. 1,0,2,3 to 3,2,0,1 are only 2, but
+    // to 0,2,3,1 are 3
+    case (4): {
+      for (size_t i = 0; i < 4; i++) {
+        if (permutated[i] == original[0]) {
+          // if zeroth value of original is swapped with the same number in both
+          // vectors, even permutations (2 swaps), e.g. 1,0,2,3 and 3,2,0,1
+          // note: doesn't necessarily have to be element zero, can also be any
+          // of the other numbers
+          if (permutated[0] == original[i]) {
+            // std::cout << 2 << std::endl;
+            return 2;
+          }
+
+          // if zeroth value of permutated is swapped with different number, odd
+          // permutations (3 swaps), e.g. 1,0,2,3 and 0,2,3,1 note: doesn't
+          // necessarily have to be element zero, can also be any of the other
+          // numbers
+
+          else {
+            // std::cout << 3 << std::endl;
+            return 3;
+          }
+        }
+      }
+
+      throw std::runtime_error("error in StereoGenerator::NumPerm for case 4");
+    }
+
+    default:
+      throw std::runtime_error("diff should be 0, 2, 3, or 4, but it is " +
+                               std::to_string(diff));
+  }
+}
+
 }  // namespace combi_ff
