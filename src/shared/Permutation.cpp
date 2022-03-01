@@ -252,4 +252,35 @@ size_t NumPerm(const std::vector<size_t>& original,
   }
 }
 
+void NeighborOrder(const size_t idx, const size_t idx_permuted,
+                   const std::vector<size_t>& permuted_indices,
+                   std::vector<size_t>& nbrs_original_order,
+                   std::vector<size_t>& nbrs_permuted_order,
+                   const std::vector<size_t>& coming_from,
+                   const std::vector<std::vector<size_t>>& going_to,
+                   const std::vector<std::vector<size_t>>& ring_connections) {
+  nbrs_original_order.resize(1);
+  nbrs_original_order[0] = coming_from[idx];
+  nbrs_original_order.insert(nbrs_original_order.end(),
+                             ring_connections[idx].begin(),
+                             ring_connections[idx].end());
+  nbrs_original_order.insert(nbrs_original_order.end(), going_to[idx].begin(),
+                             going_to[idx].end());
+  nbrs_permuted_order.resize(1);
+  nbrs_permuted_order[0] =
+      std::distance(permuted_indices.begin(),
+                    std::find(permuted_indices.begin(), permuted_indices.end(),
+                              coming_from[idx_permuted]));
+
+  for (const auto& rc : ring_connections[idx_permuted])
+    nbrs_permuted_order.push_back(std::distance(
+        permuted_indices.begin(),
+        std::find(permuted_indices.begin(), permuted_indices.end(), rc)));
+
+  for (const auto& gt : going_to[idx_permuted])
+    nbrs_permuted_order.push_back(std::distance(
+        permuted_indices.begin(),
+        std::find(permuted_indices.begin(), permuted_indices.end(), gt)));
+}
+
 }  // namespace combi_ff

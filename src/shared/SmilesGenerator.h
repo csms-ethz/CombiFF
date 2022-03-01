@@ -653,9 +653,13 @@ std::string SmilesGenerator<T, AtomClass>::UpdateStereo() {
     auto&& n = smiles_blocks[v];
     smiles += n.opening_braces + n.bond_type;
 
-    if (A.GetAtomVector()[v].GetTetraStereo().size())
-      smiles +=
-          "[" + n.element_name + A.GetAtomVector()[v].GetTetraStereo() + "]";
+    if (A.GetAtomVector()[v].GetTetraStereo().size()) {
+      smiles += "[" + n.element_name + A.GetAtomVector()[v].GetTetraStereo();
+      if (A.GetAtomVector()[v].GetNumHydrogens())
+        smiles += "H]";
+      else
+        smiles += "]";
+    }
 
     else if (n.formal_charge.size())
       smiles += "[" + n.element_name + n.formal_charge + "]";

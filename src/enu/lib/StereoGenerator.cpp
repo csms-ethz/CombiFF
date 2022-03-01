@@ -694,7 +694,8 @@ void StereoGenerator::FindValidTrueTetrahedralConfigurations(
         // if the stereocenter was swapped, determine new stereo configuration
         if (idx != idx_permuted) {
           NeighborOrder(idx, idx_permuted, *permuted_indices,
-                        nbrs_original_order, nbrs_permuted_order);
+                        nbrs_original_order, nbrs_permuted_order, coming_from,
+                        going_to, ring_connections);
 
           if (NumPerm(nbrs_original_order, nbrs_permuted_order) % 2 == 0)
             configuration_permuted[j] = configuration_all[idx_permuted];
@@ -880,7 +881,8 @@ void StereoGenerator::FindValidParaConfigurations(
 
         if (idx != idx_permuted) {
           NeighborOrder(idx, idx_permuted, (*permuted_indices),
-                        nbrs_original_order, nbrs_permuted_order);
+                        nbrs_original_order, nbrs_permuted_order, coming_from,
+                        going_to, ring_connections);
 
           if (NumPerm(nbrs_original_order, nbrs_permuted_order) % 2 == 0) {
             if (vc_tet[i] !=
@@ -1017,7 +1019,8 @@ void StereoGenerator::FindValidParaConfigurations(
 
               if (idx != idx_permuted) {
                 NeighborOrder(idx, idx_permuted, (*permuted_indices),
-                              nbrs_original_order, nbrs_permuted_order);
+                              nbrs_original_order, nbrs_permuted_order,
+                              coming_from, going_to, ring_connections);
 
                 if (NumPerm(nbrs_original_order, nbrs_permuted_order) % 2 ==
                     0) {
@@ -1188,7 +1191,8 @@ void StereoGenerator::FindValidParaConfigurations(
                 size_t idx = potential_para_stereo_idx[j];
                 size_t idx_permuted = (*permuted_indices)[idx];
                 NeighborOrder(idx, idx_permuted, *permuted_indices,
-                              nbrs_original_order, nbrs_permuted_order);
+                              nbrs_original_order, nbrs_permuted_order,
+                              coming_from, going_to, ring_connections);
 
                 if (NumPerm(nbrs_original_order, nbrs_permuted_order) % 2 == 0)
                   configuration_permuted[j] = configuration_all[(
@@ -1585,23 +1589,6 @@ bool StereoGenerator::IsSmaller(Config& perm, Config& orig) const {
   return false;
 }
 
-Config operator++(Config& b) {
-  auto&& it = std::find(b.rbegin(), b.rend(), 0);
-
-  if (it != b.rend()) *it = 1;
-
-  std::fill(b.rbegin(), it, 0);
-  /*for (int i = (int)b.size() - 1; i >= 0; i--) {
-    if (b[i] == 0) {
-      b[i] = 1;
-      return b;
-
-    } else if (b[i] == 1)
-      b[i] = 0;
-  }*/
-  return b;
-}
-
 bool StereoGenerator::NeighborsArePermuted(
     const Atom& a, const std::vector<size_t>& permuted_indices) {
   for (auto neighbor : a.GetNeighbors()) {
@@ -1609,35 +1596,6 @@ bool StereoGenerator::NeighborsArePermuted(
   }
 
   return false;
-}
-
-void StereoGenerator::NeighborOrder(
-    const size_t idx, const size_t idx_permuted,
-    const std::vector<size_t>& permuted_indices,
-    std::vector<size_t>& nbrs_original_order,
-    std::vector<size_t>& nbrs_permuted_order) const {
-  nbrs_original_order.resize(1);
-  nbrs_original_order[0] = coming_from[idx];
-  nbrs_original_order.insert(nbrs_original_order.end(),
-                             ring_connections[idx].begin(),
-                             ring_connections[idx].end());
-  nbrs_original_order.insert(nbrs_original_order.end(), going_to[idx].begin(),
-                             going_to[idx].end());
-  nbrs_permuted_order.resize(1);
-  nbrs_permuted_order[0] =
-      std::distance(permuted_indices.begin(),
-                    std::find(permuted_indices.begin(), permuted_indices.end(),
-                              coming_from[idx_permuted]));
-
-  for (const auto& rc : ring_connections[idx_permuted])
-    nbrs_permuted_order.push_back(std::distance(
-        permuted_indices.begin(),
-        std::find(permuted_indices.begin(), permuted_indices.end(), rc)));
-
-  for (const auto& gt : going_to[idx_permuted])
-    nbrs_permuted_order.push_back(std::distance(
-        permuted_indices.begin(),
-        std::find(permuted_indices.begin(), permuted_indices.end(), gt)));
 }
 
 size_t StereoGenerator::GetNumStereoCenters() const {

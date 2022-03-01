@@ -5,7 +5,8 @@ set(sources
      XmlParser.cpp
      Range.cpp
      exceptions.cpp
-     Matrix.cpp)
+     Matrix.cpp
+     ContainerOperators.cpp)
 
 set(headers
      XmlParser.h

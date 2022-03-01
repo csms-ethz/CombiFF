@@ -77,11 +77,6 @@ class StereoGenerator {
   std::vector<std::tuple<std::string, int, std::pair<int, int>>>&
   GetStereoSmiles();
 
-  void NeighborOrder(const size_t idx, const size_t idxPerm,
-                     const std::vector<size_t>& permutedIndices,
-                     std::vector<size_t>& neighborsOrigOrder,
-                     std::vector<size_t>& neighborsPermOrder) const;
-
  private:
   const enu::AdjacencyMatrix& A;
   const size_t N;
@@ -117,8 +112,6 @@ class StereoGenerator {
   // number of stereocenters and stereo CT bonds
   std::vector<std::tuple<std::string, int, std::pair<int, int>>> stereo_smiles;
 };
-
-Config operator++(Config& b);
 
 }  // namespace enu
 

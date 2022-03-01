@@ -72,6 +72,13 @@ size_t NumDiff(const std::vector<size_t>& original,
                const std::vector<size_t>& permutated);
 size_t NumPerm(const std::vector<size_t>& original,
                const std::vector<size_t>& permutated);
+void NeighborOrder(const size_t idx, const size_t idxPerm,
+                   const std::vector<size_t>& permutedIndices,
+                   std::vector<size_t>& neighborsOrigOrder,
+                   std::vector<size_t>& neighborsPermOrder,
+                   const std::vector<size_t>& coming_from,
+                   const std::vector<std::vector<size_t>>& going_to,
+                   const std::vector<std::vector<size_t>>& ring_connections);
 
 }  // namespace combi_ff
 

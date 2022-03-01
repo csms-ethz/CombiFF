@@ -271,7 +271,7 @@ void CreateNameVector(std::vector<combi_ff::SmilesBlock>& names,
         throw combi_ff::input_warning("unclosed [ encountered in " + smiles);
 
       if (smiles[i] == '@') {
-        std::cerr << "?Warning: removing stereo information\n";
+        // std::cerr << "?Warning: removing stereo information\n";
         i++;
         atoms[curr_atom - 1].SetStereo(true);
 
@@ -430,10 +430,7 @@ void CreateMatrixFromSmilesBlocks(
   }
 
   for (size_t i = 1; i < names.size(); i++) {
-    std::cout << i << " ";
     auto&& name = names[i];
-    name.Print();
-    std::cout << std::endl;
 
     if (name.opening_braces == "" && names[i - 1].closing_braces == "") {
       if (A.GetElement(i - 1, i))
@@ -624,8 +621,6 @@ void CreateMatrixFromSmilesBlocks(
           .SetNumHydrogens(
               size_t((double)A.GetAtomVector()[i].GetDegree() - rowSum));
   }
-
-  A.Print();
 }
 
 }  // namespace combi_ff
