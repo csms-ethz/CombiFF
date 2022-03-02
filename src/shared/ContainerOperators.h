@@ -3,6 +3,7 @@
 #ifndef CONTAINEROPERATORS_H
 #define CONTAINEROPERATORS_H
 
+#include <algorithm>
 #include <fstream>
 #include <list>
 #include <stdexcept>
@@ -55,6 +56,8 @@ bool operator<(const std::vector<T>& a, const std::vector<T>& b) {
 
   return false;
 }
+
+std::vector<int>& operator++(std::vector<int>& b);
 
 }  // namespace combi_ff
 

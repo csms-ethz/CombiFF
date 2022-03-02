@@ -54,7 +54,7 @@ FragmentMatrix::FragmentMatrix(size_t N, AdjacencyVector v)
   for (size_t i = 0; i < N_minus_one; i++) {
     for (size_t j = i + 1; j < N; j++) {
       if (v[i * N + j])
-        SetElement(i, j, v[i * N + j]);  // to Set neighbours correctly
+        SetElement(i, j, v[i * N + j]);  // to Set neighbors correctly
     }
   }
 }
@@ -66,7 +66,7 @@ FragmentMatrix::FragmentMatrix(size_t N,
   for (size_t i = 0; i < N_minus_one; i++) {
     for (size_t j = i + 1; j < N; j++) {
       if (v[i * N + j])
-        SetElement(i, j, v[i * N + j]);  // to Set neighbours correctly
+        SetElement(i, j, v[i * N + j]);  // to Set neighbors correctly
     }
   }
 }
@@ -78,20 +78,20 @@ FragmentMatrix::FragmentMatrix(SymmetricalMatrix<size_t>& M,
     for (size_t j = i + 1; j < N; j++) {
       if (M.GetElements()[i * N + j])
         SetElement(i, j,
-                   M.GetElements()[i * N + j]);  // to Set neighbours correctly
+                   M.GetElements()[i * N + j]);  // to Set neighbors correctly
     }
   }
 }
 void FragmentMatrix::SetElement(const size_t i, const size_t j,
                                 const size_t v) {
   if (v != 0) {
-    atoms[i].AddNeighbour(j);
-    atoms[j].AddNeighbour(i);
+    atoms[i].AddNeighbor(j);
+    atoms[j].AddNeighbor(i);
 
   } else {
     if (GetElement(i, j)) {
-      atoms[i].RemoveNeighbour(j);
-      atoms[j].RemoveNeighbour(i);
+      atoms[i].RemoveNeighbor(j);
+      atoms[j].RemoveNeighbor(i);
     }
   }
 
@@ -104,8 +104,8 @@ void FragmentMatrix::SetAtomVector(const combi_ff::AtomVector<Atom>& a) {
   for (size_t i = 0; i < N_minus_one; i++) {
     for (size_t j = i + 1; j < N; j++) {
       if (GetElement(i, j)) {
-        atoms[i].AddNeighbour(j);
-        atoms[j].AddNeighbour(i);
+        atoms[i].AddNeighbor(j);
+        atoms[j].AddNeighbor(i);
       }
     }
   }
@@ -153,14 +153,14 @@ void FragmentMatrix::PrintIndented() const {
   }
 }
 
-void FragmentMatrix::ResetAtomNeighbours() {
-  for (auto&& a : atoms) a.EraseNeighbours();
+void FragmentMatrix::ResetAtomNeighbors() {
+  for (auto&& a : atoms) a.EraseNeighbors();
 
   for (size_t i = 0; i < N_minus_one; i++) {
     for (size_t j = i + 1; j < N; j++) {
       if (GetElement(i, j)) {
-        atoms[i].AddNeighbour(j);
-        atoms[j].AddNeighbour(i);
+        atoms[i].AddNeighbor(j);
+        atoms[j].AddNeighbor(i);
       }
     }
   }
@@ -211,7 +211,7 @@ void FragmentMatrix::GetNumMultipleBonds(size_t& n_single, size_t& n_double,
 
 bool FragmentMatrix::HasCycle() const {
   for (size_t i = 0; i < N; i++) {
-    const combi_ff::NeighborVector& neighbors = atoms[i].GetNeighbours();
+    const combi_ff::NeighborVector& neighbors = atoms[i].GetNeighbors();
 
     for (auto neighbor : neighbors) {
       std::vector<bool> visited_(N, false);

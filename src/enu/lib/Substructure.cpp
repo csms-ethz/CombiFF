@@ -105,7 +105,7 @@ SubstructureCollection::SubstructureCollection(
       substructure_matrices.push_back(FragmentMatrix(
           F.GetMatrix().GetN(), av, F.GetMatrix().GetElements()));
 
-    substructure_matrices.back().ResetAtomNeighbours();
+    substructure_matrices.back().ResetAtomNeighbors();
   }
 }
 

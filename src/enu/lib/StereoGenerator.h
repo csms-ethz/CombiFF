@@ -57,10 +57,6 @@ class StereoGenerator {
 
   void FindShortestPath(std::vector<size_t>& minimalPath, size_t i,
                         size_t j) const;
-  size_t NumDiff(const std::vector<size_t>& original,
-                 const std::vector<size_t>& permutated) const;
-  size_t NumPerm(const std::vector<size_t>& original,
-                 const std::vector<size_t>& permutated) const;
   bool IsSmaller(Config& perm, Config& orig) const;
 
   void FindValidConfigurations(std::vector<Configuration>& validConfigurations);
@@ -80,11 +76,6 @@ class StereoGenerator {
 
   std::vector<std::tuple<std::string, int, std::pair<int, int>>>&
   GetStereoSmiles();
-
-  void NeighborOrder(const size_t idx, const size_t idxPerm,
-                     const std::vector<size_t>& permutedIndices,
-                     std::vector<size_t>& neighborsOrigOrder,
-                     std::vector<size_t>& neighborsPermOrder) const;
 
  private:
   const enu::AdjacencyMatrix& A;

@@ -76,7 +76,7 @@ void StereoGenerator::FindPotentialStereoCenters() {
 
   for (size_t i = 0; i < N; i++) {
     a = &A.GetAtomVector()[i];
-    size_t n_neighbors = a->GetNeighbours().size();
+    size_t n_neighbors = a->GetNeighbors().size();
 
     // test if an atom is a potential tetrahedral stereo center
     if (n_neighbors == 4 ||
@@ -105,12 +105,12 @@ void StereoGenerator::TestIfPotentialTetrahedralStereoCenter(const Atom& a,
   bool same_first_nbrs_single_bond(false);
   const Atom *nbr1, *nbr2;
 
-  for (size_t i = 0; i < a.GetNeighbours().size(); i++) {
-    const size_t n1 = a.GetNeighbours()[i];
+  for (size_t i = 0; i < a.GetNeighbors().size(); i++) {
+    const size_t n1 = a.GetNeighbors()[i];
     nbr1 = &A.GetAtomVector()[n1];
 
-    for (size_t j = i + 1; j < a.GetNeighbours().size(); j++) {
-      const size_t n2 = a.GetNeighbours()[j];
+    for (size_t j = i + 1; j < a.GetNeighbors().size(); j++) {
+      const size_t n2 = a.GetNeighbors()[j];
       nbr2 = &A.GetAtomVector()[n2];
 
       if (nbr1->GetUnitedAtomSymbol() == nbr2->GetUnitedAtomSymbol() &&
@@ -148,7 +148,7 @@ void StereoGenerator::TestIfPotentialCisTransStereoCenter(const Atom& a,
   bool same_first_nbrs(false);
   bool same_first_nbrs_single_bond(false);
 
-  for (auto&& nbr : a.GetNeighbours()) {
+  for (auto&& nbr : a.GetNeighbors()) {
     if (A.GetElement(idx, nbr) == 2) {
       has_double_bond = true;
       double_bond_nbr = nbr;
@@ -163,14 +163,14 @@ void StereoGenerator::TestIfPotentialCisTransStereoCenter(const Atom& a,
   if (has_double_bond) {
     const Atom *nbr1, *nbr2;
 
-    for (size_t i = 0; i < a.GetNeighbours().size(); i++) {
-      size_t n1 = a.GetNeighbours()[i];
+    for (size_t i = 0; i < a.GetNeighbors().size(); i++) {
+      size_t n1 = a.GetNeighbors()[i];
 
       if (n1 != double_bond_nbr) {
         nbr1 = &A.GetAtomVector()[n1];
 
-        for (size_t j = i + 1; j < a.GetNeighbours().size(); j++) {
-          size_t n2 = a.GetNeighbours()[j];
+        for (size_t j = i + 1; j < a.GetNeighbors().size(); j++) {
+          size_t n2 = a.GetNeighbors()[j];
 
           if (n2 != double_bond_nbr) {
             nbr2 = &A.GetAtomVector()[n2];
@@ -256,7 +256,7 @@ void StereoGenerator::FindTrueStereoCenters() {
   }
 
   /*
-  remove from potentical cis trans stereo and true stereo, if the neighbour is
+  remove from potentical cis trans stereo and true stereo, if the neighbor is
   not a true or potential  cis trans stereo
   */
   bool removed_ct_stereo(false);
@@ -694,7 +694,8 @@ void StereoGenerator::FindValidTrueTetrahedralConfigurations(
         // if the stereocenter was swapped, determine new stereo configuration
         if (idx != idx_permuted) {
           NeighborOrder(idx, idx_permuted, *permuted_indices,
-                        nbrs_original_order, nbrs_permuted_order);
+                        nbrs_original_order, nbrs_permuted_order, coming_from,
+                        going_to, ring_connections);
 
           if (NumPerm(nbrs_original_order, nbrs_permuted_order) % 2 == 0)
             configuration_permuted[j] = configuration_all[idx_permuted];
@@ -880,7 +881,8 @@ void StereoGenerator::FindValidParaConfigurations(
 
         if (idx != idx_permuted) {
           NeighborOrder(idx, idx_permuted, (*permuted_indices),
-                        nbrs_original_order, nbrs_permuted_order);
+                        nbrs_original_order, nbrs_permuted_order, coming_from,
+                        going_to, ring_connections);
 
           if (NumPerm(nbrs_original_order, nbrs_permuted_order) % 2 == 0) {
             if (vc_tet[i] !=
@@ -1017,7 +1019,8 @@ void StereoGenerator::FindValidParaConfigurations(
 
               if (idx != idx_permuted) {
                 NeighborOrder(idx, idx_permuted, (*permuted_indices),
-                              nbrs_original_order, nbrs_permuted_order);
+                              nbrs_original_order, nbrs_permuted_order,
+                              coming_from, going_to, ring_connections);
 
                 if (NumPerm(nbrs_original_order, nbrs_permuted_order) % 2 ==
                     0) {
@@ -1188,7 +1191,8 @@ void StereoGenerator::FindValidParaConfigurations(
                 size_t idx = potential_para_stereo_idx[j];
                 size_t idx_permuted = (*permuted_indices)[idx];
                 NeighborOrder(idx, idx_permuted, *permuted_indices,
-                              nbrs_original_order, nbrs_permuted_order);
+                              nbrs_original_order, nbrs_permuted_order,
+                              coming_from, going_to, ring_connections);
 
                 if (NumPerm(nbrs_original_order, nbrs_permuted_order) % 2 == 0)
                   configuration_permuted[j] = configuration_all[(
@@ -1526,17 +1530,6 @@ void StereoGenerator::WriteStereoSmiles(
   }
 }
 
-size_t StereoGenerator::NumDiff(const std::vector<size_t>& original,
-                                const std::vector<size_t>& permutated) const {
-  size_t diff(0);
-
-  for (size_t i = 0; i < original.size(); i++) {
-    if (original[i] != permutated[i]) diff++;
-  }
-
-  return diff;
-}
-
 void StereoGenerator::FindShortestPath(std::vector<size_t>& minimal_path,
                                        size_t i, size_t j) const {
   minimal_path.resize(0);
@@ -1568,7 +1561,7 @@ void StereoGenerator::FindShortestPath(std::vector<size_t>& minimal_path,
 
     if (cur == j) break;
 
-    for (auto&& nbr : A.GetAtomVector()[cur].GetNeighbours()) {
+    for (auto&& nbr : A.GetAtomVector()[cur].GetNeighbors()) {
       if (dist[cur] + 1 < dist[nbr]) {
         dist[nbr] = dist[cur] + 1;
         prev[nbr] = cur;
@@ -1581,61 +1574,6 @@ void StereoGenerator::FindShortestPath(std::vector<size_t>& minimal_path,
   while (prev[cur] != i) {
     minimal_path.push_back(prev[cur]);
     cur = prev[cur];
-  }
-}
-
-size_t StereoGenerator::NumPerm(const std::vector<size_t>& original,
-                                const std::vector<size_t>& permutated) const {
-  const size_t diff = NumDiff(original, permutated);
-
-  switch (diff) {
-    // e.g. 1,0,2,3 and 1,0,2,3
-    case (0):
-      // std::cout << 0 << std::endl;
-      return 0;
-
-    // e.g. 1,0,2,3 and 0,1,2,3
-    case (2):
-      // std::cout << 1 << std::endl;
-      return 1;
-
-    // e.g. 1,0,2,3 and 0,2,1,3
-    case (3):
-      // std::cout << 2 << std::endl;
-      return 2;
-
-    // not clear yet how many swaps -> e.g. 1,0,2,3 to 3,2,0,1 are only 2, but
-    // to 0,2,3,1 are 3
-    case (4): {
-      for (size_t i = 0; i < 4; i++) {
-        if (permutated[i] == original[0]) {
-          // if zeroth value of original is swapped with the same number in both
-          // vectors, even permutations (2 swaps), e.g. 1,0,2,3 and 3,2,0,1
-          // note: doesn't necessarily have to be element zero, can also be any
-          // of the other numbers
-          if (permutated[0] == original[i]) {
-            // std::cout << 2 << std::endl;
-            return 2;
-          }
-
-          // if zeroth value of permutated is swapped with different number, odd
-          // permutations (3 swaps), e.g. 1,0,2,3 and 0,2,3,1 note: doesn't
-          // necessarily have to be element zero, can also be any of the other
-          // numbers
-
-          else {
-            // std::cout << 3 << std::endl;
-            return 3;
-          }
-        }
-      }
-
-      throw std::runtime_error("error in StereoGenerator::NumPerm for case 4");
-    }
-
-    default:
-      throw std::runtime_error("diff should be 0, 2, 3, or 4, but it is " +
-                               std::to_string(diff));
   }
 }
 
@@ -1667,43 +1605,14 @@ Config& operator++(Config& b) {
   }*/
   return b;
 }
-
+  
 bool StereoGenerator::NeighborsArePermuted(
     const Atom& a, const std::vector<size_t>& permuted_indices) {
-  for (auto neighbor : a.GetNeighbours()) {
+  for (auto neighbor : a.GetNeighbors()) {
     if (neighbor != permuted_indices[neighbor]) return true;
   }
 
   return false;
-}
-
-void StereoGenerator::NeighborOrder(
-    const size_t idx, const size_t idx_permuted,
-    const std::vector<size_t>& permuted_indices,
-    std::vector<size_t>& nbrs_original_order,
-    std::vector<size_t>& nbrs_permuted_order) const {
-  nbrs_original_order.resize(1);
-  nbrs_original_order[0] = coming_from[idx];
-  nbrs_original_order.insert(nbrs_original_order.end(),
-                             ring_connections[idx].begin(),
-                             ring_connections[idx].end());
-  nbrs_original_order.insert(nbrs_original_order.end(), going_to[idx].begin(),
-                             going_to[idx].end());
-  nbrs_permuted_order.resize(1);
-  nbrs_permuted_order[0] =
-      std::distance(permuted_indices.begin(),
-                    std::find(permuted_indices.begin(), permuted_indices.end(),
-                              coming_from[idx_permuted]));
-
-  for (const auto& rc : ring_connections[idx_permuted])
-    nbrs_permuted_order.push_back(std::distance(
-        permuted_indices.begin(),
-        std::find(permuted_indices.begin(), permuted_indices.end(), rc)));
-
-  for (const auto& gt : going_to[idx_permuted])
-    nbrs_permuted_order.push_back(std::distance(
-        permuted_indices.begin(),
-        std::find(permuted_indices.begin(), permuted_indices.end(), gt)));
 }
 
 size_t StereoGenerator::GetNumStereoCenters() const {

@@ -271,10 +271,16 @@ void CreateNameVector(std::vector<combi_ff::SmilesBlock>& names,
         throw combi_ff::input_warning("unclosed [ encountered in " + smiles);
 
       if (smiles[i] == '@') {
-        std::cerr << "?Warning: removing stereo information\n";
+        // std::cerr << "?Warning: removing stereo information\n";
         i++;
+        atoms[curr_atom - 1].SetStereo(true);
 
-        if (i < smiles.size() && smiles[i] == '@') i++;
+        if (i < smiles.size() && smiles[i] == '@') {
+          i++;
+          atoms[curr_atom - 1].SetTetraStereo("@@");
+        } else {
+          atoms[curr_atom - 1].SetTetraStereo("@");
+        }
 
       } else if (smiles[i] == '+' || smiles[i] == '-') {
         if (names[curr_atom - 1].element_name.front() != '[')

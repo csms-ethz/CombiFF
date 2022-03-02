@@ -255,7 +255,7 @@ bool UllmannMatchBenz(ComparisonMatrix& M, std::vector<bool>& matched_cols,
       if ((is_aromatic_save)[i] == true) {
         size_t num_aro_nbr = 0;
 
-        for (auto&& nbr : A.GetAtomVector()[i].GetNeighbours()) {
+        for (auto&& nbr : A.GetAtomVector()[i].GetNeighbors()) {
           if (is_aromatic_save[nbr]) num_aro_nbr++;
         }
 
@@ -349,10 +349,10 @@ bool Refine(combi_ff::ComparisonMatrix& M, int k, const size_t n,
         if (M.GetElement(i, j)) {
           valid = true;
 
-          for (auto&& i2 : fragment_matrix.GetAtomVector()[i].GetNeighbours()) {
+          for (auto&& i2 : fragment_matrix.GetAtomVector()[i].GetNeighbors()) {
             found = false;
 
-            for (auto&& j2 : A.GetAtomVector()[j].GetNeighbours()) {
+            for (auto&& j2 : A.GetAtomVector()[j].GetNeighbors()) {
               if (M.GetElement(i2, j2)) {
                 if ((fragment_matrix.GetElement(i, i2) ==
                      A.GetElement(j, j2))) {

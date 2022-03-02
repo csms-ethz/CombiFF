@@ -567,10 +567,10 @@ bool MoleculeDecomposer::Refine(
         if (M.GetElement(i, j)) {
           valid = true;
 
-          for (auto&& i2 : fragment_tbl_atoms[i].GetNeighbours()) {
+          for (auto&& i2 : fragment_tbl_atoms[i].GetNeighbors()) {
             found = false;
 
-            for (auto&& j2 : A.GetAtomVector()[j].GetNeighbours()) {
+            for (auto&& j2 : A.GetAtomVector()[j].GetNeighbors()) {
               if (M.GetElement(i2, j2)) {
                 if (fragment_matrix.GetElement(i, i2) == A.GetElement(j, j2)) {
                   found = true;

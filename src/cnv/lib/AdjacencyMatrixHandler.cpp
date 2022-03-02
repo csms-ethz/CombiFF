@@ -171,7 +171,8 @@ AdjacencyMatrix AdjacencyMatrixHandler::ConvertMatrix(
       }
     }
 
-    A.MakeCanonical(u, idx, canon_iteration_limit);
+    Permutations mp(0);
+    A.MakeCanonical(u, idx, canon_iteration_limit, mp);
     combi_ff::cnv::SmilesGeneratorCnv smiles_gen(A);
     smiles_gen.GenerateSmiles();
     canon_smiles = smiles_gen.GetSmiles();

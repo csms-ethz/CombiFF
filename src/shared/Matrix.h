@@ -108,7 +108,7 @@ class FragmentMatrix final : public SymmetricalMatrix<size_t> {
   void PrintIndented() const;
   std::string GetPrintIndented() const;
 
-  void ResetAtomNeighbours();
+  void ResetAtomNeighbors();
 
   void GetNumMultipleBonds(size_t& n_single, size_t& n_double, size_t& n_triple,
                            size_t& n_quadruple) const;
@@ -137,6 +137,7 @@ class AdjacencyMatrix final : public SymmetricalMatrix<T> {
 
   double GetMass() const;
   const combi_ff::AtomVector<AtomClass>& GetAtomVector() const;
+  combi_ff::AtomVector<AtomClass>& GetAtomVectorNonConst();
   combi_ff::Atom& GetAtom(size_t i);
   const combi_ff::LambdaVector& GetLambda() const;
   const TypeVector& GetTypes() const;
@@ -155,7 +156,7 @@ class AdjacencyMatrix final : public SymmetricalMatrix<T> {
   void Print() const;
   void PrintToFile(std::ostream& outputFile) const;
 
-  void ResetAtomNeighbours();
+  void ResetAtomNeighbors();
 
   bool hasCycle() const;
   bool IsConnected() const;
@@ -173,10 +174,12 @@ class AdjacencyMatrix final : public SymmetricalMatrix<T> {
 
   void MakeCanonical(const combi_ff::RepresentationSystem& u);
   void MakeCanonical(const combi_ff::RepresentationSystem& u,
-                     std::vector<size_t>& index, const size_t limit);
+                     std::vector<size_t>& index, const size_t limit,
+                     Permutations& matrix_permutations);
 
   void SortAtomVector();
   std::vector<size_t> SortAtomVector(std::vector<bool>& is_aromatic);
+  Permutations SortAtomVector_(std::vector<bool>& is_aromatic);
 
  private:
   combi_ff::LambdaVector lambda;
@@ -531,8 +534,8 @@ AdjacencyMatrix<T, AtomClass>::AdjacencyMatrix(
   for (size_t i = 0; i < this->N_minus_one; i++) {
     for (size_t j = i + 1; j < N; j++) {
       if (this->GetElement(i, j)) {
-        atoms[i].AddNeighbour(j);
-        atoms[j].AddNeighbour(i);
+        atoms[i].AddNeighbor(j);
+        atoms[j].AddNeighbor(i);
       }
     }
   }
@@ -568,8 +571,8 @@ void AdjacencyMatrix<T, AtomClass>::SetElements(std::vector<T> v) {
   for (size_t i = 0; i < this->N_minus_one; i++) {
     for (size_t j = i + 1; j < this->N; j++) {
       if (this->GetElement(i, j)) {
-        atoms[i].AddNeighbour(j);
-        atoms[j].AddNeighbour(i);
+        atoms[i].AddNeighbor(j);
+        atoms[j].AddNeighbor(i);
       }
     }
   }
@@ -597,13 +600,13 @@ template <typename T, typename AtomClass>
 void AdjacencyMatrix<T, AtomClass>::SetElement(const size_t i, const size_t j,
                                                const T v) {
   if (v != 0) {
-    atoms[i].AddNeighbour(j);
-    atoms[j].AddNeighbour(i);
+    atoms[i].AddNeighbor(j);
+    atoms[j].AddNeighbor(i);
 
   } else {
     if (this->GetElement(i, j)) {
-      atoms[i].RemoveNeighbour(j);
-      atoms[j].RemoveNeighbour(i);
+      atoms[i].RemoveNeighbor(j);
+      atoms[j].RemoveNeighbor(i);
     }
   }
 
@@ -618,8 +621,8 @@ void AdjacencyMatrix<T, AtomClass>::SetAtomVector(
   for (size_t i = 0; i < this->N_minus_one; i++) {
     for (size_t j = i + 1; j < this->N; j++) {
       if (this->GetElement(i, j)) {
-        atoms[i].AddNeighbour(j);
-        atoms[j].AddNeighbour(i);
+        atoms[i].AddNeighbor(j);
+        atoms[j].AddNeighbor(i);
       }
     }
   }
@@ -643,8 +646,8 @@ void AdjacencyMatrix<T, AtomClass>::SetLambda(combi_ff::LambdaVector& l) {
   for (size_t i = 0; i < this->N_minus_one; i++) {
     for (size_t j = i + 1; j < this->N; j++) {
       if (this->GetElement(i, j)) {
-        atoms[i].AddNeighbour(j);
-        atoms[j].AddNeighbour(i);
+        atoms[i].AddNeighbor(j);
+        atoms[j].AddNeighbor(i);
       }
     }
   }
@@ -662,14 +665,14 @@ void AdjacencyMatrix<T, AtomClass>::SetLambda(combi_ff::LambdaVector& l) {
   max_row.back()--;
 }
 template <typename T, typename AtomClass>
-void AdjacencyMatrix<T, AtomClass>::ResetAtomNeighbours() {
-  for (auto&& a : atoms) a.EraseNeighbours();
+void AdjacencyMatrix<T, AtomClass>::ResetAtomNeighbors() {
+  for (auto&& a : atoms) a.EraseNeighbors();
 
   for (size_t i = 0; i < this->N_minus_one; i++) {
     for (size_t j = i + 1; j < this->N; j++) {
       if (this->GetElement(i, j)) {
-        atoms[i].AddNeighbour(j);
-        atoms[j].AddNeighbour(i);
+        atoms[i].AddNeighbor(j);
+        atoms[j].AddNeighbor(i);
       }
     }
   }
@@ -677,6 +680,11 @@ void AdjacencyMatrix<T, AtomClass>::ResetAtomNeighbours() {
 template <typename T, typename AtomClass>
 const combi_ff::AtomVector<AtomClass>&
 AdjacencyMatrix<T, AtomClass>::GetAtomVector() const {
+  return atoms;
+}
+template <typename T, typename AtomClass>
+combi_ff::AtomVector<AtomClass>&
+AdjacencyMatrix<T, AtomClass>::GetAtomVectorNonConst() {
   return atoms;
 }
 template <typename T, typename AtomClass>
@@ -714,7 +722,7 @@ bool AdjacencyMatrix<T, AtomClass>::IsLastRowOfALambdaBlock(size_t i) {
 template <typename T, typename AtomClass>
 bool AdjacencyMatrix<T, AtomClass>::hasCycle() const {
   for (size_t i = 0; i < this->N; i++) {
-    const combi_ff::NeighborVector& neighbors = atoms[i].GetNeighbours();
+    const combi_ff::NeighborVector& neighbors = atoms[i].GetNeighbors();
 
     for (auto neighbor : neighbors) {
       std::vector<bool> visited_(this->N, false);
@@ -750,9 +758,9 @@ bool AdjacencyMatrix<T, AtomClass>::IsConnected() const {
   std::stack<size_t> stack;
   visited[0] = true;
 
-  // add neighbours of 1st atom to stack manually to save time, since we know
-  // that visited[neighbors[0]] is false for all the neighbours
-  for (auto&& nbr : atoms[0].GetNeighbours()) {
+  // add neighbors of 1st atom to stack manually to save time, since we know
+  // that visited[neighbors[0]] is false for all the neighbors
+  for (auto&& nbr : atoms[0].GetNeighbors()) {
     visited[nbr] = true;
     stack.push(nbr);
   }
@@ -761,12 +769,12 @@ bool AdjacencyMatrix<T, AtomClass>::IsConnected() const {
     size_t currEl = stack.top();
     stack.pop();
 
-    for (auto&& nbr : atoms[currEl].GetNeighbours()) {
+    for (auto&& nbr : atoms[currEl].GetNeighbors()) {
       if (!visited[nbr]) {
         visited[nbr] = true;
 
         if (atoms[nbr].GetDegree() >
-            1)  // if the degree is 1, the only neighbour is the current one
+            1)  // if the degree is 1, the only neighbor is the current one
                 // that we already visited
           stack.push(nbr);
       }
@@ -926,7 +934,7 @@ std::vector<bool> AdjacencyMatrix<T, AtomClass>::IsInCycle() const {
 
   for (size_t j = 0; j < this->N; j++) {
     bool cyc = false;
-    const combi_ff::NeighborVector& neighbors = atoms[j].GetNeighbours();
+    const combi_ff::NeighborVector& neighbors = atoms[j].GetNeighbors();
 
     for (auto neighbor : neighbors) {
       if (cyc) break;
@@ -963,7 +971,7 @@ std::vector<bool> AdjacencyMatrix<T, AtomClass>::IsInCycle() const {
 template <typename T, typename AtomClass>
 bool AdjacencyMatrix<T, AtomClass>::AreInSameCycle(size_t atom1,
                                                    size_t atom2) const {
-  const combi_ff::NeighborVector& neighbors = atoms[atom1].GetNeighbours();
+  const combi_ff::NeighborVector& neighbors = atoms[atom1].GetNeighbors();
   SymmetricalMatrix<bool> visited(this->N);
   std::stack<size_t> stack;
   bool visit1 = false;
@@ -978,7 +986,7 @@ bool AdjacencyMatrix<T, AtomClass>::AreInSameCycle(size_t atom1,
         size_t currEl = stack.top();
         stack.pop();
 
-        for (auto&& nbr : atoms[currEl].GetNeighbours()) {
+        for (auto&& nbr : atoms[currEl].GetNeighbors()) {
           if (!visited.GetElement(currEl, nbr)) {
             visited.SetElement(currEl, nbr, true);
 
@@ -1004,7 +1012,7 @@ size_t AdjacencyMatrix<T, AtomClass>::GetNumPiAtoms() const {
 
   for (size_t i = 0; i < this->N; i++) {
     if (inCycle[i]) {
-      const combi_ff::NeighborVector& neighbors = atoms[i].GetNeighbours();
+      const combi_ff::NeighborVector& neighbors = atoms[i].GetNeighbors();
       int n_double(0);
 
       for (auto neighbor : neighbors) {
@@ -1096,16 +1104,18 @@ void AdjacencyMatrix<T, AtomClass>::MakeCanonical(
   combi_ff::PermuteVector(is_aromatic_carbon,
                           maximizing_automorphic_permutation);
   combi_ff::PermuteVector(atoms, maximizing_automorphic_permutation);
-  ResetAtomNeighbours();
+  ResetAtomNeighbors();
 }
+
 template <typename T, typename AtomClass>
 void AdjacencyMatrix<T, AtomClass>::MakeCanonical(
     const combi_ff::RepresentationSystem& u, std::vector<size_t>& index,
-    const size_t limit) {
+    const size_t limit, Permutations& matrix_permutations) {
   AdjacencyMatrix B(*this);
   combi_ff::PermutationIterator it_perm(u);
   combi_ff::Permutations maximizing_automorphic_permutation;
   const std::vector<size_t>* permuted_indices;
+
   size_t iteration = 0;
 
   while (it_perm.GetNextPermutation() && ++iteration < limit) {
@@ -1144,11 +1154,14 @@ void AdjacencyMatrix<T, AtomClass>::MakeCanonical(
            "limit. You can change the limit in src/cnv/Handler.h\n";
 
   *this = AdjacencyMatrix(B);
+  matrix_permutations.insert(matrix_permutations.end(),
+                             maximizing_automorphic_permutation.begin(),
+                             maximizing_automorphic_permutation.end());
   combi_ff::PermuteVector(index, maximizing_automorphic_permutation);
   combi_ff::PermuteVector(is_aromatic_carbon,
                           maximizing_automorphic_permutation);
   combi_ff::PermuteVector(atoms, maximizing_automorphic_permutation);
-  ResetAtomNeighbours();
+  ResetAtomNeighbors();
 }
 
 template <typename T, typename AtomClass>
@@ -1168,7 +1181,7 @@ void AdjacencyMatrix<T, AtomClass>::SortAtomVector() {
     }
   }
 
-  for (auto&& a : atoms) a.SetNeighbours(combi_ff::NeighborVector(0));
+  for (auto&& a : atoms) a.SetNeighbors(combi_ff::NeighborVector(0));
 
   SetAtomVector(atoms);
   lambda_new.push_back(1);
@@ -1260,15 +1273,17 @@ void AdjacencyMatrix<T, AtomClass>::SortAtomVector() {
     }
   }
 
-  ResetAtomNeighbours();
+  ResetAtomNeighbors();
   SetLambda(lambda_new);
 }
+
 template <typename T, typename AtomClass>
 std::vector<size_t> AdjacencyMatrix<T, AtomClass>::SortAtomVector(
     std::vector<bool>& is_aromatic) {
   //  A.print();
   std::vector<size_t> idx(GetIndices());
   combi_ff::LambdaVector lambda_new(0);
+  Permutations matrix_permutations(0);
 
   for (uint i = 0; i < this->N; i++) {
     for (uint j = 0; j < this->N; j++) {
@@ -1277,13 +1292,14 @@ std::vector<size_t> AdjacencyMatrix<T, AtomClass>::SortAtomVector(
         atoms[i] = atoms[j];
         atoms[j] = temp;
         this->Permute(combi_ff::Permutation({i, j}));
+        matrix_permutations.push_back(combi_ff::Permutation({i, j}));
         std::swap(is_aromatic[i], is_aromatic[j]);
         std::swap(idx[i], idx[j]);
       }
     }
   }
 
-  for (auto&& a : atoms) a.SetNeighbours(combi_ff::NeighborVector(0));
+  for (auto&& a : atoms) a.SetNeighbors(combi_ff::NeighborVector(0));
 
   SetAtomVector(atoms);
   lambda_new.push_back(1);
@@ -1328,6 +1344,7 @@ std::vector<size_t> AdjacencyMatrix<T, AtomClass>::SortAtomVector(
           // std::cout << "  b " << A.GetN() << " " << ii << " " << jj <<
           // std::endl;
           this->Permute(combi_ff::Permutation({ii, jj}));
+          matrix_permutations.push_back(combi_ff::Permutation({i, j}));
           std::swap(is_aromatic[ii], is_aromatic[jj]);
           std::swap(idx[ii], idx[jj]);
           // std::cout << &isAromatic << std::endl;
@@ -1365,6 +1382,7 @@ std::vector<size_t> AdjacencyMatrix<T, AtomClass>::SortAtomVector(
           // std::cout << "  b " << A.GetN() << " " << ii << " " << jj <<
           // std::endl;
           this->Permute(combi_ff::Permutation({ii, jj}));
+          matrix_permutations.push_back(combi_ff::Permutation({i, j}));
           std::swap(is_aromatic[ii], is_aromatic[jj]);
           std::swap(idx[ii], idx[jj]);
           // std::cout << &isAromatic << std::endl;
@@ -1381,10 +1399,138 @@ std::vector<size_t> AdjacencyMatrix<T, AtomClass>::SortAtomVector(
     }
   }
 
-  ResetAtomNeighbours();
+  ResetAtomNeighbors();
   SetLambda(lambda_new);
   return idx;
 }
+
+template <typename T, typename AtomClass>
+Permutations AdjacencyMatrix<T, AtomClass>::SortAtomVector_(
+    std::vector<bool>& is_aromatic) {
+  //  A.print();
+  std::vector<size_t> idx(GetIndices());
+  combi_ff::LambdaVector lambda_new(0);
+  Permutations matrix_permutations(0);
+
+  for (uint i = 0; i < this->N; i++) {
+    for (uint j = 0; j < this->N; j++) {
+      if (atoms[i] < atoms[j]) {
+        auto temp = atoms[i];
+        atoms[i] = atoms[j];
+        atoms[j] = temp;
+        this->Permute(combi_ff::Permutation({i, j}));
+        matrix_permutations.push_back(combi_ff::Permutation({i, j}));
+        std::swap(is_aromatic[i], is_aromatic[j]);
+        std::swap(idx[i], idx[j]);
+      }
+    }
+  }
+
+  for (auto&& a : atoms) a.SetNeighbors(combi_ff::NeighborVector(0));
+
+  SetAtomVector(atoms);
+  lambda_new.push_back(1);
+  std::vector<combi_ff::AtomVector<AtomClass>> atom_blocks(0);
+  atom_blocks.push_back(combi_ff::AtomVector<AtomClass>(1, atoms[0]));
+
+  for (uint i = 1; i < this->N; i++) {
+    if (atoms[i - 1] != atoms[i]) {
+      lambda_new.push_back(1);
+      atom_blocks.push_back(combi_ff::AtomVector<AtomClass>(1, atoms[i]));
+
+    } else {
+      atom_blocks.back().push_back(atoms[i]);
+      lambda_new.back()++;
+    }
+  }
+
+  for (uint i = 0; i < lambda_new.size(); i++) {
+    for (uint j = i + 1; j < lambda_new.size(); j++) {
+      // assert(atomBlocks[i].front().GetDegree() >=
+      // atomBlocks[j].front().GetDegree());
+      if (atom_blocks[i].front().GetDegree() ==
+              atom_blocks[j].front().GetDegree() &&
+          lambda_new[i] > lambda_new[j]) {
+        //  std::cout << "b have to swap " << i << " and " << j << std::endl;
+        //  A.print();
+        uint ii =
+            std::accumulate(lambda_new.begin(), lambda_new.begin() + i, 0);
+        uint jj =
+            std::accumulate(lambda_new.begin(), lambda_new.begin() + j + 1, -1);
+        //  for(auto && a : atomBlocks)
+        //      std::cout << &a << " ";
+        //  std::cout << std::endl;
+        std::swap(atom_blocks[i], atom_blocks[j]);
+
+        //  for(auto && a : atomBlocks)
+        //      std::cout << &a << " ";
+
+        //  std::cout << std::endl;
+
+        for (uint k = 0; k < std::max(lambda_new[i], lambda_new[j]); k++) {
+          // std::cout << "  b " << A.GetN() << " " << ii << " " << jj <<
+          // std::endl;
+          this->Permute(combi_ff::Permutation({ii, jj}));
+          matrix_permutations.push_back(combi_ff::Permutation({ii, jj}));
+          std::swap(is_aromatic[ii], is_aromatic[jj]);
+          std::swap(idx[ii], idx[jj]);
+          // std::cout << &isAromatic << std::endl;
+          auto temp = GetAtom(ii);
+          GetAtom(ii) = GetAtom(jj);
+          GetAtom(jj) = temp;
+          // A.print();
+          ii++;
+          jj--;
+        }
+
+        std::swap(lambda_new[i], lambda_new[j]);
+
+      } else if (atom_blocks[i].front().GetDegree() ==
+                     atom_blocks[j].front().GetDegree() &&
+                 lambda_new[i] == lambda_new[j] &&
+                 atom_blocks[i].front() > atom_blocks[j].front()) {
+        //  std::cout << "b have to swap " << i << " and " << j << std::endl;
+        //  A.print();
+        uint ii =
+            std::accumulate(lambda_new.begin(), lambda_new.begin() + i, 0);
+        uint jj =
+            std::accumulate(lambda_new.begin(), lambda_new.begin() + j + 1, -1);
+        //  for(auto && a : atomBlocks)
+        //      std::cout << &a << " ";
+        //  std::cout << std::endl;
+        std::swap(atom_blocks[i], atom_blocks[j]);
+
+        //  for(auto && a : atomBlocks)
+        //      std::cout << &a << " ";
+
+        //  std::cout << std::endl;
+
+        for (uint k = 0; k < std::max(lambda_new[i], lambda_new[j]); k++) {
+          // std::cout << "  b " << A.GetN() << " " << ii << " " << jj <<
+          // std::endl;
+          this->Permute(combi_ff::Permutation({ii, jj}));
+          matrix_permutations.push_back(combi_ff::Permutation({ii, jj}));
+          std::swap(is_aromatic[ii], is_aromatic[jj]);
+          std::swap(idx[ii], idx[jj]);
+          // std::cout << &isAromatic << std::endl;
+          auto temp = GetAtom(ii);
+          GetAtom(ii) = GetAtom(jj);
+          GetAtom(jj) = temp;
+          // A.print();
+          ii++;
+          jj--;
+        }
+
+        std::swap(lambda_new[i], lambda_new[j]);
+      }
+    }
+  }
+
+  ResetAtomNeighbors();
+  SetLambda(lambda_new);
+  return matrix_permutations;
+}
+
 template <typename T, typename AtomClass>
 void AdjacencyMatrix<T, AtomClass>::PrintToFile(
     std::ostream& outputFile) const {
