@@ -11,11 +11,7 @@ namespace enu {
 HydrogenDistribution::HydrogenDistribution(
     const LambdaVector& lambda, const AtomVector<combi_ff::Atom>& non_H_atoms,
     const int N_hyd)
-    : i(-1),
-      non_H_atoms(non_H_atoms),
-      N_hyd(N_hyd),
-      N_hat(non_H_atoms.size()),
-      canonical(false) {
+    : i(-1), N_hyd(N_hyd), N_hat(non_H_atoms.size()), canonical(false) {
   // define lambda_bar, the LambdaVector of the non-hydrogen atoms
   // if there are any hydrogen atoms, lambda_bar is lambda without the last
   // entry, otherwise it's just lambda

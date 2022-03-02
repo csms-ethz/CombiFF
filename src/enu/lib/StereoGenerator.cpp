@@ -1651,7 +1651,7 @@ bool StereoGenerator::IsSmaller(Config& perm, Config& orig) const {
   return false;
 }
 
-Config operator++(Config& b) {
+Config& operator++(Config& b) {
   auto&& it = std::find(b.rbegin(), b.rend(), 0);
 
   if (it != b.rend()) *it = 1;

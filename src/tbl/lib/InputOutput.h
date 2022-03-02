@@ -1,7 +1,7 @@
 // Copyright 2022 Salomé Rieder, CSMS ETH Zürich
 
 #ifndef INPUTOUTPUTTBL_H
-#define INPUTPUTPUTTBL_H
+#define INPUTOUTPUTTBL_H
 
 #include <fstream>
 #include <iostream>

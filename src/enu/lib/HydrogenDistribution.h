@@ -30,7 +30,6 @@ class HydrogenDistribution {
   ConnectivityVector H_con;
   std::vector<int> M;
   LambdaVector lambda_bar;
-  const AtomVector<combi_ff::Atom>& non_H_atoms;
   std::vector<int> degree_vec_bar;
   const int N_hyd;
   const size_t N_hat;

@@ -32,7 +32,7 @@ class TblAtom {
   std::string atom_id{""};
   AtomTypeSet atom_types{};
   LinkageType link_type{core};
-  const TblAtom* core_atom;
+  // const TblAtom* core_atom;
   NeighborVector neighbors;
 };
 

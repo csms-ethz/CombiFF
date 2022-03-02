@@ -22,8 +22,8 @@ FamilyDecomposer::FamilyDecomposer(
     const IOFileProperties& io_file_properties,
     const std::vector<TblFragment>& tbl_fragments)
     : filename_family_isomer_enumeration(filename_family_isomer_enumeration),
-      io_file_properties(io_file_properties),
-      tbl_fragments(tbl_fragments) {
+      io_file_properties(&io_file_properties),
+      tbl_fragments(&tbl_fragments) {
   CreateFamilyMoleculeDecompositions();
 }
 
@@ -35,9 +35,9 @@ void FamilyDecomposer::CreateFamilyMoleculeDecompositions() {
       family_isomer_enumeration_parser.GetRoot();
   CheckXMLFormat(family_isomer_enumeration_root);
   filename_molecule_decomposition =
-      (io_file_properties.output_dir_molecule_decompositions.size()
-           ? io_file_properties.output_dir_molecule_decompositions
-           : io_file_properties.output_dir) +
+      (io_file_properties->output_dir_molecule_decompositions.size()
+           ? io_file_properties->output_dir_molecule_decompositions
+           : io_file_properties->output_dir) +
       "molecule_decompositions_" + family_code + ".xml";
   XmlParserOut molecule_decompositions_parser(filename_molecule_decomposition,
                                               "molecule_decompositions");
@@ -74,7 +74,7 @@ void FamilyDecomposer::CreateFamilyMoleculeDecompositions() {
               *(molecule_decompositions_root->GetLastChild());
           molecule_decomposition.attributes["smiles"] = smiles;
           molecule_decomposition.SetAttribute(*isomer, "isomer_id");
-          MoleculeDecomposer(smiles, tbl_fragments, molecule_decomposition);
+          MoleculeDecomposer(smiles, *tbl_fragments, molecule_decomposition);
           molecule_decompositions_parser.WriteAndRemoveLastChild();
         }
       }

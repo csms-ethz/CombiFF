@@ -143,7 +143,7 @@ int main(int argc, char* argv[]) {
           .Run();
 
     else
-      throw combi_ff::input_error("unknown input " + input);
+      throw combi_ff::input_error("unknown input");
 
     output_file.close();
   }

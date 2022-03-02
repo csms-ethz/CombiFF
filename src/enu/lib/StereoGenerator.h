@@ -122,7 +122,7 @@ class StereoGenerator {
   std::vector<std::tuple<std::string, int, std::pair<int, int>>> stereo_smiles;
 };
 
-Config operator++(Config& b);
+Config& operator++(Config& b);
 
 }  // namespace enu
 

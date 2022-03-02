@@ -20,7 +20,7 @@ namespace combi_ff {
 
 namespace enu {
 
-class EnumSpecifications;
+struct EnumSpecifications;
 class Family;
 
 typedef SmilesGenerator<size_t, combi_ff::Atom> SmilesGeneratorEnu;

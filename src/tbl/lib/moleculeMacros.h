@@ -17,7 +17,7 @@ namespace topology_builder {
 class TblFragment;
 class TopologicalPropertyBase;
 class AtomTypeSet;
-class IOFileProperties;
+struct IOFileProperties;
 
 struct AtomInMolecule {
   size_t idx{};
