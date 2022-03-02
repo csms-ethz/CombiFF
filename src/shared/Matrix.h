@@ -138,7 +138,7 @@ class AdjacencyMatrix final : public SymmetricalMatrix<T> {
   double GetMass() const;
   const combi_ff::AtomVector<AtomClass>& GetAtomVector() const;
   combi_ff::AtomVector<AtomClass>& GetAtomVectorNonConst();
-  combi_ff::Atom& GetAtom(size_t i);
+  AtomClass& GetAtom(size_t i);
   const combi_ff::LambdaVector& GetLambda() const;
   const TypeVector& GetTypes() const;
   const std::vector<size_t>& GetIndices() const;
@@ -688,7 +688,7 @@ AdjacencyMatrix<T, AtomClass>::GetAtomVectorNonConst() {
   return atoms;
 }
 template <typename T, typename AtomClass>
-combi_ff::Atom& AdjacencyMatrix<T, AtomClass>::GetAtom(size_t i) {
+AtomClass& AdjacencyMatrix<T, AtomClass>::GetAtom(size_t i) {
   return atoms[i];
 }
 template <typename T, typename AtomClass>
@@ -1173,9 +1173,7 @@ void AdjacencyMatrix<T, AtomClass>::SortAtomVector() {
   for (size_t i = 0; i < this->N; i++) {
     for (size_t j = 0; j < this->N; j++) {
       if (atoms[i] < atoms[j]) {
-        auto temp = atoms[i];
-        atoms[i] = atoms[j];
-        atoms[j] = temp;
+        std::swap(atoms[i], atoms[j]);
         this->Permute(combi_ff::Permutation({i, j}));
       }
     }
@@ -1225,9 +1223,7 @@ void AdjacencyMatrix<T, AtomClass>::SortAtomVector() {
           // std::endl;
           this->Permute(combi_ff::Permutation({ii, jj}));
           // std::cout << &isAromatic << std::endl;
-          auto temp = GetAtom(ii);
-          GetAtom(ii) = GetAtom(jj);
-          GetAtom(jj) = temp;
+          std::swap(atoms[ii], atoms[jj]);
           // A.print();
           ii++;
           jj--;
@@ -1260,9 +1256,7 @@ void AdjacencyMatrix<T, AtomClass>::SortAtomVector() {
           // std::endl;
           this->Permute(combi_ff::Permutation({ii, jj}));
           // std::cout << &isAromatic << std::endl;
-          auto temp = GetAtom(ii);
-          GetAtom(ii) = GetAtom(jj);
-          GetAtom(jj) = temp;
+          std::swap(atoms[ii], atoms[jj]);
           // A.print();
           ii++;
           jj--;
@@ -1288,9 +1282,7 @@ std::vector<size_t> AdjacencyMatrix<T, AtomClass>::SortAtomVector(
   for (uint i = 0; i < this->N; i++) {
     for (uint j = 0; j < this->N; j++) {
       if (atoms[i] < atoms[j]) {
-        auto temp = atoms[i];
-        atoms[i] = atoms[j];
-        atoms[j] = temp;
+        std::swap(atoms[i], atoms[j]);
         this->Permute(combi_ff::Permutation({i, j}));
         matrix_permutations.push_back(combi_ff::Permutation({i, j}));
         std::swap(is_aromatic[i], is_aromatic[j]);
@@ -1348,9 +1340,7 @@ std::vector<size_t> AdjacencyMatrix<T, AtomClass>::SortAtomVector(
           std::swap(is_aromatic[ii], is_aromatic[jj]);
           std::swap(idx[ii], idx[jj]);
           // std::cout << &isAromatic << std::endl;
-          auto temp = GetAtom(ii);
-          GetAtom(ii) = GetAtom(jj);
-          GetAtom(jj) = temp;
+          std::swap(atoms[ii], atoms[jj]);
           // A.print();
           ii++;
           jj--;
@@ -1386,9 +1376,7 @@ std::vector<size_t> AdjacencyMatrix<T, AtomClass>::SortAtomVector(
           std::swap(is_aromatic[ii], is_aromatic[jj]);
           std::swap(idx[ii], idx[jj]);
           // std::cout << &isAromatic << std::endl;
-          auto temp = GetAtom(ii);
-          GetAtom(ii) = GetAtom(jj);
-          GetAtom(jj) = temp;
+          std::swap(atoms[ii], atoms[jj]);
           // A.print();
           ii++;
           jj--;
@@ -1415,9 +1403,7 @@ Permutations AdjacencyMatrix<T, AtomClass>::SortAtomVector_(
   for (uint i = 0; i < this->N; i++) {
     for (uint j = 0; j < this->N; j++) {
       if (atoms[i] < atoms[j]) {
-        auto temp = atoms[i];
-        atoms[i] = atoms[j];
-        atoms[j] = temp;
+        std::swap(atoms[i], atoms[j]);
         this->Permute(combi_ff::Permutation({i, j}));
         matrix_permutations.push_back(combi_ff::Permutation({i, j}));
         std::swap(is_aromatic[i], is_aromatic[j]);
@@ -1426,9 +1412,12 @@ Permutations AdjacencyMatrix<T, AtomClass>::SortAtomVector_(
     }
   }
 
-  for (auto&& a : atoms) a.SetNeighbors(combi_ff::NeighborVector(0));
+  for (auto&& a : atoms) {
+    a.SetNeighbors(combi_ff::NeighborVector(0));
+  }
 
   SetAtomVector(atoms);
+
   lambda_new.push_back(1);
   std::vector<combi_ff::AtomVector<AtomClass>> atom_blocks(0);
   atom_blocks.push_back(combi_ff::AtomVector<AtomClass>(1, atoms[0]));
@@ -1475,9 +1464,8 @@ Permutations AdjacencyMatrix<T, AtomClass>::SortAtomVector_(
           std::swap(is_aromatic[ii], is_aromatic[jj]);
           std::swap(idx[ii], idx[jj]);
           // std::cout << &isAromatic << std::endl;
-          auto temp = GetAtom(ii);
-          GetAtom(ii) = GetAtom(jj);
-          GetAtom(jj) = temp;
+          std::swap(atoms[ii], atoms[jj]);
+
           // A.print();
           ii++;
           jj--;
@@ -1512,10 +1500,8 @@ Permutations AdjacencyMatrix<T, AtomClass>::SortAtomVector_(
           matrix_permutations.push_back(combi_ff::Permutation({ii, jj}));
           std::swap(is_aromatic[ii], is_aromatic[jj]);
           std::swap(idx[ii], idx[jj]);
+          std::swap(atoms[ii], atoms[jj]);
           // std::cout << &isAromatic << std::endl;
-          auto temp = GetAtom(ii);
-          GetAtom(ii) = GetAtom(jj);
-          GetAtom(jj) = temp;
           // A.print();
           ii++;
           jj--;

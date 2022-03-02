@@ -78,9 +78,6 @@ void SmilesHandler::Run() {
         ConvertSmiles(smiles_orig.second, smiles_canon, A);
         std::string fmi("");
 
-        for (auto&& a : A.GetAtomVector())
-          std::cout << a << " " << a.GetTetraStereo() << std::endl;
-
         if (print_options[cnv::print_family_enumeration])
           FindFamilyIdentifier(smiles_canon, fmi);
 
@@ -190,16 +187,15 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
       cnv::SmilesGeneratorCnv smiles_gen_orig(A);
       smiles_gen_orig.GenerateSmilesNonCanon();
       std::string smiles_orig_ = smiles_gen_orig.GetSmiles();
+      smiles_orig_ = smiles_gen_orig.UpdateStereo();
       const auto& visited_indices(smiles_gen_orig.GetVisitedIndices());
-      std::cout << "original smiles (reconstructed): " << smiles_orig_
-                << std::endl;
-      std::cout << "visited indices: " << visited_indices << std::endl;
-      A.Print();
-
-      for (auto&& a : A.GetAtomVector())
+      // std::cout << "original smiles (reconstructed): " << smiles_orig_
+      //           << std::endl;
+      // A.Print();
+      /*for (auto&& a : A.GetAtomVector())
         std::cout << a << " " << a.GetTetraStereo() << " " << a.GetStereo()
-                  << std::endl;
-
+      //            << " " << a.GetFormalCharge()
+                  << std::endl;*/
       Permutations matrix_permutations =
           A.SortAtomVector_(A.GetIsAromaticCarbon());
       combi_ff::LambdaVector lambda = A.GetLambda();
@@ -244,7 +240,7 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
 
       std::vector<size_t> idx = A.GetIndices();
       A.MakeCanonical(u, idx, canon_iteration_limit, matrix_permutations);
-      std::cout << matrix_permutations << std::endl;
+      // std::cout << matrix_permutations << std::endl;
       std::iota(idx.begin(), idx.end(), 0);
 
       for (auto p : matrix_permutations) std::swap(idx[p.first], idx[p.second]);
@@ -252,195 +248,211 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
       if (stereo) {
         // Get automorphism group of extended matrix
         PermutationIterator perm_it(u);
+        /*if(output_file.is_open())
+          output_file << "canonicalizing permutation is " << idx << '\n';
+        else
+          std::cout << "canonicalizing permutation is " << idx << '\n';*/
+        // A.Print();
+        cnv::SmilesGeneratorCnv smiles_gen(A);
+        smiles_gen.GenerateSmiles();
+        smiles_canon = smiles_gen.GetSmiles();
+        // std::cout << smiles_canon << std::endl;
+        const auto& visited_indices_(smiles_gen.GetVisitedIndices());
+        /*std::cout << "new order of smiles: ";
 
-        while (perm_it.GetNextPermutation()) {
-          size_t jpos;
+        for (auto ii : visited_indices_) std::cout << idx[ii] << " ";
 
-          if (A.EqualTo(*(perm_it.GetPermutedIndices()), jpos)) {
-            (u_automorph)[perm_it.GetSmallestDiffIndex()].push_back(
-                *(perm_it.GetCombinedPermutation()));
-            std::cout << *(perm_it.GetCombinedPermutation()) << std::endl;
-            perm_it.SetCurrentIndexToSmallestDiffIndex();
+        std::cout << std::endl;
 
-          } else {
-            if (perm_it.GetCurrentIndex() > jpos) perm_it.SetCurrentIndex(jpos);
+        for (auto && a : A.GetAtomVector())
+          std::cout << a << " " << a.GetTetraStereo() << " " << a.GetStereo()
+                    << std::endl;*/
+
+        if (stereo) {
+          const std::vector<size_t>& coming_from_orig =
+              smiles_gen_orig.GetComingFrom();
+          const std::vector<std::vector<size_t>>& going_to_orig =
+              smiles_gen_orig.GetGoingTo();
+          const std::vector<std::vector<size_t>>& ring_connections_orig =
+              smiles_gen_orig.GetRingConnections();
+          const std::vector<size_t>& coming_from_new =
+              smiles_gen.GetComingFrom();
+          const std::vector<std::vector<size_t>>& going_to_new =
+              smiles_gen.GetGoingTo();
+          const std::vector<std::vector<size_t>>& ring_connections_new =
+              smiles_gen.GetRingConnections();
+          // std::cout << idx << std::endl;
+
+          for (size_t i = 0; i < A.GetN(); i++) {
+            size_t idx_original = idx[i];
+            const CnvAtom& a_orig = A.GetAtomVector()[idx_original];
+            CnvAtom& a_new = A.GetAtomVectorNonConst()[i];
+            std::vector<size_t> nbrs_original_order(1);
+            nbrs_original_order.reserve(4);
+            std::vector<size_t> nbrs_new_order(1);
+            nbrs_new_order.reserve(4);
+
+            if (a_new.GetStereo()) {
+              stereo = true;
+              // std::cout << "at " << i << std::endl;
+              // std::cout << "orig positoin: " << idx_original << std::endl;
+              nbrs_original_order[0] = coming_from_orig[idx_original];
+              nbrs_original_order.insert(
+                  nbrs_original_order.end(),
+                  ring_connections_orig[idx_original].begin(),
+                  ring_connections_orig[idx_original].end());
+              nbrs_original_order.insert(nbrs_original_order.end(),
+                                         going_to_orig[idx_original].begin(),
+                                         going_to_orig[idx_original].end());
+              // std::cout << a_orig << " " << a_orig.GetTetraStereo() <<
+              // std::endl;
+              // std::cout << a_new << " " << a_new.GetTetraStereo() <<
+              // std::endl; std::cout << nbrs_original_order << std::endl;
+              nbrs_new_order[0] = coming_from_new[i];
+              nbrs_new_order.insert(nbrs_new_order.end(),
+                                    ring_connections_new[i].begin(),
+                                    ring_connections_new[i].end());
+              nbrs_new_order.insert(nbrs_new_order.end(),
+                                    going_to_new[i].begin(),
+                                    going_to_new[i].end());
+
+              for (auto&& n : nbrs_new_order) n = idx[n];
+
+              // std::cout << nbrs_new_order << std::endl;
+              // std::cout << NumPerm(nbrs_original_order, nbrs_new_order)
+              //           << std::endl;
+              size_t n = NumPerm(nbrs_original_order, nbrs_new_order);
+
+              if ((n % 2)) {
+                a_new.SwapTetrahedralStereo();
+                // a_new.SwapCTStereo();
+              }  // odd
+            }
           }
-        }
-      }
 
-      /*if(output_file.is_open())
-        output_file << "canonicalizing permutation is " << idx << '\n';
-      else
-        std::cout << "canonicalizing permutation is " << idx << '\n';*/
-      A.Print();
-      cnv::SmilesGeneratorCnv smiles_gen(A);
-      smiles_gen.GenerateSmiles();
-      smiles_canon = smiles_gen.GetSmiles();
-      std::cout << smiles_canon << std::endl;
-      const auto& visited_indices_(smiles_gen.GetVisitedIndices());
-      std::cout << "new order of smiles: ";
+          std::vector<int> valid_configurations_tetra(0);
+          std::vector<size_t> true_stereo_idx(0);
+          std::vector<int> position_in_true_stereo_idx(A.GetN(), -1);
+          size_t ii = 0;
 
-      for (auto ii : visited_indices_) std::cout << idx[ii] << " ";
+          for (size_t i = 0; i < A.GetN(); i++) {
+            const auto& at = A.GetAtomVector()[i];
 
-      std::cout << std::endl;
+            if (at.GetTetraStereo() == "@") {
+              valid_configurations_tetra.push_back(1);
+              true_stereo_idx.push_back(i);
+              position_in_true_stereo_idx[i] = ii++;
 
-      for (auto&& a : A.GetAtomVector())
-        std::cout << a << " " << a.GetTetraStereo() << " " << a.GetStereo()
-                  << std::endl;
-
-      const std::vector<size_t>& coming_from_orig =
-          smiles_gen_orig.GetComingFrom();
-      const std::vector<std::vector<size_t>>& going_to_orig =
-          smiles_gen_orig.GetGoingTo();
-      const std::vector<std::vector<size_t>>& ring_connections_orig =
-          smiles_gen_orig.GetRingConnections();
-      const std::vector<size_t>& coming_from_new = smiles_gen.GetComingFrom();
-      const std::vector<std::vector<size_t>>& going_to_new =
-          smiles_gen.GetGoingTo();
-      const std::vector<std::vector<size_t>>& ring_connections_new =
-          smiles_gen.GetRingConnections();
-      std::cout << idx << std::endl;
-
-      for (size_t i = 0; i < A.GetN(); i++) {
-        size_t idx_original = idx[i];
-        const CnvAtom& a_orig = A.GetAtomVector()[idx_original];
-        CnvAtom& a_new = A.GetAtomVectorNonConst()[i];
-        std::vector<size_t> nbrs_original_order(1);
-        nbrs_original_order.reserve(4);
-        std::vector<size_t> nbrs_new_order(1);
-        nbrs_new_order.reserve(4);
-
-        if (a_new.GetStereo()) {
-          stereo = true;
-          std::cout << "at " << i << std::endl;
-          std::cout << "orig positoin: " << idx_original << std::endl;
-          nbrs_original_order[0] = coming_from_orig[idx_original];
-          nbrs_original_order.insert(
-              nbrs_original_order.end(),
-              ring_connections_orig[idx_original].begin(),
-              ring_connections_orig[idx_original].end());
-          nbrs_original_order.insert(nbrs_original_order.end(),
-                                     going_to_orig[idx_original].begin(),
-                                     going_to_orig[idx_original].end());
-          // std::cout << a_orig << " " << a_orig.GetTetraStereo() << std::endl;
-          std::cout << a_new << " " << a_new.GetTetraStereo() << std::endl;
-          std::cout << nbrs_original_order << std::endl;
-          nbrs_new_order[0] = coming_from_new[i];
-          nbrs_new_order.insert(nbrs_new_order.end(),
-                                ring_connections_new[i].begin(),
-                                ring_connections_new[i].end());
-          nbrs_new_order.insert(nbrs_new_order.end(), going_to_new[i].begin(),
-                                going_to_new[i].end());
-
-          for (auto&& n : nbrs_new_order) n = idx[n];
-
-          std::cout << nbrs_new_order << std::endl;
-          std::cout << NumPerm(nbrs_original_order, nbrs_new_order)
-                    << std::endl;
-          size_t n = NumPerm(nbrs_original_order, nbrs_new_order);
-
-          if ((n % 2)) {
-            a_new.SwapTetrahedralStereo();
-            // a_new.SwapCTStereo();
-          }  // odd
-        }
-      }
-
-      if (stereo) {
-        std::vector<int> valid_configurations_tetra(0);
-        std::vector<size_t> true_stereo_idx(0);
-
-        for (size_t i = 0; i < A.GetN(); i++) {
-          const auto& at = A.GetAtomVector()[i];
-
-          if (at.GetTetraStereo() == "@") {
-            valid_configurations_tetra.push_back(1);
-            true_stereo_idx.push_back(i);
-
-          } else if (at.GetTetraStereo() == "@@") {
-            valid_configurations_tetra.push_back(0);
-            true_stereo_idx.push_back(i);
+            } else if (at.GetTetraStereo() == "@@") {
+              valid_configurations_tetra.push_back(0);
+              true_stereo_idx.push_back(i);
+              position_in_true_stereo_idx[i] = ii++;
+            }
           }
-        }
 
-        std::vector<int> smallest_conf = valid_configurations_tetra;
-        std::cout << " " << smallest_conf << std::endl;
-        const size_t n = true_stereo_idx.size();
-        std::vector<int> configuration_all(N);
-        std::vector<int> all_true(n, true);
-        std::vector<size_t> nbrs_original_order;
-        std::vector<size_t> nbrs_permuted_order;
-        std::vector<int> configuration_permuted(
-            valid_configurations_tetra.size());
-        std::fill(configuration_all.begin(), configuration_all.end(), -1);
-        const std::vector<size_t>* permuted_indices;
-        bool ignore(false);
+          // std::cout << valid_configurations_tetra << std::endl;
+          std::vector<int> smallest_conf = valid_configurations_tetra;
+          // std::cout << " " << smallest_conf << std::endl;
+          const size_t n = true_stereo_idx.size();
+          std::vector<int> configuration_all(N);
+          std::vector<int> all_true(n, true);
+          std::vector<size_t> nbrs_original_order;
+          std::vector<size_t> nbrs_permuted_order;
+          std::vector<int> configuration_permuted(
+              valid_configurations_tetra.size());
+          std::fill(configuration_all.begin(), configuration_all.end(), -1);
+          const std::vector<size_t>* permuted_indices;
+          bool ignore(false);
 
-        for (size_t i = 0; i < true_stereo_idx.size(); i++)
-          configuration_all[true_stereo_idx[i]] = valid_configurations_tetra[i];
+          for (size_t i = 0; i < true_stereo_idx.size(); i++)
+            configuration_all[true_stereo_idx[i]] =
+                valid_configurations_tetra[i];
 
-        PermutationIterator perm_it(u_automorph);
+          while (perm_it.GetNextPermutation()) {
+            size_t jpos;
+            permuted_indices = perm_it.GetPermutedIndices();
 
-        while (perm_it.GetNextPermutation()) {
-          permuted_indices = perm_it.GetPermutedIndices();
-          std::cout << *(perm_it.GetCombinedPermutation()) << std::endl;
-          bool skip = false;
+            if (A.EqualTo(*(perm_it.GetPermutedIndices()), jpos)) {
+              (u_automorph)[perm_it.GetSmallestDiffIndex()].push_back(
+                  *(perm_it.GetCombinedPermutation()));
+              // std::cout << *(perm_it.GetCombinedPermutation()) << std::endl;
+              perm_it.SetCurrentIndexToSmallestDiffIndex();
 
-          for (size_t j = 0; j < true_stereo_idx.size() && !skip; j++) {
-            size_t idx = true_stereo_idx[j];
-            size_t idx_permuted = (*permuted_indices)[idx];
+            } else {
+              if (perm_it.GetCurrentIndex() > jpos)
+                perm_it.SetCurrentIndex(jpos);
+            }
+          }
 
-            // if the stereocenter was swapped, determine new stereo
-            // configuration
-            if (idx != idx_permuted) {
-              NeighborOrder(idx, idx_permuted, *permuted_indices,
-                            nbrs_original_order, nbrs_permuted_order,
-                            coming_from_new, going_to_new,
-                            ring_connections_new);
-              std::cout << nbrs_original_order << std::endl;
-              std::cout << nbrs_permuted_order << std::endl;
+          std::vector<int> conf(valid_configurations_tetra.size(), 0);
 
-              if (NumPerm(nbrs_original_order, nbrs_permuted_order) % 2 == 0) {
-                if (configuration_all[idx] != configuration_all[idx_permuted]) {
-                  skip = true;
-                  break;
-                }
+          /* TODO : find equivalent configuration that is smaller*/
+          while (conf < smallest_conf) {
+            // std::cout << "conf " << conf << std::endl;
+            PermutationIterator perm_it(u_automorph);
+            while (perm_it.GetNextPermutation()) {
+              permuted_indices = perm_it.GetPermutedIndices();
+              // std::cout << *(perm_it.GetCombinedPermutation()) << std::endl;
 
-                configuration_permuted[j] = configuration_all[idx_permuted];
+              for (size_t j = 0; j < true_stereo_idx.size(); j++) {
+                size_t idx = true_stereo_idx[j];
+                size_t idx_permuted = (*permuted_indices)[idx];
 
-              } else {
-                if (configuration_all[idx] == configuration_all[idx_permuted]) {
-                  skip = true;
-                  break;
-                }
+                // if the stereocenter was swapped, determine new stereo
+                // configuration
+                // if (idx != idx_permuted) {
+                NeighborOrder(idx, idx_permuted, *permuted_indices,
+                              nbrs_original_order, nbrs_permuted_order,
+                              coming_from_new, going_to_new,
+                              ring_connections_new);
+                // std::cout << nbrs_original_order << std::endl;
+                // std::cout << nbrs_permuted_order << std::endl;
+                // std::cout << idx << "  " << idx_permuted << std::endl;
+                // std::cout << configuration_all << std::endl;
 
-                configuration_permuted[j] = !configuration_all[idx_permuted];
+                if (NumPerm(nbrs_original_order, nbrs_permuted_order) % 2 == 0)
+                  configuration_permuted[j] = configuration_all
+                      [position_in_true_stereo_idx[idx_permuted]];
+
+                else
+                  configuration_permuted[j] =
+                      !configuration_all
+                          [position_in_true_stereo_idx[idx_permuted]];
+
+                //} else
+                // configuration_permuted[j] = configuration_all[idx];
               }
 
-            } else
-              configuration_permuted[j] = configuration_all[idx];
+              // std::cout << "perm " << configuration_permuted << std::endl;
+
+              if (configuration_permuted == conf) {
+                // std::cout << configuration_permuted << std::endl;
+                smallest_conf = conf;
+                break;
+              }
+            }
+
+            ++conf;
+          }
+          //*/
+
+          // std::cout << smallest_conf << std::endl;
+
+          for (size_t index : true_stereo_idx) {
+            if (smallest_conf[position_in_true_stereo_idx[index]] == 0) {
+              CnvAtom& a = A.GetAtom(index);
+              a.SetTetraStereo("@@");
+
+            } else {
+              CnvAtom& a = A.GetAtom(index);
+              a.SetTetraStereo("@");
+            }
           }
 
-          if (!skip) {
-            std::cout << configuration_permuted << std::endl;
-
-            if (configuration_permuted < smallest_conf)
-              smallest_conf = configuration_permuted;
-          }
-        }
-
-        std::cout << smallest_conf << std::endl;
-
-        for (size_t index : true_stereo_idx) {
-          if (smallest_conf[index] == 0)
-            A.GetAtomVectorNonConst()[index].SetTetraStereo("@@");
-
-          else
-            A.GetAtomVectorNonConst()[index].SetTetraStereo("@");
+          smiles_canon = smiles_gen.UpdateStereo();
+          // std::cout << smallest_conf << std::endl;
         }
       }
-
-      if (stereo) smiles_canon = smiles_gen.UpdateStereo();
     }
   }
 }
@@ -526,7 +538,6 @@ void SmilesHandler::PrintOutput(const std::string& smiles_orig,
 
   *out << '\n';
 }
-
 }  // namespace cnv
 
 }  // namespace combi_ff

@@ -26,8 +26,22 @@ for index, line in enumerate(lines):
   smiles = [s for s in line.split(' ') if s != "" and s != "\n"]
   if(len(smiles) != 2):
     continue
-  print(smiles)
-  mol1 = Chem.MolFromSmiles(smiles[0])
-  mol2 = Chem.MolFromSmiles(smiles[1])
-  if(Chem.MolToSmiles(mol1) != Chem.MolToSmiles(mol2)):
-    print(smiles, "not equal!!")
+  try:
+    mol1 = Chem.MolFromSmiles(smiles[0])
+    mol2 = Chem.MolFromSmiles(smiles[1])
+    if("/" not in smiles[0] and "\\" not in smiles[0]): # cis-trans stereo not implemented yet -> don't check
+      if(Chem.MolToSmiles(mol1) != Chem.MolToSmiles(mol2)):  
+        print(smiles[0], smiles[1], "not equal!!", Chem.MolToSmiles(mol1), Chem.MolToSmiles(mol2))
+      
+  except BaseException as err: # on RDKIT error: only stop if it comes from converted SMILES, not original one
+    try:
+      mol2 = Chem.MolFromSmiles(smiles[1])
+      Chem.MolToSmiles(mol2)
+    except BaseException as err:
+      print("Problem with converted smiles: ", smiles[1])
+      print(err)
+      pass
+    print("Problem with original smiles: ", smiles[0])
+    pass
+  
+  

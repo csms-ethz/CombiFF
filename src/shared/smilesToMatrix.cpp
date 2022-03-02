@@ -301,6 +301,19 @@ void CreateNameVector(std::vector<combi_ff::SmilesBlock>& names,
         }
       }
 
+      // case that only square brackets without charge/stereo, e.g. [Cl]
+      /*else if (smiles[i] == ']') {
+
+        if (names[curr_atom - 1].element_name.front() == '['){
+          names[curr_atom -1].element_name =
+      names[curr_atom-1].element_name.substr(1,
+      names[curr_atom-1].element_name.size()-1);
+          names[curr_atom-1].opening_braces += "(";
+          names[curr_atom-1].closing_braces += ")";
+        }
+
+      }*/
+
       if (smiles[i] == 'H') {
         if (++i == smiles.size())
           throw combi_ff::input_warning("unclosed [ encountered in " + smiles);
