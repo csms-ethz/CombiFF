@@ -17,7 +17,7 @@ namespace enu {
 
 class FamilySpecifications;
 class InputOutput;
-class IOFileProperties;
+struct IOFileProperties;
 class Family;
 
 class EnumRun {

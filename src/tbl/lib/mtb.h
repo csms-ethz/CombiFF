@@ -10,7 +10,7 @@ namespace combi_ff {
 
 namespace topology_builder {
 
-class IOFileProperties;
+struct IOFileProperties;
 
 static const std::vector<std::string> parameter_count_comments({"NB", "NBA",
                                                                 "NIDA", "NDA"});

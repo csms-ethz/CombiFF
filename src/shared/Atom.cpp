@@ -57,7 +57,7 @@ Atom::Atom(combi_ff::ElementIdentifier identifier_)
   properties = element->second;
   symbol_united_atom = properties.symbol;
 
-  if (num_hydrogens_ != -1) SetNumFixedHydrogens(num_hydrogens_);
+  if (num_hydrogens_ != -1) SetNumFixedHydrogens((size_t)num_hydrogens_);
 
   neighbors.reserve(properties.degree);
 }
@@ -261,16 +261,16 @@ void CnvAtom::SetFormalCharge(const std::string& f) {
   if (formal_charge.size()) {
     if (formal_charge.front() == '+') {
       if (std::isdigit(formal_charge.back()))
-        SetDegree(GetDegree() -
-                  std::stoi(std::string(1, formal_charge.back())));
+        SetDegree((size_t)((int)GetDegree() -
+                           std::stoi(std::string(1, formal_charge.back()))));
 
       else
         SetDegree(GetDegree() - 1);
 
     } else {  // formal charge negative
       if (std::isdigit(formal_charge.back()))
-        SetDegree(GetDegree() +
-                  std::stoi(std::string(1, formal_charge.back())));
+        SetDegree((size_t)((int)GetDegree() +
+                           std::stoi(std::string(1, formal_charge.back()))));
 
       else
         SetDegree(GetDegree() + 1);
@@ -282,16 +282,16 @@ void CnvAtom::SetFormalCharge(const std::string& f) {
   if (formal_charge.size()) {
     if (formal_charge.front() == '+') {
       if (std::isdigit(formal_charge.back()))
-        SetDegree(GetDegree() +
-                  std::stoi(std::string(1, formal_charge.back())));
+        SetDegree((size_t)((int)GetDegree() +
+                           std::stoi(std::string(1, formal_charge.back()))));
 
       else
         SetDegree(GetDegree() + 1);
 
     } else {  // formal charge negative
       if (std::isdigit(formal_charge.back()))
-        SetDegree(GetDegree() -
-                  std::stoi(std::string(1, formal_charge.back())));
+        SetDegree((size_t)((int)GetDegree() -
+                           std::stoi(std::string(1, formal_charge.back()))));
 
       else
         SetDegree(GetDegree() - 1);

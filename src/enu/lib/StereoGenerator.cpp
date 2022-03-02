@@ -1589,6 +1589,23 @@ bool StereoGenerator::IsSmaller(Config& perm, Config& orig) const {
   return false;
 }
 
+Config& operator++(Config& b) {
+  auto&& it = std::find(b.rbegin(), b.rend(), 0);
+
+  if (it != b.rend()) *it = 1;
+
+  std::fill(b.rbegin(), it, 0);
+  /*for (int i = (int)b.size() - 1; i >= 0; i--) {
+    if (b[i] == 0) {
+      b[i] = 1;
+      return b;
+
+    } else if (b[i] == 1)
+      b[i] = 0;
+  }*/
+  return b;
+}
+  
 bool StereoGenerator::NeighborsArePermuted(
     const Atom& a, const std::vector<size_t>& permuted_indices) {
   for (auto neighbor : a.GetNeighbors()) {

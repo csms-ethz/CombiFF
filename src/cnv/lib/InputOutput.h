@@ -1,7 +1,7 @@
 // Copyright 2022 Salomé Rieder, CSMS ETH Zürich
 
 #ifndef INPUTOUTPUTCVN_H
-#define INPUTPUTPUTCVN_H
+#define INPUTOUTPUTCVN_H
 
 #include <fstream>
 #include <list>

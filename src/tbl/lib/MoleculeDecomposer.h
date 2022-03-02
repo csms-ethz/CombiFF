@@ -38,8 +38,8 @@ class FamilyDecomposer {
   std::string filename_molecule_decomposition{""};
   std::string filename_family_isomer_enumeration{""};
   std::string family_code{""};
-  const IOFileProperties& io_file_properties{IOFileProperties()};
-  const std::vector<TblFragment>& tbl_fragments{std::vector<TblFragment>(0)};
+  const IOFileProperties* io_file_properties{NULL};
+  const std::vector<TblFragment>* tbl_fragments{NULL};
 };
 
 class MoleculeDecomposer : private FamilyDecomposer {
