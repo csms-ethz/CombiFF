@@ -886,14 +886,14 @@ void StereoGenerator::FindValidParaConfigurations(
 
           if (NumPerm(nbrs_original_order, nbrs_permuted_order) % 2 == 0) {
             if (vc_tet[i] !=
-                vc_tet[position_in_true_stereo_idx[(*permuted_indices)[idx]]]) {
+                vc_tet[position_in_true_stereo_idx[idx_permuted]]) {
               add = false;
               break;
             }
 
           } else {
             if (vc_tet[i] ==
-                vc_tet[position_in_true_stereo_idx[(*permuted_indices)[idx]]]) {
+                vc_tet[position_in_true_stereo_idx[idx_permuted]]) {
               add = false;
               break;
             }
@@ -1589,23 +1589,6 @@ bool StereoGenerator::IsSmaller(Config& perm, Config& orig) const {
   return false;
 }
 
-Config& operator++(Config& b) {
-  auto&& it = std::find(b.rbegin(), b.rend(), 0);
-
-  if (it != b.rend()) *it = 1;
-
-  std::fill(b.rbegin(), it, 0);
-  /*for (int i = (int)b.size() - 1; i >= 0; i--) {
-    if (b[i] == 0) {
-      b[i] = 1;
-      return b;
-
-    } else if (b[i] == 1)
-      b[i] = 0;
-  }*/
-  return b;
-}
-  
 bool StereoGenerator::NeighborsArePermuted(
     const Atom& a, const std::vector<size_t>& permuted_indices) {
   for (auto neighbor : a.GetNeighbors()) {

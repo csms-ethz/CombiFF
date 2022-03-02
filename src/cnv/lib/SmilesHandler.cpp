@@ -352,9 +352,11 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
 
         for (size_t i = 0; i < A.GetN(); i++) {
           const auto& at = A.GetAtomVector()[i];
+
           if (at.GetTetraStereo() == "@") {
             valid_configurations_tetra.push_back(1);
             true_stereo_idx.push_back(i);
+
           } else if (at.GetTetraStereo() == "@@") {
             valid_configurations_tetra.push_back(0);
             true_stereo_idx.push_back(i);
@@ -363,7 +365,6 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
 
         std::vector<int> smallest_conf = valid_configurations_tetra;
         std::cout << " " << smallest_conf << std::endl;
-
         const size_t n = true_stereo_idx.size();
         std::vector<int> configuration_all(N);
         std::vector<int> all_true(n, true);
@@ -373,7 +374,6 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
             valid_configurations_tetra.size());
         std::fill(configuration_all.begin(), configuration_all.end(), -1);
         const std::vector<size_t>* permuted_indices;
-
         bool ignore(false);
 
         for (size_t i = 0; i < true_stereo_idx.size(); i++)
@@ -384,8 +384,9 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
         while (perm_it.GetNextPermutation()) {
           permuted_indices = perm_it.GetPermutedIndices();
           std::cout << *(perm_it.GetCombinedPermutation()) << std::endl;
+          bool skip = false;
 
-          for (size_t j = 0; j < true_stereo_idx.size(); j++) {
+          for (size_t j = 0; j < true_stereo_idx.size() && !skip; j++) {
             size_t idx = true_stereo_idx[j];
             size_t idx_permuted = (*permuted_indices)[idx];
 
@@ -396,31 +397,45 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
                             nbrs_original_order, nbrs_permuted_order,
                             coming_from_new, going_to_new,
                             ring_connections_new);
-
               std::cout << nbrs_original_order << std::endl;
               std::cout << nbrs_permuted_order << std::endl;
 
-              if (NumPerm(nbrs_original_order, nbrs_permuted_order) % 2 == 0)
+              if (NumPerm(nbrs_original_order, nbrs_permuted_order) % 2 == 0) {
+                if (configuration_all[idx] != configuration_all[idx_permuted]) {
+                  skip = true;
+                  break;
+                }
+
                 configuration_permuted[j] = configuration_all[idx_permuted];
 
-              else
+              } else {
+                if (configuration_all[idx] == configuration_all[idx_permuted]) {
+                  skip = true;
+                  break;
+                }
+
                 configuration_permuted[j] = !configuration_all[idx_permuted];
+              }
 
             } else
               configuration_permuted[j] = configuration_all[idx];
           }
-          std::cout << configuration_permuted << std::endl;
-          if (configuration_permuted < smallest_conf) {
-            smallest_conf = configuration_permuted;
+
+          if (!skip) {
+            std::cout << configuration_permuted << std::endl;
+
+            if (configuration_permuted < smallest_conf)
+              smallest_conf = configuration_permuted;
           }
         }
 
         std::cout << smallest_conf << std::endl;
 
         for (size_t index : true_stereo_idx) {
-          if (smallest_conf[index] == 0) {
+          if (smallest_conf[index] == 0)
             A.GetAtomVectorNonConst()[index].SetTetraStereo("@@");
-          } else
+
+          else
             A.GetAtomVectorNonConst()[index].SetTetraStereo("@");
         }
       }
