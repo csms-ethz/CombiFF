@@ -1160,9 +1160,7 @@ void AdjacencyMatrix<T, AtomClass>::SortAtomVector() {
   for (size_t i = 0; i < this->N; i++) {
     for (size_t j = 0; j < this->N; j++) {
       if (atoms[i] < atoms[j]) {
-        auto temp = atoms[i];
-        atoms[i] = atoms[j];
-        atoms[j] = temp;
+        std::swap(atoms[i], atoms[j]);
         this->Permute(combi_ff::Permutation({i, j}));
       }
     }
@@ -1212,9 +1210,7 @@ void AdjacencyMatrix<T, AtomClass>::SortAtomVector() {
           // std::endl;
           this->Permute(combi_ff::Permutation({ii, jj}));
           // std::cout << &isAromatic << std::endl;
-          auto temp = GetAtom(ii);
-          GetAtom(ii) = GetAtom(jj);
-          GetAtom(jj) = temp;
+          std::swap(atoms[ii], atoms[jj]);
           // A.print();
           ii++;
           jj--;
@@ -1247,9 +1243,7 @@ void AdjacencyMatrix<T, AtomClass>::SortAtomVector() {
           // std::endl;
           this->Permute(combi_ff::Permutation({ii, jj}));
           // std::cout << &isAromatic << std::endl;
-          auto temp = GetAtom(ii);
-          GetAtom(ii) = GetAtom(jj);
-          GetAtom(jj) = temp;
+          std::swap(atoms[ii], atoms[jj]);
           // A.print();
           ii++;
           jj--;
@@ -1273,9 +1267,7 @@ std::vector<size_t> AdjacencyMatrix<T, AtomClass>::SortAtomVector(
   for (uint i = 0; i < this->N; i++) {
     for (uint j = 0; j < this->N; j++) {
       if (atoms[i] < atoms[j]) {
-        auto temp = atoms[i];
-        atoms[i] = atoms[j];
-        atoms[j] = temp;
+        std::swap(atoms[i], atoms[j]);
         this->Permute(combi_ff::Permutation({i, j}));
         std::swap(is_aromatic[i], is_aromatic[j]);
         std::swap(idx[i], idx[j]);
@@ -1331,9 +1323,7 @@ std::vector<size_t> AdjacencyMatrix<T, AtomClass>::SortAtomVector(
           std::swap(is_aromatic[ii], is_aromatic[jj]);
           std::swap(idx[ii], idx[jj]);
           // std::cout << &isAromatic << std::endl;
-          auto temp = GetAtom(ii);
-          GetAtom(ii) = GetAtom(jj);
-          GetAtom(jj) = temp;
+          std::swap(atoms[ii], atoms[jj]);
           // A.print();
           ii++;
           jj--;
@@ -1368,9 +1358,7 @@ std::vector<size_t> AdjacencyMatrix<T, AtomClass>::SortAtomVector(
           std::swap(is_aromatic[ii], is_aromatic[jj]);
           std::swap(idx[ii], idx[jj]);
           // std::cout << &isAromatic << std::endl;
-          auto temp = GetAtom(ii);
-          GetAtom(ii) = GetAtom(jj);
-          GetAtom(jj) = temp;
+          std::swap(atoms[ii], atoms[jj]);
           // A.print();
           ii++;
           jj--;
