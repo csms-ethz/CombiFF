@@ -23,6 +23,7 @@ class Handler {
 
   const int column_width;
   const size_t canon_iteration_limit = 100000;
+  const size_t limit_stereo = 30;
   std::vector<bool>& print_options;
   std::list<std::pair<std::string, std::string>>
       input_list;  // pair: (input source, input)

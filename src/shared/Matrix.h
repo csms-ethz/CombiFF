@@ -1151,7 +1151,7 @@ void AdjacencyMatrix<T, AtomClass>::MakeCanonical(
   if (iteration == limit)
     std::cerr
         << "?Warning: didn't finish matrix canonicalization due to iteration "
-           "limit. You can change the limit in src/cnv/Handler.h\n";
+           "limit. You can change the limit in src/cnv/lib/Handler.h\n";
 
   *this = AdjacencyMatrix(B);
   matrix_permutations.insert(matrix_permutations.end(),

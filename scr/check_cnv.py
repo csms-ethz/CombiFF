@@ -39,7 +39,7 @@ for index, line in enumerate(lines):
       Chem.MolToSmiles(mol2)
     except BaseException as err:
       print("Problem with converted smiles: ", smiles[1])
-      print(err)
+      #print(err)
       pass
     print("Problem with original smiles: ", smiles[0])
     pass

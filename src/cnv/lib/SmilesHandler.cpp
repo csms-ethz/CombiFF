@@ -245,30 +245,43 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
 
       for (auto p : matrix_permutations) std::swap(idx[p.first], idx[p.second]);
 
+      cnv::SmilesGeneratorCnv smiles_gen(A);
+      smiles_gen.GenerateSmiles();
+      smiles_canon = smiles_gen.GetSmiles();
+
       if (stereo) {
-        // Get automorphism group of extended matrix
-        PermutationIterator perm_it(u);
-        /*if(output_file.is_open())
-          output_file << "canonicalizing permutation is " << idx << '\n';
-        else
-          std::cout << "canonicalizing permutation is " << idx << '\n';*/
-        // A.Print();
-        cnv::SmilesGeneratorCnv smiles_gen(A);
-        smiles_gen.GenerateSmiles();
-        smiles_canon = smiles_gen.GetSmiles();
-        // std::cout << smiles_canon << std::endl;
-        const auto& visited_indices_(smiles_gen.GetVisitedIndices());
-        /*std::cout << "new order of smiles: ";
+        if (A.GetN() > limit_stereo) {
+          std::cerr << "?Warning: molecule too large to canonicalize stereo "
+                       "information. You can change this limit in "
+                       "src/cnv/lib/Handler.h\n";
 
-        for (auto ii : visited_indices_) std::cout << idx[ii] << " ";
+          for (size_t i = 0; i < A.GetN(); i++) {
+            CnvAtom& a = A.GetAtom(i);
 
-        std::cout << std::endl;
+            if (a.GetStereo()) a.SetTetraStereo("");
+          }
 
-        for (auto && a : A.GetAtomVector())
-          std::cout << a << " " << a.GetTetraStereo() << " " << a.GetStereo()
-                    << std::endl;*/
+          smiles_canon = smiles_gen.UpdateStereo();
 
-        if (stereo) {
+        } else {
+          // Get automorphism group of extended matrix
+          PermutationIterator perm_it(u);
+          /*if(output_file.is_open())
+            output_file << "canonicalizing permutation is " << idx << '\n';
+          else
+            std::cout << "canonicalizing permutation is " << idx << '\n';*/
+          // A.Print();
+          // std::cout << smiles_canon << std::endl;
+          const auto& visited_indices_(smiles_gen.GetVisitedIndices());
+          /*std::cout << "new order of smiles: ";
+
+          for (auto ii : visited_indices_) std::cout << idx[ii] << " ";
+
+          std::cout << std::endl;
+
+          for (auto && a : A.GetAtomVector())
+            std::cout << a << " " << a.GetTetraStereo() << " " << a.GetStereo()
+                      << std::endl;*/
           const std::vector<size_t>& coming_from_orig =
               smiles_gen_orig.GetComingFrom();
           const std::vector<std::vector<size_t>>& going_to_orig =
@@ -390,6 +403,7 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
           while (conf < smallest_conf) {
             // std::cout << "conf " << conf << std::endl;
             PermutationIterator perm_it(u_automorph);
+
             while (perm_it.GetNextPermutation()) {
               permuted_indices = perm_it.GetPermutedIndices();
               // std::cout << *(perm_it.GetCombinedPermutation()) << std::endl;
@@ -397,7 +411,6 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
               for (size_t j = 0; j < true_stereo_idx.size(); j++) {
                 size_t idx = true_stereo_idx[j];
                 size_t idx_permuted = (*permuted_indices)[idx];
-
                 // if the stereocenter was swapped, determine new stereo
                 // configuration
                 // if (idx != idx_permuted) {
@@ -434,6 +447,7 @@ void SmilesHandler::ConvertSmiles(const std::string& smiles_orig,
 
             ++conf;
           }
+
           //*/
 
           // std::cout << smallest_conf << std::endl;
