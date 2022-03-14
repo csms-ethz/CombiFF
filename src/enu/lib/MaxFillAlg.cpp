@@ -341,7 +341,14 @@ bool MaxFillAlg::IsCanonical() {
   // const size_t z = i;
   // const size_t nextZ = A.GetMaxRow(i_plus_one) - 1;
   RepresentationSystem& u_next = row_stabilizer_rep[A.GetTypeNr(i) + 1];
-  u_next.assign(id.begin(), id.end());
+  u_next.assign(
+      id.begin(),
+      id.end());  // in principle, only u_next[0] to u_next[i] have to be
+                  // initialized, as u_next[i+1] to u_next[N] are filled below,
+                  // speed gain relatively negligible. Safer to initialize.
+  // for(size_t ii = 0; ii <= i; ii++)
+  //   u_next[ii] = id[ii];
+
   RepresentationSystem& u_prev = row_stabilizer_rep[A.GetTypeNr(i)];
   size_t highest_permuted_idx(0);
   perm_it.Reset(&u_prev, /*z*/ i);
@@ -369,7 +376,9 @@ bool MaxFillAlg::IsCanonical() {
 
   LambdaVector& lambda_prime_cur = lambda_prime[i + 1];
   num_perms_lambda_z_prime.resize(N);
-  num_perms_lambda_z_prime.assign(i + 1, 1);
+  num_perms_lambda_z_prime.assign(
+      i + 1, 1);  // elements are not accessed, but speed gain by not
+                  // initializing is negligible -> safer to initialize
   size_t idx(i + 1);
 
   for (size_t ii = 0; ii < lambda_prime_cur.size(); ii++) {

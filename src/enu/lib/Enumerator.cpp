@@ -87,7 +87,7 @@ void Enumerator::EnumerateIsomers() {
       throw std::runtime_error(
           "atom_types vector is empty in Enumerator::enumerateIsomers()");
 
-    for (auto&& lambda : lambda_ranges) {
+    for (const auto& lambda : lambda_ranges) {
       if (lambda.size() != atom_types.size())
         throw std::runtime_error(
             "lambdaRanges vector doesn't have same size as aotmTypes vector in "
@@ -673,7 +673,7 @@ std::string Enumerator::CreateCanonicalFormula(
       // const Pseudoatom* psa = NULL;
       auto psa = pseudoatoms->find(used_atoms[i].GetElementSymbol());
 
-      for (auto&& a : psa->second.GetAtoms()) {
+      for (const auto& a : psa->second.GetAtoms()) {
         AtomVector<combi_ff::Atom> atmp(l[i], a);
         atoms_full.insert(atoms_full.end(), atmp.begin(), atmp.end());
       }

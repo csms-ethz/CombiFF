@@ -42,7 +42,7 @@ const std::vector<size_t>* PermutationIterator::GetPermutedIndices() {
 
   for (size_t ii = smallest_diff_index; ii < p.size(); ii++) {
     if (p[ii]) {
-      for (auto&& perm : (*u)[ii][p[ii]])
+      for (const Permutation& perm : (*u)[ii][p[ii]])
         std::swap(permuted_indices[perm.first], permuted_indices[perm.second]);
     }
   }
@@ -53,28 +53,29 @@ const std::vector<size_t>* PermutationIterator::GetPermutedIndices() {
 const std::vector<size_t>* PermutationIterator::GetPermutedIndices(
     size_t& highest_permuted_index) {
   std::iota(permuted_indices.begin(), permuted_indices.end(), 0);
-  size_t hi = 0;
+  highest_permuted_index = 0;
 
   for (size_t ii = smallest_diff_index; ii < p.size(); ii++) {
     if (p[ii]) {
-      for (auto&& perm : (*u)[ii][p[ii]]) {
+      for (const Permutation& perm : (*u)[ii][p[ii]]) {
         std::swap(permuted_indices[perm.first], permuted_indices[perm.second]);
-        hi = std::max(hi, perm.second);
+        if (perm.second > highest_permuted_index)
+          highest_permuted_index = perm.second;
       }
     }
   }
 
-  highest_permuted_index = hi;
   return &permuted_indices;
 }
 
 bool PermutationIterator::GetNextPermutation() {
-  while (current_index <
-         p.size()) {  // note: current_index is unsigned -> when current_index =
-                      // -1, modular arithmetics leads to current_index > p.size
+  // note: current_index is unsigned -> when current_index =
+  // -1, modular arithmetics leads to current_index > p.size
+  while (current_index < p.size()) {
     if (p[current_index] + 1 < (*u)[current_index].size()) {
       p[current_index]++;
-      smallest_diff_index = std::min(smallest_diff_index, current_index);
+      if (current_index < smallest_diff_index)
+        smallest_diff_index = current_index;
       current_index = size_u_minus_one;
       return true;
 
