@@ -27,7 +27,7 @@ id_list = []
 num_iso = root.find('number_of_isomers').text
 num_printed = 0
 
-molsPerRow = 20
+molsPerRow = 10
 molsPerPage = int(molsPerRow*(molsPerRow)*2)
 
 os.makedirs(img_dir, exist_ok=True)
