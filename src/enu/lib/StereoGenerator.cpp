@@ -18,6 +18,7 @@ StereoGenerator::StereoGenerator(const enu::AdjacencyMatrix& A,
       num_stereo_centers(0),
       num_ct_bonds(0),
       visited_indices(smiles_gen.GetVisitedIndices()),
+      smiles(smiles_gen.GetSmiles()),
       smiles_blocks(smiles_gen.GetSmilesBlocks()),
       coming_from(smiles_gen.GetComingFrom()),
       going_to(smiles_gen.GetGoingTo()),
@@ -1635,7 +1636,7 @@ size_t StereoGenerator::NumPerm(const std::vector<size_t>& original,
 
     default:
       throw std::runtime_error("diff should be 0, 2, 3, or 4, but it is " +
-                               std::to_string(diff));
+                               std::to_string(diff) + " for " + smiles);
   }
 }
 
@@ -1682,18 +1683,27 @@ void StereoGenerator::NeighborOrder(
     const std::vector<size_t>& permuted_indices,
     std::vector<size_t>& nbrs_original_order,
     std::vector<size_t>& nbrs_permuted_order) const {
-  nbrs_original_order.resize(1);
-  nbrs_original_order[0] = coming_from[idx];
+  if (idx != visited_indices[0]) {
+    nbrs_original_order.resize(1);
+    nbrs_original_order[0] = coming_from[idx];
+  } else {
+    nbrs_original_order.resize(0);
+  }
   nbrs_original_order.insert(nbrs_original_order.end(),
                              ring_connections[idx].begin(),
                              ring_connections[idx].end());
   nbrs_original_order.insert(nbrs_original_order.end(), going_to[idx].begin(),
                              going_to[idx].end());
-  nbrs_permuted_order.resize(1);
-  nbrs_permuted_order[0] =
-      std::distance(permuted_indices.begin(),
-                    std::find(permuted_indices.begin(), permuted_indices.end(),
-                              coming_from[idx_permuted]));
+
+  if (idx_permuted != visited_indices[0]) {
+    nbrs_permuted_order.resize(1);
+    nbrs_permuted_order[0] = std::distance(
+        permuted_indices.begin(),
+        std::find(permuted_indices.begin(), permuted_indices.end(),
+                  coming_from[idx_permuted]));
+  } else {
+    nbrs_permuted_order.resize(0);
+  }
 
   for (const auto& rc : ring_connections[idx_permuted])
     nbrs_permuted_order.push_back(std::distance(

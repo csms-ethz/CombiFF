@@ -137,7 +137,7 @@ void InputOutput::AddInputFile(size_t& i) {
   arguments_file.close();
 }
 
-// read the formula given after the -atoms keyword
+// read the formula given after the -formula keyword
 //  ->for each atom type, first read the atom type name, and then read the
 //  different lambdas
 void InputOutput::AddAtoms(size_t& i) {
@@ -372,8 +372,8 @@ void InputOutput::PrintInputOptions() {
       << "-output_directory: used to specify in which directory the '.fie' "
          "files should be saved\n\n"
       << "-output: used to specify the file name of the '.fie' file that is "
-         "created for the formulas given by -atoms\n\n"
-      << "-atoms: used to specify a molecular formula. The following formats "
+         "created for the formulas given by -formula\n\n"
+      << "-formula: used to specify a molecular formula. The following formats "
          "can be used to specify the amounts and types of the atoms:\n"
       << "   - Xn, where X is an atom type and n is a number\n"
       << "   - X[n-m], where X is an atom type and n-m is a range of nubmers\n"
@@ -392,9 +392,10 @@ void InputOutput::PrintInputOptions() {
          "order to specify a united atom, where X is an atom type and n is a "
          "number,\n     specifying the amount of hydrogen atoms in the united "
          "atom\n"
-      << "   - the -atoms keyword can be used several times, in order to "
+      << "   - the -formula keyword can be used several times, in order to "
          "specify different molecules\n"
-      << "   - example: -atoms C10H12Cl>1 F[2,3,5-4] -atoms C10 {CH3}4 H*\n\n"
+      << "   - example: -formula C10H12Cl>1 F[2,3,5-4] -formula C10 {CH3}4 "
+         "H*\n\n"
       << "-max_bond_degree: used to specify maximum bond degree between two "
          "atoms\n"
       << "   - specify by using -maxDeg n, where n is the desired maximum "

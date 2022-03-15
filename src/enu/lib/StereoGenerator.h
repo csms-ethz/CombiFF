@@ -94,6 +94,7 @@ class StereoGenerator {
   size_t num_stereo_centers;
   size_t num_ct_bonds;
   const std::vector<size_t>& visited_indices;
+  const std::string& smiles;
 
   const std::vector<SmilesBlock>& smiles_blocks;
   const std::vector<size_t>& coming_from;
