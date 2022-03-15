@@ -270,17 +270,18 @@ void InputOutput::AddOutputDir(size_t& i) {
     io_file_properties.output_dir += '/';
 }
 
-// read in the maximum bond degree parameter after the -maxDeg keyword
+// read in the maximum bond degree parameter after the -max_bond_degree keyword
 void InputOutput::AddMaxDegree(size_t& i) {
   if (i + 1 >= arguments.size())
-    throw combi_ff::input_error("expected integer argument after -maxDeg");
+    throw combi_ff::input_error(
+        "expected integer argument after -max_bond_degree");
 
   try {
     enum_spec.max_degree = std::stoi(arguments[++i]);
 
   } catch (const std::invalid_argument& ia) {
     throw combi_ff::input_error(
-        "expected integer argument after -maxDeg, but encountered " +
+        "expected integer argument after -max_bond_degree, but encountered " +
         arguments[i] + " . " + ia.what());
   }
 }
@@ -398,8 +399,8 @@ void InputOutput::PrintInputOptions() {
          "H*\n\n"
       << "-max_bond_degree: used to specify maximum bond degree between two "
          "atoms\n"
-      << "   - specify by using -maxDeg n, where n is the desired maximum "
-         "degree number\n"
+      << "   - specify by using -max_bond_degree n, where n is the desired "
+         "maximum degree number\n"
       << "   - defaults to 4, if not specified\n\n"
       << "-unsaturations: used to specify the desired number of unsaturations. "
          "The following formats can be used:\n"
