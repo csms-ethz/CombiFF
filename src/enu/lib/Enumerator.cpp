@@ -643,19 +643,12 @@ PRINT CONSOLE OUTPUT
 ********************/
 void Enumerator::PrintState(const size_t n_cur_isomers) {
   if (!(n_cur_isomers % 100)) {
-    // std::cout << ". " << std::flush;
-    // if(!(n_cur_isomers % 10000)) {
     std::cout << " -> found " << n_cur_isomers << std::flush << '\r';
-    /*std::cout << '\n'
-          << std::setw(3) << std::setfill('0') << n_cur_isomers/1000000000 <<
-       "'"
-              << std::setw(3) << std::setfill('0') <<
-       (n_cur_isomers/1000000)%1000 << "'"
-              << std::setw(3) << std::setfill('0') << (n_cur_isomers/1000)%1000
-       << "'"
-              << std::setw(3) << std::setfill('0') << (n_cur_isomers%1000) << "
-       ";*/
-    //}
+    /*if(!(n_cur_isomers % 100000)){
+      std::string name = ".enu_temp_";
+      remove(name.c_str());
+      output_file.open(name);
+    }*/
   }
 }
 

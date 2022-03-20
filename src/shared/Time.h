@@ -20,6 +20,10 @@ std::ostream& operator<<(std::ostream& stream,
          << " min "
          << std::chrono::duration_cast<std::chrono::seconds>(time).count() % 60
          << " s " << time.count() % 1000 << " ms";
+  /*stream << std::chrono::duration_cast<std::chrono::seconds>(time).count()
+         << "." << std::setfill('0') << std::setw(3) << std::right <<
+     time.count() % 1000*/
+  ;
   return stream;
 }
 

@@ -1,3 +1,4 @@
+
 // Copyright 2022 Salomé Rieder, CSMS ETH Zürich
 
 #include "matchingEnu.h"
@@ -127,8 +128,8 @@ bool UllmannMatch(ComparisonMatrix& M, std::vector<bool>& matched_cols,
       for (size_t j = 0; j < m; j++) {
         if (atomList[j] && involved_atoms_local[j]) nO++;
 
-        // one overlap is allowed, i.e. two same involved atoms
-        if (nO > 2) {
+        // one overlap is allowed, i.e. one same involved atoms
+        if (nO >= 2) {
           // if(nO >= fragMat.GetN()) {
           // std::cout << "found again:\n" << M << '\n';
           return false;

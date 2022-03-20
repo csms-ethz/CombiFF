@@ -80,10 +80,10 @@ Atom::Atom(const Atom& a)
 CnvAtom::CnvAtom(const CnvAtom& a) : Atom(a), formal_charge(a.formal_charge) {}
 
 bool Atom::operator==(const Atom& b) const {
-  if (GetUnitedAtomSymbol() == b.GetUnitedAtomSymbol() &&
+  if (GetElementSymbol() == b.GetElementSymbol() &&
       GetDegree() == b.GetDegree() &&
-      GetNumConnections() == b.GetNumConnections()
-      /*GetNumTotalHydrogens() == b.GetNumTotalHydrogens()*/)
+      GetNumConnections() == b.GetNumConnections() &&
+      GetNumTotalHydrogens() == b.GetNumTotalHydrogens())
     return true;
 
   else

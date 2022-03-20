@@ -46,6 +46,15 @@
     </atoms>
     <adjacency_stack>1 0 2</adjacency_stack>
   </pseudoatom>
+  <pseudoatom code="COC(=O)H">
+    <atoms>
+      <atom>C</atom>
+      <atom>O</atom>
+      <atom>CH1</atom>
+      <atom>O</atom>
+    </atoms>
+    <adjacency_stack>1 0 0 1 0 2</adjacency_stack>
+  </pseudoatom>
   <pseudoatom code="C-OH">
     <atoms>
       <atom>C</atom>

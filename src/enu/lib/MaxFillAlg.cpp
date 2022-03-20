@@ -75,8 +75,9 @@ MaxFillAlg::MaxFillAlg(enu::AdjacencyMatrix& A, const bool stereo,
 
   row_stabilizer_rep[0] = u0;
 
-  for (size_t ii = 0; ii < row_stabilizer_rep.size(); ii++) {
+  for (size_t ii = 1; ii < row_stabilizer_rep.size(); ii++) {
     row_stabilizer_rep[ii].resize(u0.size());
+    row_stabilizer_rep[ii].assign(id.begin(), id.end());
 
     for (size_t jj = 0; jj < row_stabilizer_rep[ii].size(); jj++)
       row_stabilizer_rep[ii][jj].reserve(u0[jj].size());
@@ -341,13 +342,12 @@ bool MaxFillAlg::IsCanonical() {
   // const size_t z = i;
   // const size_t nextZ = A.GetMaxRow(i_plus_one) - 1;
   RepresentationSystem& u_next = row_stabilizer_rep[A.GetTypeNr(i) + 1];
-  u_next.assign(
+  /*u_next.assign(
       id.begin(),
-      id.end());  // in principle, only u_next[0] to u_next[i] have to be
-                  // initialized, as u_next[i+1] to u_next[N] are filled below,
-                  // speed gain relatively negligible. Safer to initialize.
-  // for(size_t ii = 0; ii <= i; ii++)
-  //   u_next[ii] = id[ii];
+      id.end());
+  */
+  for (size_t ii = 0; ii <= i; ii++)
+    u_next[ii].resize(1);  // only keep id permutations
 
   RepresentationSystem& u_prev = row_stabilizer_rep[A.GetTypeNr(i)];
   size_t highest_permuted_idx(0);
@@ -376,9 +376,7 @@ bool MaxFillAlg::IsCanonical() {
 
   LambdaVector& lambda_prime_cur = lambda_prime[i + 1];
   num_perms_lambda_z_prime.resize(N);
-  num_perms_lambda_z_prime.assign(
-      i + 1, 1);  // elements are not accessed, but speed gain by not
-                  // initializing is negligible -> safer to initialize
+  // num_perms_lambda_z_prime.assign(i + 1, 1);  // elements are not accessed
   size_t idx(i + 1);
 
   for (size_t ii = 0; ii < lambda_prime_cur.size(); ii++) {
@@ -389,10 +387,14 @@ bool MaxFillAlg::IsCanonical() {
   // these permutations only swap cols in A(r) and only within the lambda z
   // prime partitions where the entries are the same within the same blocks, but
   // not any rows
-  for (size_t ii = /*z+1*/ i + 1; ii < u_next.size(); ii++)
-    u_next[ii].assign(
-        row_stabilizer_rep[0][ii].begin(),
-        row_stabilizer_rep[0][ii].begin() + num_perms_lambda_z_prime[ii]);
+  for (size_t ii = /*z+1*/ i + 1; ii < u_next.size(); ii++) {
+    if (num_perms_lambda_z_prime[ii] > 1)
+      u_next[ii].assign(
+          row_stabilizer_rep[0][ii].begin(),
+          row_stabilizer_rep[0][ii].begin() + num_perms_lambda_z_prime[ii]);
+    else
+      u_next[ii].resize(1);
+  }
 
   return true;  // canonical
 }

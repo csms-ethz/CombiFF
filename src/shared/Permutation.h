@@ -42,6 +42,7 @@ class PermutationIterator {
   size_t current_index;
   size_t smallest_diff_index;
   size_t size_u_minus_one;
+  size_t size_p;
   std::vector<size_t> permuted_indices;
   Permutations permutations;
   const combi_ff::RepresentationSystem* u;

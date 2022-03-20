@@ -47,4 +47,12 @@
     <num_atoms>5</num_atoms>
     <adjacency_stack>2 2 1 1 0 0 0 0 0 0</adjacency_stack>
   </substructure>
+  <substructure code="TWO_CHAIN">
+    <num_atoms>2</num_atoms>
+    <adjacency_stack>1</adjacency_stack>
+  </substructure>
+  <substructure code="THREE_CHAIN">
+    <num_atoms>3</num_atoms>
+    <adjacency_stack>1 0 1</adjacency_stack>
+  </substructure>
 </substructures>

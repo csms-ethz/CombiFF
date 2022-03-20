@@ -13,6 +13,7 @@ PermutationIterator::PermutationIterator(const size_t N)
     : current_index(N - 2),
       smallest_diff_index(current_index),
       size_u_minus_one(current_index),
+      size_p(N - 1),
       permuted_indices(N),
       permutations(Permutations(0)),
       u(NULL),
@@ -23,6 +24,7 @@ PermutationIterator::PermutationIterator(
     : current_index(u.size() - 1),
       smallest_diff_index(current_index),
       size_u_minus_one(current_index),
+      size_p(u.size()),
       permuted_indices(u.size() + 1),
       permutations(Permutations(0)),
       u(&u),
@@ -32,6 +34,7 @@ PermutationIterator::PermutationIterator(const PermutationIterator& it_p)
     : current_index(it_p.current_index),
       smallest_diff_index(it_p.smallest_diff_index),
       size_u_minus_one(it_p.size_u_minus_one),
+      size_p(it_p.p.size()),
       permuted_indices(it_p.permuted_indices),
       permutations(it_p.permutations),
       u(it_p.u),
@@ -40,7 +43,7 @@ PermutationIterator::PermutationIterator(const PermutationIterator& it_p)
 const std::vector<size_t>* PermutationIterator::GetPermutedIndices() {
   std::iota(permuted_indices.begin(), permuted_indices.end(), 0);
 
-  for (size_t ii = smallest_diff_index; ii < p.size(); ii++) {
+  for (size_t ii = smallest_diff_index; ii < size_p; ii++) {
     if (p[ii]) {
       for (const Permutation& perm : (*u)[ii][p[ii]])
         std::swap(permuted_indices[perm.first], permuted_indices[perm.second]);
@@ -55,7 +58,7 @@ const std::vector<size_t>* PermutationIterator::GetPermutedIndices(
   std::iota(permuted_indices.begin(), permuted_indices.end(), 0);
   highest_permuted_index = 0;
 
-  for (size_t ii = smallest_diff_index; ii < p.size(); ii++) {
+  for (size_t ii = smallest_diff_index; ii < size_p; ii++) {
     if (p[ii]) {
       for (const Permutation& perm : (*u)[ii][p[ii]]) {
         std::swap(permuted_indices[perm.first], permuted_indices[perm.second]);
@@ -71,7 +74,7 @@ const std::vector<size_t>* PermutationIterator::GetPermutedIndices(
 bool PermutationIterator::GetNextPermutation() {
   // note: current_index is unsigned -> when current_index =
   // -1, modular arithmetics leads to current_index > p.size
-  while (current_index < p.size()) {
+  while (current_index < size_p) {
     if (p[current_index] + 1 < (*u)[current_index].size()) {
       p[current_index]++;
       if (current_index < smallest_diff_index)
@@ -91,7 +94,7 @@ bool PermutationIterator::GetNextPermutation() {
 const Permutations* PermutationIterator::GetCombinedPermutation() {
   permutations.clear();
 
-  for (size_t ii = smallest_diff_index; ii < p.size(); ii++) {
+  for (size_t ii = smallest_diff_index; ii < size_p; ii++) {
     if (p[ii]) {
       permutations.insert(permutations.end(), (*u)[ii][p[ii]].begin(),
                           (*u)[ii][p[ii]].end());
@@ -130,6 +133,7 @@ void PermutationIterator::Reset(const combi_ff::RepresentationSystem* u_,
   std::fill(p.begin(), p.end(), 0);
   u = u_;
   size_u_minus_one = u->size() - 1;
+  size_p = p.size();
 }
 
 bool operator==(const Permutation& a, const Permutation& b) {

@@ -1168,7 +1168,7 @@ void AdjacencyMatrix<T, AtomClass>::SortAtomVector() {
 
   for (auto&& a : atoms) a.SetNeighbours(combi_ff::NeighborVector(0));
 
-  SetAtomVector(atoms);
+  // SetAtomVector(atoms);
   lambda_new.push_back(1);
   std::vector<combi_ff::AtomVector<AtomClass>> atom_blocks(0);
   atom_blocks.push_back(combi_ff::AtomVector<AtomClass>(1, atoms[0]));
@@ -1277,7 +1277,7 @@ std::vector<size_t> AdjacencyMatrix<T, AtomClass>::SortAtomVector(
 
   for (auto&& a : atoms) a.SetNeighbours(combi_ff::NeighborVector(0));
 
-  SetAtomVector(atoms);
+  // SetAtomVector(atoms);
   lambda_new.push_back(1);
   std::vector<combi_ff::AtomVector<AtomClass>> atom_blocks(0);
   atom_blocks.push_back(combi_ff::AtomVector<AtomClass>(1, atoms[0]));
