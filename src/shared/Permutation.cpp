@@ -130,9 +130,11 @@ void PermutationIterator::Reset(const combi_ff::RepresentationSystem* u_,
                                 const size_t current_new) {
   current_index = current_new;
   smallest_diff_index = current_index;
-  std::fill(p.begin(), p.end(), 0);
+
   u = u_;
   size_u_minus_one = u->size() - 1;
+  p.resize(u->size());
+  std::fill(p.begin(), p.end(), 0);
   size_p = p.size();
 }
 
