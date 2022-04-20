@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <iomanip>
 #include <numeric>
+#include <sstream>
 #include <stack>
 
 #include "Atom.h"
@@ -448,8 +449,11 @@ std::string SymmetricalMatrix<T>::GetStack() const {
   std::string stack("");
 
   for (size_t i = 0; i < N_minus_one; i++) {
-    for (size_t j = i + 1; j < this->N; j++)
-      stack += std::to_string(Matrix<T>::GetElement(i, j));
+    for (size_t j = i + 1; j < this->N; j++) {
+      std::ostringstream val;
+      val << std::setprecision(1) << Matrix<T>::GetElement(i, j);
+      stack += val.str();
+    }
   }
 
   return stack;
@@ -868,7 +872,7 @@ template <typename T, typename AtomClass>
 void AdjacencyMatrix<T, AtomClass>::GetNumMultipleBonds(
     size_t& n_single, size_t& n_double, size_t& n_triple, size_t& n_quadruple,
     size_t& n_aromatic) const {
-  for (size_t i = 0; i < this->N_minus_one; i++) {
+  for (size_t i = 0; i < this->N; i++) {
     for (size_t j = i + 1; j < this->N; j++) {
       T deg = this->GetElement(i, j);
 
@@ -894,7 +898,7 @@ void AdjacencyMatrix<T, AtomClass>::GetNumMultipleBonds(
 template <typename T, typename AtomClass>
 void AdjacencyMatrix<T, AtomClass>::GetNumMultipleBonds(
     std::vector<size_t>& ranges) const {
-  for (size_t i = 0; i < this->N_minus_one; i++) {
+  for (size_t i = 0; i < this->N; i++) {
     ranges[range_single_bonds] +=
         atoms[i].GetNumHydrogens() + atoms[i].GetNumFixedHydrogens();
 

@@ -28,6 +28,8 @@ typedef enum {
   print_mass,
   print_family_enumeration,
   print_n_unsaturations,
+  print_n_bonds,
+  print_n_single_bonds,
   print_n_multiple_bonds,
   print_n_double_bonds,
   print_n_aromatic_bonds,

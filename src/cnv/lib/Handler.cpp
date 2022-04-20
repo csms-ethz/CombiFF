@@ -57,6 +57,12 @@ void Handler::PrintFirstLine(const std::string& first) {
   if (print_options[cnv::print_n_unsaturations])
     *out << std::setw(column_width + 1) << std::left << "numUnsaturations ";
 
+  if (print_options[cnv::print_n_bonds])
+    *out << std::setw(column_width + 1) << std::left << "numBonds ";
+
+  if (print_options[cnv::print_n_single_bonds])
+    *out << std::setw(column_width + 1) << std::left << "numSingleBonds ";
+
   if (print_options[cnv::print_n_multiple_bonds])
     *out << std::setw(column_width + 1) << std::left << "numMultipleBonds ";
 

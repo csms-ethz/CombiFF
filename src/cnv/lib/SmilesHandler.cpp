@@ -234,9 +234,12 @@ void SmilesHandler::PrintOutput(const std::string& smiles_orig,
                                 const std::string& smiles_canon,
                                 const std::string& fmi,
                                 const cnv::AdjacencyMatrix& A) {
-  size_t nUnsat(0), nMB(0), nDB(0), nAB(0), nTB(0), nSB(0), nQB(0), nCyc(0);
+  size_t nUnsat(0), nB(0), nMB(0), nDB(0), nAB(0), nTB(0), nSB(0), nQB(0),
+      nCyc(0);
 
-  if (print_options[cnv::print_n_double_bonds] ||
+  if (print_options[cnv::print_n_bonds] ||
+      print_options[cnv::print_n_single_bonds] ||
+      print_options[cnv::print_n_double_bonds] ||
       print_options[cnv::print_n_aromatic_bonds] ||
       print_options[cnv::print_n_triple_bonds] ||
       print_options[cnv::print_n_unsaturations] ||
@@ -246,12 +249,13 @@ void SmilesHandler::PrintOutput(const std::string& smiles_orig,
     A.GetNumMultipleBonds(nSB, nDB, nTB, nQB, nAB);
     double DoU_(0);
     assert(!(nAB % 2));
-    nMB = nDB + nTB + nAB / 2;
+    nMB = nDB + nTB + nAB / 2 + nQB;
 
     for (auto&& atom : A.GetAtomVector()) DoU_ += (double)atom.GetDegree() - 2.;
 
     nUnsat = (size_t)floor((DoU_ / 2.) + 1);
     nCyc = nUnsat - nMB;
+    nB = nSB + nDB + nTB + nAB / 2 + nQB;
   }
 
   std::ostream* out;
@@ -280,6 +284,12 @@ void SmilesHandler::PrintOutput(const std::string& smiles_orig,
 
   if (print_options[cnv::print_n_unsaturations])
     *out << std::setw(column_width) << std::left << nUnsat << " ";
+
+  if (print_options[cnv::print_n_bonds])
+    *out << std::setw(column_width) << std::left << nB << " ";
+
+  if (print_options[cnv::print_n_single_bonds])
+    *out << std::setw(column_width) << std::left << nSB << " ";
 
   if (print_options[cnv::print_n_multiple_bonds])
     *out << std::setw(column_width) << std::left << nMB << " ";

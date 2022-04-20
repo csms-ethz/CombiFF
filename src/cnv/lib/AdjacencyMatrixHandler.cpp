@@ -185,9 +185,11 @@ void AdjacencyMatrixHandler::PrintOutput(
     const std::string& canon_smiles, const std::string& fmi,
     const cnv::AdjacencyMatrix& A) {
   int nUnsat(0);
-  size_t nMB(0), nDB(0), nAB(0), nTB(0), nSB(0), nQB(0), nCyc(0);
+  size_t nB(0), nMB(0), nDB(0), nAB(0), nTB(0), nSB(0), nQB(0), nCyc(0);
 
-  if (print_options[cnv::print_n_double_bonds] ||
+  if (print_options[cnv::print_n_bonds] ||
+      print_options[cnv::print_n_single_bonds] ||
+      print_options[cnv::print_n_double_bonds] ||
       print_options[cnv::print_n_aromatic_bonds] ||
       print_options[cnv::print_n_triple_bonds] ||
       print_options[cnv::print_n_unsaturations] ||
@@ -203,6 +205,7 @@ void AdjacencyMatrixHandler::PrintOutput(
 
     nUnsat = (int)floor((DoU_ / 2.) + 1);
     nCyc = nUnsat - nMB;
+    nB = nSB + nDB + nTB + nAB / 2 + nQB;
   }
 
   std::ostream* out;
@@ -237,6 +240,12 @@ void AdjacencyMatrixHandler::PrintOutput(
 
   if (print_options[cnv::print_n_unsaturations])
     *out << std::setw(column_width) << std::left << nUnsat << " ";
+
+  if (print_options[cnv::print_n_bonds])
+    *out << std::setw(column_width) << std::left << nB << " ";
+
+  if (print_options[cnv::print_n_single_bonds])
+    *out << std::setw(column_width) << std::left << nSB << " ";
 
   if (print_options[cnv::print_n_multiple_bonds])
     *out << std::setw(column_width) << std::left << nMB << " ";
