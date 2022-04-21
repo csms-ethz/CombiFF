@@ -21,35 +21,94 @@ void AdjacencyMatrixHandler::Run() {
     AtomVector<combi_ff::CnvAtom> atoms(0);
     std::vector<double> v(0);
 
-    if (it->second.size()) {
-      std::string atom_name;
+    if (it->first == "command_line") {
+      bool isalpha = true;
 
-      while (s >> atom_name) {
-        std::string atom_type("");
+      while (isalpha) {
+        if (it->second.size()) {
+          std::string atom_name = (it++)->second;
+          std::string atom_type("");
 
-        for (size_t i = 0; i < atom_name.size(); i++) {
-          if (isalpha(atom_name[i]))
-            atom_type += atom_name[i];
+          for (size_t i = 0; i < atom_name.size(); i++) {
+            if (std::isalpha(atom_name[i]))
+              atom_type += atom_name[i];
+
+            else
+              break;
+          }
+
+          if (atom_type.size())
+            atoms.push_back(combi_ff::CnvAtom(atom_name, atom_type));
 
           else
-            break;
+            isalpha = false;
+        }
+      }
+
+      --it;
+      double degree;
+
+      for (size_t i = 0; i < atoms.size() * atoms.size(); i++) {
+        if (it == input_list.end())
+          throw combi_ff::input_error(
+              "not enough matrix elements " + std::to_string(v.size()) +
+              " for number of atoms " + std::to_string(atoms.size()));
+
+        degree = std::stod((it++)->second);
+        v.push_back(degree);
+      }
+
+      it--;
+
+    } else {
+      if (it->second.size()) {
+        std::string atom_name;
+
+        while (s >> atom_name) {
+          std::string atom_type("");
+
+          for (size_t i = 0; i < atom_name.size(); i++) {
+            if (isalpha(atom_name[i]))
+              atom_type += atom_name[i];
+
+            else
+              break;
+          }
+
+          atoms.push_back(combi_ff::CnvAtom(atom_name, atom_type));
         }
 
-        atoms.push_back(combi_ff::CnvAtom(atom_name, atom_type));
+        for (size_t j = 0; j < atoms.size(); j++) {
+          std::istringstream ss((++it)->second);
+          double degree;
+
+          while (ss >> degree) v.push_back(degree);
+        }
       }
-
-      for (size_t j = 0; j < atoms.size(); j++) {
-        std::istringstream ss((++it)->second);
-        int degree;
-
-        while (ss >> degree) v.push_back(degree);
-      }
-
-      input_file_names.push_back(it->first);
-      matrices.push_back(cnv::AdjacencyMatrix(atoms.size()));
-      matrices.back().SetElements(v);
-      matrices.back().SetAtomVector(atoms);
     }
+
+    if (v.size() != atoms.size() * atoms.size())
+      throw combi_ff::input_error("number of matrix elements " +
+                                  std::to_string(v.size()) +
+                                  " not compatible with number of atoms " +
+                                  std::to_string(atoms.size()));
+
+    for (size_t i = 0; i < atoms.size(); i++) {
+      if (v[i * atoms.size() + i] != 0)
+        throw combi_ff::input_error(
+            "adjacency matrix diagonal has non-zero elements");
+
+      for (size_t j = i + 1; j < atoms.size(); j++) {
+        if (v[i * atoms.size() + j] != v[j * atoms.size() + i])
+          throw combi_ff::input_error(
+              "adjacency matrix elements are not symmetrical");
+      }
+    }
+
+    input_file_names.push_back(it->first);
+    matrices.push_back(cnv::AdjacencyMatrix(atoms.size()));
+    matrices.back().SetElements(v);
+    matrices.back().SetAtomVector(atoms);
   }
 
   for (size_t i = 0; i < matrices.size(); i++) {
@@ -154,13 +213,13 @@ AdjacencyMatrix AdjacencyMatrixHandler::ConvertMatrix(
     // a RepresentationSystem contains all the possible index permutations for
     // the different atom indices
     //  e.g. for lambda = [2, 1, 4], the RepresentationSystem is
-    //  (0,0), (0,1) 				(for idx 0)
-    //  (1,1)						(for idx 1)
-    //  (2,2)						(for idx 2)
-    //  (3,3), (3,4), (3,5), (3,6)	(for idx 3)
-    //  (4,4), (4,5), (4,6)			(for idx 4)
-    //  (5,5), (5,6)					(for idx 5)
-    //  (6,6) 						(for idx 6)
+    //  (0,0), (0,1)        (for idx 0)
+    //  (1,1)           (for idx 1)
+    //  (2,2)           (for idx 2)
+    //  (3,3), (3,4), (3,5), (3,6)  (for idx 3)
+    //  (4,4), (4,5), (4,6)     (for idx 4)
+    //  (5,5), (5,6)          (for idx 5)
+    //  (6,6)             (for idx 6)
     combi_ff::RepresentationSystem u(N);
 
     for (size_t i = 0; i < N; i++) {

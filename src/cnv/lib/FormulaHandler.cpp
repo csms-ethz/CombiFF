@@ -79,7 +79,9 @@ void FormulaHandler::ConvertFormula(const std::string& formula) {
       atom_name = "I";
 
     else
-      throw combi_ff::input_error("unrecognized atom type in " + formula);
+      throw combi_ff::input_error(
+          "unrecognized atom type in " + formula +
+          ". Please add it in src/cnv/lib/FormulaHandler.cpp.");
 
     i++;
 
