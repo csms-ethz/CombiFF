@@ -69,14 +69,8 @@ void Handler::PrintFirstLine(const std::string& first) {
   if (print_options[cnv::print_n_double_bonds])
     *out << std::setw(column_width + 1) << std::left << "numDoubleBonds ";
 
-  if (print_options[cnv::print_n_aromatic_bonds])
-    *out << std::setw(column_width + 1) << std::left << "numAromaticBonds ";
-
   if (print_options[cnv::print_n_triple_bonds])
     *out << std::setw(column_width + 1) << std::left << "numTripleBonds ";
-
-  if (print_options[cnv::print_n_quadruple_bonds])
-    *out << std::setw(column_width + 1) << std::left << "numQuadrupleBonds ";
 
   if (print_options[cnv::print_n_cycles])
     *out << std::setw(column_width + 1) << std::left << "numCycles ";

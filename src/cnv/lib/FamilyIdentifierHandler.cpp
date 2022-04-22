@@ -100,10 +100,8 @@ void FamilyIdentifierHandler::SearchFileForIsomer(
         print_options[cnv::print_n_unsaturations] ||
         print_options[cnv::print_n_multiple_bonds] ||
         print_options[cnv::print_n_double_bonds] ||
-        print_options[cnv::print_n_aromatic_bonds] ||
         print_options[cnv::print_n_triple_bonds] ||
-        print_options[cnv::print_n_cycles] ||
-        print_options[cnv::print_n_quadruple_bonds]) {
+        print_options[cnv::print_n_cycles]) {
       combi_ff::cnv::SmilesHandler(output_file, fie_file_names, column_width,
                                    print_options, input_list)
           .ConvertSmiles(smiles_orig, smiles_canon, A);
@@ -123,7 +121,6 @@ void FamilyIdentifierHandler::PrintOutput(const std::string& fmi,
   size_t nUnsat(0), nMB(0), nDB(0), nAB(0), nTB(0), nSB(0), nQB(0), nCyc(0);
 
   if (print_options[cnv::print_n_double_bonds] ||
-      print_options[cnv::print_n_aromatic_bonds] ||
       print_options[cnv::print_n_triple_bonds] ||
       print_options[cnv::print_n_unsaturations] ||
       print_options[cnv::print_n_cycles] ||
@@ -172,14 +169,8 @@ void FamilyIdentifierHandler::PrintOutput(const std::string& fmi,
   if (print_options[cnv::print_n_double_bonds])
     *out << std::setw(column_width) << std::left << nDB << " ";
 
-  if (print_options[cnv::print_n_aromatic_bonds])
-    *out << std::setw(column_width) << std::left << nAB << " ";
-
   if (print_options[cnv::print_n_triple_bonds])
     *out << std::setw(column_width) << std::left << nTB << " ";
-
-  if (print_options[cnv::print_n_quadruple_bonds])
-    *out << std::setw(column_width) << std::left << nQB << " ";
 
   if (print_options[cnv::print_n_cycles])
     *out << std::setw(column_width) << std::left << nCyc << " ";

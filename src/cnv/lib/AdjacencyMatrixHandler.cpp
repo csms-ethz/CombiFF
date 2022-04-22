@@ -55,6 +55,12 @@ void AdjacencyMatrixHandler::Run() {
               " for number of atoms " + std::to_string(atoms.size()));
 
         degree = std::stod((it++)->second);
+
+        if (degree == 1.5)
+          throw combi_ff::input_error(
+              "Please specify aromatic bonds in adjacency matrices as "
+              "alternating single and double bonds for now.");
+
         v.push_back(degree);
       }
 
@@ -82,7 +88,14 @@ void AdjacencyMatrixHandler::Run() {
           std::istringstream ss((++it)->second);
           double degree;
 
-          while (ss >> degree) v.push_back(degree);
+          while (ss >> degree) {
+            if (degree == 1.5)
+              throw combi_ff::input_error(
+                  "Please specify aromatic bonds in adjacency matrices as "
+                  "alternating single and double bonds for now.");
+
+            v.push_back(degree);
+          }
         }
       }
     }
@@ -249,12 +262,10 @@ void AdjacencyMatrixHandler::PrintOutput(
   if (print_options[cnv::print_n_bonds] ||
       print_options[cnv::print_n_single_bonds] ||
       print_options[cnv::print_n_double_bonds] ||
-      print_options[cnv::print_n_aromatic_bonds] ||
       print_options[cnv::print_n_triple_bonds] ||
       print_options[cnv::print_n_unsaturations] ||
       print_options[cnv::print_n_cycles] ||
-      print_options[cnv::print_n_multiple_bonds] ||
-      print_options[cnv::print_n_quadruple_bonds]) {
+      print_options[cnv::print_n_multiple_bonds]) {
     A.GetNumMultipleBonds(nSB, nDB, nTB, nQB, nAB);
     double DoU_(0);
     // assert(!(nAB % 2));
@@ -312,14 +323,8 @@ void AdjacencyMatrixHandler::PrintOutput(
   if (print_options[cnv::print_n_double_bonds])
     *out << std::setw(column_width) << std::left << nDB << " ";
 
-  if (print_options[cnv::print_n_aromatic_bonds])
-    *out << std::setw(column_width) << std::left << nAB << " ";
-
   if (print_options[cnv::print_n_triple_bonds])
     *out << std::setw(column_width) << std::left << nTB << " ";
-
-  if (print_options[cnv::print_n_quadruple_bonds])
-    *out << std::setw(column_width) << std::left << nQB << " ";
 
   if (print_options[cnv::print_n_cycles])
     *out << std::setw(column_width) << std::left << nCyc << " ";

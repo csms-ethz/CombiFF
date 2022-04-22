@@ -392,14 +392,10 @@ void InputOutput::ReadOutputOption(const size_t pos,
     arg.erase(arg.begin() + find, arg.begin() + find + 7);
   }
 
-  find = arg.find("num_arm");
+  /*find = arg.find("num_arm");
 
   if (find != (size_t)std::string::npos) {
-    /*if (input == name)
-      throw combi_ff::input_error(
-          InputOutput::IncompatibilityMessage("nam", "num_arm"));
 
-    else */
     if (input == formula)
       throw combi_ff::input_error(
           InputOutput::IncompatibilityMessage("frm", "num_arm"));
@@ -407,7 +403,7 @@ void InputOutput::ReadOutputOption(const size_t pos,
     found_option = true;
     print_options[cnv::print_n_aromatic_bonds] = true;
     arg.erase(arg.begin() + find, arg.begin() + find + 7);
-  }
+  }*/
 
   find = arg.find("num_tri");
 
@@ -561,7 +557,7 @@ void InputOutput::PrintInputOptions() {
       << "      - num_sin: print number of single bonds\n"
       << "      - num_mul: print number of multiple bonds\n"
       << "      - num_dbl: print number of double bonds\n"
-      << "      - num_arm: print number of aromatic bonds\n"
+      //<< "      - num_arm: print number of aromatic bonds\n"
       << "      - num_tri: print number of triple bonds\n"
       << "      - num_cyc: print number of cycles\n"
       << "      - stack:   print the stack of the canonical adjacency matrix\n"
