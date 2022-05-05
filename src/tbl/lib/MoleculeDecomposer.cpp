@@ -420,7 +420,7 @@ bool MoleculeDecomposer::CheckValidity(XmlElement& molecule_decomposition) {
   }
 
   for (size_t i = 0; i < A.GetN(); i++) {
-    if (!(is_assigned_core_atom[i] || is_assigned_link_atom[i] ||
+    if (!(is_assigned_core_atom[i] ||
           (A.GetAtomVector())[i].GetUnitedAtomSymbol() == "H")) {
       molecule_decomposition.value =
           "\n" + std::string(molecule_decomposition.distance * 2 + 2, ' ') +
@@ -429,7 +429,7 @@ bool MoleculeDecomposer::CheckValidity(XmlElement& molecule_decomposition) {
           std::string(molecule_decomposition.distance * 2 + 2, ' ') + " atom " +
           std::to_string(i) + " (" +
           A.GetAtomVector()[i].GetUnitedAtomSymbol() +
-          ") is neither an assigned link atom, nor an assigned core atom\n" +
+          ") is not an assigned core atom\n" +
           std::string(molecule_decomposition.distance * 2 + 2, ' ') +
           "fragments are:\n" +
           std::string(molecule_decomposition.distance * 2 + 2, ' ');
