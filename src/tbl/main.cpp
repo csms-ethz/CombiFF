@@ -8,13 +8,11 @@
 int main(int argc, char* argv[]) {
   try {
     // add command line arguments to arguments vector
-    if (argc > 1) {
-      std::vector<std::string> arguments(argv + 1, argv + argc);
-      // run the topology builder
-      combi_ff::topology_builder::TblRun(arguments).run();
 
-    } else
-      std::cout << "no command line arguments found\n";
+    std::vector<std::string> arguments(argv + 1, argv + argc);
+    // run the topology builder
+    combi_ff::topology_builder::TblRun(arguments).run();
+
   }
 
   // catch incorrect user input
