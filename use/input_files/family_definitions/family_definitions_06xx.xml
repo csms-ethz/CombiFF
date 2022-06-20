@@ -8,7 +8,7 @@
     <formula>C[0-9] 'C=O'1 H[1-22]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="KETONE" amount="1">
+      <substructure substructure_code="KETONE" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -25,7 +25,7 @@
     <formula>C[0-8] 'C=O'2 H[1-22]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="KETONE" amount="2">
+      <substructure substructure_code="KETONE" number="2">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -42,7 +42,7 @@
     <formula>C[0-7] 'C=O'3 H[0-22]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="KETONE" amount="3">
+      <substructure substructure_code="KETONE" number="3">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -59,7 +59,7 @@
     <formula>C[0-6] 'C=O'4 H[1-22]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="KETONE" amount="4">
+      <substructure substructure_code="KETONE" number="4">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>

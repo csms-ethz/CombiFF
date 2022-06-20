@@ -68,8 +68,8 @@ void CreateMTB(const std::string& filename_molecules_with_macros,
         molecule_with_macros->children.begin();
     auto&& atoms = *molecule_with_macros_property_it;
     atoms->CheckTagName("atoms");
-    atoms->CheckAttribute("amount");
-    mtb_file << std::setw(5) << std::right << atoms->attributes["amount"] << " "
+    atoms->CheckAttribute("number");
+    mtb_file << std::setw(5) << std::right << atoms->attributes["number"] << " "
              << std::setw(4) << std::right << 0 << '\n'
              << "# atoms\n"
              << "#ATOM ANM  IACM MASS        CGM ICGM MAE MSAE\n";
@@ -126,9 +126,9 @@ void CreateMTB(const std::string& filename_molecules_with_macros,
       if (topologicalPropertyMap
               .find(cur_property->tag.substr(0, cur_property->tag.size() - 1))
               ->second == prop) {
-        cur_property->CheckAttribute("amount");
+        cur_property->CheckAttribute("number");
         mtb_file << std::setw(5) << std::right
-                 << cur_property->attributes["amount"] << '\n';
+                 << cur_property->attributes["number"] << '\n';
         std::shared_ptr<TopologicalPropertyBase> new_property =
             CreateNewTopologicalProperty(prop);
         mtb_file << "#";

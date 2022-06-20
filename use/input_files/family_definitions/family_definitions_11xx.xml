@@ -64,7 +64,7 @@
     <formula>C[1-7] H* 'C=O'1 Hal1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="KETONE" amount="1">
+      <substructure substructure_code="KETONE" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -81,7 +81,7 @@
     <formula>C[1-7] H* 'C=O'1 Hal1 Hal1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="KETONE" amount="1">
+      <substructure substructure_code="KETONE" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -98,7 +98,7 @@
     <formula>C[1-7] H* 'C=O'1 Hal1 Hal1 Hal1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="KETONE" amount="1">
+      <substructure substructure_code="KETONE" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -115,7 +115,7 @@
     <formula>C[0-6] 'CC(=O)H'1 H[0-22]  Hal1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="KETONE" amount="1">
+      <substructure substructure_code="KETONE" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -132,7 +132,7 @@
     <formula>C[0-6] 'CC(=O)H'1 H[0-22] Hal1 Hal1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="KETONE" amount="1">
+      <substructure substructure_code="KETONE" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -149,7 +149,7 @@
     <formula>C[0-6] 'CC(=O)H'1 H[0-22] Hal1 Hal1 Hal1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="KETONE" amount="1">
+      <substructure substructure_code="KETONE" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -166,7 +166,7 @@
     <formula>C[0-8] H* 'C=O'2 {OH0}1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="KETONE" amount="1">
+      <substructure substructure_code="KETONE" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -174,7 +174,7 @@
           <atom type="C"/>
         </atoms>
       </substructure>
-      <substructure substructure_code="ESTER" amount="1">
+      <substructure substructure_code="ESTER" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -192,7 +192,7 @@
     <formula>C[3-9] H* {OH0}2 'CH0=O'1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ESTER" amount="1">
+      <substructure substructure_code="ESTER" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -210,7 +210,7 @@
     <formula>C[0-8] H* 'CH0=O'1 {OH0}1 'OC(=O)H'1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ESTER" amount="2" repetition="xor">
+      <substructure substructure_code="ESTER" number="2" repetition="xor">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>

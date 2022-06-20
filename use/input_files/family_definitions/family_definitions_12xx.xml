@@ -8,7 +8,7 @@
     <formula>'C=O'1 C[0-9] N1 H*</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="AMIDE" amount="1">
+      <substructure substructure_code="AMIDE" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -27,7 +27,7 @@
     <formula>'C=O'1 C[0-9] N1 H*</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="AMIDE" amount="1">
+      <substructure substructure_code="AMIDE" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -46,7 +46,7 @@
     <formula>'C=O'1 C[0-9] N1 H*</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="AMIDE" amount="1">
+      <substructure substructure_code="AMIDE" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -65,7 +65,7 @@
     <formula>'C=O'2 C[0-8] N2 H*</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="AMIDE" amount="2">
+      <substructure substructure_code="AMIDE" number="2">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>

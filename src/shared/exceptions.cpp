@@ -111,10 +111,10 @@ missing_attribute_error::missing_attribute_error(const std::string& filename,
                          " missing attribute " + attribute + " in element " +
                          tag + "\n") {}
 
-wrong_amount_of_children_error::wrong_amount_of_children_error(
+wrong_number_of_children_error::wrong_number_of_children_error(
     const std::string& tag, const std::string& expected, const size_t found)
     : xml_error(tag,
-                "wrong_amount_of_children_error: wrong number of children in "
+                "wrong_number_of_children_error: wrong number of children in "
                 "element " +
                     tag + " (expected " + expected + ", but got " +
                     std::to_string(found) + ")\n") {}
@@ -123,10 +123,10 @@ missing_value_error::missing_value_error(const std::string& xml_tag)
     : xml_error(xml_tag, "missing_value_error: missing value in element " +
                              xml_tag + "\n") {}
 
-wrong_amount_of_attributes_error::wrong_amount_of_attributes_error(
+wrong_number_of_attributes_error::wrong_number_of_attributes_error(
     const std::string& xml_tag, const size_t expected, const size_t found)
     : xml_error(xml_tag,
-                "wrong_amount_of_attributes_error: wrong number of attributes "
+                "wrong_number_of_attributes_error: wrong number of attributes "
                 "in element " +
                     xml_tag + " (expected " + std::to_string(expected) +
                     " but found " + std::to_string(found) + ")\n") {}

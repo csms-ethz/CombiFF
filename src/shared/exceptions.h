@@ -109,9 +109,9 @@ class missing_attribute_error : public xml_error {
                           const std::string& attribute);
 };
 
-class wrong_amount_of_children_error : public xml_error {
+class wrong_number_of_children_error : public xml_error {
  public:
-  wrong_amount_of_children_error(const std::string& tag,
+  wrong_number_of_children_error(const std::string& tag,
                                  const std::string& expected,
                                  const size_t found);
 };
@@ -121,9 +121,9 @@ class missing_value_error : public xml_error {
   explicit missing_value_error(const std::string& xml_tag);
 };
 
-class wrong_amount_of_attributes_error : public xml_error {
+class wrong_number_of_attributes_error : public xml_error {
  public:
-  wrong_amount_of_attributes_error(const std::string& xml_tag,
+  wrong_number_of_attributes_error(const std::string& xml_tag,
                                    const size_t expected, const size_t found);
 };
 

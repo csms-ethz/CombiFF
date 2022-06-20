@@ -15,11 +15,11 @@
 <!ELEMENT cycles (#PCDATA)>
 
 <!ELEMENT substructure (atoms)>
-<!ATTLIST substructure substructure_code CDATA #REQUIRED amount CDATA #REQUIRED repetition (xor|and|or) #IMPLIED>
+<!ATTLIST substructure substructure_code CDATA #REQUIRED number CDATA #REQUIRED repetition (xor|and|or) #IMPLIED>
 
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT atoms (atom+)>
-<!ELEMENT amount (#PCDATA)>
+<!ELEMENT number (#PCDATA)>
 
 <!ELEMENT atom EMPTY>
 <!ATTLIST atom type CDATA #REQUIRED>

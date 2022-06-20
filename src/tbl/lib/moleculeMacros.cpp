@@ -293,7 +293,7 @@ void CreateMoleculeWithMacros(XmlElement_ptr molecule_decomposition,
     idx++;
   }
 
-  atoms->attributes["amount"] = std::to_string(atoms->children.size());
+  atoms->attributes["number"] = std::to_string(atoms->children.size());
   std::vector<std::list<std::shared_ptr<TopologicalPropertyBase>>>
       topological_properties_in_molecule(num_topological_property_types);
 
@@ -653,7 +653,7 @@ void CreateMoleculeWithMacros(XmlElement_ptr molecule_decomposition,
     if (prop_type.size()) {
       molecule_macros.AddElement(prop_type.front()->GetPropertyName() + "s");
       auto&& cur_element = molecule_macros.GetLastChild();
-      cur_element->attributes["amount"] = std::to_string(prop_type.size());
+      cur_element->attributes["number"] = std::to_string(prop_type.size());
 
       for (auto&& prop : prop_type) {
         cur_element->AddElement(prop->GetPropertyName());
@@ -681,8 +681,8 @@ void CreateMoleculeWithMacros(XmlElement_ptr molecule_decomposition,
       }
     }
 
-    // reSet amount of atoms
-    atoms->attributes["amount"] = std::to_string(atoms->children.size());
+    // reSet number of atoms
+    atoms->attributes["number"] = std::to_string(atoms->children.size());
   }
 
   if (!third_neighbor_exclusions) {

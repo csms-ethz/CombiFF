@@ -48,7 +48,7 @@ void XmlElement::CheckTagName(const std::string& tag_) const {
 }
 void XmlElement::CheckAttributeSize(const size_t n) const {
   if (attributes.size() != n)
-    throw wrong_amount_of_attributes_error(tag, n, attributes.size());
+    throw wrong_number_of_attributes_error(tag, n, attributes.size());
 }
 void XmlElement::CheckAttribute(const std::string& attribute) const {
   if (attributes.find(attribute) == attributes.end())
@@ -56,12 +56,12 @@ void XmlElement::CheckAttribute(const std::string& attribute) const {
 }
 void XmlElement::CheckNumberOfChildren_equal(const size_t n) const {
   if (children.size() != n)
-    throw wrong_amount_of_children_error(tag, std::to_string(n),
+    throw wrong_number_of_children_error(tag, std::to_string(n),
                                          children.size());
 }
 void XmlElement::CheckNumberOfChildren_atLeast(const size_t n) const {
   if (children.size() < n)
-    throw wrong_amount_of_children_error(tag, ">=" + std::to_string(n),
+    throw wrong_number_of_children_error(tag, ">=" + std::to_string(n),
                                          children.size());
 }
 void XmlElement::CheckNoValue() const {

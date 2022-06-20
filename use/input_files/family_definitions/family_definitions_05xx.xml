@@ -8,7 +8,7 @@
     <formula>C[1-10] {OH0}1 H[1-22]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ETHER" amount="1">
+      <substructure substructure_code="ETHER" number="1">
         <atoms>
           <atom type="C"/>
           <atom type="O"/>
@@ -24,7 +24,7 @@
     <formula>C[1-10] {OH0}2 H[1-22]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ETHER" amount="2">
+      <substructure substructure_code="ETHER" number="2">
         <atoms>
           <atom type="C"/>
           <atom type="O"/>
@@ -40,7 +40,7 @@
     <formula>C[1-10] {OH0}3 H[1-22]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ETHER" amount="3">
+      <substructure substructure_code="ETHER" number="3">
         <atoms>
           <atom type="C"/>
           <atom type="O"/>
@@ -56,7 +56,7 @@
     <formula>C[1-10] {OH0}4 H[1-22]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ETHER" amount="4">
+      <substructure substructure_code="ETHER" number="4">
         <atoms>
           <atom type="C"/>
           <atom type="O"/>

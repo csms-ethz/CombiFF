@@ -8,7 +8,7 @@
     <formula>C[1-10] N1 H[1-40]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="TERNARY" amount="1">
+      <substructure substructure_code="TERNARY" number="1">
         <atoms>
           <atom type="N"/>
           <atom type="C"/>
@@ -25,7 +25,7 @@
     <formula>C[1-10] N1 H[1-40]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="TERNARY" amount="1">
+      <substructure substructure_code="TERNARY" number="1">
         <atoms>
           <atom type="N"/>
           <atom type="C"/>
@@ -42,7 +42,7 @@
     <formula>C[1-10] N1 H[1-40]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="TERNARY" amount="1">
+      <substructure substructure_code="TERNARY" number="1">
         <atoms>
           <atom type="N"/>
           <atom type="C"/>
@@ -59,7 +59,7 @@
     <formula>C[1-10] N1 H[1-40]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="TERNARY" amount="1">
+      <substructure substructure_code="TERNARY" number="1">
         <atoms>
           <atom type="N"/>
           <atom type="C"/>
@@ -76,7 +76,7 @@
     <formula>C[1-10] N2 H[1-40]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="TERNARY" amount="2">
+      <substructure substructure_code="TERNARY" number="2">
         <atoms>
           <atom type="N"/>
           <atom type="C"/>
@@ -93,7 +93,7 @@
     <formula>C[1-10] N3 H[1-40]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="TERNARY" amount="3">
+      <substructure substructure_code="TERNARY" number="3">
         <atoms>
           <atom type="N"/>
           <atom type="C"/>

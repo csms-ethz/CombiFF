@@ -55,4 +55,20 @@
     <num_atoms>3</num_atoms>
     <adjacency_stack>1 0 1</adjacency_stack>
   </substructure>
+  <substructure code="THREE_CYCLE">
+    <num_atoms>3</num_atoms>
+    <adjacency_stack>1 1 1</adjacency_stack>
+  </substructure>
+  <substructure code="FOUR_CYCLE">
+    <num_atoms>4</num_atoms>
+    <adjacency_stack>1 0 1 1 0 1</adjacency_stack>
+  </substructure>
+  <substructure code="THREE_CYCLE_DB">
+    <num_atoms>3</num_atoms>
+    <adjacency_stack>2 1 1</adjacency_stack>
+  </substructure>
+  <substructure code="FOUR_CYCLE_DB">
+    <num_atoms>4</num_atoms>
+    <adjacency_stack>2 0 1 1 0 1</adjacency_stack>
+  </substructure>
 </substructures>

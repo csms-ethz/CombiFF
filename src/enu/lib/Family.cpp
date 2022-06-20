@@ -376,7 +376,7 @@ void GetSubstructures(const XmlElement_ptr substructures_xml,
     substructure->CheckTagName("substructure");
     substructure->CheckNumberOfChildren_equal(1);
     substructure->CheckAttribute("substructure_code");
-    substructure->CheckAttribute("amount");
+    substructure->CheckAttribute("number");
     // create an pointer to the AbstractSubstructure with the corresponding code
     // AbstractSubstructure const* prototype = NULL;
     const std::string& code =
@@ -392,7 +392,7 @@ void GetSubstructures(const XmlElement_ptr substructures_xml,
                 << " but current family is version " << version << "\n";
 
     const std::string& range_value =
-        substructure->attributes.find("amount")->second;
+        substructure->attributes.find("number")->second;
     Range r({0, -1});
     ReadRange(range_value, r);
     auto&& atoms = substructure->GetFirstChild();

@@ -83,7 +83,7 @@ The above properties are specified by either a number, a range in rectangular br
 Furthermore, subsctuctures that should (or shouldn't) occur in the molecule can be specified using the following basic format
 
 <substructures>
-  <substructure substructure_code="[substructure code]" amount="[amount, given as number or range in rectangular brackets]">
+  <substructure substructure_code="[substructure code]" number="[number, given as number or range in rectangular brackets]">
     <atoms>
       <atom type="[atom type]"/>
       ...

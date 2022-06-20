@@ -8,7 +8,7 @@
     <formula>C[1-9] 'OC(=O)H'1 H[0-22]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ESTER" amount="1">
+      <substructure substructure_code="ESTER" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -26,7 +26,7 @@
     <formula>C[0-9] 'CH0=O'1 {OH0}1 H[0-22]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ESTER" amount="1">
+      <substructure substructure_code="ESTER" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -44,7 +44,7 @@
     <formula>C[0-8] 'OC(=O)H'2 H[0-22]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ESTER" amount="2">
+      <substructure substructure_code="ESTER" number="2">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -62,7 +62,7 @@
     <formula>C[0-8] 'CH0=O'2 {OH0}2 H[0-22]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ESTER" amount="2">
+      <substructure substructure_code="ESTER" number="2">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -80,7 +80,7 @@
     <formula>C[0-7] {CH1}3H*{OH0}6</formula>
     <unsaturations>3</unsaturations>
     <substructures>
-      <substructure substructure_code="ESTER" amount="3">
+      <substructure substructure_code="ESTER" number="3">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -98,7 +98,7 @@
     <formula>C[0-7] 'CH0=O'3 {OH0}3 H[0-22]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ESTER" amount="3">
+      <substructure substructure_code="ESTER" number="3">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -116,7 +116,7 @@
     <formula> C[0-6] 'OC(=O)H'4 H[0-22]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ESTER" amount="4">
+      <substructure substructure_code="ESTER" number="4">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -134,7 +134,7 @@
     <formula>C[0-6] 'CH0=O'4 {OH0}4 H[0-22]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ESTER" amount="4">
+      <substructure substructure_code="ESTER" number="4">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>

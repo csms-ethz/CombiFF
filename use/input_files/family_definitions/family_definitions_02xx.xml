@@ -43,7 +43,7 @@
     <formula>C5 H* Hal1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="TET" amount="1">
+      <substructure substructure_code="TET" number="1">
         <atoms>
           <atom type="C"/>
           <atom type="C"/>
@@ -61,7 +61,7 @@
     <formula>C[5-6] H* Hal1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="TET" amount="1">
+      <substructure substructure_code="TET" number="1">
         <atoms>
           <atom type="C"/>
           <atom type="C"/>
@@ -79,7 +79,7 @@
     <formula>C5 H* Hal[1-3]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="TET" amount="1">
+      <substructure substructure_code="TET" number="1">
         <atoms>
           <atom type="C"/>
           <atom type="C"/>
@@ -97,7 +97,7 @@
     <formula>C6 H* Hal1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="TET" amount="1">
+      <substructure substructure_code="TET" number="1">
         <atoms>
           <atom type="C"/>
           <atom type="CH3"/>
@@ -106,7 +106,7 @@
           <atom type="CH1"/>
         </atoms>
       </substructure>
-      <substructure substructure_code="TERNARY" amount="1">
+      <substructure substructure_code="TERNARY" number="1">
         <atoms>
           <atom type="C"/>
           <atom type="C"/>

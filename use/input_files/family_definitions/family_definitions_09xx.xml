@@ -8,7 +8,7 @@
     <formula>'C(=O)OH'1 H*</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ESTER" amount="1">
+      <substructure substructure_code="ESTER" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -26,7 +26,7 @@
     <formula>C[1-9] 'C(=O)OH'1 H*</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ESTER" amount="1">
+      <substructure substructure_code="ESTER" number="1">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -44,7 +44,7 @@
     <formula>C[0-8] 'C(=O)OH'2 H*</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ESTER" amount="2">
+      <substructure substructure_code="ESTER" number="2">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -62,7 +62,7 @@
     <formula>C[0-7] 'C(=O)OH'3 H*</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ESTER" amount="3">
+      <substructure substructure_code="ESTER" number="3">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>
@@ -80,7 +80,7 @@
     <formula>C[0-6] 'C(=O)OH'4 H*</formula>
     <unsaturations>0</unsaturations>
     <substructures>
-      <substructure substructure_code="ESTER" amount="4">
+      <substructure substructure_code="ESTER" number="4">
         <atoms>
           <atom type="O"/>
           <atom type="C"/>

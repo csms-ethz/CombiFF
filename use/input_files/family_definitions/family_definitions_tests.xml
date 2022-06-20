@@ -12,7 +12,7 @@
     <formula>C6 ^SB1 ^SB1 ^SB1 ^SB1 ^SB1 ^SB1</formula>
     <double_bonds>3</double_bonds>
     <substructures>
-      <substructure substructure_code="BENZENE" amount="1">
+      <substructure substructure_code="BENZENE" number="1">
         <atoms>
           <atom type="*"/>
           <atom type="C"/>
