@@ -4,7 +4,7 @@ repos:
     rev: master
     hooks:
       - id: clang-format
-        args: [--style=Google, -i]
+        args: [--style=Google, -i, ColumnLimit=150]
       - id: clang-tidy
       #- id: cppcheck 
       #  args: [--language=c++, --suppress=missingInclude, --suppress=unusedFunction, --suppress=unmatchedSuppression]
