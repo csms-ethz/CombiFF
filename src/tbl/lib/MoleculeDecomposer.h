@@ -57,9 +57,10 @@ class MoleculeDecomposer : private FamilyDecomposer {
 
   bool FindBondLinkingMatch(const TblFragment& frag);
 
-  bool UllmannMatch(ComparisonMatrix& M, std::vector<bool>& matched_columns,
-                    std::vector<bool>& matched_rows, int k, const size_t n,
-                    const size_t m, const FragmentMatrixTbl& fragment_matrix,
+  bool UllmannMatch(ComparisonMatrix& M,
+                    std::vector<bool>& matched_molecule_atoms, int k,
+                    const size_t n, const size_t m,
+                    const FragmentMatrixTbl& fragment_matrix,
                     const std::vector<TblAtom>& fragment_tbl_atoms);
 
   bool Refine(combi_ff::ComparisonMatrix& M, int k, const size_t n,
