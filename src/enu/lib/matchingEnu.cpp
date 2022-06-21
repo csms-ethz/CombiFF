@@ -100,14 +100,6 @@ bool UllmannMatch(ComparisonMatrix& M, int k, const size_t n, const size_t m,
                   const FragmentMatrix& fragment_matrix, int& num_matches,
                   std::vector<std::vector<bool>>& involved_atoms) {
   if (k == (int)n - 1) {
-    for (size_t i = 0; i < n; i++) {
-      if (M.AccumulateRow(i) != 1) return false;
-    }
-
-    /*for (size_t j = 0; j < m; j++) {
-      if (M.AccumulateColumn(j) > 1) return false;
-    }*/
-
     std::vector<bool> involved_atoms_local(m, false);
 
     for (size_t j = 0; j < m; j++) {
@@ -213,14 +205,6 @@ bool UllmannMatchBenz(ComparisonMatrix& M, int k, const size_t n,
                       size_t& num_matches, std::vector<bool>& is_aromatic,
                       bool& canonical, const RepresentationSystem& u0) {
   if (k == (int)n - 1) {
-    for (size_t i = 0; i < n; i++) {
-      if (M.AccumulateRow(i) != 1) return false;
-    }
-
-    for (size_t i = 0; i < m; i++) {
-      if (M.AccumulateColumn(i) > 1) return false;
-    }
-
     // return true;
     std::vector<bool> is_aromatic_save = is_aromatic;
 

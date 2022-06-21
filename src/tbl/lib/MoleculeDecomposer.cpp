@@ -504,14 +504,6 @@ bool MoleculeDecomposer::UllmannMatch(
     const FragmentMatrixTbl& fragment_matrix,
     const std::vector<TblAtom>& fragment_tbl_atoms) {
   if (k == (int)n - 1) {
-    for (size_t i = 0; i < n; i++) {
-      if (M.AccumulateRow(i) != 1) return false;
-    }
-
-    /*for (size_t i = 0; i < m; i++) {
-      if (M.AccumulateColumn(i) > 1) return false;
-    }*/
-
     return true;
   }
 
