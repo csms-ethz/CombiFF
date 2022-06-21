@@ -15,10 +15,8 @@ class SubstructureCollection;
 bool FindBenzMatch(enu::AdjacencyMatrix& A, bool& canonical,
                    const RepresentationSystem& u0);
 
-bool UllmannMatchBenz(ComparisonMatrix& M,
-                      std::vector<bool>& matched_molecule_atoms, int k,
-                      const size_t n, const size_t m,
-                      const enu::AdjacencyMatrix& A,
+bool UllmannMatchBenz(ComparisonMatrix& M, int k, const size_t n,
+                      const size_t m, const enu::AdjacencyMatrix& A,
                       const FragmentMatrix& fragment_matrix, bool& found,
                       size_t& num_matches,
                       std::vector<bool>& is_aromatic_carbon, bool& canonical,
@@ -30,9 +28,8 @@ bool FindFragMatches(const enu::AdjacencyMatrix& A,
 int FindFragMatch(const enu::AdjacencyMatrix& A, const FragmentMatrix& frag,
                   std::vector<std::vector<bool>>& involved_atoms);
 
-bool UllmannMatch(ComparisonMatrix& M,
-                  std::vector<bool>& matched_molecule_atoms, int k,
-                  const size_t n, const size_t m, const enu::AdjacencyMatrix& A,
+bool UllmannMatch(ComparisonMatrix& M, int k, const size_t n, const size_t m,
+                  const enu::AdjacencyMatrix& A,
                   const FragmentMatrix& fragment_matrix, int& num_matches,
                   std::vector<std::vector<bool>>& involved_atoms);
 

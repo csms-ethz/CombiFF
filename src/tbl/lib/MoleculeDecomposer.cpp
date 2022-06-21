@@ -294,10 +294,8 @@ bool MoleculeDecomposer::FindBondLinkingMatch(const TblFragment& frag) {
   }
 
   // M.print();
-  std::vector<bool> matched_molecule_atoms(m, false);
   int k = -1;
-  bool match = UllmannMatch(M, matched_molecule_atoms, k, n, m, fragment_matrix,
-                            fragment_tbl_atoms);
+  bool match = UllmannMatch(M, k, n, m, fragment_matrix, fragment_tbl_atoms);
 
   if (match) {
     // std::cout << "found match for " << frag.GetCode() << '\n';
@@ -502,8 +500,8 @@ size_t MoleculeDecomposer::GetMatchIndex(const ComparisonMatrix& M,
 }
 
 bool MoleculeDecomposer::UllmannMatch(
-    ComparisonMatrix& M, std::vector<bool>& matched_molecule_atoms, int k,
-    const size_t n, const size_t m, const FragmentMatrixTbl& fragment_matrix,
+    ComparisonMatrix& M, int k, const size_t n, const size_t m,
+    const FragmentMatrixTbl& fragment_matrix,
     const std::vector<TblAtom>& fragment_tbl_atoms) {
   if (k == (int)n - 1) {
     for (size_t i = 0; i < n; i++) {
@@ -518,28 +516,23 @@ bool MoleculeDecomposer::UllmannMatch(
   }
 
   ComparisonMatrix M_save(n, m);
-  std::vector<bool> matched_molecule_atoms_save(m);
 
   for (size_t l = 0; l < m; l++) {
-    if (M.GetElement(k + 1, l) && !matched_molecule_atoms[l]) {
+    if (M.GetElement(k + 1, l)) {
       M_save = M;
-      matched_molecule_atoms_save = matched_molecule_atoms;
 
       for (size_t j = 0; j < m; j++) M.SetElement(k + 1, j, false);
 
       for (size_t i = 0; i < n; i++) M.SetElement(i, l, false);
 
       M.SetElement(k + 1, l, true);
-      (matched_molecule_atoms)[l] = true;
 
       if (Refine(M, k + 1, n, m, fragment_matrix, fragment_tbl_atoms)) {
-        if (UllmannMatch(M, matched_molecule_atoms, k + 1, n, m,
-                         fragment_matrix, fragment_tbl_atoms))
+        if (UllmannMatch(M, k + 1, n, m, fragment_matrix, fragment_tbl_atoms))
           return true;
       }
 
       M = M_save;
-      matched_molecule_atoms = matched_molecule_atoms_save;
     }
   }
 

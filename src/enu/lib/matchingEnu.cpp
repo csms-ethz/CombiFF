@@ -89,18 +89,14 @@ int FindFragMatch(const enu::AdjacencyMatrix& A,
     if (!potential_match) return false;
   }
 
-  std::vector<bool> matched_molecule_atoms(m, false);
   int k = -1;
   ComparisonMatrix M_save = M;
-  std::vector<bool> matched_molecule_atoms_save(m);
-  UllmannMatch(M, matched_molecule_atoms, k, n, m, A, fragment_matrix,
-               num_matches, involved_atoms);
+  UllmannMatch(M, k, n, m, A, fragment_matrix, num_matches, involved_atoms);
   return num_matches;
 }
 
-bool UllmannMatch(ComparisonMatrix& M,
-                  std::vector<bool>& matched_molecule_atoms, int k,
-                  const size_t n, const size_t m, const enu::AdjacencyMatrix& A,
+bool UllmannMatch(ComparisonMatrix& M, int k, const size_t n, const size_t m,
+                  const enu::AdjacencyMatrix& A,
                   const FragmentMatrix& fragment_matrix, int& num_matches,
                   std::vector<std::vector<bool>>& involved_atoms) {
   if (k == (int)n - 1) {
@@ -143,28 +139,24 @@ bool UllmannMatch(ComparisonMatrix& M,
   }
 
   ComparisonMatrix M_save(n, m);
-  std::vector<bool> matched_molecule_atoms_save(m);
 
   for (size_t l = 0; l < m; l++) {
-    if (M.GetElement(k + 1, l) == true && matched_molecule_atoms[l] == false) {
+    if (M.GetElement(k + 1, l) == true) {
       M_save = M;
-      matched_molecule_atoms_save = matched_molecule_atoms;
 
       for (size_t j = 0; j < m; j++) M.SetElement(k + 1, j, false);
 
       for (size_t i = 0; i < n; i++) M.SetElement(i, l, false);
 
       M.SetElement(k + 1, l, true);
-      matched_molecule_atoms[l] = true;
 
       if (Refine(M, k + 1, n, m, A, fragment_matrix)) {
-        if (UllmannMatch(M, matched_molecule_atoms, k + 1, n, m, A,
-                         fragment_matrix, num_matches, involved_atoms))
+        if (UllmannMatch(M, k + 1, n, m, A, fragment_matrix, num_matches,
+                         involved_atoms))
           return true;
       }
 
       M = M_save;
-      matched_molecule_atoms = matched_molecule_atoms_save;
     }
   }
 
@@ -206,21 +198,17 @@ bool FindBenzMatch(enu::AdjacencyMatrix& A, bool& canonical,
     if (!foundPotentialMatchForFragmentAtom) return false;
   }
 
-  std::vector<bool> matched_molecule_atoms(m, false);
   int k = -1;
   ComparisonMatrix M_save = M;
-  std::vector<bool> matched_molecule_atoms_save(m);
   bool found = false;
   size_t num_matches = 0;
-  UllmannMatchBenz(M, matched_molecule_atoms, k, n, m, A, benzene_matrix, found,
-                   num_matches, is_aromatic, canonical, u0);
+  UllmannMatchBenz(M, k, n, m, A, benzene_matrix, found, num_matches,
+                   is_aromatic, canonical, u0);
   return found;
 }
 
-bool UllmannMatchBenz(ComparisonMatrix& M,
-                      std::vector<bool>& matched_molecule_atoms, int k,
-                      const size_t n, const size_t m,
-                      const enu::AdjacencyMatrix& A,
+bool UllmannMatchBenz(ComparisonMatrix& M, int k, const size_t n,
+                      const size_t m, const enu::AdjacencyMatrix& A,
                       const FragmentMatrix& fragment_matrix, bool& found,
                       size_t& num_matches, std::vector<bool>& is_aromatic,
                       bool& canonical, const RepresentationSystem& u0) {
@@ -294,30 +282,25 @@ bool UllmannMatchBenz(ComparisonMatrix& M,
   }
 
   ComparisonMatrix M_save(n, m);
-  std::vector<bool> matched_molecule_atoms_save(m);
 
   for (size_t l = 0; l < m; l++) {
-    if (M.GetElement(k + 1, l) == true && matched_molecule_atoms[l] == false) {
+    if (M.GetElement(k + 1, l) == true) {
       M_save = M;
-      matched_molecule_atoms_save = matched_molecule_atoms;
 
       for (size_t j = 0; j < m; j++) M.SetElement(k + 1, j, false);
 
       for (size_t i = 0; i < n; i++) M.SetElement(i, l, false);
 
       M.SetElement(k + 1, l, true);
-      matched_molecule_atoms[l] = true;
 
       if (Refine(M, k + 1, n, m, A, fragment_matrix)) {
         if (canonical &&
-            UllmannMatchBenz(M, matched_molecule_atoms, k + 1, n, m, A,
-                             fragment_matrix, found, num_matches, is_aromatic,
-                             canonical, u0))
+            UllmannMatchBenz(M, k + 1, n, m, A, fragment_matrix, found,
+                             num_matches, is_aromatic, canonical, u0))
           return true;
       }
 
       M = M_save;
-      matched_molecule_atoms = matched_molecule_atoms_save;
     }
   }
 
