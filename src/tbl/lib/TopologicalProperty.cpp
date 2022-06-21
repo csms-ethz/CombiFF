@@ -64,6 +64,11 @@ const std::vector<size_t>& TopologicalPropertyBase::GetInvolvedAtoms() const {
   return involved_atoms;
 }
 
+void TopologicalPropertyBase::SwapInvolvedAtoms(const size_t i,
+                                                const size_t j) {
+  std::swap(involved_atoms[i], involved_atoms[j]);
+}
+
 PropertyType TopologicalPropertyBase::GetType() const { return type; }
 
 /*

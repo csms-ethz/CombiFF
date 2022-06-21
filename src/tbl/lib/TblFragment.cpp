@@ -302,7 +302,7 @@ bool GetPriority(const TblFragment& f1, const TblFragment& f2) {
   else if (f1.GetNumCoreAtoms() < f2.GetNumCoreAtoms())
     return false;
 
-  return false;
+  return true;
 }
 
 void AddFragment(std::vector<TblFragment>& tbl_fragments,

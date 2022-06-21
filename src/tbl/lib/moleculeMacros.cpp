@@ -324,8 +324,9 @@ void CreateMoleculeWithMacros(XmlElement_ptr molecule_decomposition,
 
         cur_property->SortInvolvedAtoms();
         std::vector<std::string> involved_atoms_codes(0);
-
+        size_t pos1 = 0;
         for (auto&& idx : cur_property->GetInvolvedAtoms()) {
+          size_t pos2 = 0;
           for (auto&& idx_ : prop.property->GetInvolvedAtoms()) {
             auto&& atom = prop.frag->GetTblAtom(idx_);
 
@@ -336,9 +337,12 @@ void CreateMoleculeWithMacros(XmlElement_ptr molecule_decomposition,
               involved_atoms_codes.push_back(
                   core_atom_types[prop.fragment_id + "_" + atom.GetAtomID()]
                       .first);
+              prop.property->SwapInvolvedAtoms(pos1, pos2);
               break;
             }
+            pos2++;
           }
+          pos1++;
         }
 
         std::string parameter_name =
@@ -769,8 +773,10 @@ void CreateMoleculeWithMacros(XmlElement_ptr molecule_decomposition,
         at->AddElement("excluded_atoms");
 
         for (auto&& ea : excluded_atoms) {
-          at->GetFirstChild()->AddElement("excluded_atom");
-          at->GetFirstChild()->GetLastChild()->value = ea->atom_id;
+          if (ea->atom_id != atom_id) {
+            at->GetFirstChild()->AddElement("excluded_atom");
+            at->GetFirstChild()->GetLastChild()->value = ea->atom_id;
+          }
         }
       }
     }

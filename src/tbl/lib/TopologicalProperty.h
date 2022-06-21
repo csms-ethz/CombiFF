@@ -57,6 +57,7 @@ class TopologicalPropertyBase {
   const std::unordered_map<std::string, std::string>& GetAttributes() const;
 
   const std::vector<size_t>& GetInvolvedAtoms() const;
+  void SwapInvolvedAtoms(const size_t i, const size_t j);
 
   PropertyType GetType() const;
 
