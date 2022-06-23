@@ -294,7 +294,7 @@ bool MoleculeDecomposer::FindBondLinkingMatch(const TblFragment& frag) {
   }
 
   // M.print();
-  int k = -1;
+  int k = 0;
   bool match = UllmannMatch(M, k, n, m, fragment_matrix, fragment_tbl_atoms);
 
   if (match) {
@@ -503,23 +503,23 @@ bool MoleculeDecomposer::UllmannMatch(
     ComparisonMatrix& M, int k, const size_t n, const size_t m,
     const FragmentMatrixTbl& fragment_matrix,
     const std::vector<TblAtom>& fragment_tbl_atoms) {
-  if (k == (int)n - 1) {
+  if (k == (int)n) {
     return true;
   }
 
   ComparisonMatrix M_save(n, m);
 
   for (size_t l = 0; l < m; l++) {
-    if (M.GetElement(k + 1, l)) {
+    if (M.GetElement(k, l)) {
       M_save = M;
 
-      for (size_t j = 0; j < m; j++) M.SetElement(k + 1, j, false);
+      for (size_t j = 0; j < m; j++) M.SetElement(k, j, false);
 
       for (size_t i = 0; i < n; i++) M.SetElement(i, l, false);
 
-      M.SetElement(k + 1, l, true);
+      M.SetElement(k, l, true);
 
-      if (Refine(M, k + 1, n, m, fragment_matrix, fragment_tbl_atoms)) {
+      if (Refine(M, k, n, m, fragment_matrix, fragment_tbl_atoms)) {
         if (UllmannMatch(M, k + 1, n, m, fragment_matrix, fragment_tbl_atoms))
           return true;
       }

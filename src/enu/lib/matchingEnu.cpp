@@ -89,7 +89,7 @@ int FindFragMatch(const enu::AdjacencyMatrix& A,
     if (!potential_match) return false;
   }
 
-  int k = -1;
+  int k = 0;
   ComparisonMatrix M_save = M;
   UllmannMatch(M, k, n, m, A, fragment_matrix, num_matches, involved_atoms);
   return num_matches;
@@ -99,7 +99,7 @@ bool UllmannMatch(ComparisonMatrix& M, int k, const size_t n, const size_t m,
                   const enu::AdjacencyMatrix& A,
                   const FragmentMatrix& fragment_matrix, int& num_matches,
                   std::vector<std::vector<bool>>& involved_atoms) {
-  if (k == (int)n - 1) {
+  if (k == (int)n) {
     std::vector<bool> involved_atoms_local(m, false);
 
     for (size_t j = 0; j < m; j++) {
@@ -133,16 +133,16 @@ bool UllmannMatch(ComparisonMatrix& M, int k, const size_t n, const size_t m,
   ComparisonMatrix M_save(n, m);
 
   for (size_t l = 0; l < m; l++) {
-    if (M.GetElement(k + 1, l) == true) {
+    if (M.GetElement(k, l) == true) {
       M_save = M;
 
-      for (size_t j = 0; j < m; j++) M.SetElement(k + 1, j, false);
+      for (size_t j = 0; j < m; j++) M.SetElement(k, j, false);
 
       for (size_t i = 0; i < n; i++) M.SetElement(i, l, false);
 
-      M.SetElement(k + 1, l, true);
+      M.SetElement(k, l, true);
 
-      if (Refine(M, k + 1, n, m, A, fragment_matrix)) {
+      if (Refine(M, k, n, m, A, fragment_matrix)) {
         if (UllmannMatch(M, k + 1, n, m, A, fragment_matrix, num_matches,
                          involved_atoms))
           return true;
@@ -190,7 +190,7 @@ bool FindBenzMatch(enu::AdjacencyMatrix& A, bool& canonical,
     if (!foundPotentialMatchForFragmentAtom) return false;
   }
 
-  int k = -1;
+  int k = 0;
   ComparisonMatrix M_save = M;
   bool found = false;
   size_t num_matches = 0;
@@ -204,7 +204,7 @@ bool UllmannMatchBenz(ComparisonMatrix& M, int k, const size_t n,
                       const FragmentMatrix& fragment_matrix, bool& found,
                       size_t& num_matches, std::vector<bool>& is_aromatic,
                       bool& canonical, const RepresentationSystem& u0) {
-  if (k == (int)n - 1) {
+  if (k == (int)n) {
     // return true;
     std::vector<bool> is_aromatic_save = is_aromatic;
 
@@ -268,16 +268,16 @@ bool UllmannMatchBenz(ComparisonMatrix& M, int k, const size_t n,
   ComparisonMatrix M_save(n, m);
 
   for (size_t l = 0; l < m; l++) {
-    if (M.GetElement(k + 1, l) == true) {
+    if (M.GetElement(k, l) == true) {
       M_save = M;
 
-      for (size_t j = 0; j < m; j++) M.SetElement(k + 1, j, false);
+      for (size_t j = 0; j < m; j++) M.SetElement(k, j, false);
 
       for (size_t i = 0; i < n; i++) M.SetElement(i, l, false);
 
-      M.SetElement(k + 1, l, true);
+      M.SetElement(k, l, true);
 
-      if (Refine(M, k + 1, n, m, A, fragment_matrix)) {
+      if (Refine(M, k, n, m, A, fragment_matrix)) {
         if (canonical &&
             UllmannMatchBenz(M, k + 1, n, m, A, fragment_matrix, found,
                              num_matches, is_aromatic, canonical, u0))
