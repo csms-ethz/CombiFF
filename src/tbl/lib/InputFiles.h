@@ -35,7 +35,7 @@ static const InputFilePropsMap possible_input_file_props{
     {atomtypes_file, {"atomtypes file (att/s)", "atomTypesFile"}}};
 
 static const InputFileMap possible_input_files{{"-fragments", fragment_file},
-                                               {"-atomTypes", atomtypes_file}};
+                                               {"-atomtypes", atomtypes_file}};
 //{"@fieFamilies", fiefamilyfile}};
 }  // namespace topology_builder
 

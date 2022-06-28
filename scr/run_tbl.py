@@ -79,7 +79,7 @@ if len(enumerations_to_update):
     command.extend(["-output_directory_mtb", mtb_dir])
     command.append("-families")
     command.append(file)
-    command.append("-atomTypes")
+    command.append("-atomtypes")
     command.extend(glob.glob(atomtypes_dir + "/*.xml"))
     if(united_atoms):
       command.append("-united_atom")
