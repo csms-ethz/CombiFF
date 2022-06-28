@@ -69,7 +69,7 @@ TblFragment::TblFragment(
     if (atom.GetLinkageType() == core) n_core_atoms++;
   }
 
-  // Check if the fragment has a cyclicle
+  // Check if the fragment has a cycle
   cyclic = F.HasCycle();
 }
 
@@ -217,7 +217,7 @@ void CreateTblFragments(const std::list<std::string>& frag_file_names,
                 << combi_ff::current_version << " but atom type file "
                 << fragFileName << " is version " << version << "\n";
 
-    tbl_fragments.reserve(root.children.size());
+    tbl_fragments.reserve(tbl_fragments.size() + root.children.size());
 
     for (auto&& child : root.children) {
       child->CheckTagName("fragment");
@@ -238,9 +238,24 @@ void CreateTblFragments(const std::list<std::string>& frag_file_names,
                           "in any of the specified fragment files\n");
       }
     }
-  }
 
-  std::sort(tbl_fragments.begin(), tbl_fragments.end(), GetPriority);
+  } else {
+    // std::sort(tbl_fragments.begin(), tbl_fragments.end(), GetPriority);
+    // TODO: investigate why std sort leads to non-deterministic segfaults
+    bool swapped = true;
+    int end = (int)tbl_fragments.size() - 1;
+    while (swapped) {
+      swapped = false;
+
+      for (int i = 0; i < end; i++) {
+        if (!GetPriority(tbl_fragments[i], tbl_fragments[i + 1])) {
+          std::swap(tbl_fragments[i], tbl_fragments[i + 1]);
+          swapped = true;
+          end--;
+        }
+      }
+    }
+  }
 
   for (auto&& frag : tbl_fragments) frag.DetermineCoreAtoms();
 
