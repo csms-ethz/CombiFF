@@ -14,6 +14,7 @@ set(headers
      moleculeMacros.h
      Linkage.h
      mtb.h
+     replacement.h
      )
 
 set(sources
@@ -26,6 +27,7 @@ set(sources
      TopologicalProperty.cpp
      moleculeMacros.cpp
      mtb.cpp
-     TblAtom.cpp)
+     TblAtom.cpp
+     replacement.cpp)
 
 add_library(tblLib STATIC ${sources} ${headers})

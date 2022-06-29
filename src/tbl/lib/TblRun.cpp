@@ -9,6 +9,7 @@
 //#include <filesystem>
 #include "MoleculeDecomposer.h"
 #include "mtb.h"
+#include "replacement.h"
 #include "version.h"
 
 namespace combi_ff {
@@ -47,6 +48,9 @@ void TblRun::run() {
         decomposer.GetFamilyCode(), tbl_fragments, io_file_properties);
     CreateMTB(filename_molecules_with_macros, decomposer.GetFamilyCode(),
               io_file_properties);
+
+    ReplaceMacrosByParameters(filename_molecules_with_macros,
+                              decomposer.GetFamilyCode(), io_file_properties);
   }
 }
 
