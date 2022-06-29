@@ -1,3 +1,5 @@
+// Copyright 2022 Salomé Rieder, CSMS ETH Zürich
+
 #include "replacement.h"
 
 #include <regex>
@@ -7,6 +9,13 @@
 #include "XmlParser.h"
 #include "mtb.h"
 #include "version.h"
+
+/*
+TODO:
+ - add nice std::setw formatting
+ - merge with mtb.cpp to avoid code duplication -> pass macro replacement as
+input option
+*/
 
 namespace combi_ff {
 
@@ -18,124 +27,35 @@ void ReplaceMacrosByParameters(
     const IOFileProperties& io_file_properties) {
   std::vector<std::pair<std::string, std::string>> replacements;
 
-  XmlParserIn parser(
-      "/home/salome/PhD/cff/CombiFF/use/input_files/macro_replacements/"
-      "replacements.xml",
-      XmlParserIn::read_all);
-  // std::cout << parser << std::endl;
-  const XmlTree& tree = parser.GetTree_const();
-  const XmlElement& root = tree.GetRoot_const();
-  tree.CheckRootTagName("replacements");
-  root.CheckAttribute("version");
-  const std::string& version = root.attributes.find("version")->second;
+  const std::list<std::string>& replacement_file_names =
+      io_file_properties.input_file_names[replacement_file];
 
-  if (version != combi_ff::current_version)
-    std::cout << "?Warning: currently running combi_ff version "
-              << combi_ff::current_version << " but repplacement file "
-              << "XXX"
-              << " is version " << version << "\n";
+  for (const auto& replacement_file_name : replacement_file_names) {
+    XmlParserIn parser(replacement_file_name, XmlParserIn::read_all);
+    // std::cout << parser << std::endl;
+    const XmlTree& tree = parser.GetTree_const();
+    const XmlElement& root = tree.GetRoot_const();
+    tree.CheckRootTagName("replacements");
+    root.CheckAttribute("version");
+    const std::string& version = root.attributes.find("version")->second;
 
-  replacements.reserve(root.children.size());
+    if (version != combi_ff::current_version)
+      std::cout << "?Warning: currently running combi_ff version "
+                << combi_ff::current_version << " but replacement file "
+                << replacement_file_name << " is version " << version << "\n";
 
-  for (auto&& child : root.children) {
-    child->CheckTagName("replacement");
+    replacements.reserve(replacements.size() + root.children.size());
 
-    replacements.push_back(std::pair<std::string, std::string>(
-        child->GetFirstChild()->value, child->GetLastChild()->value));
+    for (auto&& child : root.children) {
+      child->CheckTagName("replacement");
+
+      replacements.push_back(std::pair<std::string, std::string>(
+          child->GetFirstChild()->value, child->GetLastChild()->value));
+    }
   }
-
-  for (auto&& r : replacements)
-    std::cout << r.first << " " << r.second << std::endl;
 
   CreateMTBWithParameters(filename_molecules_with_macros, family_code,
                           io_file_properties, replacements);
-
-  /*std::ifstream mtb_in(filename_mtb);
-  std::ofstream
-  mtb_out("/home/salome/PhD/cff/CombiFF/use/output_files/test.mtb");
-
-  std::string line;
-  while(std::getline(mtb_in, line)){
-    mtb_out << line << "\n";
-    if(line == "MTBUILDBLSOLUTE")
-      break;
-  }
-  while(std::getline(mtb_in, line)){
-    mtb_out << line << "\n";
-    if(line[0] != '#') //RNME
-      break;
-  }
-  while(std::getline(mtb_in, line)){
-    mtb_out << line << "\n";
-    if(line[0] != '#') //NMAT
-      break;
-  }
-
-  while(std::getline(mtb_in, line)){
-    if(line[0] != '#'){ //ATOM
-      std::istringstream s(line);
-      int idx;
-      std::string anm;
-      std::string iacm;
-      std::string mass;
-      std::string chg;
-      int cg;
-      int exc;
-      s >> idx >> anm >> iacm >> mass >> chg >> cg >> exc;
-
-      mtb_out << "  " << idx << "  " << anm << "  ";
-
-      bool match = false;
-      for(const auto& r : replacements){
-        if(std::regex_match (iacm, std::regex(r.first))){
-          mtb_out << r.second << std::flush;
-          match = true;
-          break;
-        }
-      }
-      if(!match)
-        throw combi_ff::input_error("no matching replacement for macro " +
-  iacm);
-
-      match = false;
-      for(const auto& r : replacements){
-        if(std::regex_match (mass, std::regex(r.first))){
-          mtb_out << r.second << "  " << std::flush;
-          match = true;
-          break;
-        }
-      }
-      if(!match)
-        throw combi_ff::input_error("no matching replacement for macro " +
-  mass);
-
-      match = false;
-      for(const auto& r : replacements){
-        if(std::regex_match (chg, std::regex(r.first))){
-          mtb_out << r.second << "  " << std::flush;
-          match = true;
-          break;
-        }
-      }
-      if(!match)
-        throw combi_ff::input_error("no matching replacement for macro " + chg);
-
-      int excl;
-      int n = 0;
-      while(s >> excl){n++; mtb_out << "  " << excl;}
-      for(int i = n; i < exc; i++){
-              mtb_in >> excl;
-              mtb_out << "  " << excl;
-          }}
-    else{
-      mtb_out << line << "\n";
-    }
-    if(line == "END")
-      break;
-  }
-
-  mtb_in.close();
-  mtb_out.close();*/
 }
 
 void CreateMTBWithParameters(

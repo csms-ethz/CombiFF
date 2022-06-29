@@ -33,6 +33,8 @@ family_definitions_dir = build_path(input_dir, 'family_definitions')
 fragments_dir = build_path(input_dir, 'fragments')
 pseudoatoms_dir = build_path(input_dir, 'pseudoatoms')
 substructures_dir = build_path(input_dir, 'substructures')
+replacement_dir = build_path(input_dir, 'macro_replacements')
+
 
 family_isomer_enumerations_dir = build_path(output_dir, 'family_isomer_enumerations')
 family_isomer_enumerations_stereo_dir = build_path(output_dir, 'family_isomer_enumerations_stereo')

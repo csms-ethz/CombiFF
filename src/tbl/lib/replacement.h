@@ -1,3 +1,5 @@
+// Copyright 2022 Salomé Rieder, CSMS ETH Zürich
+
 #ifndef REPLACEMENT_H_
 #define REPLACEMENT_H_
 

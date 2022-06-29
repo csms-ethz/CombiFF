@@ -203,8 +203,8 @@ void CreateTblFragments(const std::list<std::string>& frag_file_names,
   if (!frag_file_names.size())
     throw std::runtime_error("didn't specify any fragment files\n");
 
-  for (auto&& fragFileName : frag_file_names) {
-    XmlParserIn parser(fragFileName, XmlParserIn::read_all);
+  for (auto&& frag_file_name : frag_file_names) {
+    XmlParserIn parser(frag_file_name, XmlParserIn::read_all);
     // std::cout << parser << std::endl;
     const XmlTree& tree = parser.GetTree_const();
     const XmlElement& root = tree.GetRoot_const();
@@ -215,7 +215,7 @@ void CreateTblFragments(const std::list<std::string>& frag_file_names,
     if (version != combi_ff::current_version)
       std::cout << "?Warning: currently running combi_ff version "
                 << combi_ff::current_version << " but atom type file "
-                << fragFileName << " is version " << version << "\n";
+                << frag_file_name << " is version " << version << "\n";
 
     tbl_fragments.reserve(tbl_fragments.size() + root.children.size());
 

@@ -8,7 +8,12 @@ namespace combi_ff {
 namespace topology_builder {
 
 // add new input files here (before num_input_files!)
-typedef enum { fragment_file, atomtypes_file, num_input_files } InputFileType;
+typedef enum {
+  fragment_file,
+  atomtypes_file,
+  replacement_file,
+  num_input_files
+} InputFileType;
 
 // compatibility with g++ 4.8
 class InputFileTypeHash {
@@ -32,10 +37,13 @@ typedef std::unordered_map<InputFileType, inputFileProps, InputFileTypeHash>
 // add new input files here
 static const InputFilePropsMap possible_input_file_props{
     {fragment_file, {"fragment file (frg)", "fragmentFile"}},
-    {atomtypes_file, {"atomtypes file (att/s)", "atomTypesFile"}}};
+    {atomtypes_file, {"atomtypes file (att/s)", "atomTypesFile"}},
+    {replacement_file, {"replacement file (rep)", "replacementFile"}}};
 
-static const InputFileMap possible_input_files{{"-fragments", fragment_file},
-                                               {"-atomtypes", atomtypes_file}};
+static const InputFileMap possible_input_files{
+    {"-fragments", fragment_file},
+    {"-atomtypes", atomtypes_file},
+    {"-replacements", replacement_file}};
 //{"@fieFamilies", fiefamilyfile}};
 }  // namespace topology_builder
 

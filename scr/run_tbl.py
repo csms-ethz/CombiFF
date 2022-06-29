@@ -64,6 +64,8 @@ fragment_files = glob.glob(fragments_dir + "/*.xml")
 if (not united_atoms):
     fragment_files = [ff for ff in fragment_files if "united" not in ff]
 
+replacement_files = glob.glob(replacement_dir + "/*.xml")
+
 if(not os.path.exists(tbl_executable)):
   print("Warning: tbl executable not found -> compiling")
   exec(open(script_dir + '/compile.py').read())
@@ -74,6 +76,8 @@ if len(enumerations_to_update):
     
     command = [tbl_executable, "-fragments"]
     command.extend(fragment_files)
+    command.append("-replacements")
+    command.extend(replacement_files)
     command.extend(["-output_directory_decompositions", molecule_decompositions_dir])
     command.extend(["-output_directory_molecule_macros", molecules_with_macros_dir])
     command.extend(["-output_directory_mtb", mtb_dir])
