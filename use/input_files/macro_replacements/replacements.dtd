@@ -1,0 +1,7 @@
+<!ELEMENT replacements (replacement+)>
+<!ATTLIST replacements version CDATA #REQUIRED>
+
+<!ELEMENT replacement (macro,parameter)>
+
+<!ELEMENT macro (#PCDATA)>
+<!ELEMENT parameter (#PCDATA)>
