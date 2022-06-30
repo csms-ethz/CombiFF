@@ -8,7 +8,7 @@
 
 namespace combi_ff {
 
-typedef size_t ElementPriority;
+typedef double ElementPriority;
 typedef size_t Connectivity;
 
 typedef size_t ElementNumber;
@@ -42,10 +42,14 @@ struct ElementProperties {
       priority = 0;
     else if (symbol == "H")
       priority = 1;
+
+    // two letter symobl -> B comes before Be comes before Br
+    if (symbol.size() > 1) {
+      priority += (ElementPriority)symbol[1] / 1000;
+    }
   }
 };
 
-// IMPORTANT: element priority has to be unique for every element type!!
 static const std::unordered_map<ElementIdentifier, ElementProperties>
     element_property_map{
         {"C", ElementProperties({"C", 4, 6, 12.011, false})},

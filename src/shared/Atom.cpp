@@ -268,7 +268,9 @@ void CnvAtom::SetFormalCharge(const std::string& f) {
   }
 }
 
-size_t Atom::GetElementPriority() const { return properties.priority; }
+combi_ff::ElementPriority Atom::GetElementPriority() const {
+  return properties.priority;
+}
 
 void Atom::SetUnitedAtomSymbol(std::string s) { symbol_united_atom = s; }
 

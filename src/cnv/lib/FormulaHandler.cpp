@@ -67,10 +67,14 @@ void FormulaHandler::ConvertFormula(const std::string& formula) {
       atom_name = "P";
 
     else if (formula[i] == 'B' || formula[i] == 'r') {
-      if (formula[++i] != 'r' && formula[i] != 'R')
-        throw combi_ff::input_error("unrecognized atom type in " + formula);
-
-      atom_name = "Br";
+      if (formula[++i] == 'r')
+        atom_name = "Br";
+      else if (formula[i] == 'e')
+        atom_name = "Be";
+      else {
+        atom_name = "B";
+        i--;
+      }
 
     } else if (formula[i] == 'F' || formula[i] == 'f')
       atom_name = "F";

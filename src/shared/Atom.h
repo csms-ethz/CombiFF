@@ -154,33 +154,58 @@ std::string CreateCanonicalFormulaFromAtomVector(
   lambda_types.resize(atoms_full.size());
   atom_types.resize(atoms_full.size());
 
-  if (nH) {
-    // case that formula only consists of hydrogen atoms
-    if (atom_types[0] == "H") lambda_types[0] += nH;
-
-    // case that hydrogen is the atom type with highest priority
-    else if (atom_types.size() > 1 && atom_types[1] == "H")
+  // case that there is a carbon atom -> hydrogen has 2nd priority (if present)
+  if (atom_types[0] == "C") {
+    if (atom_types.size() > 1 && atom_types[1] == "H") {
       lambda_types[1] += nH;
-
-    // case that hydrogen is atom type with 2nd highest priority
-    //(i.e. there is at least one carbon atom in the formula as carbon is the
-    // only atom with a higher priority than hydrogen)
-    else {
-      if (atom_types[0] == "C") {
-        atom_types.insert(atom_types.begin() + 1, "H");
-        lambda_types.insert(lambda_types.begin() + 1, nH);
-
-      } else {
-        atom_types.insert(atom_types.begin(), "H");
-        lambda_types.insert(lambda_types.begin(), nH);
+    } else if (nH) {
+      atom_types.insert(atom_types.begin() + 1, "H");
+      lambda_types.insert(lambda_types.begin() + 1, nH);
+    }
+  }
+  // case that there is no carbon atom -> present hydrogen is placed
+  // alphabetically
+  else if (atom_types[0] == "H") {
+    lambda_types[0] += nH;
+    if (atom_types.back()[0] < 'H') {
+      atom_types.insert(atom_types.end(), "H");
+      lambda_types.insert(lambda_types.end(), nH);
+      atom_types.erase(atom_types.begin());
+      lambda_types.erase(lambda_types.begin());
+    } else {
+      for (size_t i = 0; i < atom_types.size(); i++) {
+        if (atom_types[i][0] >= 'H') {
+          atom_types.insert(atom_types.begin() + i, "H");
+          lambda_types.insert(lambda_types.begin() + i, nH);
+          atom_types.erase(atom_types.begin());
+          lambda_types.erase(lambda_types.begin());
+          break;
+        }
+      }
+    }
+  }
+  // case that there is no carbon atom -> implicit hydrogen is placed
+  // alphabetically
+  else if (nH) {
+    if (atom_types.back()[0] < 'H') {
+      atom_types.insert(atom_types.end(), "H");
+      lambda_types.insert(lambda_types.end(), nH);
+    } else {
+      for (size_t i = 0; i < atom_types.size(); i++) {
+        if (atom_types[i][0] >= 'H') {
+          atom_types.insert(atom_types.begin() + i, "H");
+          lambda_types.insert(lambda_types.begin() + i, nH);
+          break;
+        }
       }
     }
   }
 
   std::string formula("");
 
-  for (size_t i = 0; i < atom_types.size(); i++)
+  for (size_t i = 0; i < atom_types.size(); i++) {
     formula += atom_types[i] + std::to_string(lambda_types[i]);
+  }
 
   return formula;
 }
