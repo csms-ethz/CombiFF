@@ -205,7 +205,8 @@ std::string CreateCanonicalFormulaFromAtomVector(
   std::string formula("");
 
   for (size_t i = 0; i < atom_types.size(); i++) {
-    formula += atom_types[i] + std::to_string(lambda_types[i]);
+    formula += atom_types[i];
+    if (lambda_types[i] > 1) formula += std::to_string(lambda_types[i]);
   }
 
   return formula;

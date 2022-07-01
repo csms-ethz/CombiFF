@@ -33,72 +33,93 @@ void FormulaHandler::Run() {
 void FormulaHandler::ConvertFormula(const std::string& formula) {
   combi_ff::AtomVector<combi_ff::CnvAtom> atoms(0);
   size_t i = 0;
+  std::string num("");
+  std::string atom_name("");
 
   while (i < formula.size()) {
-    std::string atom_name("");
-    std::string num("");
-    // assert(std::isalpha(formula[i]));
+    if (std::isalpha(formula[i])) {
+      if (std::isupper(formula[i])) {
+        atom_name = formula[i];
 
-    // while(i < formula.size() && std::isalpha(formula[i]))
-    //	atom_name += formula[i++];
+        if (i + 1 < formula.size() && std::islower(formula[i + 1]))
+          atom_name += formula[++i];
 
-    if (formula[i] == 'C' || formula[i] == 'c') {
-      if (i + 1 < formula.size() &&
-          (formula[i + 1] == 'l' || formula[i + 1] == 'L')) {
-        i++;
-        atom_name = "Cl";
+      } else if (std::islower(formula[i]))
+        atom_name = std::string(1, (char)std::toupper(formula[i]));
 
-      } else
-        atom_name = "C";
+      i++;
 
-    } else if (formula[i] == 'H' || formula[i] == 'h')
-      atom_name = "H";
+      if (i == formula.size() || !std::isdigit(formula[i]))
+        num = "1";
 
-    else if (formula[i] == 'O' || formula[i] == 'o')
-      atom_name = "O";
-
-    else if (formula[i] == 'N' || formula[i] == 'n')
-      atom_name = "N";
-
-    else if (formula[i] == 'S' || formula[i] == 's')
-      atom_name = "S";
-
-    else if (formula[i] == 'P' || formula[i] == 'p')
-      atom_name = "P";
-
-    else if (formula[i] == 'B' || formula[i] == 'r') {
-      if (formula[++i] == 'r')
-        atom_name = "Br";
-      else if (formula[i] == 'e')
-        atom_name = "Be";
       else {
-        atom_name = "B";
-        i--;
+        num = "";
+        while (i < formula.size() && std::isdigit(formula[i]))
+          num += formula[i++];
       }
 
-    } else if (formula[i] == 'F' || formula[i] == 'f')
-      atom_name = "F";
+      AtomVector<combi_ff::CnvAtom> atmp(std::stoi(num), CnvAtom(atom_name));
+      atoms.insert(atoms.end(), atmp.begin(), atmp.end());
 
-    else if (formula[i] == 'I' || formula[i] == 'i')
-      atom_name = "I";
+    } else if (formula[i] == '(') {
+      combi_ff::AtomVector<combi_ff::CnvAtom> atoms_in_parentheses(0);
+      i++;
 
-    else
+      while (i < formula.size() && formula[i] != ')') {
+        if (std::isalpha(formula[i])) {
+          if (std::isupper(formula[i])) {
+            atom_name = formula[i];
+
+            if (i + 1 < formula.size() && std::islower(formula[i + 1]))
+              atom_name += formula[++i];
+
+          } else if (std::islower(formula[i]))
+            atom_name = std::string(1, (char)std::toupper(formula[i]));
+
+        } else
+          throw combi_ff::input_error("unexpected character" +
+                                      std::string(1, formula[i]) + " in " +
+                                      formula);
+
+        i++;
+
+        if (i == formula.size() || !std::isdigit(formula[i]))
+          num = "1";
+
+        else {
+          num = "";
+          while (i < formula.size() && std::isdigit(formula[i]))
+            num += formula[i++];
+        }
+
+        AtomVector<combi_ff::CnvAtom> atmp(std::stoi(num), CnvAtom(atom_name));
+        atoms_in_parentheses.insert(atoms_in_parentheses.end(), atmp.begin(),
+                                    atmp.end());
+      }
+
+      if (i == formula.size() || formula[i] != ')')
+        throw combi_ff::input_error("unclosed opening parenthesis ( in " +
+                                    formula);
+
+      i++;
+
+      if (i == formula.size() || !std::isdigit(formula[i]))
+        num = "1";
+
+      else {
+        num = "";
+        while (i < formula.size() && std::isdigit(formula[i]))
+          num += formula[i++];
+      }
+
+      for (int j = 0; j < std::stoi(num); j++)
+        atoms.insert(atoms.end(), atoms_in_parentheses.begin(),
+                     atoms_in_parentheses.end());
+
+    } else
       throw combi_ff::input_error(
-          "unrecognized atom type in " + formula +
-          ". Please add it in src/cnv/lib/FormulaHandler.cpp.");
-
-    i++;
-
-    if (!std::isdigit(formula[i]))
-      num = "1";
-
-    else {
-      while (i < formula.size() && std::isdigit(formula[i]))
-        num += formula[i++];
-    }
-
-    AtomVector<combi_ff::CnvAtom> atmp(std::stoi(num), CnvAtom(atom_name));
-    atoms.insert(atoms.end(), atmp.begin(), atmp.end());
+          "unexpected character" + std::string(1, formula[i]) + " in " +
+          formula + ". Please add it in src/cnv/lib/FormulaHandler.cpp.");
   }
 
   FormulaHandler::PrintOutput(formula, atoms);
