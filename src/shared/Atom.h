@@ -169,14 +169,15 @@ std::string CreateCanonicalFormulaFromAtomVector(
     lambda_types[0] += nH;
     if (atom_types.back()[0] < 'H') {
       atom_types.insert(atom_types.end(), "H");
-      lambda_types.insert(lambda_types.end(), nH);
+      lambda_types.insert(lambda_types.end(), lambda_types.front() + nH);
       atom_types.erase(atom_types.begin());
       lambda_types.erase(lambda_types.begin());
     } else {
       for (size_t i = 0; i < atom_types.size(); i++) {
         if (atom_types[i][0] >= 'H') {
           atom_types.insert(atom_types.begin() + i, "H");
-          lambda_types.insert(lambda_types.begin() + i, nH);
+          lambda_types.insert(lambda_types.begin() + i,
+                              lambda_types.front() + nH);
           atom_types.erase(atom_types.begin());
           lambda_types.erase(lambda_types.begin());
           break;
