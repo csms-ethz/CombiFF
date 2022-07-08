@@ -109,8 +109,13 @@ bool Atom::operator<(const Atom& b) const {
 
   if (b.GetElementSymbol() == "H") return true;
 
-  // return(a.GetTypeName() < b.GetTypeName());
-  return (GetElementNumber() < b.GetElementNumber());
+  if (GetElementNumber() > b.GetElementNumber())
+    return false;
+
+  else if (GetElementNumber() < b.GetElementNumber())
+    return true;
+
+  return (GetElementSymbol() < b.GetElementSymbol());
 }
 
 bool Atom::operator>(const Atom& b) const {
@@ -137,8 +142,13 @@ bool Atom::operator>(const Atom& b) const {
 
   if (b.GetElementSymbol() == "H") return false;
 
-  // return(a.GetTypeName() > b.GetTypeName());
-  return (GetElementNumber() > b.GetElementNumber());
+  if (GetElementNumber() < b.GetElementNumber())
+    return false;
+
+  else if (GetElementNumber() > b.GetElementNumber())
+    return true;
+
+  return (GetElementSymbol() > b.GetElementSymbol());
 }
 
 const combi_ff::ElementSymbol& Atom::GetElementSymbol() const {

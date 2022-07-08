@@ -66,16 +66,16 @@ Enumerator::Enumerator(const enu::EnumSpecifications& enum_spec,
 }
 
 /*************
-GetTER METHODS
+getter methods
 *************/
 size_t Enumerator::GetNumIsomers() const { return num_isomers; }
 
 /***************************************************************
-FUNCTION TO PREPARE FOR MOLECULE ENUMERATION FOR A GIVEN used_atom_vectors
+function to prepare for molecule enumeration for a given used_atom_vectors
 ****************************************************************/
 void Enumerator::EnumerateIsomers() {
   /************************************************************************
-  FOR A GIVEN AtomVector atom_types, LOOP OVER ALL THE DIFFERENT LAMBDA VECTORS
+  for a given atomvector atom_types, loop over all the different lambda vectors
   *************************************************************************/
   for (size_t k = 0; k < used_atom_vectors.size(); k++) {
     const combi_ff::AtomVector<combi_ff::Atom>& atom_types =
@@ -106,8 +106,8 @@ void Enumerator::EnumerateIsomers() {
           (int)floor((degree_unsaturations_ / 2.) + 1);
 
       /***********************************************************
-      IF sum_degree and degree_unsaturations MEET THE REQUIREMENTS; PRODUCE THE
-      ISOMERS
+      if sum_degree and degree_unsaturations meet the requirements; produce the
+      isomers
       ************************************************************/
       if (!(sum_degree % 2) &&
           IsInRange(deg_unsaturations,
@@ -162,7 +162,7 @@ void Enumerator::EnumerateIsomers() {
 }
 
 /****************************************************************
-FUNCTION THAT CONTROLS THE ISOMER ENUMERATION FOR A GIVEN FORMULA
+function that controls the isomer enumeration for a given formula
 *****************************************************************/
 void Enumerator::EnumerateFormula(const AtomVector<combi_ff::Atom>& atom_types,
                                   const LambdaVector& lambda,
@@ -202,7 +202,7 @@ void Enumerator::EnumerateFormula(const AtomVector<combi_ff::Atom>& atom_types,
   Enumerator::GetNImplicitAtoms(non_H_atoms, n_fixed_H);
   size_t N_full(N + enumerator_arguments.n_pseudoatoms + n_fixed_H);
   /*************************************************************
-  LOOP OVER ALL THE POSSIBLE DISTRIBUTIONS OF THE HYDROGEN ATOMS
+  loop over all the possible distributions of the hydrogen atoms
   *************************************************************/
 
   while (hydrogen_dist.GetNextDistribution()) {
@@ -245,8 +245,8 @@ void Enumerator::EnumerateFormula(const AtomVector<combi_ff::Atom>& atom_types,
 }
 
 /**************************************************************************************
-COUNT THE NUMER OF IMPLICIT HYDROGENS AND THE NUMBER OF IMPLICIT ATOMS FROM
-PSEUDOATOMS
+count the numer of implicit hydrogens and the number of implicit atoms from
+pseudoatoms
 ***************************************************************************************/
 void Enumerator::GetNImplicitAtoms(
     const AtomVector<combi_ff::Atom>& non_H_atoms, size_t& n_fixed_H) {
@@ -276,8 +276,8 @@ void Enumerator::GetNImplicitAtoms(
 }
 
 /***************************************************************************************************************
-CREATE SKELETONS FOR THE fullMatrix (WITH EXPLICIT HYDROGENS) AND THE
-extendedMatrix (WITH EXPLICIT PSEUDOATOMS)
+create skeletons for the fullmatrix (with explicit hydrogens) and the
+extendedmatrix (with explicit pseudoatoms)
 ***************************************************************************************************************/
 void Enumerator::GetFullAndExtendedMatrixSkeletons(
     const size_t N_full, const AtomVector<combi_ff::Atom>& atoms_hat) {
@@ -457,8 +457,8 @@ void Enumerator::PrintClosingIsomerTag() {
 }
 
 /*****************************************************************************************************
-FILL THE MATRIX full_matrix_ptr FROM THE ADJACENCY MATRIX A, S.T. ALL HYDROGEN
-ATOMS ARE GIVEN EXPLICITLY
+fill the matrix full_matrix_ptr from the adjacency matrix a, s.t. all hydrogen
+atoms are given explicitly
 *****************************************************************************************************/
 void Enumerator::GetFullMatrix() {
   size_t N = enumerator_arguments.A->GetN();
@@ -490,7 +490,7 @@ void Enumerator::GetFullMatrix() {
 }
 
 /************************************************
-CREATE ADJACENCY MATRIX WITH EXPLICIT PSEUDOATOMS
+create adjacency matrix with explicit pseudoatoms
 *************************************************/
 void Enumerator::GetExtendedMatrix(RepresentationSystem*& u0,
                                    RepresentationSystem*& u_automorph,
@@ -554,8 +554,8 @@ void Enumerator::GetExtendedMatrix(RepresentationSystem*& u0,
 }
 
 /********************************************************************************************
-USE SmilesGeneratorEnu CLASS TO GENERATE STEREO CONFORMATIONS AND PRINT THE
-CORRESPONDING OUTPUT
+use smilesgeneratorenu class to generate stereo conformations and print the
+corresponding output
 *********************************************************************************************/
 void Enumerator::EnumerateStereoSmiles(const size_t n_rings,
                                        const RepresentationSystem& u_automorph,
@@ -639,7 +639,7 @@ void Enumerator::EnumerateStereoSmiles(const size_t n_rings,
 }
 
 /*******************
-PRINT CONSOLE OUTPUT
+print console output
 ********************/
 void Enumerator::PrintState(const size_t n_cur_isomers) {
   if (!(n_cur_isomers % 100)) {
@@ -653,8 +653,8 @@ void Enumerator::PrintState(const size_t n_cur_isomers) {
 }
 
 /********************************************************************
-CREATES A CANONICAL FORMULA STRING FROM A GIVEN AtomVector AND LambdaVector
-BY SORTING BY ATOM PRIORITY AND EXTRACTING IMPLICIT HYDROGENS
+creates a canonical formula string from a given atomvector and lambdavector
+by sorting by atom priority and extracting implicit hydrogens
 *********************************************************************/
 std::string Enumerator::CreateCanonicalFormula(
     const LambdaVector& l, const AtomVector<combi_ff::Atom>& used_atoms) {
