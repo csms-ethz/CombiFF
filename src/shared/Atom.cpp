@@ -115,7 +115,7 @@ bool Atom::operator<(const Atom& b) const {
   else if (GetElementNumber() < b.GetElementNumber())
     return true;
 
-  return (GetElementSymbol() < b.GetElementSymbol());
+  return (GetUnitedAtomSymbol() < b.GetUnitedAtomSymbol());
 }
 
 bool Atom::operator>(const Atom& b) const {
@@ -148,7 +148,7 @@ bool Atom::operator>(const Atom& b) const {
   else if (GetElementNumber() > b.GetElementNumber())
     return true;
 
-  return (GetElementSymbol() > b.GetElementSymbol());
+  return (GetUnitedAtomSymbol() > b.GetUnitedAtomSymbol());
 }
 
 const combi_ff::ElementSymbol& Atom::GetElementSymbol() const {
