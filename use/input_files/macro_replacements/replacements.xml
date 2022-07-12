@@ -43,19 +43,19 @@
   </replacement>
   <replacement>
     <macro>chg_CH4_ali.*</macro>
-    <parameter>-0.24000</parameter>
+    <parameter>0.00000</parameter>
   </replacement>
   <replacement>
     <macro>chg_CH3_ali.*</macro>
-    <parameter>-0.18000</parameter>
+    <parameter>0.00000</parameter>
   </replacement>
   <replacement>
     <macro>chg_CH2_ali.*</macro>
-    <parameter>-0.12000</parameter>
+    <parameter>0.00000</parameter>
   </replacement>
   <replacement>
     <macro>chg_CH1_ali.*</macro>
-    <parameter>-0.06000</parameter>
+    <parameter>0.00000</parameter>
   </replacement>
   <replacement>
     <macro>chg_C_ali.*</macro>

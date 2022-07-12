@@ -201,14 +201,13 @@ void CreateMTBWithParameters(
 
     molecule_with_macros_property_it++;
 
+    size_t prop_nr = 0;
     for (auto prop : property_types_in_mtb) {
       if (molecule_with_macros_property_it ==
           molecule_with_macros->children.end()) {
-        mtb_file << "#" << std::setw(4) << std::right
-                 << parameter_count_comments[prop] << std::endl;
-        mtb_file << "0\n";
         break;
       }
+      prop_nr++;
 
       auto&& cur_property = *molecule_with_macros_property_it;
       mtb_file << "#" << std::setw(4) << std::right
@@ -261,7 +260,18 @@ void CreateMTBWithParameters(
         mtb_file << "    0\n";
     }
 
+    if (prop_nr != property_types_in_mtb.size()) {
+      for (; prop_nr < property_types_in_mtb.size(); prop_nr++) {
+        mtb_file << "#" << std::setw(4) << std::right
+                 << parameter_count_comments[property_types_in_mtb[prop_nr]]
+                 << std::endl;
+        mtb_file << "    "
+                 << "0\n";
+      }
+    }
+
     mtb_file << "# NEX\n"
+             << "    "
              << "0\n"
              << "END\n";
   }
