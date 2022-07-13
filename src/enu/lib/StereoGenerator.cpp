@@ -1545,9 +1545,8 @@ void StereoGenerator::FindShortestPath(std::vector<size_t>& minimal_path,
   std::vector<size_t> prev(N);
   dist[i] = 0;
   prev[i] = i;
-  std::vector<size_t> q;
-
-  for (size_t ii = 0; ii < N; ii++) q.push_back(ii);
+  std::vector<size_t> q(N);
+  std::iota(q.begin(), q.end(), 0);
 
   while (q.size() != 0) {
     size_t vertex_min_dist(q[0]);
