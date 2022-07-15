@@ -721,8 +721,10 @@ void CreateMoleculeWithMacros(XmlElement_ptr molecule_decomposition,
         at->AddElement("excluded_atoms");
 
         for (auto&& ea : excluded_atoms) {
-          at->GetFirstChild()->AddElement("excluded_atom");
-          at->GetFirstChild()->GetLastChild()->value = ea->atom_id;
+          if (ea->atom_id != atom_id) {
+            at->GetFirstChild()->AddElement("excluded_atom");
+            at->GetFirstChild()->GetLastChild()->value = ea->atom_id;
+          }
         }
       }
     }
