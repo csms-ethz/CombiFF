@@ -1,0 +1,33 @@
+<!ELEMENT family_isomer_enumeration (enumeration_type,number_of_isomers,enumeration_time,isomer_lists)>
+<!ATTLIST family_isomer_enumeration enu_version CDATA #REQUIRED 
+	family_code CDATA #REQUIRED 
+	family_version CDATA #REQUIRED>
+
+<!ELEMENT enumeration_type EMPTY>
+<!ATTLIST enumeration_type type (constitutional|stereo) #REQUIRED>
+
+<!ELEMENT number_of_isomers (#PCDATA)>
+<!ELEMENT enumeration_time (#PCDATA)>
+
+<!ELEMENT isomer_lists (isomer_list*)>
+
+<!ELEMENT isomer_list (isomer*)>
+<!ATTLIST isomer_list formula CDATA #REQUIRED>
+
+<!ELEMENT isomer (constitutional_SMILES,stereo_isomers*)>
+<!ATTLIST isomer isomer_id CDATA #REQUIRED>
+
+<!ELEMENT formula (#PCDATA)>
+<!ELEMENT constitutional_SMILES (#PCDATA)>
+
+<!ELEMENT stereo_isomers (num_stereoisomers,stereo_isomer+)>
+
+<!ELEMENT num_stereoisomers (#PCDATA)>
+
+<!ELEMENT stereo_isomer (stereo_SMILES,num_tetrahedral_stereocenters,num_cis_trans_stereocenters,enantiomer?)>
+
+<!ATTLIST stereo_isomer stereo_id CDATA #REQUIRED>
+<!ELEMENT stereo_SMILES (#PCDATA)>
+<!ELEMENT num_tetrahedral_stereocenters (#PCDATA)>
+<!ELEMENT num_cis_trans_stereocenters (#PCDATA)>
+<!ELEMENT enantiomer (#PCDATA)>

@@ -1,0 +1,37 @@
+<!ELEMENT molecules_with_macros (molecule_with_macros+)>
+<!ATTLIST molecules_with_macros 
+	enu_version CDATA #IMPLIED
+	family_code CDATA #IMPLIED
+	family_version CDATA #IMPLIED
+	tbl_version CDATA #REQUIRED>
+
+<!ELEMENT molecule_with_macros (atoms+,bonds*,angles?,improper_dihedrals?,torsional_dihedrals?)>
+<!ATTLIST molecule_with_macros isomer_id CDATA #IMPLIED smiles CDATA #IMPLIED>
+
+<!ELEMENT atoms (atom+)>
+<!ATTLIST atoms amount CDATA #REQUIRED>
+<!ELEMENT atom EMPTY>
+<!ATTLIST atom atom_id CDATA #REQUIRED atom_type CDATA #REQUIRED>
+
+<!ELEMENT bonds (bond+)>
+<!ATTLIST bonds amount CDATA #REQUIRED>
+<!ELEMENT bond (involved_atoms)>
+<!ATTLIST bond parameter CDATA #REQUIRED>
+
+<!ELEMENT angles (angle+)>
+<!ATTLIST angles amount CDATA #REQUIRED>
+<!ELEMENT angle (involved_atoms)>
+<!ATTLIST angle parameter CDATA #REQUIRED>
+
+<!ELEMENT improper_dihedrals (improper_dihedral+)>
+<!ATTLIST improper_dihedrals amount CDATA #REQUIRED>
+<!ELEMENT improper_dihedral (involved_atoms)>
+<!ATTLIST improper_dihedral parameter CDATA #REQUIRED>
+
+<!ELEMENT torsional_dihedrals (torsional_dihedral+)>
+<!ATTLIST torsional_dihedrals amount CDATA #REQUIRED>
+<!ELEMENT torsional_dihedral (involved_atoms)>
+<!ATTLIST torsional_dihedral parameter CDATA #REQUIRED>
+
+<!ELEMENT involved_atoms (involved_atom+)> 
+<!ELEMENT involved_atom (#PCDATA)>

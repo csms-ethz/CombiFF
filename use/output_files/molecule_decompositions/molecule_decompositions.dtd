@@ -1,0 +1,16 @@
+<!ELEMENT molecule_decompositions (molecule_decomposition+)>
+<!ATTLSIT molecule_decompositions family_code CDATA #IMPLIED tbl_version CDATA #REQUIRED>
+
+<!ELEMENT molecule_decomposition (fragments,linkages)>
+<!ATTLIST molecule_decomposition isomer_id CDATA #IMPLIED smiles CDATA #IMPLIED>
+
+<!ELEMENT fragments (fragment+)>
+<!ELEMENT fragment (#PCDATA)>
+<!ATTLIST fragment id CDATA #REQUIRED>
+
+<!ELEMENT linkages (linkage+)>
+<!ELEMENT linkage (involved_fragment,involved_fragment)>
+
+<!ELEMENT involved_fragment (fragment_id,linksite)>
+<!ELEMENT fragment_id (#PCDATA)>
+<!ELEMENT linksite (#PCDATA)>
