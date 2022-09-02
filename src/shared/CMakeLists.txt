@@ -24,4 +24,4 @@ set(headers
      version.h
      )
 
-add_library(sharedLib STATIC ${sources} ${headers})
+add_library(sharedCombiFFLib STATIC ${sources} ${headers})
