@@ -393,10 +393,10 @@ void InputOutput::PrintInputOptions() {
          "type X\n"*/
       << "   - {XHn} can be used instead of X for all of the above options in "
          "order to specify a united atom, where X is an atom type and n is a "
-         "number,\n     specifying the number of hydrogen atoms in the united "
+         "number specifying the number of hydrogen atoms in the united "
          "atom\n"
       << "   - the -formula keyword can be used several times, in order to "
-         "specify different molecules\n"
+         "specify different formulas\n"
       << "   - example: -formula C8H12F[2,3,5-4] -formula C8{CH3}4H[6-8]\n\n"
       << "-max_bond_degree: used to specify maximum bond degree between two "
          "atoms\n"
