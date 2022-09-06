@@ -23,6 +23,7 @@ mkdir build
 cd build
 cmake ..
 make
+make install
 ```
 
 After installation, the executables for the different programs are located in the `bin` directory

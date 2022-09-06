@@ -32,3 +32,4 @@ else:
   for file in glob.glob(script_dir + "/*.py"):
     shutil.copy(file, bin_dir)
   
+subprocess.call(['make','install'])
