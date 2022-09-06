@@ -75,7 +75,7 @@ void InputOutput::GetNextInputOption(size_t& i) {
     throw combi_ff::input_error(
         "expected a keyword starting with \'-\', but got \'" + arg +
         "\'. To view input options, run the program with command line argument "
-        "\'help\'");
+        "\'-help\'");
 
   if (arg == "-input")
     AddInputFile(i);
@@ -102,6 +102,9 @@ void InputOutput::GetNextInputOption(size_t& i) {
 
   else if (arg == "-stereo")
     AddStereo();
+
+  else if (arg == "-count_only")
+    AddCountOnly();
 
   else if (possible_input_files.find(arg) != possible_input_files.end())
     ReadFileNames(i, possible_input_files.find(arg)->second);
@@ -296,10 +299,17 @@ void InputOutput::AddRestriction(size_t& i,
 
   ReadRange(prop, r);
 }
+
 // Set stereo to true if the -stereo keyword is used
 void InputOutput::AddStereo() {
   std::cout << "enumerating molecules including stereoisomerism\n";
   enum_spec.stereo = true;
+}
+
+// Set count_only to true if the -count_only keyword is used
+void InputOutput::AddCountOnly() {
+  std::cout << "only counting isomers without writing output\n";
+  enum_spec.count_only = true;
 }
 
 // read the atom type of an atom and add it to used_atoms
@@ -444,7 +454,9 @@ void InputOutput::PrintInputOptions() {
          "keyword can be used several times in order to specify multiple "
          "familes\n\n"
       << "-stereo: used to specify that stereoisomerism should also be "
-         "considered in the enumeration\n\n";
+         "considered in the enumeration\n\n"
+      << "-count_only: only count the number of isomers without generating the "
+         "corresponding XML file with SMILES strings";
 }
 
 }  // namespace enu

@@ -37,7 +37,7 @@ struct EnumSpecifications {
   StringVector used_families{};
   size_t max_degree{4};
   bool stereo{false};
-  bool explicit_hydrogens{false};
+  bool count_only{false};
   RangeVector ranged_properties{num_ranges, Range(0, -1)};
 
   EnumSpecifications() = default;

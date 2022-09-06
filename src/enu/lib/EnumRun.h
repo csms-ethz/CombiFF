@@ -33,15 +33,17 @@ class EnumRun {
 
   void WriteOutputDirect(const IOFileProperties& io_files,
                          const std::string& output_file_name, const bool stereo,
+                         const bool count_only,
                          const std::chrono::milliseconds time,
                          const size_t num_isomers);
 
   void WriteOutput(const IOFileProperties& io_files,
                    const std::string& output_file_name, const bool stereo,
-                   const std::chrono::milliseconds time,
+                   const bool count_only, const std::chrono::milliseconds time,
                    const size_t num_isomers);
 
   void WriteOutputFamily(const IOFileProperties& io_files, const bool stereo,
+                         const bool count_only,
                          const std::chrono::milliseconds time,
                          const Family& family, const size_t num_isomers);
 

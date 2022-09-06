@@ -12,6 +12,7 @@ EnumSpecifications::EnumSpecifications()
       used_families(StringVector(0)),
       max_degree(4),
       stereo(false),
+      cout_only(false),
       ranged_properties(RangeVector(num_ranges, range(0, -1))) {}
 
 }  // namespace enu

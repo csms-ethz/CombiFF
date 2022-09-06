@@ -19,7 +19,8 @@ struct IOFileProperties {
   const size_t rnd;  // random number to distinguish IO files if program is run
                      // for different inputs simultaneously in same directory
   FileNameVector input_file_names;
-  std::string output_dir, output_file_name{output_file_name_default};
+  std::string output_dir{""};
+  std::string output_file_name{output_file_name_default};
   const std::string file_name_tmp{".enu_temp_" /*+ std::to_string(rnd)*/};
   StringVector input_file_categories;
   StringVector input_file_name_building_blocks;
@@ -43,6 +44,7 @@ class InputOutput {
   void AddMaxDegree(size_t& i);
   void AddRestriction(size_t& i, const size_t position_in_range_vec);
   void AddStereo();
+  void AddCountOnly();
   void ReadFileNames(size_t& i, const InputFileType input_type);
   void AddAtom(size_t& j, std::string& formula,
                AtomVector<combi_ff::Atom>& used_atoms);

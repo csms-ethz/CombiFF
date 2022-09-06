@@ -18,6 +18,7 @@ namespace enu {
 
 Enumerator::Enumerator(const enu::Family& family,
                        const enu::PseudoatomMap& pseudoatoms, const bool stereo,
+                       const bool count_only,
                        const std::string& output_file_name)
     : code(family.GetCode()),
       lambda_ranges_vec(family.GetLambdaRangesVec()),
@@ -27,6 +28,7 @@ Enumerator::Enumerator(const enu::Family& family,
       pseudoatoms(&pseudoatoms),
       max_degree(family.GetMaxDeg()),
       stereo(stereo),
+      count_only(count_only),
       num_isomers(0),
       num_isomers_for_listing(0),
       has_pseudoatom(family.GetHasPseudoatom()),
@@ -34,10 +36,12 @@ Enumerator::Enumerator(const enu::Family& family,
       ranges(num_ranges, 0) {
   std::cout << "******************************************************\n"
             << "finding isomers for family " << family.GetCode() << "...\n\n";
-  output_file.open(output_file_name);
+  if (!count_only) {
+    output_file.open(output_file_name);
 
-  if (!output_file.is_open())
-    throw std::runtime_error("couldn't open " + output_file_name);
+    if (!output_file.is_open())
+      throw std::runtime_error("couldn't open " + output_file_name);
+  }
 }
 
 Enumerator::Enumerator(const enu::EnumSpecifications& enum_spec,
@@ -50,6 +54,7 @@ Enumerator::Enumerator(const enu::EnumSpecifications& enum_spec,
       pseudoatoms(NULL),
       max_degree(enum_spec.max_degree),
       stereo(enum_spec.stereo),
+      count_only(enum_spec.count_only),
       deg_unsaturations(0),
       num_isomers(0),
       num_isomers_for_listing(0),
@@ -59,10 +64,12 @@ Enumerator::Enumerator(const enu::EnumSpecifications& enum_spec,
   std::cout
       << "******************************************************\n"
       << "finding isomers for formula given directly in input file...\n\n";
-  output_file.open(output_file_name);
+  if (!count_only) {
+    output_file.open(output_file_name);
 
-  if (!output_file.is_open())
-    throw std::runtime_error("couldn't open " + output_file_name);
+    if (!output_file.is_open())
+      throw std::runtime_error("couldn't open " + output_file_name);
+  }
 }
 
 /*************
@@ -234,11 +241,25 @@ void Enumerator::EnumerateFormula(const AtomVector<combi_ff::Atom>& atom_types,
     if ((*enumerator_arguments.A).GetN() == 1) {
       if (atoms_hat[0].GetDegree() != 0) return;
 
-      if (Enumerator::CheckMolecule()) WriteMolecule();
+      if (count_only) {
+        if (Enumerator::CheckMolecule()) CountMolecule();
+      } else {
+        if (Enumerator::CheckMolecule()) WriteMolecule();
+      }
 
     } else {
-      while (enumerator_arguments.max_fill_alg_ptr->GetNextCanonicalMatrix()) {
-        if (Enumerator::CheckMolecule()) WriteMolecule();
+      if (count_only) {
+        while (
+            enumerator_arguments.max_fill_alg_ptr->GetNextCanonicalMatrix()) {
+          if (Enumerator::CheckMolecule()) CountMolecule();
+        }
+      }
+
+      else {
+        while (
+            enumerator_arguments.max_fill_alg_ptr->GetNextCanonicalMatrix()) {
+          if (Enumerator::CheckMolecule()) WriteMolecule();
+        }
       }
     }
   }
@@ -440,6 +461,61 @@ void Enumerator::WriteMolecule() {
   }
 }
 
+/*
+count the molecule and its stereoisomers
+*/
+void Enumerator::CountMolecule() {
+  AdjacencyMatrix* mat(NULL);
+  RepresentationSystem* u0(NULL);
+  RepresentationSystem* u_automorph(NULL);
+  RepresentationSystem* u_id(NULL);
+
+  if (has_pseudoatom) {
+    enumerator_arguments.extended_matrix_ptr = std::shared_ptr<AdjacencyMatrix>(
+        new AdjacencyMatrix(*enumerator_arguments.extended_matrix_BU_ptr));
+    GetExtendedMatrix(u0, u_automorph, u_id);
+    mat = &*enumerator_arguments.extended_matrix_ptr;
+
+  } else {
+    mat = &*enumerator_arguments.A;
+    u0 = &enumerator_arguments.max_fill_alg_ptr->GetU0_non_const();
+    u_automorph =
+        &enumerator_arguments.max_fill_alg_ptr->GetUAutomorph_non_const();
+    u_id = &enumerator_arguments.max_fill_alg_ptr->GetUId_non_const();
+  }
+
+  // test if this molecule is aromatic and has already been found
+  bool canonical(true);
+
+  if (ranges[range_double_bonds] >= 3 && ranges[range_rings] >= 1 &&
+      FindBenzMatch(*mat, canonical, *u0) && !canonical)
+    return;
+
+  SmilesGeneratorEnu smiles_gen(*mat);
+  num_isomers_for_formula++;  // another molecule found
+  num_isomers_for_listing++;
+
+  if (stereo && (ranges[range_double_bonds] ||
+                 mat->GetAtomVector().front().GetDegree() >= 4 ||
+                 (mat->GetAtomVector().front().GetDegree() == 3 &&
+                  mat->GetAtomVector().front().GetNumTotalHydrogens() == 1))) {
+    smiles_gen
+        .GenerateSmiles();  // we need the SMILES for stereo configurations
+    CountStereoisomers(ranges[range_rings], *u_automorph, *u_id, smiles_gen);
+  }
+
+  else
+    PrintState(num_isomers_for_formula);
+
+  PrintClosingIsomerTag();
+
+  if (has_pseudoatom) {
+    delete u0;
+    delete u_automorph;
+    delete u_id;
+  }
+}
+
 void Enumerator::PrintConstitutionalIsomer(const std::string& smiles) {
   output_file << std::string(xml_indent_size * 3, ' ') << "<isomer isomer_id=\""
               << code << "_" << std::setw(9) << std::setfill('0') << std::right
@@ -554,7 +630,7 @@ void Enumerator::GetExtendedMatrix(RepresentationSystem*& u0,
 }
 
 /********************************************************************************************
-use smilesgeneratorenu class to generate stereo conformations and print the
+use SmilesGeneratorEnu class to generate stereo conformations and print the
 corresponding output
 *********************************************************************************************/
 void Enumerator::EnumerateStereoSmiles(const size_t n_rings,
@@ -569,9 +645,6 @@ void Enumerator::EnumerateStereoSmiles(const size_t n_rings,
   else
     mat = enumerator_arguments.A;
 
-  // mat->print();
-  // std::cout << smilesGen.GetSmiles() << std::endl;
-  // std::cout << smilesGen.GetVisitedIndices() << std::endl;
   StereoGenerator stereo_gen(*mat, n_rings, u_automorph, u_id, smiles_gen);
   stereo_gen.GenerateStereoSmiles();
   std::vector<std::tuple<std::string, int, std::pair<int, int>>>
@@ -612,20 +685,6 @@ void Enumerator::EnumerateStereoSmiles(const size_t n_rings,
 
       output_file << std::string(xml_indent_size * 5, ' ')
                   << "</stereo_isomer>\n";
-      // output_file << formula << " " << smiles << " ";
-      /*std::string smiles = std::get<0>(stereoSMILES[n]);
-      int enantiomer = std::get<1>(stereoSMILES[n]);
-      int numStereoCentersLocal = std::get<2>(stereoSMILES[n]).first;
-      int numCTBondsLocal = std::get<2>(stereoSMILES[n]).second;*/
-      /*  if(enantiomer == -1)
-          output_file << "M[" << numStereoCentersLocal << "," << numCTBondsLocal
-        << "]" << '\n';
-
-        else
-          output_file << "C[" << numStereoCentersLocal << "," << numCTBondsLocal
-        << "]" << "(" << std::setw(4) << std::setfill('0') << std::right <<
-        enantiomer
-                     << ")" << '\n';*/
     }
 
     output_file << std::string(xml_indent_size * 4, ' ')
@@ -633,9 +692,30 @@ void Enumerator::EnumerateStereoSmiles(const size_t n_rings,
     num_isomers_for_formula += stereo_smiles_vec.size() - 1;
 
   } else {
-    // printIsomerToFile(smilesGen.GetSmiles(), "A");
     PrintState(num_isomers_for_formula);
   }
+}
+
+/******************
+count stereoisomers
+*******************/
+void Enumerator::CountStereoisomers(const size_t n_rings,
+                                    const RepresentationSystem& u_automorph,
+                                    const RepresentationSystem& u_id,
+                                    const SmilesGeneratorEnu& smiles_gen) {
+  std::shared_ptr<AdjacencyMatrix> mat;
+
+  if (has_pseudoatom)
+    mat = enumerator_arguments.extended_matrix_ptr;
+
+  else
+    mat = enumerator_arguments.A;
+
+  StereoGenerator stereo_gen(*mat, n_rings, u_automorph, u_id, smiles_gen);
+  stereo_gen.GenerateStereoSmiles();
+  if (stereo_gen.GetStereoSmiles().size())
+    num_isomers_for_formula += stereo_gen.GetStereoSmiles().size() - 1;
+  PrintState(num_isomers_for_formula);
 }
 
 /*******************
@@ -644,11 +724,6 @@ print console output
 void Enumerator::PrintState(const size_t n_cur_isomers) {
   if (!(n_cur_isomers % 100)) {
     std::cout << " -> found " << n_cur_isomers << std::flush << '\r';
-    /*if(!(n_cur_isomers % 100000)){
-      std::string name = ".enu_temp_";
-      remove(name.c_str());
-      output_file.open(name);
-    }*/
   }
 }
 

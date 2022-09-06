@@ -43,7 +43,8 @@ class Enumerator {
              const std::string& output_file_name);
 
   Enumerator(const Family& family, const PseudoatomMap& pseudoatoms,
-             const bool stereo, const std::string& output_file_name);
+             const bool stereo, const bool count_only,
+             const std::string& output_file_name);
 
   size_t GetNumIsomers() const;
 
@@ -63,6 +64,8 @@ class Enumerator {
 
   void WriteMolecule();
 
+  void CountMolecule();
+
   void GetFullMatrix();
 
   void GetExtendedMatrix(RepresentationSystem*& u0,
@@ -73,6 +76,11 @@ class Enumerator {
                              const RepresentationSystem& u_automorph,
                              const RepresentationSystem& u_id,
                              const SmilesGeneratorEnu& smiles_gen);
+
+  void CountStereoisomers(const size_t n_rings,
+                          const RepresentationSystem& u_automorph,
+                          const RepresentationSystem& u_id,
+                          const SmilesGeneratorEnu& smiles_gen);
 
   void PrintState(const size_t num_curr_isomers);
 
@@ -99,6 +107,7 @@ class Enumerator {
   const PseudoatomMap* pseudoatoms = {NULL};
   const size_t max_degree;
   const bool stereo;
+  const bool count_only;
   std::ofstream output_file;
   int deg_unsaturations;
   size_t num_isomers, num_isomers_for_listing, num_isomers_for_formula;
