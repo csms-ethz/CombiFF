@@ -5,7 +5,7 @@
     saturated C1-C10 with one primary amide group
   -->
   <family_definition code="1200">
-    <formula>'C=O'1 C[0-9] N1 H*</formula>
+    <formula>'C=O'1 C[0-9] N1 H[0-30]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
       <substructure substructure_code="AMIDE" number="1">
@@ -24,7 +24,7 @@
     saturated C1-C10 with one secondary amide group
   -->
   <family_definition code="1201">
-    <formula>'C=O'1 C[0-9] N1 H*</formula>
+    <formula>'C=O'1 C[0-9] N1 H[0-30]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
       <substructure substructure_code="AMIDE" number="1">
@@ -43,7 +43,7 @@
     saturated C1-C10 with one tertiary amide group
   -->
   <family_definition code="1202">
-    <formula>'C=O'1 C[0-9] N1 H*</formula>
+    <formula>'C=O'1 C[0-9] N1 H[0-30]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
       <substructure substructure_code="AMIDE" number="1">
@@ -62,7 +62,7 @@
     saturated C1-C10 with two amide groups
   -->
   <family_definition code="1203">
-    <formula>'C=O'2 C[0-8] N2 H*</formula>
+    <formula>'C=O'2 C[0-8] N2 H[0-30]</formula>
     <unsaturations>0</unsaturations>
     <substructures>
       <substructure substructure_code="AMIDE" number="2">

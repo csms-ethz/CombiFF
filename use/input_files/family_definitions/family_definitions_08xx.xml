@@ -77,7 +77,7 @@
     C1-C10 3-ester groups
   -->
   <family_definition code="0804">
-    <formula>C[0-7] {CH1}3H*{OH0}6</formula>
+    <formula>C[0-7]{CH1}3H[0-22]{OH0}6</formula>
     <unsaturations>3</unsaturations>
     <substructures>
       <substructure substructure_code="ESTER" number="3">

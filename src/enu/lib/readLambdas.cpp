@@ -90,15 +90,6 @@ void ReadLambdas(std::list<LambdaVector>& lambda_ranges, size_t& j,
     AddNumsToLambdaRanges(nums, lambda_ranges, false);
     j++;
 
-  } else if (formula[j] == '*') {
-    std::vector<size_t> nums;
-    nums.reserve(100);
-
-    for (size_t i = 0; i < 100; i++) nums.push_back(i);
-
-    AddNumsToLambdaRanges(nums, lambda_ranges, true);
-    j++;
-
   } else
     throw combi_ff::input_error("unexpected character " +
                                 std::string(1, formula[j]) + " in " + formula);

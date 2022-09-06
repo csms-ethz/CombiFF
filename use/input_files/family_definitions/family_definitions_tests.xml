@@ -25,7 +25,7 @@
     </substructures>
   </family_definition>
   <family_definition code="double_bond">
-    <formula>C[2-5]H*</formula>
+    <formula>C[2-5]H[0-20]</formula>
     <double_bonds>1</double_bonds>
     <unsaturations>1</unsaturations>
   </family_definition>
@@ -35,7 +35,7 @@
     <unsaturations>1</unsaturations>
   </family_definition>
   <family_definition code="cycles">
-    <formula>C6H*F1Br1</formula>
+    <formula>C6H[0-20]F1Br1</formula>
     <cycles>1</cycles>
     <unsaturations>1</unsaturations>
   </family_definition>

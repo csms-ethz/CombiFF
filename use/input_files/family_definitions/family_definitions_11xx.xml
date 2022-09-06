@@ -61,7 +61,7 @@
     saturated C1-C10 with 1 ketone group and 1 halogen
   -->
   <family_definition code="1108">
-    <formula>C[1-7] H* 'C=O'1 Hal1</formula>
+    <formula>C[1-7] H[0-20] 'C=O'1 Hal1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
       <substructure substructure_code="KETONE" number="1">
@@ -78,7 +78,7 @@
     saturated C1-C10 with 1 ketone group and 2 halogens
   -->
   <family_definition code="1109">
-    <formula>C[1-7] H* 'C=O'1 Hal1 Hal1</formula>
+    <formula>C[1-7] H[0-20] 'C=O'1 Hal1 Hal1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
       <substructure substructure_code="KETONE" number="1">
@@ -95,7 +95,7 @@
     saturated C1-C10 with 1 ketone group and 3 halogens
   -->
   <family_definition code="1110">
-    <formula>C[1-7] H* 'C=O'1 Hal1 Hal1 Hal1</formula>
+    <formula>C[1-7] H[0-20] 'C=O'1 Hal1 Hal1 Hal1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
       <substructure substructure_code="KETONE" number="1">
@@ -163,7 +163,7 @@
     saturated C2-C10 - 1 ketone + 1 ester
   -->
   <family_definition code="1128">
-    <formula>C[0-8] H* 'C=O'2 {OH0}1</formula>
+    <formula>C[0-8] H[0-22] 'C=O'2 {OH0}1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
       <substructure substructure_code="KETONE" number="1">
@@ -189,7 +189,7 @@
     saturated C2-C10 - 1 ether + 1 ester
   -->
   <family_definition code="1130">
-    <formula>C[3-9] H* {OH0}2 'CH0=O'1</formula>
+    <formula>C[3-9] H[0-24] {OH0}2 'CH0=O'1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
       <substructure substructure_code="ESTER" number="1">
@@ -207,7 +207,7 @@
     saturated C2-C10 - 1 ester + 1 formate
   -->
   <family_definition code="1147">
-    <formula>C[0-8] H* 'CH0=O'1 {OH0}1 'OC(=O)H'1</formula>
+    <formula>C[0-8] H[0-24] 'CH0=O'1 {OH0}1 'OC(=O)H'1</formula>
     <unsaturations>0</unsaturations>
     <substructures>
       <substructure substructure_code="ESTER" number="2" repetition="xor">
