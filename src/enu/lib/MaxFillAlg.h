@@ -30,7 +30,6 @@ class MaxFillAlg {
   bool FindStabilizer(const std::vector<size_t>& permuted_indices,
                       RepresentationSystem& u_next,
                       const size_t highest_permuted_idx);
-  void CalculateNextLambdas();
 
   const RepresentationSystem& GetUAutomorph() const;
   const RepresentationSystem& GetU0() const;
@@ -52,11 +51,7 @@ class MaxFillAlg {
   TriangularMatrix<int> C;
   std::vector<RepresentationSystem> row_stabilizer_rep;
   RepresentationSystem id;
-  std::vector<LambdaVector> lambda_prime;
-  std::vector<LambdaVector> lambda_prime_prime;
   bool found;
-  std::vector<std::vector<size_t>> num_perms_lambda_prime_prime;
-  std::vector<size_t> num_perms_lambda_z_prime;
   TriangularMatrix<size_t> accumulated_row_matrix;
   TriangularMatrix<size_t> accumulated_column_matrix;
   PermutationIterator perm_it;

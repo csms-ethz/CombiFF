@@ -100,8 +100,12 @@ void InputOutput::GetNextInputOption(size_t& i) {
     AddRestriction(i,
                    possible_ranges.find(arg.substr(1, arg.size() - 1))->second);
 
-  else if (arg == "-stereo")
+  else if (arg == "-stereo") {
+    throw combi_ff::input_error(
+        "stereo is not supported in brute force version as automorphism group "
+        "is not generated\n");
     AddStereo();
+  }
 
   else if (arg == "-count_only")
     AddCountOnly();

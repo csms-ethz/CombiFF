@@ -17,8 +17,6 @@ MaxFillAlg::MaxFillAlg(enu::AdjacencyMatrix& A, const bool stereo,
       A(A),
       degree_vec(std::vector<int>(N)),
       found(false),
-      num_perms_lambda_prime_prime(std::vector<std::vector<size_t>>(N)),
-      num_perms_lambda_z_prime(std::vector<size_t>(N)),
       accumulated_row_matrix(TriangularMatrix<size_t>(N + 1)),
       accumulated_column_matrix(TriangularMatrix<size_t>(N + 1)),
       perm_it(N),
@@ -67,11 +65,7 @@ MaxFillAlg::MaxFillAlg(enu::AdjacencyMatrix& A, const bool stereo,
     }
   }
 
-  if (lambda.back() > 1)
-    row_stabilizer_rep = std::vector<RepresentationSystem>(lambda.size() + 1);
-
-  else
-    row_stabilizer_rep = std::vector<RepresentationSystem>(lambda.size());
+  row_stabilizer_rep = std::vector<RepresentationSystem>(1);
 
   row_stabilizer_rep[0] = u0;
 
@@ -85,29 +79,6 @@ MaxFillAlg::MaxFillAlg(enu::AdjacencyMatrix& A, const bool stereo,
 
   // lambda_prime is used for the semicanonicity test, storing the refined
   // partitions for each row
-  lambda_prime = std::vector<LambdaVector>(N + 1);
-  lambda_prime[0] = lambda;
-
-  for (size_t ii = 1; ii < lambda_prime.size(); ii++)
-    lambda_prime[ii].reserve(N);
-
-  lambda_prime_prime = std::vector<LambdaVector>(N + 1);
-
-  for (auto&& l : lambda_prime_prime) l.reserve(N);
-
-  if (lambda[0] > 1) lambda_prime_prime[0].push_back(lambda[0] - 1);
-
-  for (size_t k = 1; k < lambda.size(); k++)
-    lambda_prime_prime[0].push_back(lambda[k]);
-
-  for (size_t ii = 0; ii < N; ii++) num_perms_lambda_prime_prime[ii].reserve(N);
-
-  num_perms_lambda_prime_prime[0] = std::vector<size_t>(1, 1);
-
-  for (size_t ii = 0; ii < lambda_prime_prime[0].size(); ii++) {
-    for (size_t jj = 0; jj < lambda_prime_prime[0][ii]; jj++)
-      num_perms_lambda_prime_prime[0].push_back(lambda_prime_prime[0][ii] - jj);
-  }
 
   for (size_t ii = 0; ii < N; ii++)
     degree_vec[ii] = (int)A.GetAtomVector()[ii].GetDegree();
@@ -206,10 +177,6 @@ void MaxFillAlg::ForwardStep() {
     accumulated_column_matrix.SetElement(
         i + 1, j, accumulated_column_matrix.GetElement(i, j) + x);
 
-    if (j == N - 1 && i < N - 2)
-      accumulated_row_matrix.SetElement(
-          i + 1, i + 2, accumulated_column_matrix.GetElement(i + 1, i + 1));
-
     // if we're at the end of a row, calculate the next lambdas
     if (i == N - 2) {
       // off-diagonal element
@@ -220,11 +187,10 @@ void MaxFillAlg::ForwardStep() {
       // filled -> test for canonicity
       CanonicityTest();
 
+    } else if (j == N - 1) {
+      accumulated_row_matrix.SetElement(
+          i + 1, i + 2, accumulated_column_matrix.GetElement(i + 1, i + 1));
     }
-
-    // otherwise, just continue filling the matrix
-    else
-      next_step_ptr = &MaxFillAlg::ForwardStep;
   }
 }
 
@@ -267,153 +233,18 @@ void MaxFillAlg::CanonicityTest() {
   next_step_ptr = &MaxFillAlg::BackwardStep;
 }
 
-void MaxFillAlg::CalculateNextLambdas() {
-  LambdaVector& lambda_prime_prime_prev =
-      lambda_prime_prime[i];                             // lambda^{i-1}''
-  LambdaVector& lambda_prime_cur = lambda_prime[i + 1];  // lambda^{i}'
-  lambda_prime_cur.resize(N - i);
-  // beginning of current row of A
-  const auto&& a(A.GetElements().begin() + i * N + i + 1);
-  size_t jj = 0;
-  size_t idx(0);
-  size_t count;
-
-  for (const size_t& l_cur : lambda_prime_prime_prev) {
-    count = 1;
-    const size_t lim = jj + l_cur - 1;
-
-    for (size_t k = jj; k < lim; k++) {
-      if (a[k] == a[k + 1])
-        count++;
-
-      else {
-        lambda_prime_cur[idx++] = (count);
-        count = 1;
-      }
-    }
-
-    lambda_prime_cur[idx++] = (count);
-    jj += l_cur;
-  }
-
-  lambda_prime_cur.resize(idx);
-  LambdaVector& lambda_prime_prime_next = lambda_prime_prime[i + 1];
-
-  if (lambda_prime_cur[0] > 1) {
-    lambda_prime_prime_next.resize(lambda_prime_cur.size());
-    lambda_prime_prime_next[0] = (lambda_prime_cur[0] - 1);
-
-    for (size_t ii = 1; ii < lambda_prime_cur.size(); ii++)
-      lambda_prime_prime_next[ii] = lambda_prime_cur[ii];
-
-  } else {
-    lambda_prime_prime_next.resize(lambda_prime_cur.size() - 1);
-
-    for (size_t ii = 1; ii < lambda_prime_cur.size(); ii++)
-      lambda_prime_prime_next[ii - 1] = lambda_prime_cur[ii];
-  }
-
-  // lambda_prime_prime_next.assign(lambda_prime_prime_next.end(),
-  // lambda_prime_cur.begin() + 1, lambda_prime_cur.end());
-  // num_perms_lambda_prime_prime[i_plus_one].resize(N);
-  // num_perms_lambda_prime_prime[i_plus_one].assign(i + 2, 1);
-  num_perms_lambda_prime_prime[i + 1][i + 1] = 1;
-  idx = i + 2;
-
-  for (size_t ii = 0; ii < lambda_prime_prime_next.size(); ii++) {
-    for (size_t jj = 0; jj < lambda_prime_prime_next[ii]; jj++)
-      num_perms_lambda_prime_prime[i + 1][idx++] =
-          (lambda_prime_prime_next[ii] - jj);
-  }
-}
-
 bool MaxFillAlg::IsCanonical() {
-  // const int y = A.GetMinRow(i);
-  // const size_t z = i;
-  // const size_t nextZ = A.GetMaxRow(i_plus_one) - 1;
-  RepresentationSystem& u_next = row_stabilizer_rep[A.GetTypeNr(i) + 1];
-  /*u_next.assign(
-      id.begin(),
-      id.end());
-  */
-
-  RepresentationSystem& u_prev = row_stabilizer_rep[1];
-  size_t highest_permuted_idx(0);
   perm_it.Reset(&row_stabilizer_rep[0], N - 2);
   const std::vector<size_t>* permuted_indices;
-  size_t i_pos(0), j_pos(0);  // i and j index of first difference
-  size_t i_pos_perm(0), j_pos_perm(0);
-  size_t i0(0), j0(0);
-  bool diff(false);
 
   while (perm_it.GetNextPermutation()) {
-    permuted_indices = perm_it.GetPermutedIndices(highest_permuted_idx);
-
-    // the block that is currently tested is not affected by perm, and the next
-    // blocks also won't be
-    //-> add to u_next (for automorphism group for stereo), and continue from
-    // the next permutation for smallestDiffIdx
-    if (A.SmallerThanPermuted(
-            i, *permuted_indices, i_pos, j_pos, i_pos_perm, j_pos_perm, i0, j0,
-            diff, perm_it.GetSmallestDiffIndex(), highest_permuted_idx)) {
+    permuted_indices = perm_it.GetPermutedIndices();
+    if (A.SmallerThanPermuted(*permuted_indices)) {
       return false;  // not canonical
     }
   }
 
   return true;  // canonical
-}
-
-bool MaxFillAlg::FindStabilizer(const std::vector<size_t>& permuted_indices,
-                                RepresentationSystem& u_next,
-                                const size_t highest_permuted_idx) {
-  // NCtest[A.GetTypeNr(i)]++;
-  size_t i_pos(0), j_pos(0);  // i and j index of first difference
-  size_t i_pos_perm(0), j_pos_perm(0);
-  size_t i0(0), j0(0);
-  bool diff(false);
-
-  if (A.SmallerThanPermuted(
-          i, permuted_indices, i_pos, j_pos, i_pos_perm, j_pos_perm, i0, j0,
-          diff, perm_it.GetSmallestDiffIndex(), highest_permuted_idx)) {
-    DetermineNewIJ(i0, j0, i_pos, j_pos, i_pos_perm, j_pos_perm);
-    return false;
-  }
-
-  if (!diff) {
-    // automorphism found
-    u_next[perm_it.GetSmallestDiffIndex()].push_back(
-        *perm_it.GetCombinedPermutation());
-    perm_it.SetCurrentIndexToSmallestDiffIndex();
-
-  } else if (j_pos < perm_it.GetCurrentIndex()) {
-    // skip if position where the first difference was found is smaller than
-    // what is affected by the next permutation
-    perm_it.SetCurrentIndex(j_pos);
-  }
-
-  return true;
-}
-
-void MaxFillAlg::DetermineNewIJ(const size_t i0, const size_t j0,
-                                const size_t i_pos, const size_t j_pos,
-                                const size_t i_pos_perm,
-                                const size_t j_pos_perm) {
-  Permutation p0({i0, j0});
-  Permutation p_pos({i_pos, j_pos});
-  Permutation p_perm;
-
-  if (i_pos_perm <= j_pos_perm)
-    p_perm = Permutation(i_pos_perm, j_pos_perm);
-
-  else
-    p_perm = Permutation(j_pos_perm, i_pos_perm);
-
-  Permutation maximum = Max(p0, p_pos, p_perm);
-  // reset i and j to skip unnecessary matrix filling
-  i = (maximum).first;
-  j = (maximum).second;
-  SetNextIndex();  // necessary because in the next bw step, we will decrease
-                   // (i,j)
 }
 
 const RepresentationSystem& MaxFillAlg::GetUAutomorph() const {

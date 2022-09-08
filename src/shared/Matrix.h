@@ -164,12 +164,7 @@ class AdjacencyMatrix final : public SymmetricalMatrix<T> {
   bool AreInSameCycle(size_t atom1, size_t atom2) const;
   size_t GetNumPiAtoms() const;
 
-  bool SmallerThanPermuted(const size_t curr_row,
-                           const std::vector<size_t>& permuted_indices,
-                           size_t& i_pos, size_t& j_pos, size_t& i_pos_perm,
-                           size_t& j_pos_perm, size_t& i0, size_t& j0,
-                           bool& diff, const size_t smallest_diff_index,
-                           const size_t highest_permuted_index);
+  bool SmallerThanPermuted(const std::vector<size_t>& permuted_indices);
   bool EqualTo(const std::vector<size_t>& permuted_indices, size_t& j_pos);
 
   void MakeCanonical(const combi_ff::RepresentationSystem& u);
@@ -781,13 +776,9 @@ bool AdjacencyMatrix<T, AtomClass>::IsConnected() const {
 }
 template <typename T, typename AtomClass>
 bool AdjacencyMatrix<T, AtomClass>::SmallerThanPermuted(
-    const size_t curr_row, const std::vector<size_t>& permuted_indices,
-    size_t& i_pos, size_t& j_pos, size_t& i_pos_perm, size_t& j_pos_perm,
-    size_t& i0, size_t& j0, bool& diff, const size_t smallest_diff_index,
-    const size_t highest_permuted_index) {
+    const std::vector<size_t>& permuted_indices) {
   // permutedIndices.assign(indices.begin(), indices.end());
   // PermuteVector(permutedIndices, permutations);
-  size_t lim = std::min(max_row[curr_row], highest_permuted_index + 1);
 
   for (size_t i = 0; i < this->N; i++) {
     size_t i2 = permuted_indices[i];
@@ -796,37 +787,13 @@ bool AdjacencyMatrix<T, AtomClass>::SmallerThanPermuted(
       size_t j2 = permuted_indices[j];
 
       if (this->GetElement(i, j) != this->GetElement(i2, j2)) {
-        diff = true;
-
         if (this->GetElement(i, j) >
-            this->GetElement(
-                i2,
-                j2)) {  // matrix is larger than permuted one in current block
-          j_pos = j;
+            this->GetElement(i2, j2)) {  // matrix is larger than permuted one
           return false;
 
         } else {  // matrix is smaller than permuted one in current block -> not
                   // canonical
-          i_pos = i;
-          j_pos = j;
-          i_pos_perm = i2;
-          j_pos_perm = j2;
           return true;
-        }
-      }
-
-      if (this->GetElement(i2, j2)) {  // permuted value is larger than 0
-        if (i2 < j2) {
-          if (i2 > i0 || (i2 == i0 && j2 > j0)) {
-            i0 = i2;
-            j0 = j2;
-          }
-
-        } else {
-          if (j2 > i0 || (j2 == i0 && i2 > j0)) {
-            i0 = j2;
-            j0 = i2;
-          }
         }
       }
     }
