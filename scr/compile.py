@@ -22,6 +22,8 @@ from global_settings import *
 os.makedirs(build_dir, exist_ok=True)
 os.chdir(build_dir)
 
+os.makedirs(bin_dir, exist_ok=True)
+
 subprocess.call(['cmake','..'])
   
 if(args.executable is not None):
