@@ -789,10 +789,10 @@ bool AdjacencyMatrix<T, AtomClass>::SmallerThanPermuted(
   // PermuteVector(permutedIndices, permutations);
   size_t lim = std::min(max_row[curr_row], highest_permuted_index + 1);
 
-  for (size_t i = min_row[curr_row]; i < lim; i++) {
+  for (size_t i = 0; i < this->N; i++) {
     size_t i2 = permuted_indices[i];
 
-    for (size_t j = std::max(i + 1, smallest_diff_index); j < this->N; j++) {
+    for (size_t j = i + 1; j < this->N; j++) {
       size_t j2 = permuted_indices[j];
 
       if (this->GetElement(i, j) != this->GetElement(i2, j2)) {

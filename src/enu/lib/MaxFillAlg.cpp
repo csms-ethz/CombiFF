@@ -193,9 +193,6 @@ void MaxFillAlg::ForwardStep() {
        c_hat -
            C.GetElement(i, j)});  // note: min is at least 0, i.e. non-negative
 
-  if (num_perms_lambda_prime_prime[i][j - 1] > 1)
-    x = std::min(A.GetElement(i, j - 1), x);  // ensure semicanonicity
-
   // if the maximum possible entry is smaller than the minimum necessary entry
   // -> backstep
   if (x < min) next_step_ptr = &MaxFillAlg::BackwardStep;
@@ -209,20 +206,20 @@ void MaxFillAlg::ForwardStep() {
     accumulated_column_matrix.SetElement(
         i + 1, j, accumulated_column_matrix.GetElement(i, j) + x);
 
+    if (j == N - 1 && i < N - 2)
+      accumulated_row_matrix.SetElement(
+          i + 1, i + 2, accumulated_column_matrix.GetElement(i + 1, i + 1));
+
     // if we're at the end of a row, calculate the next lambdas
-    if (j == N - 1) {
-      CalculateNextLambdas();
+    if (i == N - 2) {
       // off-diagonal element
       accumulated_row_matrix.SetElement(
           i + 1, i + 2, accumulated_column_matrix.GetElement(i + 1, i + 1));
 
       // if all the rows are filled OR all the rows of the current atom type are
       // filled -> test for canonicity
-      if (A.IsLastRowOfALambdaBlock(i))
-        CanonicityTest();
+      CanonicityTest();
 
-      else
-        next_step_ptr = &MaxFillAlg::ForwardStep;
     }
 
     // otherwise, just continue filling the matrix
@@ -264,16 +261,10 @@ void MaxFillAlg::BackwardStep() {
 }
 
 void MaxFillAlg::CanonicityTest() {
-  if (i == N - 2 /*&& j == N - 1*/) {
-    if (A.IsConnected() && IsCanonical()) found = true;
+  if (A.IsConnected() && IsCanonical()) found = true;
 
-    next_step_ptr = &MaxFillAlg::BackwardStep;
-
-  } else if (IsCanonical())
-    next_step_ptr = &MaxFillAlg::ForwardStep;
-
-  else
-    next_step_ptr = &MaxFillAlg::BackwardStep;
+  SetNextIndex();
+  next_step_ptr = &MaxFillAlg::BackwardStep;
 }
 
 void MaxFillAlg::CalculateNextLambdas() {
@@ -337,7 +328,6 @@ void MaxFillAlg::CalculateNextLambdas() {
 }
 
 bool MaxFillAlg::IsCanonical() {
-  const size_t x = A.GetMinRow(i);
   // const int y = A.GetMinRow(i);
   // const size_t z = i;
   // const size_t nextZ = A.GetMaxRow(i_plus_one) - 1;
@@ -346,13 +336,15 @@ bool MaxFillAlg::IsCanonical() {
       id.begin(),
       id.end());
   */
-  for (size_t ii = 0; ii <= i; ii++)
-    u_next[ii].resize(1);  // only keep id permutations
 
-  RepresentationSystem& u_prev = row_stabilizer_rep[A.GetTypeNr(i)];
+  RepresentationSystem& u_prev = row_stabilizer_rep[1];
   size_t highest_permuted_idx(0);
-  perm_it.Reset(&u_prev, /*z*/ i);
+  perm_it.Reset(&row_stabilizer_rep[0], N - 2);
   const std::vector<size_t>* permuted_indices;
+  size_t i_pos(0), j_pos(0);  // i and j index of first difference
+  size_t i_pos_perm(0), j_pos_perm(0);
+  size_t i0(0), j0(0);
+  bool diff(false);
 
   while (perm_it.GetNextPermutation()) {
     permuted_indices = perm_it.GetPermutedIndices(highest_permuted_idx);
@@ -361,39 +353,11 @@ bool MaxFillAlg::IsCanonical() {
     // blocks also won't be
     //-> add to u_next (for automorphism group for stereo), and continue from
     // the next permutation for smallestDiffIdx
-    if (highest_permuted_idx < x) {
-      if (stereo)
-        u_next[perm_it.GetSmallestDiffIndex()].push_back(
-            *perm_it.GetCombinedPermutation());
-
-      perm_it.SetCurrentIndexToSmallestDiffIndex();
-
-    } else if (!FindStabilizer(*permuted_indices, u_next,
-                               highest_permuted_idx)) {
+    if (A.SmallerThanPermuted(
+            i, *permuted_indices, i_pos, j_pos, i_pos_perm, j_pos_perm, i0, j0,
+            diff, perm_it.GetSmallestDiffIndex(), highest_permuted_idx)) {
       return false;  // not canonical
     }
-  }
-
-  LambdaVector& lambda_prime_cur = lambda_prime[i + 1];
-  num_perms_lambda_z_prime.resize(N);
-  // num_perms_lambda_z_prime.assign(i + 1, 1);  // elements are not accessed
-  size_t idx(i + 1);
-
-  for (size_t ii = 0; ii < lambda_prime_cur.size(); ii++) {
-    for (size_t jj = 0; jj < lambda_prime_cur[ii]; jj++)
-      num_perms_lambda_z_prime[idx++] = (lambda_prime_cur[ii] - jj);
-  }
-
-  // these permutations only swap cols in A(r) and only within the lambda z
-  // prime partitions where the entries are the same within the same blocks, but
-  // not any rows
-  for (size_t ii = /*z+1*/ i + 1; ii < u_next.size(); ii++) {
-    if (num_perms_lambda_z_prime[ii] > 1)
-      u_next[ii].assign(
-          row_stabilizer_rep[0][ii].begin(),
-          row_stabilizer_rep[0][ii].begin() + num_perms_lambda_z_prime[ii]);
-    else
-      u_next[ii].resize(1);
   }
 
   return true;  // canonical

@@ -43,7 +43,7 @@ PermutationIterator::PermutationIterator(const PermutationIterator& it_p)
 const std::vector<size_t>* PermutationIterator::GetPermutedIndices() {
   std::iota(permuted_indices.begin(), permuted_indices.end(), 0);
 
-  for (size_t ii = smallest_diff_index; ii < size_p; ii++) {
+  for (size_t ii = 0; ii < size_p; ii++) {
     if (p[ii]) {
       for (const Permutation& perm : (*u)[ii][p[ii]])
         std::swap(permuted_indices[perm.first], permuted_indices[perm.second]);
@@ -58,7 +58,7 @@ const std::vector<size_t>* PermutationIterator::GetPermutedIndices(
   std::iota(permuted_indices.begin(), permuted_indices.end(), 0);
   highest_permuted_index = 0;
 
-  for (size_t ii = smallest_diff_index; ii < size_p; ii++) {
+  for (size_t ii = 0; ii < size_p; ii++) {
     if (p[ii]) {
       for (const Permutation& perm : (*u)[ii][p[ii]]) {
         std::swap(permuted_indices[perm.first], permuted_indices[perm.second]);
@@ -94,7 +94,7 @@ bool PermutationIterator::GetNextPermutation() {
 const Permutations* PermutationIterator::GetCombinedPermutation() {
   permutations.clear();
 
-  for (size_t ii = smallest_diff_index; ii < size_p; ii++) {
+  for (size_t ii = 0; ii < size_p; ii++) {
     if (p[ii]) {
       permutations.insert(permutations.end(), (*u)[ii][p[ii]].begin(),
                           (*u)[ii][p[ii]].end());
