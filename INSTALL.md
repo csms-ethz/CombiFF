@@ -2,7 +2,7 @@
 
 ## Introduction
 
-To compile the C++ programs of CombiFF, you'll need CMake (https://cmake.org/). To use the python scripts, we recommend using Anaconda (https://www.anaconda.com/)
+To compile the C++ programs of CombiFF, you'll need CMake (https://cmake.org/). To use the python scripts, we recommend using Anaconda (https://www.anaconda.com/) or mamba (https://anaconda.org/conda-forge/mamba).
 
 ## Installation
 
@@ -26,4 +26,4 @@ make
 make install
 ```
 
-After installation, the executables for the different programs are located in the `bin` directory
+After installation, the executables for the different programs are located by default in the `bin` directory
