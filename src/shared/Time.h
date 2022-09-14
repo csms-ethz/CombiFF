@@ -1,5 +1,7 @@
 // Copyright 2022 Salomé Rieder, CSMS ETH Zürich
 
+#ifndef TIME_H
+#define TIME_H
 #include <chrono>
 
 namespace combi_ff {
@@ -28,3 +30,4 @@ std::ostream& operator<<(std::ostream& stream,
 }
 
 }  // namespace combi_ff
+#endif
