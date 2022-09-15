@@ -13,35 +13,37 @@ FamilySpecifications::FamilySpecifications(InputOutput& IO)
       pseudoatoms(PseudoatomMap(0)),
       alias_map(AliasMap(0)),
       families(FamilyVector(0)) {
-  try {
-    CreateSubstructures(abstr_substructures,
-                        IO.GetInputFileNamesAt(substructure_file));
+  if (IO.GetInputFileNamesAt(family_file).size()) {
+    try {
+      CreateSubstructures(abstr_substructures,
+                          IO.GetInputFileNamesAt(substructure_file));
 
-  } catch (combi_ff::input_warning& w) {
-    std::cout << "?Warning: " << w.what() << std::endl;
-  }
+    } catch (combi_ff::input_warning& w) {
+      std::cout << "?Warning: " << w.what() << std::endl;
+    }
 
-  try {
-    CreatePseudoatoms(pseudoatoms, IO.GetInputFileNamesAt(pseudoatom_file));
+    try {
+      CreatePseudoatoms(pseudoatoms, IO.GetInputFileNamesAt(pseudoatom_file));
 
-  } catch (combi_ff::input_warning& w) {
-    std::cout << "?Warning: " << w.what() << std::endl;
-  }
+    } catch (combi_ff::input_warning& w) {
+      std::cout << "?Warning: " << w.what() << std::endl;
+    }
 
-  try {
-    CreateAliases(alias_map, IO.GetInputFileNamesAt(alias_file));
+    try {
+      CreateAliases(alias_map, IO.GetInputFileNamesAt(alias_file));
 
-  } catch (combi_ff::input_warning& w) {
-    std::cout << "?Warning: " << w.what() << std::endl;
-  }
+    } catch (combi_ff::input_warning& w) {
+      std::cout << "?Warning: " << w.what() << std::endl;
+    }
 
-  try {
-    CreateFamilies(families, IO.GetInputFileNamesAt(family_file),
-                   IO.GetEnumSpec().used_families, abstr_substructures,
-                   alias_map, pseudoatoms);
+    try {
+      CreateFamilies(families, IO.GetInputFileNamesAt(family_file),
+                     IO.GetEnumSpec().used_families, abstr_substructures,
+                     alias_map, pseudoatoms);
 
-  } catch (combi_ff::input_warning& w) {
-    std::cout << "?Warning: " << w.what() << std::endl;
+    } catch (combi_ff::input_warning& w) {
+      std::cout << "?Warning: " << w.what() << std::endl;
+    }
   }
 }
 
