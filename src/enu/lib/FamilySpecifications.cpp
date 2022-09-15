@@ -13,7 +13,7 @@ FamilySpecifications::FamilySpecifications(InputOutput& IO)
       pseudoatoms(PseudoatomMap(0)),
       alias_map(AliasMap(0)),
       families(FamilyVector(0)) {
-  if (IO.GetInputFileNamesAt(family_file).size()) {
+  if (IO.GetEnumSpec().used_families.size()) {
     try {
       CreateSubstructures(abstr_substructures,
                           IO.GetInputFileNamesAt(substructure_file));
