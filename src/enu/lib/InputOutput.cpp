@@ -456,7 +456,8 @@ void InputOutput::PrintInputOptions() {
       << "-stereo: used to specify that stereoisomerism should also be "
          "considered in the enumeration\n\n"
       << "-count_only: only count and report the number of isomers (i.e., no "
-         "XML file containing the corresponding SMILES strings is generated)";
+         "XML file containing the corresponding SMILES strings is "
+         "generated)\n\n";
 }
 
 }  // namespace enu
