@@ -6,6 +6,11 @@
 \usepackage{graphicx}
 \usepackage{geometry}
 \usepackage{float}
+\usepackage[super,comma]{natbib}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{listings}
 
 \usepackage[labelfont=bf,skip=0pt]{subcaption}
 \usepackage[labelfont=bf,skip=0pt]{caption}
@@ -17,19 +22,379 @@
     \sethlcolor{foo}\hl{#2}}%
 }
 
+\newcommand*{\citen}[1]{%
+  \begingroup
+    \romannumeral-`\x % remove space at the beginning of \setcitestyle
+    \setcitestyle{numbers}%
+    \cite{#1}%
+  \endgroup   
+}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+\lstset{language=XML,
+       basicstyle=\ttfamily\footnotesize\linespread{0},
+       keywordstyle=\color{blue}\ttfamily,
+       stringstyle=\color{red}\ttfamily,
+       commentstyle=\color{magenta}\ttfamily,
+       morecomment=[l][\color{magenta}]{\#},
+       showstringspaces=false,
+       tabsize=2,
+       backgroundcolor=\color{gray_hell},
+       breaklines=true,
+       keepspaces,}
+\definecolor{gray_hell}{rgb}{0.93, 0.93, 0.93}
+
 \usepackage{titling}
 \setlength{\droptitle}{-2cm}
-\title{enu}
-\author{Salom\'e Rieder, Philippe H. Hünenberger}
+\title{How to use \textit{enu}}
+\author{Salom\'e Rieder, Sereina Riniker, Philippe H. Hünenberger}
 \date{}
 
-\geometry{verbose,a4paper,tmargin=20mm,bmargin=20mm,lmargin=15mm,rmargin=15mm}
-
+\geometry{verbose,a4paper,tmargin=30mm,bmargin=30mm,lmargin=25mm,rmargin=25mm}
 \begin{document}
 \pagestyle{plain}
 \maketitle
 
 
+\section{Introduction}
+
+The open-source isomer enumerator \textit{enu} is part of the CombiFF combinatorial force-field parameterization scheme to automatically parameterize force fields for condensed-phase molecular dynamics (MD) simulations.\cite{Oliveira2020,Oliveira2021} The source code of \textit{enu} is written in C++ and can be compiled with \textit{cmake}. The program enumerates the constitutional and spatial isomers of a given molecular formula. The theoretical background of \textit{enu} will be documented in Ref.~\citen{Rieder2022}, while the present document provides an introduction to the practical usage of the program.
+
+\section{Installation}
+
+For installation instructions, please refer to \url{https://github.com/csms-ethz/CombiFF/blob/main/INSTALL.md}.
+
+\section{Usage}
+
+In its most basic use, \textit{enu} enumerates the constitutional and (if desired) spatial isomers of a given molecular formula and reports the detected (stereo)isomers as canonical SMILES strings in an XML format.
+
+\subsection{Basic Arguments}
+
+\subsubsection{Input/Output}
+\begin{table}[H]
+\begin{tabular}{>{\ttfamily}p{0.2\textwidth}|p{0.75\textwidth}}
+    \hline
+    \textnormal{argument} & functionality                                                                                  \\
+    \hline\hline
+    -input   & specify an input file containing one or several arguments recognized by \textit{enu}                   \\
+             & ~~\tabitem these arguments can also be used directly in the command line                       \\
+             & ~~\tabitem lines starting with \texttt{\#} in the file are considered comments and are ignored \\
+    \hline
+    -output\_directory & specify the directory where the output files should be created \\
+    \hline
+    -output & specify the file name of the output file (\textit{i.e.}, the XML file containing the canonical SMILES strings)\\
+    \hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Molecular Formula}
+
+\begin{table}[H]
+\begin{tabular}{>{\ttfamily}p{0.2\textwidth}|p{0.75\textwidth}}
+    \hline
+    \textnormal{argument} & functionality                                                                                  \\
+    \hline\hline
+    -formula & specify the molecular formula \\
+             & ~~\tabitem this arguments may be used several times to specify multiple molecular formulas \\
+    \hline
+\end{tabular}
+\end{table}
+
+The basic format to specify a molecular formula is a sequence of alternating element types and corresponding counts. The following syntax may be used for an element type \texttt{X} and numbers \texttt{n}, \texttt{m}, \texttt{l}:
+
+\begin{table}[H]
+\begin{tabular}{>{\ttfamily\raggedright}p{0.2\textwidth}|p{0.75\textwidth}}
+    \hline
+    \textnormal{formula building block} & functionality \\
+    \hline\hline
+    Xn           & \texttt{n} counts of element type \texttt{X} \\
+    X[n-m]       & range from \texttt{n} to \texttt{m} counts of element type \texttt{X}\\
+    X[n,m,l,...] & \texttt{n}, \texttt{m}, \texttt{l}, ... counts of element type \texttt{X} \\
+    \{XHn\}      & atom type \texttt{X} with \texttt{n} implicit hydrogens. To specify the count of \texttt{\{XHn\}}, the same syntax can be used as for a simple atom type (\textit{i.e.}, simple count, range, or list) \\
+    \hline
+\end{tabular}
+\end{table}
+
+Note that the notation for ranges and the notation for lists of counts may be combined, \textit{e.g.}, \texttt{X[n-m,k,l,i-j]}
+
+\subsubsection{Behavior}
+
+The following arguments can be used to modify what and how \textit{enu} reports its results:
+
+\begin{table}[H]
+\begin{tabular}{>{\ttfamily\raggedright}p{0.2\textwidth}|p{0.75\textwidth}}
+    \hline
+    \textnormal{formula building block} & functionality \\
+    \hline\hline
+    -stereo & enumerate spatial isomers additionally to constitutional ones\\
+    \hline
+    -count\_only & report the number of detected isomers but don't generate XML output\\
+    \hline
+    -quiet & don't report the current number of isomers during the enumeration process\\
+    \hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Restrictions}\label{sec:restrictions}
+
+The user can specify restrictions on the molecules that should be counted/reported. The following syntax can be used for numbers \texttt{n} and \texttt{m}:
+
+\begin{table}[H]
+\begin{tabular}{>{\ttfamily\raggedright}p{0.26\textwidth}|p{0.69\textwidth}}
+    \hline
+    \textnormal{argument} & functionality \\
+    \hline\hline
+    -max\_bond\_degree n& maximum bond degree between two atoms is set to \texttt{n} (default: 4)\\
+    \hline
+    -unsaturations n & \texttt{n} unsaturations \\
+    -unsaturations [n-m] & range of \texttt{n} to \texttt{m} unsaturations \\
+    -unsaturations * & no restriction on number of unsaturations (default)\\
+    \hline
+    -total\_bonds n & in total \texttt{n} bonds (irrespective of bond multiplicity) \\
+    -total\_bonds [n-m] & range of \texttt{n} to \texttt{m} bonds \\
+    -total\_bonds * & no restriction on total number of bonds (default)\\
+    \hline
+    -single\_bonds n & \texttt{n} single bonds \\
+    -single\_bonds [n-m] & range of \texttt{n} to \texttt{m} single bonds \\
+    -single\_bonds * & no restriction on total number of single bonds (default)\\
+    \hline
+    -double\_bonds n & \texttt{n} double bonds \\
+    -double\_bonds [n-m] & range of \texttt{n} to \texttt{m} double bonds \\
+    -double\_bonds * & no restriction on total number of double bonds (default)\\
+    \hline
+    -triple\_bonds n & \texttt{n} triple bonds \\
+    -triple\_bonds [n-m] & range of \texttt{n} to \texttt{m} triple bonds \\
+    -triple\_bonds * & no restriction on total number of triple bonds (default)\\
+    \hline
+    -cycles n & \texttt{n} cycles \\
+    -cycles [n-m] & range of \texttt{n} to \texttt{m} cycles \\
+    -cycles * & no restriction on total number of cycles (default)\\
+    \hline
+\end{tabular}
+\end{table}
+
+Note that the number of total/single/double/triple bonds is determined from the entries of the molecule's canonical adjacency matrix, the number of unsaturations $d_\text{unsat}$ is calculated as
+%
+\begin{align}\label{eq:unsaturations}
+    d_\text{unsat} = 1 + \frac{1}{2}\left(\sum\limits_{k=0}^{K}\lambda_k(\delta_k-2)\right) \, ,
+\end{align}
+%
+where $\delta_k$ is the valence of atom type $\alpha_k$ and $\lambda_k$ is the count of atom type $\alpha_k$, and the number of cycles $n_\text{cycles}$ is calculated as
+%
+\begin{align}
+  n_\text{cycles} = d_\text{unsat} - n_\text{db} - 2\cdot n_\text{tb} \, ,
+\end{align}
+%
+where $n_\text{db}$ is the number of double bonds, and $n_\text{tb}$ is the number of triple bonds.
+
+\section{Usage Examples}
+
+\section{Molecular Families}
+
+For the application of \textit{enu} for the CombiFF force-field parameterization scheme, the definition of so-called molecular families is an essential tool. Family definitions also offer more flexibility to specify the molecules of interest using so-called \textit{element aliases} and \textit{pseudoatoms} and by allowing the filtering of substructures.\cite{Rieder2022} For the convenience of the user, the CombiFF repository contains additional python scripts, most importantly \texttt{scr/run\_enu.py} that can be used to automatically run \textit{enu} for the families defined in the CombiFF repository. For more information on these scripts, please refer to \url{https://github.com/csms-ethz/CombiFF#scripts}.
+
+In the following sections, first the command line arguments are explained that may be used to pass the arguments related to molecular families to \textit{enu}, and then the file formats of the respective input files and output files are outlined.
+
+\subsection{Command Line Arguments}
+
+\begin{table}[H]
+\begin{tabular}{>{\ttfamily\raggedright}p{0.21\textwidth}|p{0.74\textwidth}}
+    \hline
+    \textnormal{formula building block} & functionality \\
+    \hline\hline
+    -families & specify the families that should be enumerated\\
+              & ~~\tabitem specified \textit{via} the family code defined in the family definition XML file\\
+              & ~~\tabitem may be used several times to specify multiple families\\
+              & ~~\tabitem multiple family codes may be listed consecutively to specify multiple families\\
+    \hline
+    -family\_files & specify the path to the family definition input file(s)\\
+                   & ~~\tabitem multiple file paths may be listed consecutively\\
+    \hline
+    -element\_alias\_files & specify the path to the element alias input file(s)\\
+                   & ~~\tabitem multiple file paths may be listed consecutively\\
+    \hline
+    -pseudoatom\_files & specify the path to the pseudoatom input file(s)\\
+                   & ~~\tabitem multiple file paths may be listed consecutively\\
+    \hline
+    -substructure\_files & specify the path to the substructure input file(s)\\
+                   & ~~\tabitem multiple file paths may be listed consecutively\\
+\end{tabular}
+\end{table}
+
+\subsection{Family Definition Files}\label{sec:family}
+
+The family definition files follow an XML structure and are located in the \texttt{use/src/input\_files/family\_definitions} directory. The directory contains several examples of family definition files that have been used in the context of CombiFF. The directory also contains the DTD file defining the format of a family definition file. A family definition file should follow the following format:
+
+\begin{lstlisting}
+<family_definitions version="[version number]">
+  <!--
+    [comment describing the family]
+  -->
+  <family_definition code="[family code]">
+    <formula>[formula, e.g. C10H22]</formula>
+  </family_definition>
+  ...
+</family_definitions>
+\end{lstlisting}
+
+Analogous to the \texttt{-formula} command line argument of \textit{enu}, the formula entry in a family definition consists of alternating element types and corresponding counts. 
+
+An element type may be specified \textit{via}
+
+\begin{itemize}
+  \item directly as an element type (\textit{e.g.}, \texttt{C})
+  \item including implicit hydrogens (\textit{e.g.}, \texttt{\{CH2\}})
+  \item as an element alias (\textit{e.g.} \texttt{Hal}) $\rightarrow$ see Sec. \ref{sec:alias}
+  \item as a pseudoatom in single quotes (\textit{e.g.} \texttt{'C=O'}) $\rightarrow$ see Sec. \ref{sec:pseudoatoms}
+\end{itemize}
+
+An element count may be specified \textit{via}
+
+\begin{itemize}
+  \item a simple count (\textit{e.g.}, \texttt{C10})
+  \item a range in square brackets (\textit{e.g.}, \texttt{C[8-10]})
+  \item a list of numbers in square brackets (\textit{e.g.}, \texttt{C[8,10,12]})
+  \item a mix of lists and ranges in square brackets (\textit{e.g.}, \texttt{C[1-2,3,5,7-10,15]})
+\end{itemize}
+
+For element aliases, the following additional syntax may be used to specify various combinations of the members of an element alias set. For example if \texttt{Hal} corresponds to the set of \texttt{\{Br,Cl,F,I\}}:
+
+\begin{itemize}
+  \item AND: the same element type is used
+  \begin{itemize}
+    \item \texttt{Hal[1-5]} corresponds to one to five elements of a \texttt{Hal} type, \textit{e.g.}, \texttt{Br[1-5]}
+  \end{itemize}
+  \item OR: the same or a different element type is used
+  \begin{itemize}
+    \item \texttt{Hal{\color{red}2}Hal{\color{green}1}} corresponds to {\color{red}two} \texttt{Hal} elements and {\color{green}one} \texttt{Hal} elements without any restrictions, \textit{e.g.} \texttt{Br2Cl1} or \texttt{Br3}
+  \end{itemize}
+  \item XOR: different element types should be used, specified by \texttt{\^}
+  \begin{itemize}
+    \item \texttt{\^{}Hal{\color{red}2}\^{}Hal{\color{green}1}} corresponds to {\color{red}two} \texttt{Hal} elements of one type and {\color{green}one} \texttt{Hal} element of a different type, \textit{e.g.} \texttt{Br2Cl1}
+    \item \texttt{\^{}Hal{\color{red}[4-5]}\^{}Hal{\color{green}3}\^{}Hal{\color{purple}1}} corresponds to {\color{red}four to five} \texttt{Hal} elements of one type, {\color{green}three} \texttt{Hal} elements of a different type, and {\color{purple}one} \texttt{Hal} element of yet another type, \textit{e.g.} \texttt{Br5Cl3F1}
+  \end{itemize}
+\end{itemize}
+
+After the \texttt{formula} entry, restrictions can be defined (same principle as for the command line arguments described in Sec. \ref{sec:restrictions}):
+
+\begin{itemize}
+  \item \texttt{max\_bond\_degree}
+  \item \texttt{unsaturations}
+  \item \texttt{single\_bonds}
+  \item \texttt{double\_bonds}
+  \item \texttt{triple\_bonds}
+  \item \texttt{cycles}
+\end{itemize}
+
+As for the command line arguments, the restrictions can be a specific number \texttt{n} or a range in rectangular brackets \texttt{[n-m]}. The XML syntax to specify, for example, one to two unsaturations and zero cycles is:
+
+\begin{lstlisting}
+    <unsaturations>[1-2]</unsaturations>
+    <cycles>0</cycles>
+\end{lstlisting}
+
+Finally, substructures may be specified that should or should not occur in the molecule using the substructure code ($\rightarrow$ see Sec. \ref{sec:substructures}). In a CombiFF substructure, only the connectivity of the molecular graph nodes and the multiplicity of the graph edges are defined, but not the element types of the nodes. The element types of the nodes are specified in the family definition file using the following format:
+
+\begin{lstlisting}
+  <substructures>
+    <substructure substructure_code="[substructure code]" number="[number, given as number or range in rectangular brackets]">
+      <atoms>
+        <atom type="[atom type 1]"/>
+        <atom type="[atom type 2]"/>
+        ...
+      </atoms>
+    </substructure>
+    ...
+  </substructures>
+\end{lstlisting}
+
+Here, an atom type may be
+\begin{itemize}
+  \item directly as an element type (\textit{e.g.}, \texttt{C})
+  \item including implicit hydrogens (\textit{e.g.}, \texttt{\{CH2\}})
+  \item as an element alias (\textit{e.g.} \texttt{Hal}) $\rightarrow$ see Sec. \ref{sec:alias}
+  \item a wildcard, specified by a \texttt{*}
+\end{itemize}
+
+If element aliases are used for the atom types, the following additional syntax may be used to specify the valid combinations of element types from the element alias set. For example if \texttt{Hal} corresponds to the set of \texttt{\{Br,Cl,F,I\}}:
+
+\begin{itemize}
+  \item OR: any combination is allowed, no specified
+  \begin{itemize}
+    \item \texttt{<atom type="Hal"/><atom type="Hal"/>} allows any combination of halogen element types
+  \end{itemize}
+  \item AND: the same element type should be used, specified by \texttt{n\&}, where the element types with the same number \texttt{n} have to be the same
+  \begin{itemize}
+    \item \texttt{<atom type="\&{}1Hal"/><atom type="\&{}1Hal"><atom type="\&{}2Hal"/><atom type="\&{}2Hal"/>}: the element types with the \texttt{\&1} specifier have to be the same and the element types with the \texttt{\&2} specifier have to be the same. However, both the case where all four are the same, and the case where the first two are different from the second two is valid.
+  \end{itemize}
+  \item XOR: different element types should be used, specified by \texttt{n\^}, where the element types with the same number \texttt{n} have to be different from one another
+  \begin{itemize}
+    \item \texttt{<atom type="\^{}1Hal"/><atom type="\^{}1Hal"/>} corresponds to two different halogen element types
+    \item \texttt{<atom type="\^{}1Hal"/><atom type="\^{}1Hal"/><atom type="\^{}2Hal"/><atom type="\^{}2Hal"/>}: the element types with the \texttt{\^{}1} specifier should be different from each other and the element types with the \texttt{\^{}2} specified should be different from each other. However, one of the element types with the \texttt{\^{}1} specifier may be the same as one of the element types with the \texttt{\^{}2} specifier (but does not have to be the same).
+  \end{itemize}
+\end{itemize}
+
+\subsection{Element Alias Files}\label{sec:alias}
+
+An element alias is a set of element types, \textit{e.g.}, \texttt{Hal=\{Br,Cl,F,I\}}.\cite{Rieder2022} Element alias files are contained in the \texttt{use/input\_files/aliases} directory of the CombiFF repository. The directory also contains the DTD file defining the format of an element alias file. The XML structure of an element alias file follows the following format
+
+\begin{lstlisting}
+<aliases version="[version number]">
+  <alias name="[name of alias]">
+    <member>[element symbol of member, e.g. H, F. Also united hydrogens such as CH3]</member>
+    ...
+    <aliasmember>[name of other alias (listed **before the current one** whose members should be included]</aliasmember>
+    ...
+  </alias>
+  ...
+</aliases>
+\end{lstlisting}
+
+\subsection{Pseudoatom Files}\label{sec:pseudoatoms}
+
+A pseudoatom is a molecular fragment that only contains one atom that is not fully bonded.\cite{Rieder2022} During the enumeration, a pseudoatom is treated like a normal atom and can be used to define substructures. A pseudoatom is defined by an identifier (\texttt{code}), a list of element types, and an adjacency matrix stack. Pseudoatom files are contained in the \texttt{use/input\_files/pseudoatoms} directory of the CombiFF repository. The directory also contains the DTD file defining the format of a pseudoatom file. The XML structure of a pseudoatom file follows the following format
+
+\begin{lstlisting}
+<pseudoatoms version="[version number]">
+  <pseudoatom code="[pseudoatom code]">
+    <atoms>
+      <atom>[atom type of 1st atom]</atom>
+      ...
+    </atoms>
+    <adjacency_stack>[stack of adjacency matrix, which defines the connections of the above atoms]</adjacency_stack>
+  </pseudoatom>
+  ...
+</pseudoatoms>
+\end{lstlisting}
+
+An atom type may be
+
+\begin{itemize}
+  \item an element type, \textit{e.g.} \texttt{C}
+  \item an element type including implicit hydrogens, \textit{e.g.} \texttt{CH3}
+\end{itemize}
+
+Note that adjacency matrix stacks can be conveniently created from SMILES strings with the CombiFF program \texttt{cnv}. For example, the adjacency matrix stack for the molecule \texttt{CCC(=O)C} can be generated by running \texttt{./cnv -O stack 'CCC(=O)C'}.
+
+\subsection{Substructure Files}\label{sec:substructures}
+
+Substructure files are contained in the \texttt{use/input\_files/substructures} directory of the CombiFF repository. The directory also contains the DTD file defining the format of a substructures file. The XML structure of a substructures file follows the following format
+
+\begin{lstlisting}
+<substructures version="[version number]">
+  <substructure code="[unique substructure identifier code]">
+    <num_atoms>[# atoms in substructure]</num_atoms>
+    <adjacency_stack>[adjacency stack as numbers separated by spaces, e.g. 1 1 0 0 1 1]</adjacency_stack>
+  </substructure>
+  ...
+</substructures>
+\end{lstlisting}
+
+Note that the atom types are not specified, only the connectivity of the nodes and the multiplicity of the edges. The atom types can then be specified in the family definition (see Sec. \ref{sec:family}).
+
+\renewcommand\bibname{References}
+\bibliographystyle{plain}
+\bibliography{references}
 
 \end{document}
 
