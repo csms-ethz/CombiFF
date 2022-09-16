@@ -49,7 +49,7 @@ class SmilesGenerator {
       std::vector<size_t>& node_visited_at_position);
   void TestValidity(const std::string& smiles, const size_t& nArom,
                     const size_t& ring);
-  const std::string GetSmiles() const;
+  const std::string& GetSmiles() const;
   const std::vector<size_t>& GetVisitedIndices() const;
   const std::vector<size_t>& GetComingFrom() const;
   const std::vector<std::vector<size_t>>& GetGoingTo() const;
@@ -634,7 +634,7 @@ void SmilesGenerator<T, AtomClass>::TestValidity(const std::string& smiles,
   }
 }
 template <typename T, typename AtomClass>
-const std::string SmilesGenerator<T, AtomClass>::GetSmiles() const {
+const std::string& SmilesGenerator<T, AtomClass>::GetSmiles() const {
   return smiles;
 }
 template <typename T, typename AtomClass>
