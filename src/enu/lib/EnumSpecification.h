@@ -38,6 +38,7 @@ struct EnumSpecifications {
   size_t max_degree{4};
   bool stereo{false};
   bool count_only{false};
+  bool quiet{false};
   RangeVector ranged_properties{num_ranges, Range(0, -1)};
 
   EnumSpecifications() = default;

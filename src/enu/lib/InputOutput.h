@@ -45,6 +45,7 @@ class InputOutput {
   void AddRestriction(size_t& i, const size_t position_in_range_vec);
   void AddStereo();
   void AddCountOnly();
+  void AddQuiet();
   void ReadFileNames(size_t& i, const InputFileType input_type);
   void AddAtom(size_t& j, std::string& formula,
                AtomVector<combi_ff::Atom>& used_atoms);

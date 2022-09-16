@@ -106,6 +106,9 @@ void InputOutput::GetNextInputOption(size_t& i) {
   else if (arg == "-count_only")
     AddCountOnly();
 
+  else if (arg == "-quiet")
+    AddQuiet();
+
   else if (possible_input_files.find(arg) != possible_input_files.end())
     ReadFileNames(i, possible_input_files.find(arg)->second);
 
@@ -312,6 +315,13 @@ void InputOutput::AddCountOnly() {
   enum_spec.count_only = true;
 }
 
+// Set quiet to true if the -quiet keyword is used
+void InputOutput::AddQuiet() {
+  std::cout << "quiet mode: not reporting current number of isomers during "
+               "enumeration\n";
+  enum_spec.quiet = true;
+}
+
 // read the atom type of an atom and add it to used_atoms
 void InputOutput::AddAtom(size_t& j, std::string& formula,
                           AtomVector<combi_ff::Atom>& used_atoms) {
@@ -457,7 +467,9 @@ void InputOutput::PrintInputOptions() {
          "considered in the enumeration\n\n"
       << "-count_only: only count and report the number of isomers (i.e., no "
          "XML file containing the corresponding SMILES strings is "
-         "generated)\n\n";
+         "generated)\n\n"
+      << "-quiet: don't report current number of isomers during "
+         "enumeration\n\n";
 }
 
 }  // namespace enu

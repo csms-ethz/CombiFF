@@ -60,8 +60,7 @@ void EnumRun::EnumerateFamilies(const FamilySpecifications& family_spec,
     // create Enumerator instance and use it to enumerate the isomers of the
     // given family
     Enumerator enumerator(family, family_spec.GetPseudoatoms(),
-                          io.GetEnumSpec().stereo, io.GetEnumSpec().count_only,
-                          io.GetIOFilProps().file_name_tmp);
+                          io.GetEnumSpec(), io.GetIOFilProps().file_name_tmp);
     enumerator.EnumerateIsomers();
     // stop timer
     const std::chrono::milliseconds duration(GetDuration(start, Clock::now()));

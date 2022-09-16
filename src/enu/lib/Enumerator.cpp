@@ -17,8 +17,8 @@ namespace combi_ff {
 namespace enu {
 
 Enumerator::Enumerator(const enu::Family& family,
-                       const enu::PseudoatomMap& pseudoatoms, const bool stereo,
-                       const bool count_only,
+                       const enu::PseudoatomMap& pseudoatoms,
+                       const EnumSpecifications& enum_spec,
                        const std::string& output_file_name)
     : code(family.GetCode()),
       lambda_ranges_vec(family.GetLambdaRangesVec()),
@@ -27,8 +27,9 @@ Enumerator::Enumerator(const enu::Family& family,
       substructures(&family.GetSubstructures()),
       pseudoatoms(&pseudoatoms),
       max_degree(family.GetMaxDeg()),
-      stereo(stereo),
-      count_only(count_only),
+      stereo(enum_spec.stereo),
+      count_only(enum_spec.count_only),
+      quiet(enum_spec.quiet),
       num_isomers(0),
       num_isomers_for_listing(0),
       has_pseudoatom(family.GetHasPseudoatom()),
@@ -42,6 +43,10 @@ Enumerator::Enumerator(const enu::Family& family,
     if (!output_file.is_open())
       throw std::runtime_error("couldn't open " + output_file_name);
   }
+  if (quiet)
+    print_state_ptr = (&Enumerator::Enumerator::PrintStateQuiet);
+  else
+    print_state_ptr = (&Enumerator::Enumerator::PrintState);
 }
 
 Enumerator::Enumerator(const enu::EnumSpecifications& enum_spec,
@@ -55,6 +60,7 @@ Enumerator::Enumerator(const enu::EnumSpecifications& enum_spec,
       max_degree(enum_spec.max_degree),
       stereo(enum_spec.stereo),
       count_only(enum_spec.count_only),
+      quiet(enum_spec.quiet),
       deg_unsaturations(0),
       num_isomers(0),
       num_isomers_for_listing(0),
@@ -70,6 +76,10 @@ Enumerator::Enumerator(const enu::EnumSpecifications& enum_spec,
     if (!output_file.is_open())
       throw std::runtime_error("couldn't open " + output_file_name);
   }
+  if (quiet)
+    print_state_ptr = (&Enumerator::Enumerator::PrintStateQuiet);
+  else
+    print_state_ptr = (&Enumerator::Enumerator::PrintState);
 }
 
 /*************
@@ -134,8 +144,10 @@ void Enumerator::EnumerateIsomers() {
         size_t max_degree_local =
             std::min((int)max_degree, deg_unsaturations + 1);
         num_isomers_for_formula = 0;
-        std::cout << " -> found " << num_isomers_for_formula << std::flush
-                  << '\r';
+        if (!quiet) {
+          std::cout << " -> found " << num_isomers_for_formula << std::flush
+                    << '\r';
+        }
         // find all molecules that fit the restrictions
         output_file << std::string(xml_indent_size * 2, ' ')
                     << "<isomer_list formula=\""
@@ -450,7 +462,7 @@ void Enumerator::WriteMolecule() {
     EnumerateStereoSmiles(ranges[range_rings], *u_automorph, *u_id, smiles_gen);
 
   else
-    PrintState(num_isomers_for_formula);
+    (this->*print_state_ptr)(num_isomers_for_formula);
 
   PrintClosingIsomerTag();
 
@@ -505,7 +517,7 @@ void Enumerator::CountMolecule() {
   }
 
   else
-    PrintState(num_isomers_for_formula);
+    (this->*print_state_ptr)(num_isomers_for_formula);
 
   PrintClosingIsomerTag();
 
@@ -657,7 +669,7 @@ void Enumerator::EnumerateStereoSmiles(const size_t n_rings,
                 << "</num_stereoisomers>\n";
 
     for (size_t n = 0; n < stereo_smiles_vec.size(); n++) {
-      PrintState(num_isomers_for_formula + (size_t)n);
+      (this->*print_state_ptr)(num_isomers_for_formula + (size_t)n);
       const std::string stereo_smiles = std::get<0>(stereo_smiles_vec[n]);
       const int enantiomer = std::get<1>(stereo_smiles_vec[n]);
       const int n_tet_centers = std::get<2>(stereo_smiles_vec[n]).first;
@@ -692,7 +704,7 @@ void Enumerator::EnumerateStereoSmiles(const size_t n_rings,
     num_isomers_for_formula += stereo_smiles_vec.size() - 1;
 
   } else {
-    PrintState(num_isomers_for_formula);
+    (this->*print_state_ptr)(num_isomers_for_formula);
   }
 }
 
@@ -715,7 +727,7 @@ void Enumerator::CountStereoisomers(const size_t n_rings,
   stereo_gen.GenerateStereoSmiles();
   if (stereo_gen.GetStereoSmiles().size())
     num_isomers_for_formula += stereo_gen.GetStereoSmiles().size() - 1;
-  PrintState(num_isomers_for_formula);
+  (this->*print_state_ptr)(num_isomers_for_formula);
 }
 
 /*******************
@@ -726,6 +738,8 @@ void Enumerator::PrintState(const size_t n_cur_isomers) {
     std::cout << " -> found " << n_cur_isomers << std::flush << '\r';
   }
 }
+
+void Enumerator::PrintStateQuiet(const size_t n_cur_isomers) {}
 
 /********************************************************************
 creates a canonical formula string from a given atomvector and lambdavector

@@ -43,7 +43,7 @@ class Enumerator {
              const std::string& output_file_name);
 
   Enumerator(const Family& family, const PseudoatomMap& pseudoatoms,
-             const bool stereo, const bool count_only,
+             const EnumSpecifications& enum_spec,
              const std::string& output_file_name);
 
   size_t GetNumIsomers() const;
@@ -83,6 +83,7 @@ class Enumerator {
                           const SmilesGeneratorEnu& smiles_gen);
 
   void PrintState(const size_t num_curr_isomers);
+  void PrintStateQuiet(const size_t num_curr_isomers);
 
   void PrintConstitutionalIsomer(const std::string& smiles);
   void PrintClosingIsomerTag();
@@ -108,6 +109,7 @@ class Enumerator {
   const size_t max_degree;
   const bool stereo;
   const bool count_only;
+  const bool quiet;
   std::ofstream output_file;
   int deg_unsaturations;
   size_t num_isomers, num_isomers_for_listing, num_isomers_for_formula;
@@ -115,6 +117,8 @@ class Enumerator {
   size_t formula_idx;
   EnumeratorArgs enumerator_arguments;
   std::vector<size_t> ranges;
+  void (combi_ff::enu::Enumerator::*print_state_ptr)(
+      const size_t num_curr_isomers);
 };
 
 }  // namespace enu
