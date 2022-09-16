@@ -97,7 +97,7 @@ void XmlElement::RemoveChild(std::list<XmlElement_ptr>::iterator child) {
   children.erase(child);
 }
 
-const size_t XmlElement::GetNumberOfChildren() const { return children.size(); }
+size_t XmlElement::GetNumberOfChildren() const { return children.size(); }
 
 /******************
 XmlTree definitions

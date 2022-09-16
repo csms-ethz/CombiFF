@@ -39,7 +39,7 @@ Getter functions
 */
 const AtomTypeSet& TblAtom::GetAtomTypes() const { return atom_types; }
 
-const LinkageType TblAtom::GetLinkageType() const { return link_type; }
+LinkageType TblAtom::GetLinkageType() const { return link_type; }
 
 const std::string& TblAtom::GetAtomID() const { return atom_id; }
 

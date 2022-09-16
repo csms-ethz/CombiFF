@@ -21,7 +21,7 @@ class TblAtom {
   void SetAtomTypeSet(const AtomTypeSet& atomTypeSet);
   void AddNeighbour(const size_t nbrIdx);
   const AtomTypeSet& GetAtomTypes() const;
-  const LinkageType GetLinkageType() const;
+  LinkageType GetLinkageType() const;
   const std::string& GetAtomID() const;
   const NeighborVector& GetNeighbours() const;
   void SetLinkageType(const LinkageType linktype_);

@@ -58,7 +58,7 @@ struct XmlElement : std::enable_shared_from_this<XmlElement> {
   void RemoveLastChild();
   void RemoveChildren();
   void RemoveChild(std::list<XmlElement_ptr>::iterator child);
-  const size_t GetNumberOfChildren() const;
+  size_t GetNumberOfChildren() const;
 
   XmlElement* parent{NULL};
   std::list<XmlElement_ptr> children{std::list<XmlElement_ptr>(0)};
