@@ -220,8 +220,16 @@ void ReadRange(const std::string& prop_, Range& r) {
       r = Range(a, a);
 
     else {
+      if (prop[j] != '-')
+        throw combi_ff::input_error("expected - at position " +
+                                    std::to_string(j) + " in restriction " +
+                                    prop_ + " but got " + prop[j]);
       size_t b = GetNumber(++j, prop);
       r = Range(std::min(a, b), std::max(a, b));
+      if ((j) >= prop.size() || prop[j] != ']')
+        throw combi_ff::input_error("expected ] at position " +
+                                    std::to_string(j) + " in restriction " +
+                                    prop_ + " but got " + prop[j]);
     }
 
   } else if (prop[j] == '*') {

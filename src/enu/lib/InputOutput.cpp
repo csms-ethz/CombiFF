@@ -403,8 +403,6 @@ void InputOutput::PrintInputOptions() {
       << "   - X[n,m,l,...,], where n,m,l,... are specific numbers to be used\n"
       << "   - the notation of [n-m] and [n,m,...] can be combined at will, "
          "e.g. [1-3,4,10-8, 7]\n"
-      << "   - X*, in order to specify any number of atom type X (in practice "
-         "at the moment simply corresponds to range of 0-100)\n"
       /*<< "   - X>n or X>=n, where X is an atom type and n is a number, in "
          "order to specify that there should at least n+1, or n, atoms of type "
          "X\n"
