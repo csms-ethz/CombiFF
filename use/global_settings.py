@@ -51,7 +51,7 @@ family_exceptions=['test*']
 families_to_enumerate = ['intro']
 families_to_build_topologies = ['intro']
 
-force_update = True
+force_update = False
 united_atoms = True
 third_neighbor_exclusions = True
 unique_torsionals = True

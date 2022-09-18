@@ -80,18 +80,6 @@ for isomer_lists in root.findall('isomer_lists'):
         num_printed += molsPerPage
         print(str(num_printed) + "/" + str(num_iso))
 
-"""
-for i in range(len(mol_list)):
-  for j in range(i+1, len(mol_list)):
-    m1 = mol_list[i]
-    m2 = mol_list[j]
-    s1 = Chem.CanonSmiles(Chem.rdmolfiles.MolToSmiles(m1))
-    s2 = Chem.CanonSmiles(Chem.rdmolfiles.MolToSmiles(m2))
-    if(s1 == s2):
-      print(str(i) + " " + str(j) + " " + str(s1 == s2))
-      print(s1,s2)
-"""
-
 img = Chem.Draw.MolsToGridImage(mol_list, molsPerRow=molsPerRow, subImgSize = (400,400), maxMols = molsPerPage, legends=id_list, returnPNG=False)
 img.save("tmp.pdf")
 writer.addpages(PdfReader("tmp.pdf").pages)

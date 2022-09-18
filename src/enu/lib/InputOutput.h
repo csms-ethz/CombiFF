@@ -54,6 +54,7 @@ class InputOutput {
   std::list<std::string>& GetInputFileNamesAt(size_t idx);
   const IOFileProperties& GetIOFilProps() const;
   const std::string& GetOutputFileName() const;
+  const std::string& GetOutputFileDirectory() const;
   const EnumSpecifications& GetEnumSpec() const;
 
   void PrintInputOptions();

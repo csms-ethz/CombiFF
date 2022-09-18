@@ -45,8 +45,10 @@ void EnumRun::EnumerateDirect(const InputOutput& io) {
     enumerator.EnumerateIsomers();
     // stop timer
     const std::chrono::milliseconds duration(GetDuration(start, Clock::now()));
+    const std::string output_file_name =
+        io.GetOutputFileDirectory() + io.GetOutputFileName();
     // print final information and close output file;
-    WriteOutputDirect(io.GetIOFilProps(), io.GetOutputFileName(),
+    WriteOutputDirect(io.GetIOFilProps(), output_file_name,
                       io.GetEnumSpec().stereo, io.GetEnumSpec().count_only,
                       duration, enumerator.GetNumIsomers());
   }

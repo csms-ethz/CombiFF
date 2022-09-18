@@ -373,6 +373,9 @@ std::list<std::string>& InputOutput::GetInputFileNamesAt(size_t idx) {
 const std::string& InputOutput::GetOutputFileName() const {
   return io_file_properties.output_file_name;
 }
+const std::string& InputOutput::GetOutputFileDirectory() const {
+  return io_file_properties.output_dir;
+}
 const IOFileProperties& InputOutput::GetIOFilProps() const {
   return io_file_properties;
 }

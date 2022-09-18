@@ -10,6 +10,18 @@
 
 For installation instructions please refer to [INSTALL.md](https://github.com/csms-ethz/CombiFF/blob/main/INSTALL.md)
 
+### enu
+
+For instructions and examples how to use `enu`, please refer to `doc/enu.pdf`.
+
+### tbl
+
+For documentation of `tbl`, please refer to `doc/tbl.pdf` (coming soon).
+
+### cnv
+
+For documentation of `cnv`, please refer to `doc/cnv.pdf` (coming soon).
+
 ### Getting Started
 
 #### Scripts
@@ -42,18 +54,6 @@ When you familiarize with the setup of CombiFF, a good starting place is the glo
 Next, you could have a look at the different families defined in `use/input_files/family_definitions` and play around with `enu` and `tbl` by adapting your settings in `use/user_settings.py` to e.g. choose different families, or enumerate stereo isomers. You can have a look at the `README` files within the different directories of `use/input_files` if you want to define your own families, fragments, etc. Ideally you shouldn't modify the existing input files but rather create your own. Just follow the format outlined in the corresponding `README` and `.dtd` files.
 
 You can of course also work with the differen programs without the python helper scripts. Simply start by executing them with the `--help` option to see a list of options, or have a look at the documentation.
-
-### Enu
-
-For documentation of `enu`, please refer to `doc/enu.pdf` (coming soon). Please make sure to compile the documentation first by executing the script `scr/compile_documentation.py`
-
-### Tbl
-
-For documentation of `tbl`, please refer to `doc/tbl.pdf` (coming soon). Please make sure to compile the documentation first by executing the script `scr/compile_documentation.py`
-
-### Cnv
-
-For documentation of `cnv`, please refer to `doc/cnv.pdf` (coming soon). Please make sure to compile the documentation first by executing the script `scr/compile_documentation.py`
 
 ## References
 

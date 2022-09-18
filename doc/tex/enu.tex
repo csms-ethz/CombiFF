@@ -11,6 +11,7 @@
 \usepackage{array}
 \usepackage{parskip}
 \usepackage{listings}
+\usepackage{mhchem}
 
 \usepackage[labelfont=bf,skip=0pt]{subcaption}
 \usepackage[labelfont=bf,skip=0pt]{caption}
@@ -46,15 +47,17 @@
 
 \usepackage{titling}
 \setlength{\droptitle}{-2cm}
-\title{How to use \textit{enu}}
-\author{Salom\'e Rieder, Sereina Riniker, Philippe H. Hünenberger}
+\title{\textit{enu} Manual}
+%\author{Salom\'e Rieder, Sereina Riniker, Philippe H. Hünenberger}
 \date{}
 
 \geometry{verbose,a4paper,tmargin=30mm,bmargin=30mm,lmargin=25mm,rmargin=25mm}
 \begin{document}
 \pagestyle{plain}
 \maketitle
+\tableofcontents
 
+\clearpage
 
 \section{Introduction}
 
@@ -64,11 +67,11 @@ The open-source isomer enumerator \textit{enu} is part of the CombiFF combinator
 
 For installation instructions, please refer to \url{https://github.com/csms-ethz/CombiFF/blob/main/INSTALL.md}.
 
-\section{Usage}
+\section{Basic Usage}
 
-In its most basic use, \textit{enu} enumerates the constitutional and (if desired) spatial isomers of a given molecular formula and reports the detected (stereo)isomers as canonical SMILES strings in an XML format.
+This section describes the ``basic'' use of \textit{enu}, \textit{i.e.}, enumerating the constitutional and (if desired) spatial isomers of a given molecular formula and reporting the detected (stereo)isomers as canonical SMILES strings in an XML format. Usage examples are provided in Sec. \ref{sec:usage}. The use of \textit{enu} in the context of CombiFF to enumerate molecular ``families'' is described in Sec. \ref{sec:families}.
 
-\subsection{Basic Arguments}
+\subsection{Command Line Arguments}
 
 \subsubsection{Input/Output}
 \begin{table}[H]
@@ -78,7 +81,7 @@ In its most basic use, \textit{enu} enumerates the constitutional and (if desire
     \hline\hline
     -input   & specify an input file containing one or several arguments recognized by \textit{enu}                   \\
              & ~~\tabitem these arguments can also be used directly in the command line                       \\
-             & ~~\tabitem lines starting with \texttt{\#} in the file are considered comments and are ignored \\
+             & ~~\tabitem lines starting with \texttt{\#} in the file are comments and are ignored \\
     \hline
     -output\_directory & specify the directory where the output files should be created \\
     \hline
@@ -130,7 +133,7 @@ The following arguments can be used to modify what and how \textit{enu} reports 
     \hline
     -count\_only & report the number of detected isomers but don't generate XML output\\
     \hline
-    -quiet & don't report the current number of isomers during the enumeration process\\
+    -quiet & don't report the current number of isomers during the enumeration process. \textbf{This is especially useful when re-directing the standard output to a file}, as the \texttt{'\textbackslash r'} carriage return only works in terminals, and the output will be too verbose if written to a file.\\
     \hline
 \end{tabular}
 \end{table}
@@ -187,25 +190,55 @@ where $\delta_k$ is the valence of atom type $\alpha_k$ and $\lambda_k$ is the c
 %
 where $n_\text{db}$ is the number of double bonds, and $n_\text{tb}$ is the number of triple bonds.
 
-\section{Usage Examples}
+\subsection{Usage Examples}\label{sec:usage}
 
-\section{Molecular Families}
+\begin{table}[H]
+\begin{tabular}{>{\ttfamily\raggedright}p{0.35\textwidth}|p{0.6\textwidth}}
+    \hline
+    \textnormal{call} & result \\
+    \hline\hline
+    ./enu -formula C19H42 & enumerate the constitutional isomers of \ce{C19H42}. By default, the output is written to the file \texttt{isomerlist.xml}. \\
+    \hline
+    ./enu -formula C19H42 -quiet & enumerate the constitutional isomers of \ce{C19H42}. Don't report the current number of detected isomers during the enumeration process. By default, the output is written to the file \texttt{isomerlist.xml}. \\
+    \hline
+    ./enu -formula C19H42 -count\_only & enumerate the constitutional isomers of \ce{C19H42} without generating an output file containing the corresponding SMILES strings. \\
+    \hline
+    ./enu -formula C10H22 -stereo & enumerate the constitutional and spatial isomers of \ce{C10H22}. By default, the output is written to the file \texttt{isomerlist.xml}. \\
+    \hline
+    ./enu -formula C10H22 -output\_directory out & enumerate the constitutional isomers of \ce{C10H22} and create the output file in \texttt{out/isomerlist.xml}.\\
+    \hline
+    ./enu -formula C10H22 -output\_directory out -output c10h22.xml & enumerate the constitutional isomers of \ce{C10H22} and write the output to \texttt{out/c10h22.xml}.\\
+    \hline
+    ./enu -formula C[1-20]H[4-42] -unsaturations 0 -stereo & enumerate the constitutional and spatial isomers of the straight-chain alkanes from \ce{C1H4} to \ce{C20H42}.\\
+    \hline
+    ./enu -formula C5H[0-12]Br[0-2]Cl[0-2] -cycles 1 -unsaturations 1 & enumerate the constitutional isomers of all molecular formulas with five carbon atoms, zero to twelve hydrogen atoms, zero to two bromine atoms, and zero to two chlorine atoms that contain one cycle and one unsaturation.\\
+    \hline
+    ./enu -formula C[3,5]H[0-12]Br[1,3,5,7-10] & enumerate the constitutional isomers of all molecular formulas with three or five carbon atoms, zero to twelve hydrogen atoms, and one, three, five, seven, eight, nine, or ten bromine atoms.\\
+    \hline
+    ./enu -formula \{CH1\}1\{CH3\}2O1C2\{OH1\}1H2 & enumerate the constitutional isomers of \ce{C5H10O2} with one carbon atom connected to exactly one hydrogen, two carbon atoms connected to exactly three hydrogens, one oxygen atom without a restriction on the number of connected hydrogens, two carbon atoms without a restriction on the number of connected hydrogens, one oxygen atom connected to exactly one hydrogen, and two hydrogen atoms (additionally to the implicit hydrogens).\\
+    \hline
+\end{tabular}
+\end{table}
 
-For the application of \textit{enu} for the CombiFF force-field parameterization scheme, the definition of so-called molecular families is an essential tool. Family definitions also offer more flexibility to specify the molecules of interest using so-called \textit{element aliases} and \textit{pseudoatoms} and by allowing the filtering of substructures.\cite{Rieder2022} For the convenience of the user, the CombiFF repository contains additional python scripts, most importantly \texttt{scr/run\_enu.py} that can be used to automatically run \textit{enu} for the families defined in the CombiFF repository. For more information on these scripts, please refer to \url{https://github.com/csms-ethz/CombiFF#scripts}.
+\clearpage
 
-In the following sections, first the command line arguments are explained that may be used to pass the arguments related to molecular families to \textit{enu}, and then the file formats of the respective input files and output files are outlined.
+\section{Use of \textit{enu} for CombiFF: Molecular Families}\label{sec:families}
+
+For the application of \textit{enu} for the CombiFF force-field parameterization scheme, the definition of so-called molecular families is an essential tool. Family definitions also offer more flexibility to specify the molecules of interest using so-called \textit{element aliases} and \textit{pseudoatoms} and by allowing the filtering of substructures.\cite{Rieder2022} For the convenience of the user, the CombiFF repository contains additional python scripts, most importantly \texttt{scr/run\_enu.py} that can be used to automatically run \textit{enu} for the families defined in the CombiFF repository (see also \url{https://github.com/csms-ethz/CombiFF#scripts}).
+
+In the following sections, first the command line arguments are explained that may be used to pass the arguments related to molecular families to \textit{enu}, then the file formats of the respective input files and output files are outlined, and finally some usage examples are provided.
 
 \subsection{Command Line Arguments}
 
 \begin{table}[H]
-\begin{tabular}{>{\ttfamily\raggedright}p{0.21\textwidth}|p{0.74\textwidth}}
+\begin{tabular}{>{\ttfamily\raggedright}p{0.25\textwidth}|p{0.7\textwidth}}
     \hline
     \textnormal{formula building block} & functionality \\
     \hline\hline
     -families & specify the families that should be enumerated\\
-              & ~~\tabitem specified \textit{via} the family code defined in the family definition XML file\\
+              & ~~\tabitem specified \textit{via} the family code from the family definition XML\\
               & ~~\tabitem may be used several times to specify multiple families\\
-              & ~~\tabitem multiple family codes may be listed consecutively to specify multiple families\\
+              & ~~\tabitem multiple family codes may be listed consecutively\\
     \hline
     -family\_files & specify the path to the family definition input file(s)\\
                    & ~~\tabitem multiple file paths may be listed consecutively\\
@@ -223,7 +256,7 @@ In the following sections, first the command line arguments are explained that m
 
 \subsection{Family Definition Files}\label{sec:family}
 
-The family definition files follow an XML structure and are located in the \texttt{use/src/input\_files/family\_definitions} directory. The directory contains several examples of family definition files that have been used in the context of CombiFF. The directory also contains the DTD file defining the format of a family definition file. A family definition file should follow the following format:
+The family definition files are located in the \texttt{use/input\_files/family\_definitions} directory and follow an XML structure. The directory contains several examples of family definition files that have been used in the context of CombiFF. The directory also contains the DTD file defining the format of a family definition file. A family definition file should follow the following format:
 
 \begin{lstlisting}
 <family_definitions version="[version number]">
@@ -390,7 +423,41 @@ Substructure files are contained in the \texttt{use/input\_files/substructures} 
 </substructures>
 \end{lstlisting}
 
-Note that the atom types are not specified, only the connectivity of the nodes and the multiplicity of the edges. The atom types can then be specified in the family definition (see Sec. \ref{sec:family}).
+Note that the atom types are not specified, only the connectivity of the nodes and the multiplicity of the edges. The atom types can then be specified in the family definition (see Sec. \ref{sec:family}). Note that adjacency matrix stacks can be conveniently created from SMILES strings with the CombiFF program \texttt{cnv}. For example, the adjacency matrix stack for the molecule \texttt{CCC(=O)C} can be generated by running \texttt{./cnv -O stack 'CCC(=O)C'}.
+
+\subsection{Usage}
+
+\subsubsection{\texttt{run\_enu.py}}
+
+The most convenient way to use \textit{enu} to create family isomer enumeration files that can then be processed by \textit{tbl} is \textit{via} the Python script \texttt{run\_enu.py} located in the \texttt{scr/} directory. We recommend that you create a \texttt{conda} (\url{https://www.anaconda.com/}) or \texttt{mamba} (\url{https://anaconda.org/conda-forge/mamba}) environment as follows to run the script:
+
+\begin{verbatim}
+    conda env create -f dev/conda_envs/combiff.yml -n combiff
+    conda activate combiff
+\end{verbatim}
+
+The location of the executables, as well as the input and output files is defined in \texttt{use/global\_settings.py}. To control the behavior of the script, you can create a file \texttt{use/user\_settings.py}. In this file you can overwrite any of the variables defined in \texttt{use/global\_settings.py}, namely in the context of \textit{enu}:
+
+\begin{table}[H]
+\begin{tabular}{>{\ttfamily\raggedright}p{0.25\textwidth}|p{0.7\textwidth}}
+    \hline
+    \textnormal{variable} & functionality \\
+    \hline\hline
+    families\_to\_enumerate & list of strings, containing the code of the families that should be enumerated by \textit{enu}. If it contains the element \texttt{all}, all families will be enumerated. You may use regex such as \texttt{'01..'} or \texttt{'*1*'}.\\
+    & \textit{e.g.}, \texttt{families\_to\_enumerate = ['01..', '0300']}\\
+    \hline
+    family\_exceptions & list of strings, containing the code of the families that should be ignored by the scripts, even if \texttt{all} is specified for \texttt{families\_to\_enumerate}. You may use regex such as \texttt{'01..'} or \texttt{'*1*'}.\\
+    & \textit{e.g.}, \texttt{family\_exceptions = ['0102', '0104']}\\
+    \hline
+    force\_update & boolean, specifying whether output files should be regenerated even if input files did not change since the last execution of \textit{enu}\\
+    & default: False\\
+    \hline
+    stereo & boolean, specifying whether spatial isomers should also be enumerated by \textit{enu}\\
+    & default: False\\
+    \hline
+\end{tabular}
+\end{table}
+
 
 \renewcommand\bibname{References}
 \bibliographystyle{plain}
