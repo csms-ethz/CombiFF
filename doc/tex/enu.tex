@@ -111,8 +111,11 @@ The basic format to specify a molecular formula is a sequence of alternating ele
     \textnormal{formula building block} & functionality \\
     \hline\hline
     Xn           & \texttt{n} counts of element type \texttt{X} \\
+    \hline
     X[n-m]       & range from \texttt{n} to \texttt{m} counts of element type \texttt{X}\\
+    \hline
     X[n,m,l,...] & \texttt{n}, \texttt{m}, \texttt{l}, ... counts of element type \texttt{X} \\
+    \hline
     \{XHn\}      & atom type \texttt{X} with \texttt{n} implicit hydrogens. To specify the count of \texttt{\{XHn\}}, the same syntax can be used as for a simple atom type (\textit{i.e.}, simple count, range, or list) \\
     \hline
 \end{tabular}
@@ -251,6 +254,7 @@ In the following sections, first the command line arguments are explained that m
     \hline
     -substructure\_files & specify the path to the substructure input file(s)\\
                    & ~~\tabitem multiple file paths may be listed consecutively\\
+    \hline
 \end{tabular}
 \end{table}
 
@@ -358,12 +362,12 @@ If element aliases are used for the atom types, the following additional syntax 
   \end{itemize}
   \item AND: the same element type should be used, specified by \texttt{n\&}, where the element types with the same number \texttt{n} have to be the same
   \begin{itemize}
-    \item \texttt{<atom type="\&{}1Hal"/><atom type="\&{}1Hal"><atom type="\&{}2Hal"/><atom type="\&{}2Hal"/>}: the element types with the \texttt{\&1} specifier have to be the same and the element types with the \texttt{\&2} specifier have to be the same. However, both the case where all four are the same, and the case where the first two are different from the second two is valid.
+    \item \begin{sloppypar}\texttt{<atom type="\&{}1Hal"/><atom type="\&{}1Hal"><atom type="\&{}2Hal"/><atom type="\&{}2Hal"/>}: the element types with the \texttt{\&1} specifier have to be the same and the element types with the \texttt{\&2} specifier have to be the same. However, both the case where all four are the same, and the case where the first two are different from the second two is valid.\end{sloppypar}
   \end{itemize}
   \item XOR: different element types should be used, specified by \texttt{n\^}, where the element types with the same number \texttt{n} have to be different from one another
   \begin{itemize}
     \item \texttt{<atom type="\^{}1Hal"/><atom type="\^{}1Hal"/>} corresponds to two different halogen element types
-    \item \texttt{<atom type="\^{}1Hal"/><atom type="\^{}1Hal"/><atom type="\^{}2Hal"/><atom type="\^{}2Hal"/>}: the element types with the \texttt{\^{}1} specifier should be different from each other and the element types with the \texttt{\^{}2} specified should be different from each other. However, one of the element types with the \texttt{\^{}1} specifier may be the same as one of the element types with the \texttt{\^{}2} specifier (but does not have to be the same).
+    \item \begin{sloppypar}\texttt{<atom type="\^{}1Hal"/><atom type="\^{}1Hal"/><atom type="\^{}2Hal"/><atom type="\^{}2Hal"/>}: the element types with the \texttt{\^{}1} specifier should be different from each other and the element types with the \texttt{\^{}2} specified should be different from each other. However, one of the element types with the \texttt{\^{}1} specifier may be the same as one of the element types with the \texttt{\^{}2} specifier (but does not have to be the same).\end{sloppypar}
   \end{itemize}
 \end{itemize}
 
